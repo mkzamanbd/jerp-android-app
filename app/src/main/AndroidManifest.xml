@@ -2,15 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simplelogin">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mvvm"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/mvvm"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleLogin">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.view.DashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.auth.AuthActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
