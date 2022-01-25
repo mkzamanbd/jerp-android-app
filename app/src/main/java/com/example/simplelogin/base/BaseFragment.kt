@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.simplelogin.data.UserPreferences
-import com.example.simplelogin.network.RemoteDataSource
+import com.example.simplelogin.network.RetrofitClient
 import com.example.simplelogin.network.UserApi
 import com.example.simplelogin.ui.view.auth.AuthActivity
 import com.example.simplelogin.utils.startNewActivity
@@ -20,7 +20,7 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
 
     protected lateinit var userPreferences: UserPreferences
     protected lateinit var binding: B
-    protected val remoteDataSource = RemoteDataSource()
+    protected val retrofitClient = RetrofitClient()
     protected lateinit var viewModel: VM
 
     override fun onCreateView(
@@ -41,7 +41,7 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
 
     fun logout() = lifecycleScope.launch {
         val accessToken = userPreferences.accessToken.first()
-        val api = remoteDataSource.buildApi(UserApi::class.java, accessToken)
+        val api = retrofitClient.buildApi(UserApi::class.java, accessToken)
         viewModel.logout(api)
         userPreferences.clear()
         requireActivity().startNewActivity(AuthActivity::class.java)
