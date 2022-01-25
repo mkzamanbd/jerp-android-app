@@ -3,7 +3,6 @@ package com.example.simplelogin.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.simplelogin.repository.AuthRepository
-import com.example.simplelogin.repository.BaseRepository
 import com.example.simplelogin.repository.ProfileRepository
 import com.example.simplelogin.ui.view.auth.AuthViewModel
 import com.example.simplelogin.ui.viewModel.ProfileViewModel

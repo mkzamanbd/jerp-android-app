@@ -1,5 +1,6 @@
 package com.example.simplelogin.repository
 
+import com.example.simplelogin.base.BaseRepository
 import com.example.simplelogin.network.UserApi
 
 class ProfileRepository(

@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/ic_login_screen_background"
-    android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".ui.view.auth.LoginFragment">
+    tools:context=".ui.view.auth.RegisterFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -15,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/gl_logo_bottom"
+        android:text="@string/register"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,35 +23,46 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_logo_bottom"
-        app:layout_constraintGuide_percent="0.25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/nameInputField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:background="@drawable/bg_input_field"
+            android:drawableStart="@drawable/ic_baseline_people_24"
+            android:drawablePadding="10dp"
+            android:hint="@string/name"
+            android:padding="15dp" />
 
         <EditText
             android:id="@+id/emailInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:autofillHints="Email"
             android:background="@drawable/bg_input_field"
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="10dp"
             android:hint="@string/login_email_hint"
             android:inputType="textEmailAddress"
-            android:padding="15dp"
-            android:text="@string/username" />
+            android:padding="15dp" />
 
 
         <EditText
@@ -66,61 +76,30 @@
             android:drawablePadding="10dp"
             android:hint="@string/login_password_hint"
             android:inputType="textPassword"
+            android:padding="15dp"/>
+
+        <EditText
+            android:id="@+id/passwordConfirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints="Password"
+            android:background="@drawable/bg_input_field"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="10dp"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
             android:padding="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/cb_remember_me"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center_vertical|start"
-                android:padding="@dimen/five"
-                android:text="@string/remember_me"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_forgot_password"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center_vertical|end"
-                android:padding="@dimen/five"
-                android:text="@string/forgot_password"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvErrorMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ten"
-            android:gravity="center_vertical|start"
-            android:maxLines="2"
-            android:padding="@dimen/five"
-            android:text="@string/authenticationFailed"
-            android:textColor="@color/red"
-            android:textSize="@dimen/ten"
-            android:visibility="gone" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten"
             android:background="@drawable/login_button"
             android:gravity="center"
-            android:text="@string/login"
+            android:text="@string/register"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -131,26 +110,26 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/createAccount"
+        android:id="@+id/userLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_instead"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.114"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_account"
-        android:textColor="@color/colorPrimary" />
+        app:layout_constraintVertical_bias="0.114" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

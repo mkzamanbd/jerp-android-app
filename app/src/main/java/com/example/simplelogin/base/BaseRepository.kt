@@ -1,4 +1,4 @@
-package com.example.simplelogin.repository
+package com.example.simplelogin.base
 
 import com.example.simplelogin.network.Resource
 import com.example.simplelogin.network.UserApi
