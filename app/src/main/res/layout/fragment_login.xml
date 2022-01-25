@@ -150,7 +150,7 @@
         app:layout_constraintVertical_bias="0.114"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create account"
+        android:text="@string/create_account"
         android:textColor="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
