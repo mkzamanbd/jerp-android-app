@@ -2,6 +2,7 @@ package com.example.simplelogin.ui.view.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -20,24 +21,28 @@ import kotlinx.coroutines.launch
 
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.progressBar.visible(false)
         binding.loginButton.enable(false)
 
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+            binding.progressBar.visible(it is Resource.Loading)
             when(it){
                 is Resource.Success ->{
-                    viewModel.saveAuthToken(it.value.token)
-                    requireActivity().startNewActivity(DashboardActivity::class.java)
+                    lifecycleScope.launch {
+                        viewModel.saveAuthToken(it.value.token)
+                        requireActivity().startNewActivity(DashboardActivity::class.java)
+                    }
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visible(false)
                     binding.tvErrorMessage.visible(true)
                     Toast.makeText(requireContext(), "Login Failure!", Toast.LENGTH_SHORT).show()
                 }
+
             }
         })
 
@@ -50,10 +55,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             binding.tvErrorMessage.visible(false)
             val email = binding.emailInputField.text.toString().trim()
             val password = binding.passwordInputField.text.toString().trim()
-
-            // TODO validation
-
-            binding.progressBar.visible(true)
 
             viewModel.userLogin(email, password)
 
