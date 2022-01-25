@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.simplelogin.base.BaseFragment
 import com.example.simplelogin.network.Resource
 import com.example.simplelogin.ui.view.DashboardActivity
 import com.example.simplelogin.ui.view.auth.LoginFragment
@@ -57,6 +58,9 @@ fun Fragment.handleApiError(
         failure.errorCode == 401 -> {
             if (this is LoginFragment) {
                 requireView().snackBar("You've entered incorrect email or password")
+            }
+            else{
+                (this as BaseFragment<*, *, *>).logout()
             }
         }
         else -> {

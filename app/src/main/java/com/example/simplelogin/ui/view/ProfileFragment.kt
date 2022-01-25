@@ -40,6 +40,10 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, P
             }
         })
 
+        binding.userLogout.setOnClickListener{
+            logout()
+        }
+
     }
 
     private fun updateUI(user: User){

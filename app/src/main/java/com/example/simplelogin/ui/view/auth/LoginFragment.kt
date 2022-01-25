@@ -15,6 +15,7 @@ import com.example.simplelogin.network.Resource
 import com.example.simplelogin.repository.AuthRepository
 import com.example.simplelogin.ui.view.DashboardActivity
 import com.example.simplelogin.utils.enable
+import com.example.simplelogin.utils.handleApiError
 import com.example.simplelogin.utils.startNewActivity
 import com.example.simplelogin.utils.visible
 import kotlinx.coroutines.launch
@@ -30,35 +31,34 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             binding.progressBar.visible(it is Resource.Loading)
-            when(it){
-                is Resource.Success ->{
+            when (it) {
+                is Resource.Success -> {
                     lifecycleScope.launch {
                         viewModel.saveAuthToken(it.value.token)
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
                 }
-                is Resource.Failure -> {
-                    binding.progressBar.visible(false)
-                    binding.tvErrorMessage.visible(true)
-                    Toast.makeText(requireContext(), "Login Failure!", Toast.LENGTH_SHORT).show()
-                }
+                is Resource.Failure -> handleApiError(it) { login() }
 
             }
         })
 
-        binding.passwordInputField.addTextChangedListener{
+        binding.passwordInputField.addTextChangedListener {
             val email = binding.emailInputField.text.toString().trim()
             binding.loginButton.enable(email.isNotEmpty() && it.toString().isNotEmpty())
         }
 
         binding.loginButton.setOnClickListener {
-            binding.tvErrorMessage.visible(false)
-            val email = binding.emailInputField.text.toString().trim()
-            val password = binding.passwordInputField.text.toString().trim()
-
-            viewModel.userLogin(email, password)
-
+            login()
         }
+    }
+
+    private fun login() {
+        binding.tvErrorMessage.visible(false)
+        val email = binding.emailInputField.text.toString().trim()
+        val password = binding.passwordInputField.text.toString().trim()
+
+        viewModel.userLogin(email, password)
     }
 
     override fun getViewModel() = AuthViewModel::class.java
@@ -68,5 +68,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         container: ViewGroup?,
     ) = FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun getFragmentRepository() = AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
+    override fun getFragmentRepository() =
+        AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
 }

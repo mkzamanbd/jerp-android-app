@@ -21,7 +21,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     fun performLogout() = lifecycleScope.launch {
-        //viewModel.logout()
+        // viewModel.logout()
         userPreferences.clear()
         startNewActivity(AuthActivity::class.java)
     }
