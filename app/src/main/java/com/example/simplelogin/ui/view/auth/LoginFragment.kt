@@ -38,7 +38,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
                 is Resource.Success -> {
                     binding.loginButton.enable(true)
                     lifecycleScope.launch {
-                        viewModel.saveAuthToken(it.value.token)
+                        viewModel.saveAccessToken(it.value.token)
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
                 }

@@ -13,7 +13,7 @@ class RemoteDataSource {
 
     fun <Api> buildApi(
         api: Class<Api>,
-        authToken: String? = null,
+        accessToken: String? = null,
     ): Api {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -22,7 +22,7 @@ class RemoteDataSource {
                     .addInterceptor { chain ->
                         chain.proceed(chain.request().newBuilder().also {
                             it.addHeader("Accept", "application/json")
-                            it.addHeader("Authorization", "Bearer $authToken")
+                            it.addHeader("Authorization", "Bearer $accessToken")
                         }.build())
                     }
                     .also { client ->

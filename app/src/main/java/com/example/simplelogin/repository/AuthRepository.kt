@@ -16,7 +16,7 @@ class AuthRepository(
         authApi.login(email, password)
     }
 
-    suspend fun saveAuthToken(token: String){
-        userPreferences.saveAuthToken(token)
+    suspend fun saveAccessToken(token: String){
+        userPreferences.saveAccessToken(token)
     }
 }

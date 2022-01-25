@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val userPreferences = UserPreferences(this)
-        userPreferences.authToken.asLiveData().observe(this, Observer {
+        userPreferences.accessToken.asLiveData().observe(this, Observer {
             val activity = if(it == null) AuthActivity::class.java else DashboardActivity::class.java
             startNewActivity(activity)
         })

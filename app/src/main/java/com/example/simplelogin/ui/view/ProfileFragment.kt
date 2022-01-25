@@ -60,7 +60,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, P
     ) = FragmentProfileBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): ProfileRepository {
-        val token = runBlocking { userPreferences.authToken.first() }
+        val token = runBlocking { userPreferences.accessToken.first() }
         val api = remoteDataSource.buildApi(UserApi::class.java, token)
 
         return ProfileRepository(api)
