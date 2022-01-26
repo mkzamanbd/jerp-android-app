@@ -62,6 +62,12 @@ fun Fragment.handleApiError(
                 (this as BaseFragment<*>).logout()
             }
         }
+        failure.statusCode == 422 -> {
+            requireView().snackBar("The given data was invalid")
+        }
+        failure.statusCode == 500 -> {
+            requireView().snackBar("Internal server error")
+        }
         else -> {
             val error = failure.errorBody?.string().toString()
             requireView().snackBar(error)
