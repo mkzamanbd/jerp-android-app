@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.simplelogin.ui.view.UserFragment"
+        android:name="com.example.mvvm.ui.view.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.simplelogin.ui.view.ProfileFragment"
+        android:name="com.example.mvvm.ui.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.simplelogin.ui.view.NotificationFragment"
+        android:name="com.example.mvvm.ui.view.NotificationFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.simplelogin.ui.view.SettingsFragment"
+        android:name="com.example.mvvm.ui.view.SettingsFragment"
         android:label="Add Contact"
         tools:layout="@layout/fragment_settings" />
 

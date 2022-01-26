@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.simplelogin"
+        applicationId "com.example.mvvm"
         minSdk 23
         targetSdk 32
         versionCode 1
