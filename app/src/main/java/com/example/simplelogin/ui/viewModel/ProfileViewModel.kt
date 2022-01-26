@@ -8,9 +8,12 @@ import com.example.simplelogin.base.BaseViewModel
 import com.example.simplelogin.data.response.ProfileResponse
 import com.example.simplelogin.network.Resource
 import com.example.simplelogin.repository.ProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel(
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
 ) : BaseViewModel(repository) {
 

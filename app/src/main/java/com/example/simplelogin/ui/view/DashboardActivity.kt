@@ -9,10 +9,14 @@ import com.example.simplelogin.data.UserPreferences
 import com.example.simplelogin.ui.view.auth.AuthActivity
 import com.example.simplelogin.ui.viewModel.ProfileViewModel
 import com.example.simplelogin.utils.startNewActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
     private val viewModel by viewModels<ProfileViewModel>()
+    @Inject
     lateinit var userPreferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +25,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     fun performLogout() = lifecycleScope.launch {
-        // viewModel.logout()
+        viewModel.logout()
         userPreferences.clear()
         startNewActivity(AuthActivity::class.java)
     }

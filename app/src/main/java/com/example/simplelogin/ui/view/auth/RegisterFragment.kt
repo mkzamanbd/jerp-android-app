@@ -11,7 +11,9 @@ import com.example.simplelogin.databinding.FragmentRegisterBinding
 import com.example.simplelogin.network.AuthApi
 import com.example.simplelogin.repository.AuthRepository
 
-class RegisterFragment : BaseFragment<AuthViewModel, FragmentRegisterBinding, AuthRepository>() {
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
+    FragmentRegisterBinding::inflate
+) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,14 +22,4 @@ class RegisterFragment : BaseFragment<AuthViewModel, FragmentRegisterBinding, Au
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
-
-    override fun getViewModel() = AuthViewModel::class.java
-
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-    ) = FragmentRegisterBinding.inflate(inflater, container, false)
-
-    override fun getFragmentRepository() =
-        AuthRepository(retrofitClient.buildApi(AuthApi::class.java), userPreferences)
 }

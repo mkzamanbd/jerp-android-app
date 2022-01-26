@@ -2,29 +2,31 @@ package com.example.simplelogin.ui.view.auth
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.simplelogin.R
 import com.example.simplelogin.base.BaseFragment
 import com.example.simplelogin.databinding.FragmentLoginBinding
-import com.example.simplelogin.network.AuthApi
 import com.example.simplelogin.network.Resource
-import com.example.simplelogin.repository.AuthRepository
 import com.example.simplelogin.ui.view.DashboardActivity
 import com.example.simplelogin.utils.enable
 import com.example.simplelogin.utils.handleApiError
 import com.example.simplelogin.utils.startNewActivity
 import com.example.simplelogin.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate
+) {
+    private val viewModel by viewModels<AuthViewModel>()
 
-class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,14 +78,4 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 
         viewModel.userLogin(email, password)
     }
-
-    override fun getViewModel() = AuthViewModel::class.java
-
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-    ) = FragmentLoginBinding.inflate(inflater, container, false)
-
-    override fun getFragmentRepository() =
-        AuthRepository(retrofitClient.buildApi(AuthApi::class.java), userPreferences)
 }

@@ -1,20 +1,30 @@
 package com.example.simplelogin.network
 
+import android.content.Context
 import com.example.simplelogin.BuildConfig
+import com.example.simplelogin.data.UserPreferences
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class RetrofitClient {
+class RetrofitClient @Inject constructor(){
     companion object {
         private const val baseUrl = "https://api.kzaman.me/api/"
     }
 
     fun <Api> buildApi(
         api: Class<Api>,
-        accessToken: String? = null,
+        context: Context
     ): Api {
+        val userPreferences = UserPreferences(context)
+
+        val accessToken = runBlocking {
+            userPreferences.accessToken.first()
+        }
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(
@@ -22,7 +32,7 @@ class RetrofitClient {
                     .addInterceptor { chain ->
                         chain.proceed(chain.request().newBuilder().also {
                             it.addHeader("Accept", "application/json")
-                            it.addHeader("Authorization", "Bearer $accessToken")
+                             it.addHeader("Authorization", "Bearer $accessToken")
                         }.build())
                     }
                     .also { client ->

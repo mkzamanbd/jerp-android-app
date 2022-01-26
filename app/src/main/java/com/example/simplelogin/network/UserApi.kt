@@ -5,11 +5,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface UserApi {
-
+interface UserApi : BaseApi {
     @GET("auth/current-user")
-    suspend fun getUserProfile (): ProfileResponse
-
-    @POST("auth/logout")
-    suspend fun logout(): ResponseBody
+    suspend fun getUserProfile(): ProfileResponse
 }

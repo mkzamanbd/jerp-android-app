@@ -15,41 +15,25 @@ import com.example.simplelogin.ui.view.auth.AuthActivity
 import com.example.simplelogin.utils.startNewActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.lang.IllegalArgumentException
 
-abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseRepository> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding>(
+    private val bindingInflater: (inflater: LayoutInflater) -> VB,
+) : Fragment() {
 
-    protected lateinit var userPreferences: UserPreferences
-    protected lateinit var binding: B
-    protected val retrofitClient = RetrofitClient()
-    protected lateinit var viewModel: VM
+    private var _binding: VB? = null
+
+    val binding: VB
+        get() = _binding as VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        userPreferences = UserPreferences(requireContext())
-        binding = getFragmentBinding(inflater, container)
-        val factory = ViewModelFactory(getFragmentRepository())
-        viewModel = ViewModelProvider(this, factory).get(getViewModel())
-
-        lifecycleScope.launch {
-            userPreferences.accessToken.first()
-        }
+        _binding = bindingInflater.invoke(inflater)
+        if (_binding == null)
+            throw IllegalArgumentException("Binding cannot be null")
         return binding.root
     }
-
-    fun logout() = lifecycleScope.launch {
-        val accessToken = userPreferences.accessToken.first()
-        val api = retrofitClient.buildApi(UserApi::class.java, accessToken)
-        viewModel.logout(api)
-        userPreferences.clear()
-        requireActivity().startNewActivity(AuthActivity::class.java)
-    }
-
-    abstract fun getViewModel(): Class<VM>
-
-    abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): B
-
-    abstract fun getFragmentRepository(): R
 }

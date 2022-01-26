@@ -2,15 +2,17 @@ package com.example.simplelogin.ui.view.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplelogin.base.BaseViewModel
 import com.example.simplelogin.data.response.LoginResponse
 import com.example.simplelogin.network.Resource
 import com.example.simplelogin.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthViewModel(
+@HiltViewModel
+class AuthViewModel @Inject constructor(
     private val repository: AuthRepository,
 ) : BaseViewModel(repository) {
 
