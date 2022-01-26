@@ -3,11 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_dashboard"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/userFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/userFragment"
+        android:name="com.example.simplelogin.ui.view.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/profileFragment"
         android:name="com.example.simplelogin.ui.view.ProfileFragment"
-        android:label="fragment_home"
+        android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.simplelogin.ui.view.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.simplelogin.ui.view.SettingsFragment"
+        android:label="Add Contact"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
