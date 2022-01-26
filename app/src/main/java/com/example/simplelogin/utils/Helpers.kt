@@ -48,18 +48,17 @@ fun Fragment.logout() = lifecycleScope.launch {
 
 fun Fragment.handleApiError(
     failure: Resource.Failure,
-    retry: (() -> Unit)? = null
+    retry: (() -> Unit)? = null,
 ) {
     when {
         failure.isNetworkError -> requireView().snackBar(
             "Please check your internet connection",
             retry
         )
-        failure.errorCode == 401 -> {
+        failure.statusCode == 401 -> {
             if (this is LoginFragment) {
                 requireView().snackBar("You've entered incorrect email or password")
-            }
-            else{
+            } else {
                 (this as BaseFragment<*>).logout()
             }
         }

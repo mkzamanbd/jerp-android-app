@@ -4,5 +4,5 @@ import com.example.simplelogin.data.model.User
 
 data class ProfileResponse(
     //val response_code: Int?,
-    val user: User
+    val user: User,
 )

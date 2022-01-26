@@ -15,9 +15,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
-    private val viewModel by viewModels<ProfileViewModel>()
     @Inject
     lateinit var userPreferences: UserPreferences
+    private val viewModel by viewModels<ProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

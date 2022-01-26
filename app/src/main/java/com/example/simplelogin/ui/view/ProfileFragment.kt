@@ -29,8 +29,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.getUser()
 
         viewModel.profile.observe(viewLifecycleOwner, Observer {
-            when(it){
-                is Resource.Success ->{
+            when (it) {
+                is Resource.Success -> {
                     binding.progressBar.visible(false)
                     binding.profileInfo.visible(true)
                     updateUI(it.value.user)
@@ -41,13 +41,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
         })
 
-        binding.userLogout.setOnClickListener{
+        binding.userLogout.setOnClickListener {
             logout()
         }
 
     }
 
-    private fun updateUI(user: User){
+    private fun updateUI(user: User) {
         binding.tvName.text = user.name
         binding.tvEmail.text = user.email
         Log.d("user", user.toString())

@@ -14,5 +14,5 @@ data class User(
     val profile_photo_url: String,
     val updated_at: String,
     val user_created_at: String,
-    val username: String
+    val username: String,
 )

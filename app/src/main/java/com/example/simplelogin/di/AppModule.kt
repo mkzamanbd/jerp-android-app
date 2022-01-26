@@ -19,7 +19,7 @@ object AppModule {
     @Provides
     fun provideAuthApi(
         retrofitClient: RetrofitClient,
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AuthApi {
         return retrofitClient.buildApi(AuthApi::class.java, context)
     }
@@ -28,7 +28,7 @@ object AppModule {
     @Provides
     fun provideUserApi(
         retrofitClient: RetrofitClient,
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): UserApi {
         return retrofitClient.buildApi(UserApi::class.java, context)
     }

@@ -30,7 +30,7 @@ class AuthViewModel @Inject constructor(
         _loginResponse.value = repository.login(email, password)
     }
 
-    suspend fun saveAccessToken(token: String){
+    suspend fun saveAccessToken(token: String) {
         repository.saveAccessToken(token)
     }
 }

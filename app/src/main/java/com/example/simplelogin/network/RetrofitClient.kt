@@ -9,16 +9,17 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class RetrofitClient @Inject constructor(){
+class RetrofitClient @Inject constructor() {
     companion object {
         private const val baseUrl = "https://api.kzaman.me/api/"
     }
 
     fun <Api> buildApi(
         api: Class<Api>,
-        context: Context
+        context: Context,
     ): Api {
         val userPreferences = UserPreferences(context)
 
@@ -29,10 +30,13 @@ class RetrofitClient @Inject constructor(){
             .baseUrl(baseUrl)
             .client(
                 OkHttpClient.Builder()
+                    .connectTimeout(40, TimeUnit.SECONDS)
+                    .writeTimeout(40, TimeUnit.SECONDS)
+                    .readTimeout(40, TimeUnit.SECONDS)
                     .addInterceptor { chain ->
                         chain.proceed(chain.request().newBuilder().also {
                             it.addHeader("Accept", "application/json")
-                             it.addHeader("Authorization", "Bearer $accessToken")
+                            it.addHeader("Authorization", "Bearer $accessToken")
                         }.build())
                     }
                     .also { client ->
