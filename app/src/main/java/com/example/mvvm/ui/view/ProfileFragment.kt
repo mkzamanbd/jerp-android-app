@@ -10,6 +10,7 @@ import com.example.mvvm.data.model.User
 import com.example.mvvm.databinding.FragmentProfileBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
+import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.logout
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,14 +30,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         viewModel.getUser()
 
         viewModel.profile.observe(viewLifecycleOwner, Observer {
+            binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     binding.progressBar.visible(false)
                     binding.profileInfo.visible(true)
                     updateUI(it.value.user)
                 }
-                is Resource.Loading -> {
-                    binding.progressBar.visible(true)
+                is Resource.Failure -> handleApiError(it){
+                    binding.progressBar.visible(false)
                 }
             }
         })
