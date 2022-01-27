@@ -3,6 +3,7 @@ package com.example.mvvm.network
 import android.content.Context
 import com.example.mvvm.BuildConfig
 import com.example.mvvm.data.UserPreferences
+import com.example.mvvm.utils.NoNetworkException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -21,6 +22,10 @@ class RetrofitClient @Inject constructor() {
         api: Class<Api>,
         context: Context,
     ): Api {
+
+        val helper = NetworkHelper(context)
+
+
         val userPreferences = UserPreferences(context)
 
         val accessToken = runBlocking {
@@ -34,6 +39,7 @@ class RetrofitClient @Inject constructor() {
                     .writeTimeout(40, TimeUnit.SECONDS)
                     .readTimeout(40, TimeUnit.SECONDS)
                     .addInterceptor { chain ->
+                        if (!helper.isNetworkConnected()) throw NoNetworkException()
                         chain.proceed(chain.request().newBuilder().also {
                             it.addHeader("Accept", "application/json")
                             it.addHeader("Authorization", "Bearer $accessToken")

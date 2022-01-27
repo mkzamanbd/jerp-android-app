@@ -11,4 +11,7 @@
 
     <dimen name="signup_text_margin_top">10dp</dimen>
 
+    <dimen name="layout_height">100dp</dimen>
+    <dimen name="standard_padding">8dp</dimen>
+
 </resources>
