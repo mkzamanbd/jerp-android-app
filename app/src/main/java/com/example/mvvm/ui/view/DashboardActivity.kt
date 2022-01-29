@@ -14,6 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
 
@@ -32,16 +34,17 @@ class DashboardActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomNavigationView.setupWithNavController(navController)
 
-//        val appBarConfiguration = AppBarConfiguration.Builder(
-//            R.id.userFragment,
-//            R.id.profileFragment,
-//            R.id.notificationFragment,
-//            R.id.settingsFragment
-//        ).build()
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
-//        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.userFragment,
+                R.id.profileFragment,
+                R.id.notificationFragment,
+                R.id.settingsFragment
+            )
+        )
+        setupActionBarWithNavController( navController, appBarConfiguration)
+        bottomNavigationView.setupWithNavController(navController);
     }
 
     fun performLogout() = lifecycleScope.launch {
