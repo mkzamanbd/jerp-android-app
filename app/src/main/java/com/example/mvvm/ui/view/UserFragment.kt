@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.adapter.UserListAdapter
 import com.example.mvvm.base.BaseFragment
-import com.example.mvvm.data.model.User
 import com.example.mvvm.databinding.FragmentUserBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.UserViewModel
@@ -23,8 +22,8 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     FragmentUserBinding::inflate
 ) {
     private val viewModel by viewModels<UserViewModel>()
-    val userListAdapter = UserListAdapter(arrayListOf())
-    lateinit var userListRecyclerView : RecyclerView
+    private val userListAdapter = UserListAdapter(arrayListOf())
+    private lateinit var userListRecyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,19 +41,17 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    binding.progressBar.visible(false)
                     Log.d("usersList", it.value.users.toString())
                     userListAdapter.updateUsers(it.value.users)
                 }
-                is Resource.Failure -> handleApiError(it){
-                    binding.progressBar.visible(false)
+                is Resource.Failure -> handleApiError(it) {
                     getUsersList()
                 }
             }
         })
     }
 
-    private fun getUsersList(){
+    private fun getUsersList() {
         viewModel.getUsers()
     }
 }
