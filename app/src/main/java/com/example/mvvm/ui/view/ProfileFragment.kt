@@ -27,18 +27,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         binding.progressBar.visible(false)
         binding.profileInfo.visible(false)
 
-        viewModel.getUser()
+        getUser()
 
         viewModel.profile.observe(viewLifecycleOwner, Observer {
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    binding.progressBar.visible(false)
                     binding.profileInfo.visible(true)
                     updateUI(it.value.user)
                 }
                 is Resource.Failure -> handleApiError(it){
-                    binding.progressBar.visible(false)
+                    getUser()
                 }
             }
         })
@@ -53,6 +52,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         binding.tvName.text = user.name
         binding.tvEmail.text = user.email
         Log.d("user", user.toString())
+    }
+
+    private fun getUser(){
+        viewModel.getUser()
     }
 }
 
