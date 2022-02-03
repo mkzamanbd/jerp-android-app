@@ -47,6 +47,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
                 is Resource.Failure -> handleApiError(it) {
                     getUsersList()
                 }
+                else -> Log.d("unknownError", "Unknown Error")
             }
         })
     }

@@ -39,6 +39,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 is Resource.Failure -> handleApiError(it){
                     getUser()
                 }
+                else -> Log.d("unknownError", "Unknown Error")
             }
         })
 

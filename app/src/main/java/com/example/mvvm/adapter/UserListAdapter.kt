@@ -8,22 +8,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.data.model.User
-import com.example.mvvm.data.response.UserResponse
 
-class UserListAdapter(var users: ArrayList<User>) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
+class UserListAdapter(var users: ArrayList<User>) :
+    RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateUsers(newUsers: List<User>) {
+    fun updateUsers(user: List<User>) {
         users.clear()
-        users.addAll(newUsers)
+        users.addAll(user)
         notifyDataSetChanged()
     }
 
-    class UserViewHolder (view: View) : RecyclerView.ViewHolder(view){
+    class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val name: TextView = view.findViewById(R.id.name)
         val email: TextView = view.findViewById(R.id.email)
-        fun bind(user: User){
+        fun bind(user: User) {
             name.text = user.name
             email.text = user.email
         }

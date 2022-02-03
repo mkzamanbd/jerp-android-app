@@ -2,6 +2,7 @@ package com.example.mvvm.ui.view.auth
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
@@ -48,6 +49,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     login()
                     binding.loginButton.enable(true)
                 }
+                else -> Log.d("unknownError", "Unknown Error")
             }
         })
 
