@@ -12,11 +12,12 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/mvvm"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Mvvm">
+        android:theme="@style/Theme.Mvvm"
+        android:usesCleartextTraffic="true">
         <activity
-            android:theme="@style/Theme.Dashboard"
             android:name=".ui.view.DashboardActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Dashboard" />
         <activity
             android:name=".ui.view.auth.AuthActivity"
             android:exported="true" />
