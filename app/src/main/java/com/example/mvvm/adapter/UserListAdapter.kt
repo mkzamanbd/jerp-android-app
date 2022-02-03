@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.data.model.User
+import com.example.mvvm.utils.getProgressDrawable
+import com.example.mvvm.utils.loadImage
 
 class UserListAdapter(
     var users: ArrayList<User>,
@@ -25,9 +28,12 @@ class UserListAdapter(
 
         val name: TextView = view.findViewById(R.id.name)
         val email: TextView = view.findViewById(R.id.email)
+        private val profilePhoto: ImageView = view.findViewById(R.id.imageView)
+        private val progressDrawable = getProgressDrawable(view.context)
         fun bind(user: User) {
             name.text = user.name
             email.text = user.email
+            profilePhoto.loadImage(user.profile_photo_url, progressDrawable)
         }
 
         init {

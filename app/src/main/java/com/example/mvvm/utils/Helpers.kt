@@ -1,10 +1,16 @@
 package com.example.mvvm.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.DashboardActivity
@@ -73,4 +79,17 @@ fun Fragment.handleApiError(
             requireView().snackBar(error)
         }
     }
+}
+
+fun getProgressDrawable(context: Context): CircularProgressDrawable {
+    return CircularProgressDrawable(context).apply {
+        strokeWidth = 10f
+        centerRadius = 50f
+        start()
+    }
+}
+
+fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
+    val option = RequestOptions().placeholder(progressDrawable).error(R.mipmap.ic_launcher_round)
+    Glide.with(this.context).setDefaultRequestOptions(option).load(uri).into(this)
 }

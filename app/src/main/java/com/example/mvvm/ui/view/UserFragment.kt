@@ -25,7 +25,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 
     private val viewModel by viewModels<UserViewModel>()
     private val userListAdapter = UserListAdapter(arrayListOf(), this)
-    private lateinit var userListRecyclerView: RecyclerView
+    lateinit var userListRecyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,6 +60,8 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 
     override fun onItemClick(position: Int) {
         userListAdapter.notifyItemChanged(position)
-        Toast.makeText(requireContext(), userListAdapter.users[position].toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(),
+            userListAdapter.users[position].toString(),
+            Toast.LENGTH_SHORT).show()
     }
 }
