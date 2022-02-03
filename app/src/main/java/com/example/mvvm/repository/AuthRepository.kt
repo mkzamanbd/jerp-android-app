@@ -2,7 +2,7 @@ package com.example.mvvm.repository
 
 import com.example.mvvm.base.BaseRepository
 import com.example.mvvm.data.UserPreferences
-import com.example.mvvm.network.AuthApi
+import com.example.mvvm.api.AuthApi
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(

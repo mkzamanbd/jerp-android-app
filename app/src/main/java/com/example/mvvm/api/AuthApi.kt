@@ -1,6 +1,7 @@
-package com.example.mvvm.network
+package com.example.mvvm.api
 
 import com.example.mvvm.data.response.LoginResponse
+import com.example.mvvm.network.BaseApi
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

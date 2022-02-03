@@ -1,9 +1,9 @@
 package com.example.mvvm.di
 
 import android.content.Context
-import com.example.mvvm.network.AuthApi
+import com.example.mvvm.api.AuthApi
 import com.example.mvvm.network.RetrofitClient
-import com.example.mvvm.network.UserApi
+import com.example.mvvm.api.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

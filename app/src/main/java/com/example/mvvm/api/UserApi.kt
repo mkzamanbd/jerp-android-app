@@ -1,7 +1,8 @@
-package com.example.mvvm.network
+package com.example.mvvm.api
 
 import com.example.mvvm.data.response.ProfileResponse
 import com.example.mvvm.data.response.UserResponse
+import com.example.mvvm.network.BaseApi
 import retrofit2.http.GET
 import retrofit2.http.Path
 
