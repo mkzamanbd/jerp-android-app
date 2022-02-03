@@ -37,10 +37,9 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
         viewModel.userDetail.observe(viewLifecycleOwner, Observer {
             when(it){
                 is Resource.Success -> {
-                    Log.d("userDetail", it.toString())
+                    binding.userDetail.text = it.value.user.toString()
                 }
                 is Resource.Failure -> handleApiError(it) {
-                    Log.d("ErrorDetail", it.toString())
                     getUserDetail(userId.toString())
                 }
                 else -> Log.d("unknownError", "Unknown Error")

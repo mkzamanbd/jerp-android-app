@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm.base.BaseViewModel
+import com.example.mvvm.data.response.DefaultResponse
 import com.example.mvvm.data.response.UserResponse
 import com.example.mvvm.network.Resource
 import com.example.mvvm.repository.UserRepository
@@ -17,10 +18,10 @@ class UserViewModel @Inject constructor(
 ) : BaseViewModel(repository) {
 
     private val _users: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
-    private val _userDetail: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
-
     val users: LiveData<Resource<UserResponse>> = _users
-    val userDetail: LiveData<Resource<UserResponse>> = _userDetail
+
+    private val _userDetail: MutableLiveData<Resource<DefaultResponse>> = MutableLiveData()
+    val userDetail: LiveData<Resource<DefaultResponse>> = _userDetail
 
     fun getUsers() = viewModelScope.launch {
         _users.value = Resource.Loading

@@ -1,5 +1,6 @@
 package com.example.mvvm.api
 
+import com.example.mvvm.data.response.DefaultResponse
 import com.example.mvvm.data.response.ProfileResponse
 import com.example.mvvm.data.response.UserResponse
 import com.example.mvvm.network.BaseApi
@@ -17,5 +18,5 @@ interface UserApi : BaseApi {
     @GET("get-user-detail/{id}")
     suspend fun getUserDetail(
         @Path("id") id: String,
-    ): UserResponse
+    ): DefaultResponse
 }
