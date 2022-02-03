@@ -3,6 +3,7 @@ package com.example.mvvm.ui.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentUserBinding>(
     FragmentUserBinding::inflate
-) {
+), UserListAdapter.OnItemClickListener {
+
     private val viewModel by viewModels<UserViewModel>()
-    private val userListAdapter = UserListAdapter(arrayListOf())
+    private val userListAdapter = UserListAdapter(arrayListOf(), this)
     private lateinit var userListRecyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,5 +56,10 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 
     private fun getUsersList() {
         viewModel.getUsers()
+    }
+
+    override fun onItemClick(position: Int) {
+        userListAdapter.notifyItemChanged(position)
+        Toast.makeText(requireContext(), userListAdapter.users[position].toString(), Toast.LENGTH_SHORT).show()
     }
 }
