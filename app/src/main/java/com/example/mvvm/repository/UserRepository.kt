@@ -9,4 +9,6 @@ class UserRepository @Inject constructor(
 ) : BaseRepository(api) {
 
     suspend fun getAllUsers() = safeApiCall { api.getAllUsers() }
+
+    suspend fun getUserDetail(userId: String) = safeApiCall { api.getUserDetail(userId) }
 }

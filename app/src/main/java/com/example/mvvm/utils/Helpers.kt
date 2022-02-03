@@ -68,6 +68,9 @@ fun Fragment.handleApiError(
                 (this as BaseFragment<*>).logout()
             }
         }
+        failure.statusCode == 404 -> {
+            requireView().snackBar("Url not found!")
+        }
         failure.statusCode == 422 -> {
             requireView().snackBar("The given data was invalid")
         }

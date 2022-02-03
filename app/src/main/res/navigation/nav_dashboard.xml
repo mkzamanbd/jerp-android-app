@@ -9,7 +9,11 @@
         android:id="@+id/userFragment"
         android:name="com.example.mvvm.ui.view.UserFragment"
         android:label="Users"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -20,7 +24,7 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.mvvm.ui.view.NotificationFragment"
-        android:label="Notifications"
+        android:label="Notification"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
@@ -28,5 +32,10 @@
         android:name="com.example.mvvm.ui.view.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.mvvm.ui.view.UserDetailFragment"
+        android:label="User Detail"
+        tools:layout="@layout/fragment_user_detail" />
 
 </navigation>

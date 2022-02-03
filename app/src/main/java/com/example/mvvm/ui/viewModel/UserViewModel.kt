@@ -17,11 +17,18 @@ class UserViewModel @Inject constructor(
 ) : BaseViewModel(repository) {
 
     private val _users: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
-    val users: LiveData<Resource<UserResponse>>
-        get() = _users
+    private val _userDetail: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
+
+    val users: LiveData<Resource<UserResponse>> = _users
+    val userDetail: LiveData<Resource<UserResponse>> = _userDetail
 
     fun getUsers() = viewModelScope.launch {
         _users.value = Resource.Loading
         _users.value = repository.getAllUsers()
+    }
+
+    fun getUserDetail(userId: String) = viewModelScope.launch {
+        _userDetail.value = Resource.Loading
+        _userDetail.value = repository.getUserDetail(userId)
     }
 }

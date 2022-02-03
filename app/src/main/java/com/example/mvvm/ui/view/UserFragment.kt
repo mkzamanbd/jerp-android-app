@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
@@ -24,6 +25,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 ), UserListAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<UserViewModel>()
+
     private val userListAdapter = UserListAdapter(arrayListOf(), this)
     lateinit var userListRecyclerView: RecyclerView
 
@@ -60,8 +62,11 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 
     override fun onItemClick(position: Int) {
         userListAdapter.notifyItemChanged(position)
-        Toast.makeText(requireContext(),
-            userListAdapter.users[position].toString(),
-            Toast.LENGTH_SHORT).show()
+
+        val user = userListAdapter.users[position]
+        val bundle = Bundle()
+        bundle.putString("userId", user.id.toString())
+
+        findNavController().navigate(R.id.action_userFragment_to_userDetailFragment, bundle)
     }
 }
