@@ -44,7 +44,7 @@ class DashboardActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController( navController, appBarConfiguration)
-        bottomNavigationView.setupWithNavController(navController);
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     fun performLogout() = lifecycleScope.launch {
