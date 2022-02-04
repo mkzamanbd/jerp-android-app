@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/ic_login_screen_background"
     android:padding="40dp"
-    tools:context=".ui.view.auth.RegisterFragment">
+    tools:context=".ui.view.fragments.auth.RegisterFragment">
 
     <TextView
         android:id="@+id/textView"

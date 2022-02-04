@@ -1,4 +1,4 @@
-package com.example.mvvm.ui.view.auth
+package com.example.mvvm.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

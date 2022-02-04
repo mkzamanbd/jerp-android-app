@@ -6,7 +6,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import com.example.mvvm.R
 import com.example.mvvm.data.UserPreferences
-import com.example.mvvm.ui.view.auth.AuthActivity
+import com.example.mvvm.ui.view.activities.AuthActivity
+import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.utils.startNewActivity
 
 class MainActivity : AppCompatActivity() {

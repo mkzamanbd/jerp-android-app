@@ -1,4 +1,4 @@
-package com.example.mvvm.ui.view
+package com.example.mvvm.ui.view.activities
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.example.mvvm.R
 import com.example.mvvm.data.UserPreferences
-import com.example.mvvm.ui.view.auth.AuthActivity
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.startNewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView

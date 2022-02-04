@@ -1,4 +1,4 @@
-package com.example.mvvm.ui.view.auth
+package com.example.mvvm.ui.view.fragments.auth
 
 import android.os.Bundle
 import android.view.View

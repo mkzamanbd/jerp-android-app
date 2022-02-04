@@ -13,8 +13,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.network.Resource
-import com.example.mvvm.ui.view.DashboardActivity
-import com.example.mvvm.ui.view.auth.LoginFragment
+import com.example.mvvm.ui.view.activities.DashboardActivity
+import com.example.mvvm.ui.view.fragments.auth.LoginFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 

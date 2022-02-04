@@ -1,4 +1,4 @@
-package com.example.mvvm.ui.view.auth
+package com.example.mvvm.ui.view.fragments.auth
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,8 @@ import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentLoginBinding
 import com.example.mvvm.network.Resource
-import com.example.mvvm.ui.view.DashboardActivity
+import com.example.mvvm.ui.view.activities.DashboardActivity
+import com.example.mvvm.ui.viewModel.AuthViewModel
 import com.example.mvvm.utils.enable
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.startNewActivity
