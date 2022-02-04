@@ -1,10 +1,14 @@
 package com.example.mvvm.ui.view.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.mvvm.R
 import com.example.mvvm.data.UserPreferences
 import com.example.mvvm.ui.viewModel.ProfileViewModel
@@ -13,9 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 
 
 @AndroidEntryPoint
@@ -36,14 +37,23 @@ class DashboardActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.dashboardFragment,
                 R.id.userFragment,
                 R.id.profileFragment,
-                R.id.notificationFragment,
-                R.id.settingsFragment
+                R.id.notificationFragment
             )
         )
-        setupActionBarWithNavController( navController, appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.dashboardFragment) {
+                bottomNavigationView.visibility = View.VISIBLE
+            } else {
+                bottomNavigationView.visibility = View.GONE
+            }
+        }
+
     }
 
     fun performLogout() = lifecycleScope.launch {
