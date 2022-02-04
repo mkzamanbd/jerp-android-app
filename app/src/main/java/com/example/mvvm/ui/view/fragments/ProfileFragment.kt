@@ -1,4 +1,4 @@
-package com.example.mvvm.ui.view
+package com.example.mvvm.ui.view.fragments
 
 import android.os.Bundle
 import android.util.Log
