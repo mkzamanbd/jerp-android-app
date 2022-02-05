@@ -27,6 +27,11 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mContext = requireContext()
+        mActivity = requireActivity()
+    }
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

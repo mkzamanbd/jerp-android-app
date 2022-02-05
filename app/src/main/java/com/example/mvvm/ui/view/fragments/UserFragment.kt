@@ -28,6 +28,12 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     private val userListAdapter = UserListAdapter(arrayListOf(), this)
     lateinit var userListRecyclerView: RecyclerView
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mContext = requireContext()
+        mActivity = requireActivity()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

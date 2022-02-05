@@ -3,13 +3,13 @@ package com.example.mvvm.ui.view.activities
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.mvvm.R
+import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.data.UserPreferences
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.startNewActivity
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : BaseActivity() {
     @Inject
     lateinit var userPreferences: UserPreferences
     private val viewModel by viewModels<ProfileViewModel>()
@@ -55,6 +55,10 @@ class DashboardActivity : AppCompatActivity() {
         }
 
     }
+
+
+    override fun init() {}
+    override fun setToolbarTitle(title: String) {}
 
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()

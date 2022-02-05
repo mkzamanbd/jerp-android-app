@@ -1,5 +1,7 @@
 package com.example.mvvm.base
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +12,11 @@ import java.lang.IllegalArgumentException
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (inflater: LayoutInflater) -> VB,
-) : Fragment() {
+) : Fragment(), InitialComponent {
+
+    protected lateinit var mContext : Context
+    protected lateinit var mActivity : Activity
+    protected lateinit var baseActivity: BaseActivity
 
     private var _binding: VB? = null
 
@@ -27,4 +33,7 @@ abstract class BaseFragment<VB : ViewBinding>(
             throw IllegalArgumentException("Binding cannot be null")
         return binding.root
     }
+
+    override fun init() {}
+    override fun setToolbarTitle(title: String) { }
 }

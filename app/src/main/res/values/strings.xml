@@ -38,4 +38,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="users">Users</string>
     <string name="todo">TODO</string>
+    <string name="products">Products</string>
+    <string name="customers">Customers</string>
+    <string name="orders">Orders</string>
 </resources>

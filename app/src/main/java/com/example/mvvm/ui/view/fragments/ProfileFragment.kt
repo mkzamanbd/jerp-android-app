@@ -14,12 +14,19 @@ import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.logout
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     FragmentProfileBinding::inflate
 ) {
     private val viewModel by viewModels<ProfileViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mContext = requireContext()
+        mActivity = requireActivity()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                     binding.profileInfo.visible(true)
                     updateUI(it.value.user)
                 }
-                is Resource.Failure -> handleApiError(it){
+                is Resource.Failure -> handleApiError(it) {
                     getUser()
                 }
                 else -> Log.d("unknownError", "Unknown Error")
@@ -55,7 +62,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         Log.d("user", user.toString())
     }
 
-    private fun getUser(){
+    private fun getUser() {
         viewModel.getUser()
     }
 }

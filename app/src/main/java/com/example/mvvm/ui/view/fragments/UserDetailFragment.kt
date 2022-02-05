@@ -21,6 +21,8 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext = requireContext()
+        mActivity = requireActivity()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
