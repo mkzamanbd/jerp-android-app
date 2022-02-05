@@ -2,10 +2,8 @@ package com.example.mvvm.network
 
 import android.content.Context
 import com.example.mvvm.BuildConfig
-import com.example.mvvm.data.UserPreferences
+import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.utils.NoNetworkException
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,7 +13,7 @@ import javax.inject.Inject
 
 class RetrofitClient @Inject constructor() {
     companion object {
-        private const val baseUrl = "https://api.kzaman.me/api/"
+        private const val baseUrl = "http://203.188.245.58:8889/api/"
     }
 
     fun <Api> buildApi(
@@ -24,13 +22,9 @@ class RetrofitClient @Inject constructor() {
     ): Api {
 
         val helper = NetworkHelper(context)
+        val spManager = SharedPreferenceManager(context)
+        val accessToken = spManager.userAccessToken()
 
-
-        val userPreferences = UserPreferences(context)
-
-        val accessToken = runBlocking {
-            userPreferences.accessToken.first()
-        }
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(

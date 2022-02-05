@@ -1,9 +1,9 @@
 package com.example.mvvm.network
 
 import okhttp3.ResponseBody
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 interface BaseApi {
-    @POST("auth/logout")
+    @GET("logout")
     suspend fun logout(): ResponseBody
 }

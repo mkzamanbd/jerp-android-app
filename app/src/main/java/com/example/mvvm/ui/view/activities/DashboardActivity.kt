@@ -10,24 +10,23 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.mvvm.R
 import com.example.mvvm.base.BaseActivity
-import com.example.mvvm.data.UserPreferences
+import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.startNewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class DashboardActivity : BaseActivity() {
-    @Inject
-    lateinit var userPreferences: UserPreferences
     private val viewModel by viewModels<ProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        spManager = SharedPreferenceManager(applicationContext)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -62,7 +61,7 @@ class DashboardActivity : BaseActivity() {
 
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
-        userPreferences.clear()
+        spManager.clearAll()
         startNewActivity(AuthActivity::class.java)
     }
 }

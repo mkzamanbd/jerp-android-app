@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.data.model.User
+import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.FragmentProfileBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
@@ -26,29 +27,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
+        spManager = SharedPreferenceManager(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.progressBar.visible(false)
-        binding.profileInfo.visible(false)
 
-        getUser()
-
-        viewModel.profile.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.visible(it is Resource.Loading)
-            when (it) {
-                is Resource.Success -> {
-                    binding.profileInfo.visible(true)
-                    updateUI(it.value.user)
-                }
-                is Resource.Failure -> handleApiError(it) {
-                    getUser()
-                }
-                else -> Log.d("unknownError", "Unknown Error")
-            }
-        })
+        updateUI()
 
         binding.userLogout.setOnClickListener {
             logout()
@@ -56,10 +43,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     }
 
-    private fun updateUI(user: User) {
-        binding.tvName.text = user.name
-        binding.tvEmail.text = user.email
-        Log.d("user", user.toString())
+    private fun updateUI() {
+        binding.tvName.text = spManager.getUserFullName()
+        binding.tvEmail.text = spManager.getUserRoleName()
     }
 
     private fun getUser() {

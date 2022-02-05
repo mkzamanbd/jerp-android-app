@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
+import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.FragmentLoginBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.DashboardActivity
@@ -27,11 +28,14 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
+        spManager = SharedPreferenceManager(requireContext())
     }
+
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +51,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 is Resource.Success -> {
                     binding.loginButton.enable(true)
                     lifecycleScope.launch {
-                        viewModel.saveAccessToken(it.value.token)
+                        spManager.storeTokenInformation(it.value.data.token)
+                        spManager.storeUserInformation(it.value.data.user)
+                        spManager.isLoggedIn(true);
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
                 }
