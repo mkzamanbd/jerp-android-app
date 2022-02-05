@@ -1,4 +1,4 @@
-package com.example.mvvm.network
+package com.example.mvvm.interfaces
 
 interface NetworkConfig
 {

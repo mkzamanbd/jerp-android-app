@@ -1,4 +1,4 @@
-package com.example.mvvm.base
+package com.example.mvvm.interfaces
 
 interface InitialComponent {
     fun init()

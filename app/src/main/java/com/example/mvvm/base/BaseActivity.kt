@@ -2,6 +2,7 @@ package com.example.mvvm.base
 
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mvvm.interfaces.InitialComponent
 
 abstract class BaseActivity : AppCompatActivity(), InitialComponent {
 
