@@ -59,12 +59,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 is Resource.Success -> {
                     binding.loginButton.enable(true)
                     lifecycleScope.launch {
+                        mActivity.successToast("User Successfully logged In")
                         spManager.storeTokenInformation(it.value.data.token)
                         spManager.storeUserInformation(it.value.data.user)
                         spManager.isLoggedIn(true)
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
-                    mActivity.successToast("User Successfully logged In")
                 }
                 is Resource.Failure -> handleApiError(it) {
                     login()
