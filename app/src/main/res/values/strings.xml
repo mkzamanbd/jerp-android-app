@@ -41,4 +41,11 @@
     <string name="products">Products</string>
     <string name="customers">Customers</string>
     <string name="orders">Orders</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="info">Info</string>
+    <string name="warning">Warning</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="retry">Retry</string>
+    <string name="no_network_warning">Unable to connect internet, Please check your internet connection.</string>
 </resources>

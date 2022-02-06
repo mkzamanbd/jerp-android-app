@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,6 +21,7 @@ import com.example.mvvm.utils.enable
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.startNewActivity
 import com.example.mvvm.utils.visible
+import com.example.mvvm.utils.successToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -64,6 +64,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                         spManager.isLoggedIn(true)
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
+                    mActivity.successToast("User Successfully logged In")
                 }
                 is Resource.Failure -> handleApiError(it) {
                     login()

@@ -14,4 +14,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+
+    <!-- toast background color -->
+    <color name="success_color">#2CD994</color>
+    <color name="success_bg_color">#3358F0B3</color>
+    <color name="error_color">#FF5151</color>
+    <color name="error_bg_color">#33DC5959</color>
+    <color name="warning_color">#FF6B00</color>
+    <color name="warning_bg_color">#33E6823A</color>
+    <color name="info_color">#4693FF</color>
+    <color name="info_bg_color">#33528AD8</color>
+    <color name="toast_view_color">#282F39</color>
 </resources>

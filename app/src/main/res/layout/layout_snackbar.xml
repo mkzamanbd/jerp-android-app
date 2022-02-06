@@ -1,0 +1,72 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/snack_bar_layout_root"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_5sdp"
+    android:background="@drawable/bg_toast"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/five"
+        android:background="@drawable/bg_toast_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/dividerHeight"
+        android:src="@drawable/ic_no_internet" />
+
+    <LinearLayout
+        android:id="@+id/ln_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_toStartOf="@+id/tv_retry"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/RobotoMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:textColor="@color/warning_color"
+            android:textSize="@dimen/_12sdp"
+            android:text="@string/no_internet" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_message"
+            style="@style/RobotoRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:padding="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:text="@string/no_network_warning" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_2sdp"
+        android:textSize="@dimen/_12sdp"
+        style="@style/RobotoMedium"
+        android:textColor="@color/success_color"
+        android:text="@string/retry"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>
