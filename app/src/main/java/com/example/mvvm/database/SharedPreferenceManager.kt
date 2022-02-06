@@ -38,13 +38,42 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
 
     /**
      * ...update password
-     * @param password update password
+     * ...update username
+     * @param password & username update
      */
-    fun updateRememberPassword(password: String?) {
+    fun updateRememberUserCredential(userName: String, password: String,) {
         sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
+        editor.putString("userName", userName)
         editor.putString("password", password)
         editor.apply()
+    }
+
+    /**
+     * get user remember status
+     * @return if remember then return true otherwise false
+     */
+    fun getRememberStatus(): Boolean {
+        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isRemember", false)
+    }
+
+    /**
+     * get last remembered user name
+     * @return user name
+     */
+    fun getRememberUsername(): String? {
+        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
+        return sharedPreferences.getString("userName", null)
+    }
+
+    /**
+     * get last remembered password
+     * @return user password
+     */
+    fun getRememberPassword(): String? {
+        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
+        return sharedPreferences.getString("password", null)
     }
 
     /**
@@ -91,39 +120,12 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
     }
 
     /**
-     * get user remember status
-     * @return if remember then return true otherwise false
-     */
-    fun getRememberStatus(): Boolean {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("isRemember", false)
-    }
-
-    /**
-     * get last remembered user name
-     * @return user name
-     */
-    fun getRememberUsername(): String? {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("userName", null)
-    }
-
-    /**
      * ...get current user name
      * @return user name
      */
     fun getUserName(): String? {
         sharedPreferences = appContext.getSharedPreferences(loginInfo, Context.MODE_PRIVATE)
         return sharedPreferences.getString("userName", null)
-    }
-
-    /**
-     * get last remembered password
-     * @return user password
-     */
-    fun getRememberPassword(): String? {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("password", null)
     }
 
     /**

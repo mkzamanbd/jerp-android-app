@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -42,8 +43,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.progressBar.visible(false)
-        binding.loginButton.enable(false)
+        if (binding.passwordInputField.text.isNullOrEmpty()) {
+            binding.loginButton.enable(false)
+        }
 
+        if (spManager.getRememberStatus()) {
+            binding.emailInputField.setText(spManager.getRememberUsername())
+            binding.passwordInputField.setText(spManager.getRememberPassword())
+            binding.cbRememberMe.isChecked = true
+        }
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             binding.progressBar.visible(it is Resource.Loading)
@@ -53,7 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     lifecycleScope.launch {
                         spManager.storeTokenInformation(it.value.data.token)
                         spManager.storeUserInformation(it.value.data.user)
-                        spManager.isLoggedIn(true);
+                        spManager.isLoggedIn(true)
                         requireActivity().startNewActivity(DashboardActivity::class.java)
                     }
                 }
@@ -90,6 +98,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         binding.loginButton.enable(false)
         val email = binding.emailInputField.text.toString().trim()
         val password = binding.passwordInputField.text.toString().trim()
+
+        val rememberMe = binding.cbRememberMe
+        if (rememberMe.isChecked) {
+            if (spManager.getRememberStatus()) {
+                spManager.updateRememberUserCredential(email, password)
+            } else {
+                spManager.rememberUserCredential(true, email, password)
+            }
+        }
 
         viewModel.userLogin(email, password)
     }
