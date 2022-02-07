@@ -52,8 +52,7 @@
             android:drawablePadding="10dp"
             android:hint="@string/login_email_hint"
             android:inputType="textEmailAddress"
-            android:padding="15dp"
-            android:text="@string/username" />
+            android:padding="15dp" />
 
 
         <EditText

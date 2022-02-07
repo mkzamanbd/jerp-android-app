@@ -1,9 +1,11 @@
 package com.example.mvvm.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.mvvm.api.AuthApi
 import com.example.mvvm.network.RetrofitClient
 import com.example.mvvm.api.UserApi
+import com.example.mvvm.database.SharedPreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +17,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideAuthApi(
         retrofitClient: RetrofitClient,
         @ApplicationContext context: Context,
@@ -24,12 +26,20 @@ object AppModule {
         return retrofitClient.buildApi(AuthApi::class.java, context)
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideUserApi(
         retrofitClient: RetrofitClient,
         @ApplicationContext context: Context,
     ): UserApi {
         return retrofitClient.buildApi(UserApi::class.java, context)
     }
+
+    @Provides
+    @Singleton
+    fun providePrefManager(@ApplicationContext mContext: Context): SharedPreferences = mContext.getSharedPreferences("MVVMPrefInfo", Context.MODE_PRIVATE)
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(preferences : SharedPreferences) = SharedPreferenceManager(preferences)
 }

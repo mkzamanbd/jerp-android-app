@@ -8,18 +8,18 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.ui.view.activities.AuthActivity
 import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.utils.startNewActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var spManager: SharedPreferenceManager
+    @Inject
+    lateinit var prefManager: SharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        spManager = SharedPreferenceManager(applicationContext)
-
-        Log.d("getIsUserLoggedIn", spManager.getIsUserLoggedIn().toString())
-
-        if (spManager.getIsUserLoggedIn()) {
+        if (prefManager.getIsUserLoggedIn()) {
             startNewActivity(DashboardActivity::class.java)
         } else {
             startNewActivity(AuthActivity::class.java)

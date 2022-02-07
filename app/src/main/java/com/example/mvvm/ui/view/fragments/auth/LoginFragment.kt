@@ -23,17 +23,18 @@ import com.example.mvvm.utils.startNewActivity
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
-
+    @Inject
+    lateinit var spManager: SharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
-        spManager = SharedPreferenceManager(requireContext())
     }
 
     private val viewModel by viewModels<AuthViewModel>()

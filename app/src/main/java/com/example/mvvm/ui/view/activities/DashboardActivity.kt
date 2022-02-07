@@ -17,17 +17,18 @@ import com.example.mvvm.utils.toastSuccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class DashboardActivity : BaseActivity() {
+    @Inject
+    lateinit var prefManager: SharedPreferenceManager
     private val viewModel by viewModels<ProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
-        spManager = SharedPreferenceManager(applicationContext)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -62,7 +63,7 @@ class DashboardActivity : BaseActivity() {
 
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
-        spManager.clearAll()
+        prefManager.clearAll()
         toastSuccess("User Successfully Logged Out")
         startNewActivity(AuthActivity::class.java)
     }

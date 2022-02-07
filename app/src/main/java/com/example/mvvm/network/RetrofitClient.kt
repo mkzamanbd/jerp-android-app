@@ -11,7 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class RetrofitClient @Inject constructor() {
+class RetrofitClient @Inject constructor(
+    var prefManager: SharedPreferenceManager,
+) {
     companion object {
         private const val baseUrl = "http://203.188.245.58:8889/api/"
     }
@@ -22,8 +24,7 @@ class RetrofitClient @Inject constructor() {
     ): Api {
 
         val helper = NetworkHelper(context)
-        val spManager = SharedPreferenceManager(context)
-        val accessToken = spManager.userAccessToken()
+        val accessToken = prefManager.getAccessToken()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)

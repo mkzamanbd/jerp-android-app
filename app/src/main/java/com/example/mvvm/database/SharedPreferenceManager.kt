@@ -1,25 +1,42 @@
 package com.example.mvvm.database
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.example.mvvm.data.response.TokenDataModel
 import com.example.mvvm.data.response.UserDataModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class SharedPreferenceManager @Inject constructor(@ApplicationContext context: Context) {
+@Singleton
+open class SharedPreferenceManager @Inject constructor(
+    private val preferences: SharedPreferences,
+) {
 
-    private val appContext = context.applicationContext
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
+    companion object {
+        const val LOGIN_INFO = "login_info" //store login information
+        const val areaInfo = "area_info" //store login information
+        const val ACCESS_TOKEN = "token" //store token information
+        const val LOGIN_STATUS = "login" //store token information
+        const val TERRITORY_INFO = "territory_info" //store territory info
+        const val DEMO_MODE = "demo_mode"
+        const val IS_REMEMBER = "is_remember"
+        const val REM_USER_NAME = "remembered_user_name"
+        const val REM_PASSWORD = "remembered_password"
 
-    private val rememberMe = "remember_me" //remember current user credential
-    private val loginInfo = "login_info" //store login information
-    private val areaInfo = "area_info" //store login information
-    private val token = "token" //store token information
-    private val loginStatus = "login" //store token information
-    private val territoryInfo = "territory_info" //store territory info
-    private val demoMode = "demo_mode"
+        // user info
+        const val USER_ID = "userId"
+        const val HASH_UID = "hashUid"
+        const val USER_TYPE = "userType"
+        const val USER_NAME = "userName"
+        const val FULL_NAME = "name"
+        const val EMAIL = "email"
+        const val PHONE = "phone"
+        const val PHOTO = "photo"
+        const val ROLE_ID = "roleId"
+        const val ROLE_NAME = "roleName"
+        const val VISIBLE_NAME = "visibleName"
+        const val SUB_ID = "subId"
+        const val SUB_NAME = "sbuName"
+    }
 
     /**
      * Store user name and password
@@ -28,12 +45,9 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * @param password entered password
      */
     fun rememberUserCredential(isRemember: Boolean, userName: String, password: String) {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putBoolean("isRemember", isRemember)
-        editor.putString("userName", userName)
-        editor.putString("password", password)
-        editor.apply()
+        preferences[IS_REMEMBER] = isRemember
+        preferences[REM_USER_NAME] = userName
+        preferences[REM_PASSWORD] = password
     }
 
     /**
@@ -41,12 +55,9 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * ...update username
      * @param password & username update
      */
-    fun updateRememberUserCredential(userName: String, password: String,) {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putString("userName", userName)
-        editor.putString("password", password)
-        editor.apply()
+    fun updateRememberUserCredential(userName: String, password: String) {
+        preferences[REM_USER_NAME] = userName
+        preferences[REM_PASSWORD] = password
     }
 
     /**
@@ -54,26 +65,23 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * @return if remember then return true otherwise false
      */
     fun getRememberStatus(): Boolean {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("isRemember", false)
+        return preferences[IS_REMEMBER] ?: false
     }
 
     /**
      * get last remembered user name
      * @return user name
      */
-    fun getRememberUsername(): String? {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("userName", null)
+    fun getRememberUsername(): String {
+        return preferences[REM_USER_NAME] ?: ""
     }
 
     /**
      * get last remembered password
      * @return user password
      */
-    fun getRememberPassword(): String? {
-        sharedPreferences = appContext.getSharedPreferences(rememberMe, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("password", null)
+    fun getRememberPassword(): String {
+        return preferences[REM_PASSWORD] ?: ""
     }
 
     /**
@@ -81,10 +89,7 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * @param isLoggedIn log in status
      */
     fun isLoggedIn(isLoggedIn: Boolean) {
-        sharedPreferences = appContext.getSharedPreferences(loginStatus, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putBoolean("isLoggedIn", isLoggedIn)
-        editor.apply()
+        preferences[LOGIN_STATUS] = isLoggedIn
     }
 
     /**
@@ -92,40 +97,34 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * @param user logged in user info
      */
     fun storeUserInformation(user: UserDataModel) {
-        sharedPreferences = appContext.getSharedPreferences(loginInfo, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putString("userId", user.id)
-        editor.putString("hashUid", user.userId)
-        editor.putString("userType", user.userType)
-        editor.putString("userName", user.userName)
-        editor.putString("name", user.name)
-        editor.putString("email", user.email)
-        editor.putString("phone", user.phone)
-        editor.putString("photo", user.photo)
-        editor.putInt("roleId", user.roleId)
-        editor.putString("roleName", user.roleName)
-        editor.putString("visibleName", user.visibleName)
-        editor.putString("sbuId", user.sbuId)
-        editor.putString("sbuName", user.sbuName)
-        editor.apply()
+        preferences[USER_ID] = user.id
+        preferences[HASH_UID] = user.userId
+        preferences[USER_TYPE] = user.userType
+        preferences[USER_NAME] = user.userName
+        preferences[FULL_NAME] = user.name
+        preferences[EMAIL] = user.email
+        preferences[PHONE] = user.phone
+        preferences[PHOTO] = user.photo
+        preferences[ROLE_ID] = user.roleId
+        preferences[ROLE_NAME] = user.roleName
+        preferences[VISIBLE_NAME] = user.visibleName
+        preferences[SUB_ID] = user.sbuId
+        preferences[SUB_NAME] = user.sbuName
     }
 
     fun storeTokenInformation(tokenDataModel: TokenDataModel) {
-        sharedPreferences = appContext.getSharedPreferences(token, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putString("accessToken", tokenDataModel.accessToken)
-        editor.putString("tokenType", tokenDataModel.tokenType)
-        editor.putString("expireDate", tokenDataModel.expireAt)
-        editor.apply()
+//        editor.putString("accessToken", tokenDataModel.accessToken)
+//        editor.putString("tokenType", tokenDataModel.tokenType)
+//        editor.putString("expireDate", tokenDataModel.expireAt)
+        preferences[ACCESS_TOKEN] = tokenDataModel.accessToken
     }
 
     /**
      * ...get current user name
      * @return user name
      */
-    fun getUserName(): String? {
-        sharedPreferences = appContext.getSharedPreferences(loginInfo, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("userName", null)
+    fun getUserName(): String {
+        return preferences[USER_NAME] ?: ""
     }
 
     /**
@@ -133,52 +132,84 @@ class SharedPreferenceManager @Inject constructor(@ApplicationContext context: C
      * @return true if user logged in otherwise return false
      */
     fun getIsUserLoggedIn(): Boolean {
-        sharedPreferences = appContext.getSharedPreferences(loginStatus, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("isLoggedIn", false)
+        return preferences[LOGIN_STATUS] ?: false
     }
 
     /**
      * ...get user access token
      * @return user access token
      */
-    fun userAccessToken(): String? {
-        sharedPreferences = appContext.getSharedPreferences(token, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("accessToken", null)
+    fun getAccessToken(): String {
+        return preferences[ACCESS_TOKEN] ?: ""
     }
 
     /**
      * ...get user full name
      * @return user full name
      */
-    fun getUserFullName(): String? {
-        sharedPreferences = appContext.getSharedPreferences(loginInfo, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("name", null)
+    fun getUserFullName(): String {
+        return preferences[FULL_NAME] ?: ""
     }
 
     /**
      * ...get user role name
      * @return user role name
      */
-    fun getUserRoleName(): String? {
-        sharedPreferences = appContext.getSharedPreferences(loginInfo, Context.MODE_PRIVATE)
-        return sharedPreferences.getString("visibleName", null)
+    fun getUserRoleName(): String {
+        return preferences[VISIBLE_NAME] ?: ""
     }
 
     /**
      * ...clear all data while user logged out
      */
     fun clearAll() {
-        val prefNames = arrayOf<String>(
-            loginStatus,
-            territoryInfo,
-            token,
-            loginInfo,
-            demoMode
-        )
-        for (prefName in prefNames) {
-            sharedPreferences = appContext.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-            sharedPreferences.edit().clear().apply()
-        }
-    }
+        preferences[ACCESS_TOKEN] = null
+        preferences[VISIBLE_NAME] = null
+        preferences[USER_NAME] = null
+        preferences[FULL_NAME] = null
 
+    }
+}
+
+/**
+ * SharedPreferences extension function, to listen the edit() and apply() fun calls
+ * on every SharedPreferences operation.
+ */
+private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
+    val editor = this.edit()
+    operation(editor)
+    editor.apply()
+}
+
+/**
+ * puts a key value pair in shared prefs if doesn't exists, otherwise updates value on given [key]
+ */
+private operator fun SharedPreferences.set(key: String, value: Any?) {
+    when (value) {
+        is String? -> edit { it.putString(key, value) }
+        is Int -> edit { it.putInt(key, value) }
+        is Boolean -> edit { it.putBoolean(key, value) }
+        is Float -> edit { it.putFloat(key, value) }
+        is Long -> edit { it.putLong(key, value) }
+        else -> throw UnsupportedOperationException("Not yet implemented")
+    }
+}
+
+/**
+ * finds value on given key.
+ * [T] is the type of value
+ * @param defaultValue optional default value - will take null for strings, false for bool and -1 for numeric values if [defaultValue] is not specified
+ */
+private inline operator fun <reified T : Any> SharedPreferences.get(
+    key: String,
+    defaultValue: T? = null,
+): T? {
+    return when (T::class) {
+        String::class -> getString(key, defaultValue as? String) as T?
+        Int::class -> getInt(key, defaultValue as? Int ?: -1) as T?
+        Boolean::class -> getBoolean(key, defaultValue as? Boolean ?: false) as T?
+        Float::class -> getFloat(key, defaultValue as? Float ?: -1f) as T?
+        Long::class -> getLong(key, defaultValue as? Long ?: -1) as T?
+        else -> throw UnsupportedOperationException("Not yet implemented")
+    }
 }
