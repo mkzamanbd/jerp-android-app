@@ -1,8 +1,8 @@
 package com.example.mvvm.database
 
 import android.content.SharedPreferences
-import com.example.mvvm.data.response.TokenDataModel
-import com.example.mvvm.data.response.UserDataModel
+import com.example.mvvm.data.model.TokenDataModel
+import com.example.mvvm.data.model.UserDataModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

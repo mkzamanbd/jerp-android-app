@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
-import com.example.mvvm.data.response.Product
+import com.example.mvvm.data.model.Product
 
 class ProductListAdapter(
     var products: ArrayList<Product>,
-    private val listener: OnItemClickListener,
-) : RecyclerView.Adapter<ProductListAdapter.UserViewHolder>() {
+    private val onItemClickListener: OnItemClickListener,
+) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setProducts(product: List<Product>) {
@@ -21,11 +21,11 @@ class ProductListAdapter(
         notifyDataSetChanged()
     }
 
-    inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        private val name: TextView = view.findViewById(R.id.prod_name)
+        private val code: TextView = view.findViewById(R.id.code)
+        private val packSize: TextView = view.findViewById(R.id.pack_size)
 
-        val name: TextView = view.findViewById(R.id.prod_name)
-        val code: TextView = view.findViewById(R.id.code)
-        val packSize: TextView = view.findViewById(R.id.pack_size)
         @SuppressLint("SetTextI18n")
         fun bind(product: Product) {
             name.text = product.productName
@@ -36,10 +36,11 @@ class ProductListAdapter(
         init {
             itemView.setOnClickListener(this)
         }
+
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(adapterPosition)
+                onItemClickListener.onItemClick(adapterPosition)
             }
         }
     }
@@ -47,11 +48,11 @@ class ProductListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ) = UserViewHolder(
+    ) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false)
     )
 
-    override fun onBindViewHolder(holder: ProductListAdapter.UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductListAdapter.ViewHolder, position: Int) {
         holder.bind(products[position])
     }
 

@@ -3,6 +3,8 @@ package com.example.mvvm.ui.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RelativeLayout
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,7 @@ import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductBinding>(
     FragmentProductBinding::inflate
@@ -41,13 +44,23 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
             adapter = productListAdapter
         }
 
+        val etSearch = binding.etSearch
+        val ivCancelSearch = binding.ivCancelSearch
+
+        etSearch.addTextChangedListener {
+            ivCancelSearch.visible(true)
+        }
+
+        binding.ivCancelSearch.setOnClickListener {
+            etSearch.text = null
+            ivCancelSearch.visible(false)
+        }
+
         getProductList()
 
         viewModel.products.observe(viewLifecycleOwner) {
-            binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    Log.d("usersList", it.value.productList.toString())
                     productListAdapter.setProducts(it.value.productList)
                 }
                 is Resource.Failure -> handleApiError(it) {
@@ -65,9 +78,9 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
     override fun onItemClick(position: Int) {
         productListAdapter.notifyItemChanged(position)
 
-        val user = productListAdapter.products[position]
+        val product = productListAdapter.products[position]
         val bundle = Bundle()
-        bundle.putString("userId", user.id.toString())
+        bundle.putString("productId", product.productId)
 
         findNavController().navigate(R.id.action_userFragment_to_userDetailFragment, bundle)
     }

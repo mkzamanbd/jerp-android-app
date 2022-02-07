@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.example.mvvm.ui.view.fragments.UserDetailFragment"
-        android:label="User Detail"
+        android:label="Product Detail"
         tools:layout="@layout/fragment_user_detail" />
 
     <fragment
