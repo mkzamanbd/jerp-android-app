@@ -1,6 +1,7 @@
 package com.example.mvvm.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvm.R
 import com.example.mvvm.database.SharedPreferenceManager
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.d("IS_LOGIN", prefManager.getIsUserLoggedIn().toString())
+        Log.d("ACCESS_TOKEN", prefManager.getAccessToken())
 
         if (prefManager.getIsUserLoggedIn()) {
             startNewActivity(DashboardActivity::class.java)

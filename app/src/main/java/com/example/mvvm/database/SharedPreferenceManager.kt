@@ -88,7 +88,7 @@ open class SharedPreferenceManager @Inject constructor(
      * save is user logged in
      * @param isLoggedIn log in status
      */
-    fun isLoggedIn(isLoggedIn: Boolean) {
+    fun setLoginStatus(isLoggedIn: Boolean) {
         preferences[LOGIN_STATUS] = isLoggedIn
     }
 

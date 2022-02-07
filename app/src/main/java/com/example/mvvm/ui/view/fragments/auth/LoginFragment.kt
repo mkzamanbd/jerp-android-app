@@ -60,8 +60,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     lifecycleScope.launch {
                         spManager.storeTokenInformation(it.value.data.token)
                         spManager.storeUserInformation(it.value.data.user)
-                        spManager.isLoggedIn(true)
-                        requireActivity().startNewActivity(DashboardActivity::class.java)
+                        spManager.setLoginStatus(true)
+                        mActivity.startNewActivity(DashboardActivity::class.java)
                     }
                 }
                 is Resource.Failure -> handleApiError(it) {

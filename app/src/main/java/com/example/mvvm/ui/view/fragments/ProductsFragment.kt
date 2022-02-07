@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -54,21 +55,8 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
             } else {
                 ivCancelSearch.visible(true)
             }
-            binding.svSearch.setQuery(it.toString(), false)
+            productListAdapter.filter.filter(it)
         }
-
-        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    productListAdapter.filter.filter(it)
-                }
-                return false
-            }
-        })
 
         binding.ivCancelSearch.setOnClickListener {
             etSearch.text = null
@@ -96,11 +84,7 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
     override fun onItemClick(position: Int) {
         productListAdapter.notifyItemChanged(position)
-
         val product = productListAdapter.products[position]
-        val bundle = Bundle()
-        bundle.putString("productId", product.productId)
-
-        findNavController().navigate(R.id.action_userFragment_to_userDetailFragment, bundle)
+        Toast.makeText(mContext, product.productId, Toast.LENGTH_SHORT).show()
     }
 }
