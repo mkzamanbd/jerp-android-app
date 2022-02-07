@@ -1,18 +1,29 @@
 package com.example.mvvm.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.data.model.Product
+import java.util.Locale
+import kotlin.collections.ArrayList
 
 class ProductListAdapter(
     var products: ArrayList<Product>,
     private val onItemClickListener: OnItemClickListener,
-) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>(), Filterable {
+
+    var filterProductList = ArrayList<Product>()
+
+    init {
+        filterProductList = products
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setProducts(product: List<Product>) {
@@ -53,13 +64,47 @@ class ProductListAdapter(
     )
 
     override fun onBindViewHolder(holder: ProductListAdapter.ViewHolder, position: Int) {
-        holder.bind(products[position])
+        holder.bind(filterProductList[position])
     }
 
-    override fun getItemCount() = products.size
+    override fun getItemCount() = filterProductList.size
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+    }
+
+    // Filter products by product name , product codes, generic name etc
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                Log.d("charSearch", charSearch)
+                if (charSearch.isEmpty()) {
+                    filterProductList = products
+                } else {
+                    val resultList = ArrayList<Product>()
+                    for (product in filterProductList) {
+                        if (product.productName.lowercase(Locale.ROOT)
+                                .contains(charSearch.lowercase(Locale.ROOT)) || product.productCode.lowercase(
+                                Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))
+                        ) {
+                            resultList.add(product)
+                        }
+                    }
+                    filterProductList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = filterProductList
+                return filterResults
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filterProductList = results?.values as ArrayList<Product>
+                notifyDataSetChanged()
+            }
+        }
     }
 
 

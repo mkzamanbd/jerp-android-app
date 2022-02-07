@@ -1,9 +1,10 @@
 package com.example.mvvm.ui.view.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.RelativeLayout
+import androidx.appcompat.widget.SearchView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -48,8 +49,26 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
         val ivCancelSearch = binding.ivCancelSearch
 
         etSearch.addTextChangedListener {
-            ivCancelSearch.visible(true)
+            if (it.isNullOrEmpty()) {
+                ivCancelSearch.visible(false)
+            } else {
+                ivCancelSearch.visible(true)
+            }
+            binding.svSearch.setQuery(it.toString(), false)
         }
+
+        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    productListAdapter.filter.filter(it)
+                }
+                return false
+            }
+        })
 
         binding.ivCancelSearch.setOnClickListener {
             etSearch.text = null
