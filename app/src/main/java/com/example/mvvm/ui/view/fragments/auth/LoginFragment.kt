@@ -54,9 +54,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
+            binding.loginButton.enable(false)
             when (it) {
                 is Resource.Success -> {
-                    binding.loginButton.enable(true)
                     lifecycleScope.launch {
                         spManager.storeTokenInformation(it.value.data.token)
                         spManager.storeUserInformation(it.value.data.user)
@@ -66,7 +66,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 }
                 is Resource.Failure -> handleApiError(it) {
                     login()
-                    binding.loginButton.enable(true)
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
