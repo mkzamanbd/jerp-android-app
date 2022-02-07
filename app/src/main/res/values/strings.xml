@@ -48,4 +48,5 @@
     <string name="no_internet">No Internet Connection</string>
     <string name="retry">Retry</string>
     <string name="no_network_warning">Unable to connect internet, Please check your internet connection.</string>
+    <string name="username_hint">Username</string>
 </resources>

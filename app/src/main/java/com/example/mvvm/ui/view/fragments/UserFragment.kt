@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.adapter.UserListAdapter
 import com.example.mvvm.base.BaseFragment
@@ -25,7 +24,6 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     private val viewModel by viewModels<CommonViewModel>()
 
     private val userListAdapter = UserListAdapter(arrayListOf(), this)
-    lateinit var userListRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userListRecyclerView = view.findViewById(R.id.userList)
+        val userListRecyclerView = binding.userList
 
         userListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)

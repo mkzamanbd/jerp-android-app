@@ -9,9 +9,9 @@ class AuthRepository @Inject constructor(
 ) : BaseRepository(api) {
 
     suspend fun login(
-        email: String,
+        userName: String,
         password: String,
     ) = safeApiCall {
-        api.login(email, password)
+        api.login(userName, password)
     }
 }

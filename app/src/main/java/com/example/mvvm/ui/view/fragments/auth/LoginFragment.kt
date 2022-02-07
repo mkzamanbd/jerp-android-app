@@ -47,7 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
 
         if (spManager.getRememberStatus()) {
-            binding.emailInputField.setText(spManager.getRememberUsername())
+            binding.userNameInputField.setText(spManager.getRememberUsername())
             binding.passwordInputField.setText(spManager.getRememberPassword())
             binding.cbRememberMe.isChecked = true
         }
@@ -73,8 +73,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
 
         binding.passwordInputField.addTextChangedListener {
-            val email = binding.emailInputField.text.toString().trim()
-            binding.loginButton.enable(email.isNotEmpty() && it.toString().isNotEmpty())
+            val userName = binding.userNameInputField.text.toString().trim()
+            binding.loginButton.enable(userName.isNotEmpty() && it.toString().isNotEmpty())
         }
 
 
@@ -95,18 +95,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     private fun login() {
         binding.tvErrorMessage.visible(false)
         binding.loginButton.enable(false)
-        val email = binding.emailInputField.text.toString().trim()
+        val userName = binding.userNameInputField.text.toString().trim()
         val password = binding.passwordInputField.text.toString().trim()
 
         val rememberMe = binding.cbRememberMe
         if (rememberMe.isChecked) {
             if (spManager.getRememberStatus()) {
-                spManager.updateRememberUserCredential(email, password)
+                spManager.updateRememberUserCredential(userName, password)
             } else {
-                spManager.rememberUserCredential(true, email, password)
+                spManager.rememberUserCredential(true, userName, password)
             }
         }
 
-        viewModel.userLogin(email, password)
+        viewModel.userLogin(userName, password)
     }
 }
