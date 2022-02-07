@@ -1,6 +1,7 @@
 package com.example.mvvm.api
 
 import com.example.mvvm.data.response.DefaultResponse
+import com.example.mvvm.data.response.MobileMenuResponse
 import com.example.mvvm.data.response.ProductResponse
 import com.example.mvvm.data.response.ProfileResponse
 import com.example.mvvm.network.BaseApi
@@ -11,6 +12,9 @@ interface CommonApi : BaseApi {
 
     @GET("user")
     suspend fun getUserProfile(): ProfileResponse
+
+    @GET("mobile/mobile-menu")
+    suspend fun getMobileMenu(): MobileMenuResponse
 
     @GET("web/search-product-data-list")
     suspend fun getAllUsers(): ProductResponse

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm.base.BaseViewModel
 import com.example.mvvm.data.response.DefaultResponse
+import com.example.mvvm.data.response.MobileMenuResponse
 import com.example.mvvm.data.response.ProductResponse
 import com.example.mvvm.network.Resource
 import com.example.mvvm.repository.CommonRepository
@@ -31,5 +32,13 @@ class CommonViewModel @Inject constructor(
     fun getUserDetail(userId: String) = viewModelScope.launch {
         _userDetail.value = Resource.Loading
         _userDetail.value = repository.getUserDetail(userId)
+    }
+
+    private val _mobileMenu: MutableLiveData<Resource<MobileMenuResponse>> = MutableLiveData()
+    val mobileMenu: LiveData<Resource<MobileMenuResponse>> = _mobileMenu
+
+    fun getMobileMenu() = viewModelScope.launch {
+        _mobileMenu.value = Resource.Loading
+        _mobileMenu.value = repository.getMobileMenu()
     }
 }
