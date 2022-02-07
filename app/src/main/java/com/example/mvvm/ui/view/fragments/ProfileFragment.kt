@@ -1,5 +1,6 @@
 package com.example.mvvm.ui.view.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,16 +32,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.progressBar.visible(false)
 
         getUser()
+        updateUI()
 
         viewModel.profile.observe(viewLifecycleOwner){
             binding.progressBar.visible(it is Resource.Loading)
             when(it){
                 is Resource.Success -> {
-                    Log.d("Profile", it.value.data.toString())
+                    binding.tvName.text = it.value.data.toString()
                 }
                 is Resource.Failure -> handleApiError(it){
                     getUser()
@@ -49,17 +50,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             }
         }
 
-        updateUI()
-
         binding.userLogout.setOnClickListener {
             logout()
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateUI() {
-        binding.tvName.text = prefManager.getUserFullName()
-        binding.tvEmail.text = prefManager.getUserRoleName()
+        binding.tvEmail.text = "Local=> Name ${prefManager.getUserFullName()}, Email: ${prefManager.getUserRoleName()}"
     }
 
     private fun getUser() {

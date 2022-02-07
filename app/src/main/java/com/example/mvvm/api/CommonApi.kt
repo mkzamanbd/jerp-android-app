@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface CommonApi : BaseApi {
 
-    @GET("auth/current-user")
+    @GET("user")
     suspend fun getUserProfile(): ProfileResponse
 
     @GET("web/search-product-data-list")

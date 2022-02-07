@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.mvvm.base.BaseViewModel
 import com.example.mvvm.data.response.DefaultResponse
 import com.example.mvvm.data.response.ProductResponse
-import com.example.mvvm.data.response.UserResponse
 import com.example.mvvm.network.Resource
 import com.example.mvvm.repository.CommonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
