@@ -28,7 +28,7 @@ fun Activity.getDrawableBackgroundColor(mView: View, color: Int) {
 /**
  * ...display success toast message
  */
-fun Activity.successToast(body: String) {
+fun Activity.toastSuccess(body: String) {
     val inflater = this.layoutInflater
     val layout: View =
         inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
@@ -52,7 +52,7 @@ fun Activity.successToast(body: String) {
  * ...display error toast message
  */
 
-fun Activity.errorToast(body: String) {
+fun Activity.toastError(body: String) {
     val inflater = this.layoutInflater
     val layout: View =
         inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
@@ -75,7 +75,7 @@ fun Activity.errorToast(body: String) {
 /**
  * ...display information toast message
  */
-fun Activity.infoToast(body: String) {
+fun Activity.toastInfo(body: String) {
     val inflater = this.layoutInflater
     val layout: View =
         inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
@@ -98,7 +98,7 @@ fun Activity.infoToast(body: String) {
 /**
  * ...display warning toast message
  */
-fun Activity.warningToast(body: String) {
+fun Activity.toastWarning(body: String) {
     val inflater = this.layoutInflater
     val layout: View =
         inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))

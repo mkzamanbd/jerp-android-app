@@ -21,7 +21,6 @@ import com.example.mvvm.utils.enable
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.startNewActivity
 import com.example.mvvm.utils.visible
-import com.example.mvvm.utils.successToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -59,7 +58,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 is Resource.Success -> {
                     binding.loginButton.enable(true)
                     lifecycleScope.launch {
-                        mActivity.successToast("User Successfully logged In")
                         spManager.storeTokenInformation(it.value.data.token)
                         spManager.storeUserInformation(it.value.data.user)
                         spManager.isLoggedIn(true)
