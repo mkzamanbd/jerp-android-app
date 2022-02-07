@@ -163,6 +163,7 @@ open class SharedPreferenceManager @Inject constructor(
      * ...clear all data while user logged out
      */
     fun clearAll() {
+        preferences[LOGIN_STATUS] = false
         preferences[ACCESS_TOKEN] = null
         preferences[VISIBLE_NAME] = null
         preferences[USER_NAME] = null
