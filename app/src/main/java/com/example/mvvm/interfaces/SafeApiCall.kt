@@ -26,7 +26,7 @@ interface SafeApiCall {
                         Resource.Failure(true, 559, null, null)
                     }
                     else -> {
-                        Resource.Failure(true, 500, null, null)
+                        Resource.Failure(false, 1001, "Unknown Error", null)
                     }
                 }
             }
