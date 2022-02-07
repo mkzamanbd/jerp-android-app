@@ -1,12 +1,15 @@
 package com.example.mvvm.ui.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.FragmentProfileBinding
+import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
+import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.logout
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +33,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.progressBar.visible(false)
+
+        getUser()
+
+        viewModel.profile.observe(viewLifecycleOwner){
+            binding.progressBar.visible(it is Resource.Loading)
+            when(it){
+                is Resource.Success -> {
+                    Log.d("Profile", it.value.data.toString())
+                }
+                is Resource.Failure -> handleApiError(it){
+                    getUser()
+                }
+                else -> Log.d("unknownError", "Unknown Error")
+            }
+        }
 
         updateUI()
 

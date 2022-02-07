@@ -14,8 +14,4 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding>(
         mContext = requireContext()
         mActivity = requireActivity()
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

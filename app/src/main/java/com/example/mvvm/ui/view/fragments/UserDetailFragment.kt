@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentUserDetailBinding
 import com.example.mvvm.network.Resource
@@ -33,7 +32,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
             getUserDetail(userId.toString())
         }
 
-        viewModel.userDetail.observe(viewLifecycleOwner, Observer {
+        viewModel.userDetail.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     binding.userDetail.text = it.value.user.toString()
@@ -43,7 +42,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
-        })
+        }
     }
 
     private fun getUserDetail(userId: String) {

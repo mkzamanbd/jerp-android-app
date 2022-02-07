@@ -4,6 +4,8 @@ import android.content.Context
 import com.example.mvvm.BuildConfig
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.utils.NoNetworkException
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class RetrofitClient @Inject constructor(
-    var prefManager: SharedPreferenceManager,
+    private val prefManager: SharedPreferenceManager,
 ) {
     companion object {
         private const val baseUrl = "http://203.188.245.58:8889/api/"
@@ -25,6 +27,7 @@ class RetrofitClient @Inject constructor(
 
         val helper = NetworkHelper(context)
         val accessToken = prefManager.getAccessToken()
+        val gson: Gson = GsonBuilder().setLenient().create()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -48,7 +51,7 @@ class RetrofitClient @Inject constructor(
                         }
                     }.build()
             )
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(api)
     }

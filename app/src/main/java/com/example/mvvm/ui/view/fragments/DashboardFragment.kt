@@ -2,9 +2,6 @@ package com.example.mvvm.ui.view.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.navigation.fragment.findNavController
-import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentDashboardBinding
 

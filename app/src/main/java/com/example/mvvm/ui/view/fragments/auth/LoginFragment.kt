@@ -7,7 +7,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm.R
@@ -53,7 +52,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             binding.cbRememberMe.isChecked = true
         }
 
-        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -71,7 +70,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
-        })
+        }
 
         binding.passwordInputField.addTextChangedListener {
             val email = binding.emailInputField.text.toString().trim()

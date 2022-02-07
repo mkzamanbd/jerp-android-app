@@ -2,6 +2,7 @@ package com.example.mvvm.ui.view.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -13,7 +14,6 @@ import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.startNewActivity
-import com.example.mvvm.utils.toastSuccess
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -64,7 +64,8 @@ class DashboardActivity : BaseActivity() {
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
         prefManager.clearAll()
-        toastSuccess("User Successfully Logged Out")
+
+        Toast.makeText(applicationContext, "User Successfully Logged Out", Toast.LENGTH_SHORT).show()
         startNewActivity(AuthActivity::class.java)
     }
 }

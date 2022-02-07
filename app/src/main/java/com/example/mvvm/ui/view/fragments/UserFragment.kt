@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,19 +45,19 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
 
         getUsersList()
 
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        viewModel.users.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     Log.d("usersList", it.value.users.toString())
-                    userListAdapter.updateUsers(it.value.users)
+                    userListAdapter.setUsers(it.value.users)
                 }
                 is Resource.Failure -> handleApiError(it) {
                     getUsersList()
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
-        })
+        }
     }
 
     private fun getUsersList() {

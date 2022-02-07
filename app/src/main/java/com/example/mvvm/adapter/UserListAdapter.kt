@@ -18,7 +18,7 @@ class UserListAdapter(
 ) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateUsers(user: List<User>) {
+    fun setUsers(user: List<User>) {
         users.clear()
         users.addAll(user)
         notifyDataSetChanged()

@@ -1,7 +1,6 @@
 package com.example.mvvm.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvm.R
 import com.example.mvvm.database.SharedPreferenceManager
