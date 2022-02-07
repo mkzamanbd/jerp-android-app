@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentUserDetailBinding
 import com.example.mvvm.network.Resource
-import com.example.mvvm.ui.viewModel.UserViewModel
+import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
     FragmentUserDetailBinding::inflate
 ) {
     private var userId: String? = null
-    private val viewModel by viewModels<UserViewModel>()
+    private val viewModel by viewModels<CommonViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

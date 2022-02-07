@@ -12,7 +12,7 @@ import com.example.mvvm.adapter.UserListAdapter
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentUserBinding
 import com.example.mvvm.network.Resource
-import com.example.mvvm.ui.viewModel.UserViewModel
+import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     FragmentUserBinding::inflate
 ), UserListAdapter.OnItemClickListener {
 
-    private val viewModel by viewModels<UserViewModel>()
+    private val viewModel by viewModels<CommonViewModel>()
 
     private val userListAdapter = UserListAdapter(arrayListOf(), this)
     lateinit var userListRecyclerView: RecyclerView
@@ -49,8 +49,8 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    Log.d("usersList", it.value.users.toString())
-                    userListAdapter.setUsers(it.value.users)
+                    Log.d("usersList", it.value.productList.toString())
+                    // userListAdapter.setUsers(it.value.productList)
                 }
                 is Resource.Failure -> handleApiError(it) {
                     getUsersList()

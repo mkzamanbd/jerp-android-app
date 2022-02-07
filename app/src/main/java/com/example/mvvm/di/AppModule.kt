@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.mvvm.api.AuthApi
 import com.example.mvvm.network.RetrofitClient
-import com.example.mvvm.api.UserApi
+import com.example.mvvm.api.CommonApi
 import com.example.mvvm.database.SharedPreferenceManager
 import dagger.Module
 import dagger.Provides
@@ -31,8 +31,8 @@ object AppModule {
     fun provideUserApi(
         retrofitClient: RetrofitClient,
         @ApplicationContext context: Context,
-    ): UserApi {
-        return retrofitClient.buildApi(UserApi::class.java, context)
+    ): CommonApi {
+        return retrofitClient.buildApi(CommonApi::class.java, context)
     }
 
     @Provides
