@@ -23,7 +23,7 @@ interface SafeApiCall {
                         )
                     }
                     is NoNetworkException -> {
-                        Resource.Failure(true, 559, null, null)
+                        Resource.Failure(true, 559, "No Network", null)
                     }
                     else -> {
                         Resource.Failure(false, 1001, "Unknown Error", null)
