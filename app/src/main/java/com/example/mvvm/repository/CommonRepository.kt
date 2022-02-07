@@ -9,7 +9,7 @@ class CommonRepository @Inject constructor(
 ) : BaseRepository(api) {
 
     suspend fun getMobileMenu() = safeApiCall { api.getMobileMenu() }
-    suspend fun getAllUsers() = safeApiCall { api.getAllUsers() }
+    suspend fun getAllProducts() = safeApiCall { api.getAllProducts() }
 
     suspend fun getUserDetail(userId: String) = safeApiCall { api.getUserDetail(userId) }
 }

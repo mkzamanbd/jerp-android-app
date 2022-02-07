@@ -7,9 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm.R
-import com.example.mvvm.adapter.UserListAdapter
+import com.example.mvvm.adapter.ProductListAdapter
 import com.example.mvvm.base.BaseFragment
-import com.example.mvvm.databinding.FragmentUserBinding
+import com.example.mvvm.databinding.FragmentProductBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
@@ -17,13 +17,13 @@ import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserFragment : BaseFragment<FragmentUserBinding>(
-    FragmentUserBinding::inflate
-), UserListAdapter.OnItemClickListener {
+class ProductsFragment : BaseFragment<FragmentProductBinding>(
+    FragmentProductBinding::inflate
+), ProductListAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<CommonViewModel>()
 
-    private val userListAdapter = UserListAdapter(arrayListOf(), this)
+    private val productListAdapter = ProductListAdapter(arrayListOf(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,38 +34,38 @@ class UserFragment : BaseFragment<FragmentUserBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userListRecyclerView = binding.userList
+        val productListRecyclerView = binding.productList
 
-        userListRecyclerView.apply {
+        productListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = userListAdapter
+            adapter = productListAdapter
         }
 
-        getUsersList()
+        getProductList()
 
-        viewModel.users.observe(viewLifecycleOwner) {
+        viewModel.products.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     Log.d("usersList", it.value.productList.toString())
-                    // userListAdapter.setUsers(it.value.productList)
+                    productListAdapter.setProducts(it.value.productList)
                 }
                 is Resource.Failure -> handleApiError(it) {
-                    getUsersList()
+                    getProductList()
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
         }
     }
 
-    private fun getUsersList() {
-        viewModel.getUsers()
+    private fun getProductList() {
+        viewModel.getAllProducts()
     }
 
     override fun onItemClick(position: Int) {
-        userListAdapter.notifyItemChanged(position)
+        productListAdapter.notifyItemChanged(position)
 
-        val user = userListAdapter.users[position]
+        val user = productListAdapter.products[position]
         val bundle = Bundle()
         bundle.putString("userId", user.id.toString())
 

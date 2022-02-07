@@ -38,7 +38,7 @@ class DashboardActivity : BaseActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.dashboardFragment,
-                R.id.userFragment,
+                R.id.productFragment,
                 R.id.profileFragment,
                 R.id.notificationFragment
             )

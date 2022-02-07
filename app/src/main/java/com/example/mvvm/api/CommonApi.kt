@@ -16,8 +16,8 @@ interface CommonApi : BaseApi {
     @GET("mobile/mobile-menu")
     suspend fun getMobileMenu(): MobileMenuResponse
 
-    @GET("web/search-product-data-list")
-    suspend fun getAllUsers(): ProductResponse
+    @GET("web/v2/search-product-data-list")
+    suspend fun getAllProducts(): ProductResponse
 
     @GET("get-user-detail/{id}")
     suspend fun getUserDetail(

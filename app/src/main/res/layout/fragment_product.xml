@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.fragments.UserFragment">
+    tools:context=".ui.view.fragments.ProductsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userList"
+        android:id="@+id/product_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/user_list_item"
+        tools:listitem="@layout/product_list_item"
         android:paddingEnd="@dimen/five"
         android:paddingStart="@dimen/five"
         app:layout_constraintEnd_toEndOf="parent"

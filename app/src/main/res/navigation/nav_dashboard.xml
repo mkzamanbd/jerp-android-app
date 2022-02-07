@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/userFragment"
-        android:name="com.example.mvvm.ui.view.fragments.UserFragment"
-        android:label="Users"
-        tools:layout="@layout/fragment_user">
+        android:id="@+id/productFragment"
+        android:name="com.example.mvvm.ui.view.fragments.ProductsFragment"
+        android:label="Product List"
+        tools:layout="@layout/fragment_product">
         <action
             android:id="@+id/action_userFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />

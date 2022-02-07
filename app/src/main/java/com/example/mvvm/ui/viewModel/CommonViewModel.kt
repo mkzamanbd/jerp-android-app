@@ -18,16 +18,16 @@ class CommonViewModel @Inject constructor(
     val repository: CommonRepository
 ) : BaseViewModel(repository) {
 
-    private val _users: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()
-    val users: LiveData<Resource<ProductResponse>> = _users
+    private val _products: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()
+    val products: LiveData<Resource<ProductResponse>> = _products
+
+    fun getAllProducts() = viewModelScope.launch {
+        _products.value = Resource.Loading
+        _products.value = repository.getAllProducts()
+    }
 
     private val _userDetail: MutableLiveData<Resource<DefaultResponse>> = MutableLiveData()
     val userDetail: LiveData<Resource<DefaultResponse>> = _userDetail
-
-    fun getUsers() = viewModelScope.launch {
-        _users.value = Resource.Loading
-        _users.value = repository.getAllUsers()
-    }
 
     fun getUserDetail(userId: String) = viewModelScope.launch {
         _userDetail.value = Resource.Loading
