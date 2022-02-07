@@ -78,7 +78,7 @@ fun Fragment.handleApiError(
             requireView().snackBar("Internal server error")
         }
         else -> {
-            val error = "Code: ${failure.statusCode},  ${failure.errorMessage.toString()}"
+            val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
             requireView().snackBar(error)
         }
     }
