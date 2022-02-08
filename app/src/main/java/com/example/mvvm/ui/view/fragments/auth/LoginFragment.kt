@@ -16,10 +16,7 @@ import com.example.mvvm.databinding.FragmentLoginBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.AuthViewModel
-import com.example.mvvm.utils.enable
-import com.example.mvvm.utils.handleApiError
-import com.example.mvvm.utils.startNewActivity
-import com.example.mvvm.utils.visible
+import com.example.mvvm.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +26,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
     @Inject
-    lateinit var spManager: SharedPreferenceManager
+    lateinit var prefManager: SharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
@@ -46,9 +43,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             binding.loginButton.enable(false)
         }
 
-        if (spManager.isRemembered()) {
-            binding.userNameInputField.setText(spManager.getRememberUsername())
-            binding.passwordInputField.setText(spManager.getRememberPassword())
+        if (prefManager.isRemembered()) {
+            binding.userNameInputField.setText(prefManager.getRememberUsername())
+            binding.passwordInputField.setText(prefManager.getRememberPassword())
             binding.cbRememberMe.isChecked = true
         }
 
@@ -58,9 +55,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
-                        spManager.storeTokenInformation(it.value.data.token)
-                        spManager.storeUserInformation(it.value.data.user)
-                        spManager.setLoginStatus(true)
+                        prefManager.setLoginStatus(true)
+                        prefManager.setTokenInformation(it.value.data.token)
+                        prefManager.setUserInformation(it.value.data.user)
                         mActivity.startNewActivity(DashboardActivity::class.java)
                     }
                 }
@@ -79,11 +76,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         binding.loginButton.setOnClickListener {
             login()
-
-            val inputMethodManager =
-                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-
+            hideSoftKeyboard(mContext, binding.passwordInputField)
         }
 
         binding.createAccount.setOnClickListener {
@@ -99,10 +92,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         val rememberMe = binding.cbRememberMe
         if (rememberMe.isChecked) {
-            if (spManager.isRemembered()) {
-                spManager.updateRememberUserCredential(userName, password)
+            if (prefManager.isRemembered()) {
+                prefManager.updateRememberUserCredential(userName, password)
             } else {
-                spManager.rememberUserCredential(true, userName, password)
+                prefManager.rememberUserCredential(true, userName, password)
             }
         }
 
