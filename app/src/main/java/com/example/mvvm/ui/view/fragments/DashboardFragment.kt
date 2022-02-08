@@ -3,10 +3,13 @@ package com.example.mvvm.ui.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm.R
+import com.example.mvvm.adapter.MenuParentAdapter
 import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.data.response.UserChildMenuModel
@@ -40,6 +43,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
 
     private val viewModel by viewModels<CommonViewModel>()
 
+    private lateinit var homeMenuParentAdapter: MenuParentAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
@@ -54,14 +59,23 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
             findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)
         }
 
+        homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), mContext)
+
+        val homeRecyclerView = binding.rvHomeList
+
+        homeRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = homeMenuParentAdapter
+        }
+
         getMobileMenu()
 
         viewModel.mobileMenu.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    binding.tvMobileMenu.text = it.value.data.toString()
                     setBottomMenu(it.value.data.bottomParentMenu)
+                    homeMenuParentAdapter.setHomePrentMenu(it.value.data.topParentMenu)
                 }
                 is Resource.Failure -> handleApiError(it) {
                     getMobileMenu()
