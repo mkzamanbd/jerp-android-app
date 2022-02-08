@@ -64,7 +64,7 @@ open class SharedPreferenceManager @Inject constructor(
      * get user remember status
      * @return if remember then return true otherwise false
      */
-    fun getRememberStatus(): Boolean {
+    fun isRemembered(): Boolean {
         return preferences[IS_REMEMBER] ?: false
     }
 

@@ -46,7 +46,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             binding.loginButton.enable(false)
         }
 
-        if (spManager.getRememberStatus()) {
+        if (spManager.isRemembered()) {
             binding.userNameInputField.setText(spManager.getRememberUsername())
             binding.passwordInputField.setText(spManager.getRememberPassword())
             binding.cbRememberMe.isChecked = true
@@ -99,7 +99,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         val rememberMe = binding.cbRememberMe
         if (rememberMe.isChecked) {
-            if (spManager.getRememberStatus()) {
+            if (spManager.isRemembered()) {
                 spManager.updateRememberUserCredential(userName, password)
             } else {
                 spManager.rememberUserCredential(true, userName, password)

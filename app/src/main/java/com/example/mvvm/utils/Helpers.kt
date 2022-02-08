@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -95,4 +97,10 @@ fun getProgressDrawable(context: Context): CircularProgressDrawable {
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
     val option = RequestOptions().placeholder(progressDrawable).error(R.mipmap.ic_launcher_round)
     Glide.with(this.context).setDefaultRequestOptions(option).load(uri).into(this)
+}
+
+fun hideSoftKeyboard(context: Context, mEtSearch: EditText) {
+    mEtSearch.clearFocus()
+    val inputMethod = (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+    inputMethod.hideSoftInputFromWindow(mEtSearch.windowToken, 0)
 }
