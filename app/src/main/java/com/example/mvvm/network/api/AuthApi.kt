@@ -1,4 +1,4 @@
-package com.example.mvvm.api
+package com.example.mvvm.network.api
 
 import com.example.mvvm.data.response.LoginResponse
 import com.example.mvvm.network.BaseApi

@@ -1,7 +1,7 @@
 package com.example.mvvm.repository
 
 import com.example.mvvm.base.BaseRepository
-import com.example.mvvm.api.CommonApi
+import com.example.mvvm.network.api.CommonApi
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(

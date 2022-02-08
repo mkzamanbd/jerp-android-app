@@ -17,6 +17,7 @@ import com.example.mvvm.databinding.FragmentProductBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
+import com.example.mvvm.utils.hideSoftKeyboard
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,6 +61,7 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
         binding.ivCancelSearch.setOnClickListener {
             etSearch.text = null
+            hideSoftKeyboard(mContext, etSearch)
             ivCancelSearch.visible(false)
         }
 

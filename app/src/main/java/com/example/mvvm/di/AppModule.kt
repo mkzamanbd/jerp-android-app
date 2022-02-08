@@ -3,8 +3,8 @@ package com.example.mvvm.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.mvvm.BuildConfig
-import com.example.mvvm.api.AuthApi
-import com.example.mvvm.api.CommonApi
+import com.example.mvvm.network.api.AuthApi
+import com.example.mvvm.network.api.CommonApi
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.network.NetworkHelper
 import com.example.mvvm.utils.NoNetworkException
@@ -28,6 +28,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun providePrefManager(@ApplicationContext mContext: Context): SharedPreferences =
+        mContext.getSharedPreferences("MVVMPrefInfo", Context.MODE_PRIVATE)
+    @Provides
+    @Singleton
+    fun provideSharedPref(preferences: SharedPreferences) = SharedPreferenceManager(preferences)
 
     @Provides
     fun provideBaseUrl() = "http://203.188.245.58:8889/api/"
@@ -85,14 +93,4 @@ object AppModule {
     @Provides
     @Singleton
     fun provideCommonApi(retrofit: Retrofit): CommonApi = retrofit.create(CommonApi::class.java)
-
-
-    @Provides
-    @Singleton
-    fun providePrefManager(@ApplicationContext mContext: Context): SharedPreferences =
-        mContext.getSharedPreferences("MVVMPrefInfo", Context.MODE_PRIVATE)
-
-    @Provides
-    @Singleton
-    fun provideSharedPref(preferences: SharedPreferences) = SharedPreferenceManager(preferences)
 }
