@@ -10,7 +10,6 @@ import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentDashboardBinding
 import com.example.mvvm.network.Resource
-import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.visible

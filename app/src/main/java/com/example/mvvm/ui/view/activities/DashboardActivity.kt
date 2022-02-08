@@ -1,13 +1,10 @@
 package com.example.mvvm.ui.view.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.mvvm.R
@@ -15,6 +12,7 @@ import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.startNewActivity
+import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +26,7 @@ class DashboardActivity : BaseActivity() {
 
     lateinit var rlToolbar: RelativeLayout
     lateinit var tvTitle: TextView
+    lateinit var tvBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +34,7 @@ class DashboardActivity : BaseActivity() {
 
         rlToolbar = findViewById(R.id.toolbar)
         tvTitle = findViewById(R.id.tv_toolbar_title)
+        tvBack = findViewById(R.id.tv_back)
     }
 
 
@@ -53,7 +53,8 @@ class DashboardActivity : BaseActivity() {
     /**
      * ...show toolbar
      */
-    override fun showToolbar() {
+    override fun showToolbar(isBackButton: Boolean) {
+        tvBack.visible(isBackButton)
         rlToolbar.visibility = View.VISIBLE
     }
 

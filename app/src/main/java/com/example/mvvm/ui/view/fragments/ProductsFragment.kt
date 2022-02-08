@@ -36,7 +36,7 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as BaseActivity).showToolbar() //display toolbar
+        (activity as BaseActivity).showToolbar(true) //display toolbar
         (activity as BaseActivity).setToolbarTitle("Product List")
 
         val productListRecyclerView = binding.productList
