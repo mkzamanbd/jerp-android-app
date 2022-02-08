@@ -12,12 +12,9 @@ open class SharedPreferenceManager @Inject constructor(
 ) {
 
     companion object {
-        const val LOGIN_INFO = "login_info" //store login information
         const val areaInfo = "area_info" //store login information
         const val ACCESS_TOKEN = "token" //store token information
-        const val LOGIN_STATUS = "login" //store token information
-        const val TERRITORY_INFO = "territory_info" //store territory info
-        const val DEMO_MODE = "demo_mode"
+        const val IS_LOGIN = "is_login" //store token information
         const val IS_REMEMBER = "is_remember"
         const val REM_USER_NAME = "remembered_user_name"
         const val REM_PASSWORD = "remembered_password"
@@ -89,14 +86,14 @@ open class SharedPreferenceManager @Inject constructor(
      * @param isLoggedIn log in status
      */
     fun setLoginStatus(isLoggedIn: Boolean) {
-        preferences[LOGIN_STATUS] = isLoggedIn
+        preferences[IS_LOGIN] = isLoggedIn
     }
 
     /**
      * save logged in user information
      * @param user logged in user info
      */
-    fun storeUserInformation(user: UserDataModel) {
+    fun setUserInformation(user: UserDataModel) {
         preferences[USER_ID] = user.id
         preferences[HASH_UID] = user.userId
         preferences[USER_TYPE] = user.userType
@@ -112,7 +109,7 @@ open class SharedPreferenceManager @Inject constructor(
         preferences[SUB_NAME] = user.sbuName
     }
 
-    fun storeTokenInformation(tokenDataModel: TokenDataModel) {
+    fun setTokenInformation(tokenDataModel: TokenDataModel) {
 //        editor.putString("accessToken", tokenDataModel.accessToken)
 //        editor.putString("tokenType", tokenDataModel.tokenType)
 //        editor.putString("expireDate", tokenDataModel.expireAt)
@@ -132,7 +129,7 @@ open class SharedPreferenceManager @Inject constructor(
      * @return true if user logged in otherwise return false
      */
     fun getIsUserLoggedIn(): Boolean {
-        return preferences[LOGIN_STATUS] ?: false
+        return preferences[IS_LOGIN] ?: false
     }
 
     /**
@@ -163,12 +160,11 @@ open class SharedPreferenceManager @Inject constructor(
      * ...clear all data while user logged out
      */
     fun clearAll() {
-        preferences[LOGIN_STATUS] = false
+        preferences[IS_LOGIN] = false
         preferences[ACCESS_TOKEN] = null
         preferences[VISIBLE_NAME] = null
         preferences[USER_NAME] = null
         preferences[FULL_NAME] = null
-
     }
 }
 
