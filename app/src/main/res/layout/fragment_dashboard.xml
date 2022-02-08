@@ -38,33 +38,58 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wall_share"
-                    style="?android:attr/borderlessButtonStyle"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:text="@string/orders"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:drawableTopCompat="@drawable/ic_baseline_shopping_basket_24" />
+                    tools:ignore="UseCompoundDrawables">
 
-                <TextView
-                    android:id="@+id/tvUserList"
-                    style="?android:attr/borderlessButtonStyle"
+                    <ImageView
+                        android:id="@+id/iv_bottom_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_baseline_shopping_basket_24" />
+
+                    <TextView
+                        android:id="@+id/bottom_first_menu"
+                        style="@style/RobotoRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orders"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:text="@string/notice"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:drawableTopCompat="@drawable/ic_baseline_warning_24" />
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/iv_bottom_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_baseline_warning_24" />
+
+                    <TextView
+                        android:id="@+id/bottom_second_menu"
+                        style="@style/RobotoRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orders"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black" />
+                </LinearLayout>
 
                 <TextView
                     style="?android:attr/borderlessButtonStyle"
@@ -79,42 +104,67 @@
                     android:visibility="invisible"
                     app:drawableTopCompat="@drawable/ic_baseline_add_24" />
 
-                <TextView
-                    android:id="@+id/tvProductList"
-                    style="?android:attr/borderlessButtonStyle"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:text="@string/products"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:drawableTopCompat="@drawable/ic_baseline_list_alt_24" />
+                    tools:ignore="UseCompoundDrawables">
 
-                <TextView
-                    style="?android:attr/borderlessButtonStyle"
+                    <ImageView
+                        android:id="@+id/iv_bottom_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_baseline_list_alt_24" />
+
+                    <TextView
+                        android:id="@+id/bottom_third_menu"
+                        style="@style/RobotoRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orders"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:text="@string/customers"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:drawableTopCompat="@drawable/ic_baseline_people_24" />
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/iv_bottom_last"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_baseline_people_24" />
+
+                    <TextView
+                        android:id="@+id/bottom_last_menu"
+                        style="@style/RobotoRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/orders"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black" />
+                </LinearLayout>
             </LinearLayout>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/bottom_center_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_baseline_add_24"
+            android:src="@drawable/ic_baseline_list_alt_24"
             app:backgroundTint="@color/colorPrimary"
             app:layout_anchor="@id/bottomAppBar"
             app:tint="@color/white" />
