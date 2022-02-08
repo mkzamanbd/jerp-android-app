@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9333EA</color>
+    <color name="colorPrimary">#026CD1</color>
     <color name="colorPrimaryDark">#00509C</color>
-    <color name="colorAccent">#FFBB86FC</color>
+    <color name="colorAccent">#51AAFF</color>
+    <color name="demo_mood">#FF9800</color>
 
     <!--colors for modern ui-->
     <color name="whiteTextColor">#ffffff</color>

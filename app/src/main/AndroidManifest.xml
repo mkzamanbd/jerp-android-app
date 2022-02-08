@@ -16,8 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.view.activities.DashboardActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Dashboard" />
+            android:exported="true" />
         <activity
             android:name=".ui.view.activities.AuthActivity"
             android:exported="true" />

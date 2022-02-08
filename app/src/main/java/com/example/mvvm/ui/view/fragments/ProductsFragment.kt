@@ -1,11 +1,10 @@
 package com.example.mvvm.ui.view.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,6 @@ import com.example.mvvm.utils.hideSoftKeyboard
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("CAST_NEVER_SUCCEEDS")
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductBinding>(
     FragmentProductBinding::inflate
@@ -39,6 +37,13 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_productFragment_to_dashboardFragment)
+                }
+            })
 
         val productListRecyclerView = binding.productList
 

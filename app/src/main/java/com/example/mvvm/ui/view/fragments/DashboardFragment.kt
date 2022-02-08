@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentDashboardBinding
 import com.example.mvvm.network.Resource
+import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleApiError
 import com.example.mvvm.utils.visible
@@ -28,16 +31,20 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvProductList.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)
+        }
+
         getMobileMenu()
 
-        viewModel.mobileMenu.observe(viewLifecycleOwner){
+        viewModel.mobileMenu.observe(viewLifecycleOwner) {
             binding.progressBar.visible(it is Resource.Loading)
-            when(it){
-                is Resource.Success ->{
+            when (it) {
+                is Resource.Success -> {
                     Log.d("mobileMenu", it.value.data.toString())
                     binding.tvMobileMenu.text = it.value.data.toString()
                 }
-                is Resource.Failure -> handleApiError(it){
+                is Resource.Failure -> handleApiError(it) {
                     getMobileMenu()
                 }
                 else -> Log.d("error", "Unknown Error")
@@ -45,7 +52,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
         }
     }
 
-    private fun getMobileMenu(){
+    private fun getMobileMenu() {
         viewModel.getMobileMenu()
     }
 }
