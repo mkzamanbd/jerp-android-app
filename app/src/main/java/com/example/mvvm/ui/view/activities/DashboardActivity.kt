@@ -33,8 +33,6 @@ class DashboardActivity : BaseActivity() {
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
         prefManager.clearAll()
-
-        Toast.makeText(applicationContext, "User Successfully Logged Out", Toast.LENGTH_SHORT).show()
         startNewActivity(AuthActivity::class.java)
     }
 }
