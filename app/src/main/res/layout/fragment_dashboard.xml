@@ -6,125 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.fragments.DashboardFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.view.activities.DashboardActivity">
+        android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <TextView
+            android:id="@+id/tv_mobile_menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_mobile_menu"
-                android:textAlignment="center"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:fabAlignmentMode="center"
+            app:fabCradleRoundedCornerRadius="16dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hello_blank_fragment"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="horizontal">
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:backgroundTint="@color/white"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:fabAlignmentMode="center"
-                app:fabCradleRoundedCornerRadius="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/wall_share"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/orders"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_baseline_shopping_basket_24" />
 
-                    <TextView
-                        android:id="@+id/wall_share"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:text="@string/orders"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        app:drawableTopCompat="@drawable/ic_baseline_shopping_basket_24" />
+                <TextView
+                    android:id="@+id/tvUserList"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/notice"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_baseline_warning_24" />
 
-                    <TextView
-                        android:id="@+id/tvUserList"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:text="@string/notice"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        app:drawableTopCompat="@drawable/ic_baseline_warning_24" />
+                <TextView
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:visibility="invisible"
+                    app:drawableTopCompat="@drawable/ic_baseline_add_24" />
 
-                    <TextView
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:visibility="invisible"
-                        app:drawableTopCompat="@drawable/ic_baseline_add_24" />
+                <TextView
+                    android:id="@+id/tvProductList"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/products"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_baseline_list_alt_24" />
 
-                    <TextView
-                        android:id="@+id/tvProductList"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:text="@string/products"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        app:drawableTopCompat="@drawable/ic_baseline_list_alt_24" />
+                <TextView
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/customers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_baseline_people_24" />
+            </LinearLayout>
 
-                    <TextView
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:text="@string/customers"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        app:drawableTopCompat="@drawable/ic_baseline_people_24" />
-                </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
-            </com.google.android.material.bottomappbar.BottomAppBar>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/ic_baseline_add_24"
-                app:backgroundTint="@color/colorPrimary"
-                app:layout_anchor="@id/bottomAppBar"
-                app:tint="@color/white" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_baseline_add_24"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_anchor="@id/bottomAppBar"
+            app:tint="@color/white" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

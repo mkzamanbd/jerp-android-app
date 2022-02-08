@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvm.R
 import com.example.mvvm.adapter.ProductListAdapter
+import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentProductBinding
 import com.example.mvvm.network.Resource
@@ -38,12 +36,8 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_productFragment_to_dashboardFragment)
-                }
-            })
+        (activity as BaseActivity).showToolbar() //display toolbar
+        (activity as BaseActivity).setToolbarTitle("Product List")
 
         val productListRecyclerView = binding.productList
 

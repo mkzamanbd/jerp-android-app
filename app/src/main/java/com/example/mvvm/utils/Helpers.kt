@@ -3,12 +3,14 @@ package com.example.mvvm.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -103,4 +105,18 @@ fun hideSoftKeyboard(context: Context, mEtSearch: EditText) {
     mEtSearch.clearFocus()
     val inputMethod = (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
     inputMethod.hideSoftInputFromWindow(mEtSearch.windowToken, 0)
+}
+
+/**
+ * ...start next fragment
+ * ...passing value one fragment to next fragment
+ * ...execute actionId wise
+ */
+fun goToNextFragment(actionId : Int, mView : View, bundle : Bundle?)
+{
+    bundle?.let {
+        Navigation.findNavController(mView).navigate(actionId,bundle)
+    }?: run {
+        Navigation.findNavController(mView).navigate(actionId)
+    }
 }

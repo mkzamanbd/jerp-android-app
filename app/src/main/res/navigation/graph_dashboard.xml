@@ -12,25 +12,14 @@
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_productFragment"
-            app:destination="@id/productFragment"
-            app:enterAnim="@anim/animation_slide_in_right"
-            app:exitAnim="@anim/animation_slide_out_left"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/animation_slide_in_left"
-            app:popExitAnim="@anim/animation_slide_out_right"
-            app:popUpTo="@+id/dashboardFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/productFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/productFragment"
         android:name="com.example.mvvm.ui.view.fragments.ProductsFragment"
         android:label="Product List"
-        tools:layout="@layout/fragment_product">
-        <action
-            android:id="@+id/action_productFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_product" />
 
     <fragment
         android:id="@+id/userDetailFragment"

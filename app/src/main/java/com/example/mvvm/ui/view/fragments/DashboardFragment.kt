@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm.R
+import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentDashboardBinding
 import com.example.mvvm.network.Resource
@@ -30,6 +31,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as BaseActivity).hideToolbar() //display toolbar
 
         binding.tvProductList.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)

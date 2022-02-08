@@ -18,4 +18,7 @@ abstract class BaseActivity : AppCompatActivity(), InitialComponent {
     fun setToolbarTitle(title: String, tvTitle: TextView) {
         tvTitle.text = title
     }
+
+    open fun hideToolbar() {}
+    open fun showToolbar() {}
 }
