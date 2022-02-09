@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvm.interfaces.InitialComponent
 
 abstract class BaseActivity : AppCompatActivity(), InitialComponent {
-    abstract override fun init()
 
+    abstract override fun init()
     abstract override fun setToolbarTitle(title: String)
 
     /**

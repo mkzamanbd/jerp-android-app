@@ -19,21 +19,21 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity() {
-
     @Inject
     lateinit var prefManager: SharedPreferenceManager
     private val viewModel by viewModels<ProfileViewModel>()
-
     private lateinit var binding: ActivitySettingsBinding
 
-    @SuppressLint("SetTextI18n")
+    private val tvTitleStr: String = "Settings"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        binding.toolbar.tvToolbarTitle.text = "Settings"
+        binding.toolbarRoot.tvToolbarTitle.text = tvTitleStr
+        binding.toolbarRoot.ivBackButton.visible(true)
 
         getUser()
         updateUI()
