@@ -19,6 +19,7 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_MTP
 import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
 import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.SETTING
+import com.example.mvvm.utils.Constants.Companion.TRACKING
 
 /*
 *
@@ -78,6 +79,12 @@ fun menuRouting(context: Context, featureId: String) {
         }
         REVIEW_REQUEST -> {
             Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+        }
+        TRACKING -> {
+            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+        }
+        else -> {
+            Toast.makeText(context, "Unknown Feature", Toast.LENGTH_SHORT).show()
         }
     }
 

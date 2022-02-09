@@ -33,6 +33,7 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
 import com.example.mvvm.utils.handleApiError
+import com.example.mvvm.utils.menuRouting
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,10 +55,6 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as BaseActivity).hideToolbar() //display toolbar
-
-        binding.bottomCenterMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)
-        }
 
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), mContext)
 
@@ -108,6 +105,25 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
         val ivLast = binding.ivBottomLast
 
         if (bottomMenu.size == 5) {
+
+            binding.bottomCenterMenu.setOnClickListener {
+                menuRouting(mContext, bottomMenu[2].featureId)
+                findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)
+            }
+            binding.lnFirst.setOnClickListener {
+                menuRouting(mContext, bottomMenu[0].featureId)
+            }
+
+            binding.lnSecond.setOnClickListener {
+                menuRouting(mContext, bottomMenu[1].featureId)
+            }
+            binding.lnThird.setOnClickListener {
+                menuRouting(mContext, bottomMenu[3].featureId)
+            }
+            binding.lnLast.setOnClickListener {
+                menuRouting(mContext, bottomMenu[4].featureId)
+            }
+
             for ((count, bottom) in bottomMenu.withIndex()) {
                 when (count) {
                     0 -> {
