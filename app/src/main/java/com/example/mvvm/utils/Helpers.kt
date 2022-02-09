@@ -123,7 +123,10 @@ fun goToNextFragment(actionId : Int, mView : View, bundle : Bundle?)
     }
 }
 
-
+/*
+* horizontalColumnRecyclerView
+* context, recyclerView, column
+*/
 fun horizontalColumnRecyclerView(
     context: Context?,
     recyclerView: RecyclerView,

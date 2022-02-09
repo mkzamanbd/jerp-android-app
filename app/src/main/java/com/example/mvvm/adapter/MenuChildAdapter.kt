@@ -1,18 +1,17 @@
 package com.example.mvvm.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.data.response.UserChildMenuModel
+import com.example.mvvm.utils.menuRouting
 
 class MenuChildAdapter(
     private var menuItems: List<UserChildMenuModel>,
@@ -26,9 +25,9 @@ class MenuChildAdapter(
         fun bind(menuModel: UserChildMenuModel) {
             tvTitle.text = menuModel.menuName
             ivImage.setImageDrawable(ContextCompat.getDrawable(context, menuModel.iconId))
-            Log.d("iconId", menuModel.iconId.toString())
+
             lnRoot.setOnClickListener {
-                Toast.makeText(context, menuModel.featureId, Toast.LENGTH_SHORT).show()
+                menuRouting(context, menuModel.featureId)
             }
         }
     }
