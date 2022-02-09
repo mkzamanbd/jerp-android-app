@@ -20,5 +20,5 @@ abstract class BaseActivity : AppCompatActivity(), InitialComponent {
     }
 
     open fun hideToolbar() {}
-    open fun showToolbar(isBackButton: Boolean) {}
+    open fun showToolbar(isBackButton: Boolean = false) {}
 }

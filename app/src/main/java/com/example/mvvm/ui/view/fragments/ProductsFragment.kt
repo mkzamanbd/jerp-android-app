@@ -21,11 +21,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductBinding>(
     FragmentProductBinding::inflate
-), ProductListAdapter.OnItemClickListener {
+) {
 
     private val viewModel by viewModels<CommonViewModel>()
 
-    private val productListAdapter = ProductListAdapter(arrayListOf(), this)
+    private lateinit var productListAdapter: ProductListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,8 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        productListAdapter = ProductListAdapter(arrayListOf(), mContext)
 
         (activity as BaseActivity).showToolbar(true) //display toolbar
         (activity as BaseActivity).setToolbarTitle("Product List")
@@ -81,11 +83,5 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
     private fun getProductList() {
         viewModel.getAllProducts()
-    }
-
-    override fun onItemClick(position: Int) {
-        productListAdapter.notifyItemChanged(position)
-        val product = productListAdapter.products[position]
-        Toast.makeText(mContext, product.productId, Toast.LENGTH_SHORT).show()
     }
 }

@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
@@ -17,19 +19,16 @@ class MenuChildAdapter(
     val context: Context,
 ) : RecyclerView.Adapter<MenuChildAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val tvTitle: TextView = view.findViewById(R.id.tv_title)
         private val ivImage: ImageView = view.findViewById(R.id.iv_image)
+        private val lnRoot: LinearLayout = view.findViewById(R.id.ln_root)
         fun bind(menuModel: UserChildMenuModel) {
             tvTitle.text = menuModel.menuName
             ivImage.setImageDrawable(ContextCompat.getDrawable(context, menuModel.iconId))
             Log.d("iconId", menuModel.iconId.toString())
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                Log.d("child_menu", position.toString())
+            lnRoot.setOnClickListener {
+                Toast.makeText(context, menuModel.featureId, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -46,9 +45,5 @@ class MenuChildAdapter(
     }
 
     override fun getItemCount() = menuItems.size
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
 
 }

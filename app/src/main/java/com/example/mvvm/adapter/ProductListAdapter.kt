@@ -1,6 +1,7 @@
 package com.example.mvvm.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.R
 import com.example.mvvm.data.model.Product
@@ -16,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class ProductListAdapter(
     var products: ArrayList<Product>,
-    private val onItemClickListener: OnItemClickListener,
+    val context: Context,
 ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>(), Filterable {
 
     var filterProductList = ArrayList<Product>()
@@ -32,7 +34,7 @@ class ProductListAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val name: TextView = view.findViewById(R.id.prod_name)
         private val code: TextView = view.findViewById(R.id.code)
         private val packSize: TextView = view.findViewById(R.id.pack_size)
@@ -42,16 +44,9 @@ class ProductListAdapter(
             name.text = product.productName
             code.text = product.productCode
             packSize.text = "(${product.packSize})"
-        }
 
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                onItemClickListener.onItemClick(adapterPosition)
+            itemView.setOnClickListener {
+                Toast.makeText(context, product.productId, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -68,10 +63,6 @@ class ProductListAdapter(
     }
 
     override fun getItemCount() = filterProductList.size
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
 
     // Filter products by product name , product codes, generic name etc
     override fun getFilter(): Filter {
