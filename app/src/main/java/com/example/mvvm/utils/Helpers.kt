@@ -154,12 +154,47 @@ fun goToNextFragment(actionId: Int, mView: View, bundle: Bundle?) {
 * context, recyclerView, column
 */
 fun horizontalColumnRecyclerView(
-    context: Context?,
+    activity: Activity?,
     recyclerView: RecyclerView,
     column: Int,
 ): RecyclerView {
     recyclerView.setHasFixedSize(true)
-    recyclerView.layoutManager = GridLayoutManager(context, column)
+    recyclerView.layoutManager = GridLayoutManager(activity, column)
     recyclerView.isNestedScrollingEnabled = false
     return recyclerView
+}
+
+/*
+*
+* activity start animation
+*
+*/
+
+fun goToNextActivityAnimation(activity: Activity, intent: Intent, isNextActivity: Boolean = true) {
+    activity.startActivity(intent)
+    if (isNextActivity) {
+        activity.overridePendingTransition(R.anim.animation_slide_in_right,
+            R.anim.animation_slide_out_left)
+    } else {
+        activity.overridePendingTransition(R.anim.animation_slide_in_left,
+            R.anim.animation_slide_out_right)
+    }
+
+}
+
+fun <A : Activity> Activity.startNewActivityAnimation(
+    activity: Class<A>,
+    isNextActivity: Boolean = true,
+) {
+    Intent(this, activity).also {
+        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(it)
+    }
+    if (isNextActivity) {
+        this.overridePendingTransition(R.anim.animation_slide_in_right,
+            R.anim.animation_slide_out_left)
+    } else {
+        this.overridePendingTransition(R.anim.animation_slide_in_left,
+            R.anim.animation_slide_out_right)
+    }
 }

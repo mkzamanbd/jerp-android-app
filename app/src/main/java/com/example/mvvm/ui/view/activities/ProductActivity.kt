@@ -1,5 +1,6 @@
 package com.example.mvvm.ui.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.TextView
 import com.example.mvvm.R
 import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.databinding.ActivityProductBinding
+import com.example.mvvm.utils.startNewActivityAnimation
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,8 +18,8 @@ class ProductActivity : BaseActivity() {
     private lateinit var binding: ActivityProductBinding
 
     lateinit var rlToolbar: RelativeLayout
-    lateinit var tvTitle: TextView
-    lateinit var tvBack: ImageView
+    private lateinit var tvTitle: TextView
+    private lateinit var tvBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +45,13 @@ class ProductActivity : BaseActivity() {
     override fun showToolbar(isBackButton: Boolean) {
         tvBack.visible(isBackButton)
         rlToolbar.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack();
+        } else {
+            startNewActivityAnimation(DashboardActivity::class.java, false);
+        }
     }
 }

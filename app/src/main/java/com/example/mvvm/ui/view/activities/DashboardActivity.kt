@@ -1,5 +1,6 @@
 package com.example.mvvm.ui.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -16,6 +17,7 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivityDashboardBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
+import com.example.mvvm.utils.*
 import com.example.mvvm.utils.Constants.Companion.CUSTOMER_LIST
 import com.example.mvvm.utils.Constants.Companion.DCR
 import com.example.mvvm.utils.Constants.Companion.DELIVERY
@@ -31,10 +33,6 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
 import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
-import com.example.mvvm.utils.handleActivityApiError
-import com.example.mvvm.utils.menuRouting
-import com.example.mvvm.utils.startNewActivity
-import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -226,5 +224,13 @@ class DashboardActivity : BaseActivity() {
         viewModel.logout()
         prefManager.clearAll()
         startNewActivity(AuthActivity::class.java)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack();
+        } else {
+            super.onBackPressed()
+        }
     }
 }

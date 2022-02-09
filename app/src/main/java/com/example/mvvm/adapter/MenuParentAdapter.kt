@@ -1,7 +1,7 @@
 package com.example.mvvm.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +37,7 @@ import com.example.mvvm.utils.horizontalColumnRecyclerView
 
 class MenuParentAdapter(
     var menuItems: ArrayList<UserParentMenuModel>,
-    private val context: Context,
+    private val activity: Activity,
 ) : RecyclerView.Adapter<MenuParentAdapter.ViewHolder>() {
 
     lateinit var childMenuAdapter: MenuChildAdapter
@@ -55,8 +55,8 @@ class MenuParentAdapter(
 
         fun bind(menuModel: UserParentMenuModel) {
             tvTitle.text = menuModel.menuName
-            childMenuAdapter = MenuChildAdapter(getUserChildMenu(menuModel.menuItems), context)
-            horizontalColumnRecyclerView(context, rvList, 4).adapter = childMenuAdapter
+            childMenuAdapter = MenuChildAdapter(getUserChildMenu(menuModel.menuItems), activity)
+            horizontalColumnRecyclerView(activity, rvList, 4).adapter = childMenuAdapter
         }
     }
 

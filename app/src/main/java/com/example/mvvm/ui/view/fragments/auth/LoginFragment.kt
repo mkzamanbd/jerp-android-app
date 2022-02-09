@@ -16,7 +16,7 @@ import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.AuthViewModel
 import com.example.mvvm.utils.enable
 import com.example.mvvm.utils.handleFragmentApiError
-import com.example.mvvm.utils.startNewActivity
+import com.example.mvvm.utils.startNewActivityAnimation
 import com.example.mvvm.utils.visible
 import com.example.mvvm.utils.hideSoftKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                         prefManager.setLoginStatus(true)
                         prefManager.setTokenInformation(it.value.data.token)
                         prefManager.setUserInformation(it.value.data.user)
-                        mActivity.startNewActivity(DashboardActivity::class.java)
+                        mActivity.startNewActivityAnimation(DashboardActivity::class.java)
                     }
                 }
                 is Resource.Failure -> handleFragmentApiError(it) {

@@ -1,6 +1,6 @@
 package com.example.mvvm.utils
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 import com.example.mvvm.ui.view.activities.ProductActivity
@@ -27,69 +27,67 @@ import com.example.mvvm.utils.Constants.Companion.TRACKING
 /*
 *
 * dashboard menu routing
-* context, featureId
+* activity, featureId
 */
 
-fun menuRouting(context: Context, featureId: String) {
+fun menuRouting(activity: Activity, featureId: String) {
     when (featureId) {
         MONTHLY_TOUR_PLAN -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         DAILY_CALL_PLAN -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         DCR -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER_HISTORY -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         CUSTOMER_LIST -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ADVISER_LIST -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         RETURN -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         SETTING -> {
-            context.startActivity(Intent(context, SettingsActivity::class.java))
+            goToNextActivityAnimation(activity, Intent(activity, SettingsActivity::class.java))
         }
         DELIVERY -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         PAYMENT_COLLECTION -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         PRODUCT_LIST -> {
-            context.startActivity(Intent(context, ProductActivity::class.java))
+            goToNextActivityAnimation(activity, Intent(activity, ProductActivity::class.java))
         }
         HISTORY -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_MTP -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_ORDER -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER_APPROVAL -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_REQUEST -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         TRACKING -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         else -> {
-            Toast.makeText(context, "Unknown Feature", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Unknown Feature", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.example.mvvm.ui.view.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -11,7 +12,7 @@ import com.example.mvvm.databinding.ActivitySettingsBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
 import com.example.mvvm.utils.handleActivityApiError
-import com.example.mvvm.utils.startNewActivity
+import com.example.mvvm.utils.startNewActivityAnimation
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -55,7 +56,7 @@ class SettingsActivity : BaseActivity() {
             lifecycleScope.launch {
                 viewModel.logout()
                 prefManager.clearAll()
-                startNewActivity(AuthActivity::class.java)
+                startNewActivityAnimation(AuthActivity::class.java)
             }
         }
     }
@@ -72,5 +73,13 @@ class SettingsActivity : BaseActivity() {
 
     private fun getUser() {
         viewModel.getUser()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack();
+        } else {
+            startNewActivityAnimation(DashboardActivity::class.java, false);
+        }
     }
 }
