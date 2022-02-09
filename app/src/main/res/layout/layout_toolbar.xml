@@ -36,8 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:hint="@string/todo"
+            android:hint="@string/app_name"
             android:padding="@dimen/five"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:textSize="@dimen/eighteen" />
 

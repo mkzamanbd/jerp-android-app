@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Mvvm"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.view.activities.ProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activities.SettingsActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.view.activities.DashboardActivity"
             android:exported="true" />
         <activity

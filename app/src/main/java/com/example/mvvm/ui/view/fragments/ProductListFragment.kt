@@ -3,15 +3,15 @@ package com.example.mvvm.ui.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm.adapter.ProductListAdapter
 import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
-import com.example.mvvm.databinding.FragmentProductBinding
+import com.example.mvvm.databinding.FragmentProductListBinding
 import com.example.mvvm.network.Resource
+import com.example.mvvm.ui.view.activities.ProductActivity
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.hideSoftKeyboard
@@ -19,8 +19,8 @@ import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductsFragment : BaseFragment<FragmentProductBinding>(
-    FragmentProductBinding::inflate
+class ProductListFragment : BaseFragment<FragmentProductListBinding>(
+    FragmentProductListBinding::inflate
 ) {
 
     private val viewModel by viewModels<CommonViewModel>()
@@ -38,8 +38,8 @@ class ProductsFragment : BaseFragment<FragmentProductBinding>(
 
         productListAdapter = ProductListAdapter(arrayListOf(), mContext)
 
-        (activity as BaseActivity).showToolbar(true) //display toolbar
-        (activity as BaseActivity).setToolbarTitle("Product List")
+        (activity as ProductActivity).showToolbar(true) //display toolbar
+        (activity as ProductActivity).setToolbarTitle("Product List")
 
         val productListRecyclerView = binding.productList
 

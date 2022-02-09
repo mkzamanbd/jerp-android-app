@@ -1,7 +1,10 @@
 package com.example.mvvm.utils
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import com.example.mvvm.ui.view.activities.ProductActivity
+import com.example.mvvm.ui.view.activities.SettingsActivity
 import com.example.mvvm.utils.Constants.Companion.ADVISER_LIST
 import com.example.mvvm.utils.Constants.Companion.CUSTOMER_LIST
 import com.example.mvvm.utils.Constants.Companion.DAILY_CALL_PLAN
@@ -54,7 +57,7 @@ fun menuRouting(context: Context, featureId: String) {
             Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
         }
         SETTING -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            context.startActivity(Intent(context, SettingsActivity::class.java))
         }
         DELIVERY -> {
             Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
@@ -63,7 +66,7 @@ fun menuRouting(context: Context, featureId: String) {
             Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
         }
         PRODUCT_LIST -> {
-            Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
+            context.startActivity(Intent(context, ProductActivity::class.java))
         }
         HISTORY -> {
             Toast.makeText(context, featureId, Toast.LENGTH_SHORT).show()
