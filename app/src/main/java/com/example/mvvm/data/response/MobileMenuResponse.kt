@@ -18,12 +18,13 @@ data class UserParentMenuModel(
     @SerializedName("id") val menuId: String,
     @SerializedName("menu_name") val menuName: String,
     @SerializedName("menu") val menuItems: List<UserChildMenuModel>,
-    @SerializedName("nav_type") val navType : String,
+    @SerializedName("nav_type") val navType: String,
 )
 
 data class UserChildMenuModel(
     @SerializedName("id") val menuId: String,
     @SerializedName("feature_id") val featureId: String,
     @SerializedName("menu_name") val menuName: String,
-    @SerializedName("nav_type") val navType : String,
+    @SerializedName("nav_type") val navType: String,
+    var iconId: Int,
 )

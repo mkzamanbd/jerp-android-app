@@ -11,6 +11,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -119,4 +121,16 @@ fun goToNextFragment(actionId : Int, mView : View, bundle : Bundle?)
     }?: run {
         Navigation.findNavController(mView).navigate(actionId)
     }
+}
+
+
+fun horizontalColumnRecyclerView(
+    context: Context?,
+    recyclerView: RecyclerView,
+    column: Int,
+): RecyclerView {
+    recyclerView.setHasFixedSize(true)
+    recyclerView.layoutManager = GridLayoutManager(context, column)
+    recyclerView.isNestedScrollingEnabled = false
+    return recyclerView
 }
