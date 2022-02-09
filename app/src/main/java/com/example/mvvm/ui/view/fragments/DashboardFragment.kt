@@ -105,7 +105,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
         val ivLast = binding.ivBottomLast
 
         if (bottomMenu.size == 5) {
-
+            binding.bottomMenuRoot.visible(true)
             binding.bottomCenterMenu.setOnClickListener {
                 menuRouting(mContext, bottomMenu[2].featureId)
                 findNavController().navigate(R.id.action_dashboardFragment_to_productFragment)
