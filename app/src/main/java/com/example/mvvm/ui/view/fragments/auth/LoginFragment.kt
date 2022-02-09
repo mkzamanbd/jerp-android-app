@@ -1,10 +1,8 @@
 package com.example.mvvm.ui.view.fragments.auth
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +14,11 @@ import com.example.mvvm.databinding.FragmentLoginBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.AuthViewModel
-import com.example.mvvm.utils.*
+import com.example.mvvm.utils.enable
+import com.example.mvvm.utils.handleFragmentApiError
+import com.example.mvvm.utils.startNewActivity
+import com.example.mvvm.utils.visible
+import com.example.mvvm.utils.hideSoftKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -61,7 +63,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                         mActivity.startNewActivity(DashboardActivity::class.java)
                     }
                 }
-                is Resource.Failure -> handleApiError(it) {
+                is Resource.Failure -> handleFragmentApiError(it) {
                     login()
                 }
                 else -> Log.d("unknownError", "Unknown Error")

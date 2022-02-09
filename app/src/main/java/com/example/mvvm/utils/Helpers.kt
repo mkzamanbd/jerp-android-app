@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.mvvm.R
+import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.DashboardActivity
@@ -58,15 +59,14 @@ fun Fragment.logout() = lifecycleScope.launch {
     }
 }
 
-fun Fragment.handleApiError(
+fun Fragment.handleFragmentApiError(
     failure: Resource.Failure,
     retry: (() -> Unit)? = null,
 ) {
     when {
-        failure.isNetworkError -> requireView().snackBar(
-            "Please check your internet connection",
-            retry
-        )
+        failure.isNetworkError -> {
+            requireView().snackBar("Please check your internet connection", retry)
+        }
         failure.statusCode == 401 -> {
             if (this is LoginFragment) {
                 requireView().snackBar("You've entered incorrect email or password")
@@ -86,6 +86,33 @@ fun Fragment.handleApiError(
         else -> {
             val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
             requireView().snackBar(error)
+        }
+    }
+}
+
+fun Activity.handleActivityApiError(
+    failure: Resource.Failure,
+    retry: (() -> Unit)? = null,
+) {
+    when {
+        failure.isNetworkError -> {
+            toastError("Please check your internet connection")
+        }
+        failure.statusCode == 401 -> {
+            (this as DashboardActivity).performLogout()
+        }
+        failure.statusCode == 404 -> {
+            toastError("Url not found!")
+        }
+        failure.statusCode == 422 -> {
+            toastError("The given data was invalid")
+        }
+        failure.statusCode == 500 -> {
+            toastError("Internal server error")
+        }
+        else -> {
+            val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
+            toastError(error)
         }
     }
 }
@@ -114,11 +141,10 @@ fun hideSoftKeyboard(context: Context, mEtSearch: EditText) {
  * ...passing value one fragment to next fragment
  * ...execute actionId wise
  */
-fun goToNextFragment(actionId : Int, mView : View, bundle : Bundle?)
-{
+fun goToNextFragment(actionId: Int, mView: View, bundle: Bundle?) {
     bundle?.let {
-        Navigation.findNavController(mView).navigate(actionId,bundle)
-    }?: run {
+        Navigation.findNavController(mView).navigate(actionId, bundle)
+    } ?: run {
         Navigation.findNavController(mView).navigate(actionId)
     }
 }

@@ -32,7 +32,7 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
 import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
-import com.example.mvvm.utils.handleApiError
+import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.menuRouting
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +74,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(
                     setBottomMenu(it.value.data.bottomParentMenu)
                     homeMenuParentAdapter.setHomePrentMenu(it.value.data.topParentMenu)
                 }
-                is Resource.Failure -> handleApiError(it) {
+                is Resource.Failure -> handleFragmentApiError(it) {
                     getMobileMenu()
                 }
                 else -> Log.d("error", "Unknown Error")

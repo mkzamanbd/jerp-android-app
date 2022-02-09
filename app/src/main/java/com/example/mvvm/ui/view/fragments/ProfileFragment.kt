@@ -10,7 +10,7 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.FragmentProfileBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
-import com.example.mvvm.utils.handleApiError
+import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.logout
 import com.example.mvvm.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
                 is Resource.Success -> {
                     binding.tvName.text = it.value.data.toString()
                 }
-                is Resource.Failure -> handleApiError(it){
+                is Resource.Failure -> handleFragmentApiError(it){
                     getUser()
                 }
                 else -> Log.d("unknownError", "Unknown Error")
