@@ -134,11 +134,55 @@
         app:layout_anchor="@+id/rl_user_info"
         app:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dashboard"
-            android:textColor="@color/white" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/forty"
+                android:layout_height="@dimen/forty"
+                android:layout_gravity="center"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/img_avatar" />
+
+            <LinearLayout
+                android:id="@+id/ln_toolbar_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fifteen"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_toolbar_user_name"
+                    style="@style/RobotoMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/five"
+                    android:text="@string/author_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fourteen" />
+
+                <TextView
+                    android:id="@+id/tv_iv_toolbar_my_territory"
+                    style="@style/RobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/two"
+                    android:drawablePadding="@dimen/five"
+                    android:gravity="center_vertical"
+                    android:text="@string/location"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twelve"
+                    app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
+                    app:drawableTint="@color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
