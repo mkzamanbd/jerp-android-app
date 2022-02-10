@@ -64,9 +64,9 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:padding="@dimen/five"
+                        android:text="@string/author_name"
                         android:textColor="@color/textColor"
-                        android:textSize="@dimen/fourteen"
-                        tools:text="Kamruzzaman" />
+                        android:textSize="@dimen/fourteen" />
 
                     <TextView
                         android:id="@+id/tv_user_role"
@@ -78,9 +78,9 @@
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/five"
                         android:paddingEnd="@dimen/five"
+                        android:text="@string/designation"
                         android:textColor="@color/childTextColor"
-                        android:textSize="@dimen/twelve"
-                        tools:text="Sales executive" />
+                        android:textSize="@dimen/twelve" />
 
                     <TextView
                         android:id="@+id/tv_my_territory"
@@ -91,6 +91,7 @@
                         android:layout_marginTop="@dimen/two"
                         android:drawablePadding="@dimen/five"
                         android:gravity="center_vertical"
+                        android:text="@string/location"
                         android:textColor="@color/childTextColor"
                         android:textSize="@dimen/twelve"
                         app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
