@@ -3,6 +3,7 @@ package com.example.mvvm.utils
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
+import com.example.mvvm.ui.view.activities.OrdersActivity
 import com.example.mvvm.ui.view.activities.ProductActivity
 import com.example.mvvm.ui.view.activities.SettingsActivity
 import com.example.mvvm.utils.Constants.Companion.ADVISER_LIST
@@ -42,7 +43,7 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            goToNextActivityAnimation(activity, Intent(activity, OrdersActivity::class.java))
         }
         ORDER_HISTORY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()

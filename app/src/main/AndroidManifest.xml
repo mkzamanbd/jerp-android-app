@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Mvvm"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.view.activities.OrdersActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.activities.ProductActivity"
             android:exported="true" />
         <activity

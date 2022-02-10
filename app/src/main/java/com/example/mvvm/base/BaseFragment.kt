@@ -8,11 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.interfaces.InitialComponent
-import dagger.hilt.android.AndroidEntryPoint
-import java.lang.IllegalArgumentException
-import javax.inject.Inject
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (inflater: LayoutInflater) -> VB,
