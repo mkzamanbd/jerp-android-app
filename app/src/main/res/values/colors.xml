@@ -10,6 +10,15 @@
     <color name="primaryTextColor">#2661FA</color>
     <color name="loginBkColor">#f0f0f0</color>
 
+    <color name="dividerColor">#FAF7ED</color>
+    <color name="whiteBackground">#FFFFFF</color>
+    <color name="offWhiteBackground">#FAF7ED</color>
+
+    <color name="drawableIconColor">#393535</color>
+    <color name="textColor">#393535</color>
+    <color name="childTextColor">#696A6A</color>
+    <color name="unread_notification_bg">#0D707070</color>
+
     <!--colors for card-->
     <color name="whiteCardColor">#E2EDFA</color>
     <color name="black">#FF000000</color>

@@ -2,6 +2,7 @@ package com.example.mvvm.ui.view.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -32,18 +33,22 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
 import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
+import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class DashboardActivity : BaseActivity() {
+class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
     private val viewModel by viewModels<CommonViewModel>()
     private lateinit var homeMenuParentAdapter: MenuParentAdapter
     private lateinit var binding: ActivityDashboardBinding
+
+    private var scrollRange = -1
+    private var mIsTheTitleVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +56,11 @@ class DashboardActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.appBarLayout.addOnOffsetChangedListener(this)
         init()
 
     }
+
 
     override fun init() {
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
@@ -66,7 +73,7 @@ class DashboardActivity : BaseActivity() {
         getMobileMenu()
 
         viewModel.mobileMenu.observe(this) {
-            binding.progressBar.visible(it is Resource.Loading)
+            // binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     setBottomMenu(it.value.data.bottomParentMenu)
@@ -233,5 +240,30 @@ class DashboardActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+        if (scrollRange == -1) {
+            scrollRange = appBarLayout.totalScrollRange
+        }
+        if (scrollRange + verticalOffset == 0) {
+            startAlphaAnimation(binding.toolbar, 0, View.VISIBLE)
+            binding.clCollapsing.visibility = View.INVISIBLE
+            binding.clCollapsing.setBackgroundColor(ContextCompat.getColor(this,
+                R.color.colorPrimary))
+            mIsTheTitleVisible = true
+        } else if (mIsTheTitleVisible) {
+            startAlphaAnimation(binding.toolbar, 0, View.INVISIBLE)
+            binding.clCollapsing.visibility = View.VISIBLE
+            mIsTheTitleVisible = false
+            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this,
+                R.color.colorPrimary))
+            binding.clCollapsing.background =
+                ContextCompat.getDrawable(this, R.drawable.bg_home_profile)
+        }
+    }
+
+    private fun handleToolbarTitleVisibility(maxScroll: Int) {
+
     }
 }

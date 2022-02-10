@@ -31,6 +31,9 @@
     <dimen name="layout_height">100dp</dimen>
     <dimen name="standard_padding">8dp</dimen>
     <dimen name="dateRadius">40dp</dimen>
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
 
 
 

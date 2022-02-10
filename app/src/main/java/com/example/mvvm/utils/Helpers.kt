@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AlphaAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -197,4 +198,13 @@ fun <A : Activity> Activity.startNewActivityAnimation(
         this.overridePendingTransition(R.anim.animation_slide_in_left,
             R.anim.animation_slide_out_right)
     }
+}
+
+fun startAlphaAnimation(view: View, duration: Long, visibility: Int) {
+    val alphaAnimation =
+        if (visibility == View.VISIBLE) AlphaAnimation(0f, 1f) else AlphaAnimation(1f, 0f)
+    view.visibility = visibility
+    alphaAnimation.duration = duration
+    alphaAnimation.fillAfter = true
+    view.startAnimation(alphaAnimation)
 }
