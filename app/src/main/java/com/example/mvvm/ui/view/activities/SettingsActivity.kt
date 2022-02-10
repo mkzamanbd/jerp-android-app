@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.mvvm.BuildConfig
 import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivitySettingsBinding
@@ -33,11 +34,19 @@ class SettingsActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.toolbarRoot.tvToolbarTitle.text = tvTitleStr
-        binding.toolbarRoot.ivBackButton.visible(true)
+        val versionName = BuildConfig.VERSION_NAME
+        binding.appVersion.text = versionName
 
-        getUser()
-        updateUI()
+        val ivBackButton = binding.toolbarRoot.ivBackButton
+
+        binding.toolbarRoot.tvToolbarTitle.text = tvTitleStr
+        ivBackButton.visible(true)
+
+        ivBackButton.setOnClickListener {
+            onBackPressed()
+        }
+
+        init()
 
         viewModel.profile.observe(this) {
             binding.progressBar.visible(it is Resource.Loading)
@@ -61,7 +70,10 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    override fun init() {}
+    override fun init() {
+        getUser()
+        updateUI()
+    }
 
     override fun setToolbarTitle(title: String) {}
 
