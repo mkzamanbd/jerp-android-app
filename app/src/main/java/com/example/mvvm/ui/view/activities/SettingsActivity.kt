@@ -72,16 +72,9 @@ class SettingsActivity : BaseActivity() {
 
     override fun init() {
         getUser()
-        updateUI()
     }
 
     override fun setToolbarTitle(title: String) {}
-
-    @SuppressLint("SetTextI18n")
-    private fun updateUI() {
-        binding.tvEmail.text =
-            "Local=> Name ${prefManager.getUserFullName()}, Email: ${prefManager.getUserRoleName()}"
-    }
 
     private fun getUser() {
         viewModel.getUser()
@@ -89,7 +82,7 @@ class SettingsActivity : BaseActivity() {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack();
+            supportFragmentManager.popBackStack()
         } else {
             startNewActivityAnimation(DashboardActivity::class.java, false);
         }
