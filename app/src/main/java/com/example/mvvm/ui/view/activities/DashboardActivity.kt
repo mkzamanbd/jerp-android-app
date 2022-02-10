@@ -1,6 +1,5 @@
 package com.example.mvvm.ui.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -52,6 +51,11 @@ class DashboardActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
+        init()
+
+    }
+
+    override fun init() {
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
 
         binding.rvHomeList.apply {
@@ -74,8 +78,9 @@ class DashboardActivity : BaseActivity() {
                 else -> Log.d("error", "Unknown Error")
             }
         }
-
     }
+
+    override fun setToolbarTitle(title: String) {}
 
     private fun getMobileMenu() {
         viewModel.getMobileMenu()
@@ -215,10 +220,6 @@ class DashboardActivity : BaseActivity() {
         }
         return R.drawable.ic_no_image_hm
     }
-
-
-    override fun init() {}
-    override fun setToolbarTitle(title: String) {}
 
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()

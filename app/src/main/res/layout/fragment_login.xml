@@ -14,9 +14,9 @@
         style="@style/loginHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
         android:padding="10dp"
         android:text="@string/login"
-        android:fontFamily="@font/roboto_regular"
         app:layout_constraintBottom_toTopOf="@+id/gl_logo_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +50,7 @@
             android:background="@drawable/bg_input_field"
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimary"
             android:hint="@string/username_hint"
             android:inputType="textEmailAddress"
             android:padding="15dp" />
@@ -64,10 +65,11 @@
             android:background="@drawable/bg_input_field"
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimary"
             android:hint="@string/login_password_hint"
             android:inputType="textPassword"
-            android:text="@string/password"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:text="@string/password" />
 
         <LinearLayout
             android:layout_width="match_parent"
