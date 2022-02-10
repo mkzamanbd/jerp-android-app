@@ -8,12 +8,7 @@
 
     <include
         android:id="@+id/toolbar_root"
-        layout="@layout/layout_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        layout="@layout/layout_toolbar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/productFragmentContainerView"
