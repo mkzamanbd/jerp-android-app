@@ -1,7 +1,9 @@
 package com.example.mvvm.ui.view
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvm.R
 import com.example.mvvm.database.SharedPreferenceManager
@@ -15,17 +17,25 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
+
+    lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d("IS_LOGIN", prefManager.getIsUserLoggedIn().toString())
-        Log.d("ACCESS_TOKEN", prefManager.getAccessToken())
+        progressBar = findViewById(R.id.m_progress_bar)
 
-        if (prefManager.getIsUserLoggedIn()) {
-            startNewActivity(DashboardActivity::class.java)
-        } else {
-            startNewActivity(AuthActivity::class.java)
-        }
+        Handler(Looper.getMainLooper()).postDelayed(
+            { //This method will be executed once the timer is over
+                if (prefManager.getIsUserLoggedIn()) {
+                    startNewActivity(DashboardActivity::class.java)
+                    overridePendingTransition(R.anim.animation_fade_in, R.anim.animation_fade_out)
+                } else {
+                    startNewActivity(AuthActivity::class.java)
+                    overridePendingTransition(R.anim.animation_fade_in, R.anim.animation_fade_out)
+                }
+            },
+            1000,
+        )
     }
 }
