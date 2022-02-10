@@ -19,7 +19,7 @@ class ProductActivity : BaseActivity() {
 
     lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView
-    private lateinit var tvBack: ImageView
+    private lateinit var ivBackButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,11 @@ class ProductActivity : BaseActivity() {
 
         rlToolbar = findViewById(R.id.toolbar_root)
         tvTitle = findViewById(R.id.tv_toolbar_title)
-        tvBack = findViewById(R.id.iv_back_button)
+        ivBackButton = findViewById(R.id.iv_back_button)
+
+        ivBackButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun init() {}
@@ -43,13 +47,13 @@ class ProductActivity : BaseActivity() {
     }
 
     override fun showToolbar(isBackButton: Boolean) {
-        tvBack.visible(isBackButton)
+        ivBackButton.visible(isBackButton)
         rlToolbar.visibility = View.VISIBLE
     }
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack();
+            supportFragmentManager.popBackStack()
         } else {
             startNewActivityAnimation(DashboardActivity::class.java, false);
         }
