@@ -20,7 +20,7 @@ class ProfileViewModel @Inject constructor(
     val profile: LiveData<Resource<ProfileResponse>>
         get() = _profile
 
-    fun getUser() = viewModelScope.launch {
+    fun getUserProfile() = viewModelScope.launch {
         _profile.value = Resource.Loading
         _profile.value = repository.getUserProfile()
     }

@@ -17,14 +17,20 @@ import me.kzaman.android.database.SharedPreferenceManager
 import me.kzaman.android.databinding.ActivityDashboardBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.CommonViewModel
-import me.kzaman.android.utils.*
+import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.Constants.Companion.DELIVERY
 import me.kzaman.android.utils.Constants.Companion.ORDER
 import me.kzaman.android.utils.Constants.Companion.TRACKING
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import me.kzaman.android.utils.*
+import me.kzaman.android.utils.handleActivityApiError
+import me.kzaman.android.utils.toastWarning
+import me.kzaman.android.utils.visible
+import me.kzaman.android.utils.menuRouting
+import me.kzaman.android.utils.getMenuIcon
+import me.kzaman.android.utils.startNewActivityAnimation
+import me.kzaman.android.utils.startAlphaAnimation
 import javax.inject.Inject
 
 
@@ -44,15 +50,12 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        binding.appBarLayout.addOnOffsetChangedListener(this)
-
         init()
-
     }
 
 
     override fun init() {
+        binding.appBarLayout.addOnOffsetChangedListener(this)
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
 
         binding.rvHomeList.apply {
@@ -190,7 +193,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
         prefManager.clearAll()
-        startNewActivity(AuthActivity::class.java)
+        startNewActivityAnimation(AuthActivity::class.java)
     }
 
     override fun onBackPressed() {

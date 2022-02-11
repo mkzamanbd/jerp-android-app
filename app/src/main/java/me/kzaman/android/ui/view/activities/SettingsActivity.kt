@@ -14,6 +14,7 @@ import me.kzaman.android.utils.handleActivityApiError
 import me.kzaman.android.utils.startNewActivityAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import me.kzaman.android.BuildConfig
 import me.kzaman.android.utils.visible
 import javax.inject.Inject
 
@@ -31,10 +32,11 @@ class SettingsActivity : BaseActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        init()
 
         loadingUtils = LoadingUtils(this)
 
-        val versionName = "BuildConfig.VERSION_NAME"
+        val versionName = BuildConfig.VERSION_NAME
         binding.appVersion.text = versionName
 
         val ivBackButton = binding.toolbarRoot.ivBackButton
@@ -45,16 +47,17 @@ class SettingsActivity : BaseActivity() {
         ivBackButton.setOnClickListener {
             onBackPressed()
         }
+    }
 
-        init()
-
+    override fun init() {
+        getUserProfile()
         viewModel.profile.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     binding.tvName.text = it.value.data.toString()
                 }
                 is Resource.Failure -> handleActivityApiError(it) {
-                    getUser()
+                    getUserProfile()
                 }
                 else -> Log.d("unknownError", "Unknown Error")
             }
@@ -69,14 +72,10 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    override fun init() {
-        getUser()
-    }
-
     override fun setToolbarTitle(title: String) {}
 
-    private fun getUser() {
-        viewModel.getUser()
+    private fun getUserProfile() {
+        viewModel.getUserProfile()
     }
 
     override fun onBackPressed() {
