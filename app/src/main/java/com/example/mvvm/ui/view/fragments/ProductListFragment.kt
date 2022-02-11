@@ -13,6 +13,7 @@ import com.example.mvvm.databinding.FragmentProductListBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.ProductActivity
 import com.example.mvvm.ui.viewModel.CommonViewModel
+import com.example.mvvm.utils.LoadingUtils
 import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.hideSoftKeyboard
 import com.example.mvvm.utils.visible
@@ -37,6 +38,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         productListAdapter = ProductListAdapter(arrayListOf(), mContext)
+        loadingUtils = LoadingUtils(mContext)
 
         (activity as ProductActivity).showToolbar(true) //display toolbar
         (activity as ProductActivity).setToolbarTitle("Product List")
@@ -69,6 +71,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         getProductList()
 
         viewModel.products.observe(viewLifecycleOwner) {
+            loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     productListAdapter.setProducts(it.value.productList)

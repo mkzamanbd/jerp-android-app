@@ -115,11 +115,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_menu_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_menu_placeholder_layout" />
+
+                    <include layout="@layout/shimmer_menu_placeholder_layout" />
+
+                    <include layout="@layout/shimmer_menu_placeholder_layout" />
+                </LinearLayout>
+
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_home_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/_51sdp"
+                android:visibility="gone"
                 tools:listitem="@layout/user_menu_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

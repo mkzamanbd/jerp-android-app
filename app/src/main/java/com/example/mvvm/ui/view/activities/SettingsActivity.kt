@@ -10,6 +10,7 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivitySettingsBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.ProfileViewModel
+import com.example.mvvm.utils.LoadingUtils
 import com.example.mvvm.utils.handleActivityApiError
 import com.example.mvvm.utils.startNewActivityAnimation
 import com.example.mvvm.utils.visible
@@ -32,6 +33,8 @@ class SettingsActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
+        loadingUtils = LoadingUtils(this)
+
         val versionName = BuildConfig.VERSION_NAME
         binding.appVersion.text = versionName
 
@@ -47,7 +50,7 @@ class SettingsActivity : BaseActivity() {
         init()
 
         viewModel.profile.observe(this) {
-            binding.progressBar.visible(it is Resource.Loading)
+            loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     binding.tvName.text = it.value.data.toString()

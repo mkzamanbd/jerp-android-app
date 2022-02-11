@@ -77,10 +77,17 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             adapter = homeMenuParentAdapter
         }
 
+        val shimmerMenuPlaceholder = binding.shimmerMenuPlaceholder
+
         getMobileMenu()
 
         viewModel.mobileMenu.observe(this) {
-            loadingUtils.isLoading(it is Resource.Loading)
+            if (it is Resource.Loading) {
+                shimmerMenuPlaceholder.visible(true)
+            } else {
+                shimmerMenuPlaceholder.visible(false)
+                binding.rvHomeList.visible(true)
+            }
 
             when (it) {
                 is Resource.Success -> {

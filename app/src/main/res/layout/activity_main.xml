@@ -10,7 +10,6 @@
         android:layout_width="@dimen/mainLogoWidth"
         android:layout_height="@dimen/mainLogoHeight"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:src="@drawable/logo_white" />
 

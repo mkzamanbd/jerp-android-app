@@ -17,7 +17,7 @@
     <color name="drawableIconColor">#393535</color>
     <color name="textColor">#393535</color>
     <color name="childTextColor">#696A6A</color>
-    <color name="unread_notification_bg">#0D707070</color>
+    <color name="unread_notification_bg">#0D717171</color>
 
     <!--colors for card-->
     <color name="whiteCardColor">#E2EDFA</color>

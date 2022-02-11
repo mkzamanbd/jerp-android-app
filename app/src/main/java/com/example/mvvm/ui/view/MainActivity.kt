@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                     overridePendingTransition(R.anim.animation_fade_in, R.anim.animation_fade_out)
                 }
             },
-            1000,
+            500,
         )
     }
 }
