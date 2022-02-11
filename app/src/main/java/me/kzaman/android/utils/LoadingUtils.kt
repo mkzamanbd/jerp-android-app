@@ -7,29 +7,30 @@ import me.kzaman.android.R
 import me.kzaman.android.interfaces.LoadingConfig
 
 class LoadingUtils(
-    val context: Context,
+    val mContext: Context,
 ) : LoadingConfig {
 
     init {
         createLoadingDialog()
     }
 
-    private lateinit var loadingDialog: Dialog
-
-    private fun createLoadingDialog(): Dialog {
-        loadingDialog = Dialog(context)
+    lateinit var loadingDialog: Dialog
+    private fun createLoadingDialog() {
+        loadingDialog = Dialog(mContext)
         loadingDialog.setContentView(R.layout.dialog_loading_layout)
 
         if (loadingDialog.window != null) {
             loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
         }
         loadingDialog.setCancelable(false)
-
-        return loadingDialog
     }
 
     override fun showLoadingDialog() {
-        loadingDialog.show()
+        try {
+            loadingDialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     /**
@@ -37,8 +38,11 @@ class LoadingUtils(
      * @ Dismiss progress dialog
      */
     override fun dismissLoadingDialog() {
-        if (loadingDialog.isShowing) {
+        try {
             loadingDialog.hide()
+            loadingDialog.dismiss()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

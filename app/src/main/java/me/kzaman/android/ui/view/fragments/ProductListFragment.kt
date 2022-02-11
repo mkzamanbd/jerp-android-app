@@ -3,6 +3,7 @@ package me.kzaman.android.ui.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,8 +70,8 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         }
 
         getProductList()
-
         viewModel.products.observe(viewLifecycleOwner) {
+            loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     val response = it.value
