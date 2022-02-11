@@ -17,26 +17,15 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivityDashboardBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
-import com.example.mvvm.utils.Constants.Companion.CUSTOMER_LIST
-import com.example.mvvm.utils.Constants.Companion.DCR
 import com.example.mvvm.utils.Constants.Companion.DELIVERY
-import com.example.mvvm.utils.Constants.Companion.DEPOSIT
-import com.example.mvvm.utils.Constants.Companion.NOTICE
-import com.example.mvvm.utils.Constants.Companion.OFFER
 import com.example.mvvm.utils.Constants.Companion.ORDER
-import com.example.mvvm.utils.Constants.Companion.PAYMENT_COLLECTION
-import com.example.mvvm.utils.Constants.Companion.PRODUCT_LIST
-import com.example.mvvm.utils.Constants.Companion.RETURN
-import com.example.mvvm.utils.Constants.Companion.REVIEW_MTP
-import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
-import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
-import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
 import com.example.mvvm.utils.LoadingUtils
 import com.example.mvvm.utils.handleActivityApiError
 import com.example.mvvm.utils.startNewActivity
 import com.example.mvvm.utils.visible
 import com.example.mvvm.utils.menuRouting
+import com.example.mvvm.utils.getMenuIcon
 import com.example.mvvm.utils.startAlphaAnimation
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -195,53 +184,6 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         }
     }
 
-    private fun getMenuIcon(featureId: String): Int {
-        when (featureId) {
-            ORDER -> {
-                return R.drawable.ic_bt_order_unselect
-            }
-            DEPOSIT -> {
-                return R.drawable.ic_bt_deposit_unselect
-            }
-            TA_DA -> {
-                return R.drawable.ic_bt_ta_da_unselect
-            }
-            NOTICE -> {
-                return R.drawable.ic_bt_warning_unselect
-            }
-            DCR -> {
-                return R.drawable.ic_bt_visit_un_select
-            }
-            TRACKING -> {
-                return R.drawable.ic_bt_tracking_unselect
-            }
-            RETURN -> {
-                return R.drawable.ic_bt_return
-            }
-            OFFER -> {
-                return R.drawable.ic_bt_offers
-            }
-            PAYMENT_COLLECTION -> {
-                return R.drawable.ic_bt_payments
-            }
-            PRODUCT_LIST -> {
-                return R.drawable.ic_bt_product
-            }
-            CUSTOMER_LIST -> {
-                return R.drawable.ic_bt_customer
-            }
-            REVIEW_ORDER -> {
-                return R.drawable.ic_hm_review_order
-            }
-            REVIEW_REQUEST -> {
-                return R.drawable.ic_hm_review
-            }
-            REVIEW_MTP -> {
-                return R.drawable.ic_hm_review_mtp
-            }
-        }
-        return R.drawable.ic_no_image_hm
-    }
 
     fun performLogout() = lifecycleScope.launch {
         viewModel.logout()
