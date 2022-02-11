@@ -7,16 +7,16 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm.adapter.ProductListAdapter
-import com.example.mvvm.base.BaseActivity
 import com.example.mvvm.base.BaseFragment
 import com.example.mvvm.databinding.FragmentProductListBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.ProductActivity
 import com.example.mvvm.ui.viewModel.CommonViewModel
 import com.example.mvvm.utils.LoadingUtils
-import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.hideSoftKeyboard
 import com.example.mvvm.utils.visible
+import com.example.mvvm.utils.toastWarning
+import com.example.mvvm.utils.handleFragmentApiError
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,7 +74,12 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
             loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    productListAdapter.setProducts(it.value.productList)
+                    val response = it.value
+                    if (response.responseCode == 200) {
+                        productListAdapter.setProducts(it.value.productList)
+                    } else {
+                        mActivity.toastWarning("Product list list not found")
+                    }
                 }
                 is Resource.Failure -> handleFragmentApiError(it) {
                     getProductList()

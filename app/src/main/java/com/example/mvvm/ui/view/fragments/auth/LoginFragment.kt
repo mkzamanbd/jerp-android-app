@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm.R
 import com.example.mvvm.base.BaseFragment
@@ -14,13 +13,13 @@ import com.example.mvvm.databinding.FragmentLoginBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.view.activities.DashboardActivity
 import com.example.mvvm.ui.viewModel.AuthViewModel
+import com.example.mvvm.utils.LoadingUtils
 import com.example.mvvm.utils.enable
-import com.example.mvvm.utils.handleFragmentApiError
 import com.example.mvvm.utils.startNewActivityAnimation
 import com.example.mvvm.utils.visible
 import com.example.mvvm.utils.hideSoftKeyboard
+import com.example.mvvm.utils.handleFragmentApiError
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,6 +39,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingUtils = LoadingUtils(mContext)
+
         binding.progressBar.visible(false)
         if (binding.passwordInputField.text.isNullOrEmpty()) {
             binding.loginButton.enable(false)
@@ -52,14 +53,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
 
         viewModel.loginResponse.observe(viewLifecycleOwner) {
-            binding.progressBar.visible(it is Resource.Loading)
-            binding.loginButton.enable(false)
+            loadingUtils.isLoading(it is Resource.Loading)
+            if (it !is Resource.Loading) {
+                binding.loginButton.isEnabled = true
+                binding.loginButton.alpha = 1f
+            }
             when (it) {
                 is Resource.Success -> {
-                    lifecycleScope.launch {
+                    val response = it.value
+                    if (response.responseCode == 200) {
+                        if (response.data.user == null || response.data.userArea == null) {
+                            binding.tvErrorMessage.visibility = View.VISIBLE
+                            return@observe
+                        }
                         prefManager.setLoginStatus(true)
-                        prefManager.setTokenInformation(it.value.data.token)
-                        prefManager.setUserInformation(it.value.data.user)
+                        prefManager.setTokenInformation(response.data.token)
+                        response.data.user?.let { user -> prefManager.setUserInformation(user) }
                         mActivity.startNewActivityAnimation(DashboardActivity::class.java)
                     }
                 }

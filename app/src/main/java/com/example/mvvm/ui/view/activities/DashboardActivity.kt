@@ -17,16 +17,10 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivityDashboardBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
+import com.example.mvvm.utils.*
 import com.example.mvvm.utils.Constants.Companion.DELIVERY
 import com.example.mvvm.utils.Constants.Companion.ORDER
 import com.example.mvvm.utils.Constants.Companion.TRACKING
-import com.example.mvvm.utils.LoadingUtils
-import com.example.mvvm.utils.handleActivityApiError
-import com.example.mvvm.utils.startNewActivity
-import com.example.mvvm.utils.visible
-import com.example.mvvm.utils.menuRouting
-import com.example.mvvm.utils.getMenuIcon
-import com.example.mvvm.utils.startAlphaAnimation
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -80,8 +74,16 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
             when (it) {
                 is Resource.Success -> {
-                    setBottomMenu(it.value.data.bottomParentMenu)
-                    homeMenuParentAdapter.setHomePrentMenu(it.value.data.topParentMenu)
+                    val response = it.value
+                    if (response.code == 200) {
+                        response.data.topParentMenu?.let { topMenu ->
+                            homeMenuParentAdapter.setHomePrentMenu(topMenu)
+                        }
+                        response.data.bottomParentMenu?.let { bottomMenu -> setBottomMenu(bottomMenu) }
+                    } else {
+                        toastWarning("User menu not found!")
+                    }
+
                 }
                 is Resource.Failure -> handleActivityApiError(it) {
                     Toast.makeText(this, "Menu Can't loaded", Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 package com.example.mvvm.data.response
 
+import com.example.mvvm.data.model.SalesAreaModel
 import com.example.mvvm.data.model.TokenDataModel
 import com.example.mvvm.data.model.UserDataModel
 import com.google.gson.annotations.SerializedName
@@ -11,6 +12,7 @@ data class LoginResponse(
 )
 
 data class DataModel(
-    val token: TokenDataModel,
-    val user: UserDataModel,
+    @SerializedName("token") val token: TokenDataModel,
+    @SerializedName("user") val user: UserDataModel? = null,
+    @SerializedName("user_area") val userArea: SalesAreaModel? = null
 )
