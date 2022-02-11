@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.example.android.ui.view.fragments.ProductListFragment"
+        android:name="me.kzaman.android.ui.view.fragments.ProductListFragment"
         android:label="Product List"
         tools:layout="@layout/fragment_product_list" />
 
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.example.android.ui.view.fragments.UserDetailFragment"
+        android:name="me.kzaman.android.ui.view.fragments.UserDetailFragment"
         android:label="Product Detail"
         tools:layout="@layout/fragment_user_detail" />
 
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.android.ui.view.fragments.NotificationFragment"
+        android:name="me.kzaman.android.ui.view.fragments.NotificationFragment"
         android:label="Notification"
         tools:layout="@layout/fragment_notification" />
 
