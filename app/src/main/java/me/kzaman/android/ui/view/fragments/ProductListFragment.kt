@@ -11,8 +11,8 @@ import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductListBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.ProductActivity
-import me.kzaman.android.ui.viewModel.CommonViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import me.kzaman.android.ui.viewModel.ProductViewModel
 import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.hideSoftKeyboard
 import me.kzaman.android.utils.toastWarning
@@ -24,7 +24,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
     FragmentProductListBinding::inflate
 ) {
 
-    private val viewModel by viewModels<CommonViewModel>()
+    private val viewModel by viewModels<ProductViewModel>()
 
     private lateinit var productListAdapter: ProductListAdapter
 
@@ -71,7 +71,6 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         getProductList()
 
         viewModel.products.observe(viewLifecycleOwner) {
-            loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     val response = it.value
@@ -90,6 +89,6 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
     }
 
     private fun getProductList() {
-        viewModel.getAllProducts()
+        viewModel.getRemoteProducts()
     }
 }

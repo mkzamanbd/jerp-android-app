@@ -46,7 +46,6 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         setContentView(view)
 
         binding.appBarLayout.addOnOffsetChangedListener(this)
-        loadingUtils = LoadingUtils(this)
 
         init()
 

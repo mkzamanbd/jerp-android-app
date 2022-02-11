@@ -18,8 +18,7 @@ class AuthViewModel @Inject constructor(
 
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
-    val loginResponse: LiveData<Resource<LoginResponse>>
-        get() = _loginResponse
+    val loginResponse: LiveData<Resource<LoginResponse>> = _loginResponse
 
 
     fun userLogin(

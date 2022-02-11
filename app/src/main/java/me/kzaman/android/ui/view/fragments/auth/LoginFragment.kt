@@ -53,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
 
         viewModel.loginResponse.observe(viewLifecycleOwner) {
-            loadingUtils.isLoading(it is Resource.Loading)
+            binding.progressBar.visible(it is Resource.Loading)
             if (it !is Resource.Loading) {
                 binding.loginButton.isEnabled = true
                 binding.loginButton.alpha = 1f

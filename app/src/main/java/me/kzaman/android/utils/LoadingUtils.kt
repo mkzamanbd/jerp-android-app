@@ -28,16 +28,22 @@ class LoadingUtils(
         return loadingDialog
     }
 
-    override fun showLoadingDialog() = loadingDialog.show()
+    override fun showLoadingDialog() {
+        loadingDialog.show()
+    }
 
     /**
      *
      * @ Dismiss progress dialog
      */
-    override fun dismissLoadingDialog() = loadingDialog.hide()
+    override fun dismissLoadingDialog() {
+        if (loadingDialog.isShowing) {
+            loadingDialog.hide()
+        }
+    }
 
     fun isLoading(isLoading: Boolean) {
-        if (isLoading && !loadingDialog.isShowing) {
+        if (isLoading) {
             showLoadingDialog()
         } else {
             dismissLoadingDialog()

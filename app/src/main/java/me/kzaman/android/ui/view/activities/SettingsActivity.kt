@@ -49,7 +49,6 @@ class SettingsActivity : BaseActivity() {
         init()
 
         viewModel.profile.observe(this) {
-            loadingUtils.isLoading(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     binding.tvName.text = it.value.data.toString()

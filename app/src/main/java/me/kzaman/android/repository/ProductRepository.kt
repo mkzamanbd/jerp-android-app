@@ -4,9 +4,9 @@ import me.kzaman.android.base.BaseRepository
 import me.kzaman.android.network.api.CommonApi
 import javax.inject.Inject
 
-class CommonRepository @Inject constructor(
+class ProductRepository @Inject constructor(
     private val api: CommonApi,
 ) : BaseRepository(api) {
 
-    suspend fun getMobileMenu() = safeApiCall { api.getMobileMenu() }
+    suspend fun getRemoteProducts() = safeApiCall { api.getRemoteProducts() }
 }
