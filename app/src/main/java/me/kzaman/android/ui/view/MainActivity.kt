@@ -9,7 +9,7 @@ import me.kzaman.android.R
 import me.kzaman.android.database.SharedPreferenceManager
 import me.kzaman.android.ui.view.activities.AuthActivity
 import me.kzaman.android.ui.view.activities.DashboardActivity
-import me.kzaman.android.utils.startNewActivity
+import me.kzaman.android.utils.startNewActivityAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,11 +28,9 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed(
             { //This method will be executed once the timer is over
                 if (prefManager.getIsUserLoggedIn()) {
-                    startNewActivity(DashboardActivity::class.java)
-                    overridePendingTransition(R.anim.animation_fade_in, R.anim.animation_fade_out)
+                    startNewActivityAnimation(DashboardActivity::class.java)
                 } else {
-                    startNewActivity(AuthActivity::class.java)
-                    overridePendingTransition(R.anim.animation_fade_in, R.anim.animation_fade_out)
+                    startNewActivityAnimation(AuthActivity::class.java)
                 }
             },
             500,
