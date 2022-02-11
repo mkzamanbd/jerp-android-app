@@ -17,7 +17,6 @@ import com.example.mvvm.database.SharedPreferenceManager
 import com.example.mvvm.databinding.ActivityDashboardBinding
 import com.example.mvvm.network.Resource
 import com.example.mvvm.ui.viewModel.CommonViewModel
-import com.example.mvvm.utils.*
 import com.example.mvvm.utils.Constants.Companion.CUSTOMER_LIST
 import com.example.mvvm.utils.Constants.Companion.DCR
 import com.example.mvvm.utils.Constants.Companion.DELIVERY
@@ -33,6 +32,12 @@ import com.example.mvvm.utils.Constants.Companion.REVIEW_ORDER
 import com.example.mvvm.utils.Constants.Companion.REVIEW_REQUEST
 import com.example.mvvm.utils.Constants.Companion.TA_DA
 import com.example.mvvm.utils.Constants.Companion.TRACKING
+import com.example.mvvm.utils.LoadingUtils
+import com.example.mvvm.utils.handleActivityApiError
+import com.example.mvvm.utils.startNewActivity
+import com.example.mvvm.utils.visible
+import com.example.mvvm.utils.menuRouting
+import com.example.mvvm.utils.startAlphaAnimation
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -57,6 +62,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         setContentView(view)
 
         binding.appBarLayout.addOnOffsetChangedListener(this)
+        loadingUtils = LoadingUtils(this)
+
         init()
 
     }
@@ -73,7 +80,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         getMobileMenu()
 
         viewModel.mobileMenu.observe(this) {
-            // binding.progressBar.visible(it is Resource.Loading)
+            loadingUtils.isLoading(it is Resource.Loading)
+
             when (it) {
                 is Resource.Success -> {
                     setBottomMenu(it.value.data.bottomParentMenu)
@@ -261,9 +269,5 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             binding.clCollapsing.background =
                 ContextCompat.getDrawable(this, R.drawable.bg_home_profile)
         }
-    }
-
-    private fun handleToolbarTitleVisibility(maxScroll: Int) {
-
     }
 }
