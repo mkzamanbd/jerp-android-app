@@ -17,7 +17,6 @@ import me.kzaman.android.database.SharedPreferenceManager
 import me.kzaman.android.databinding.ActivityDashboardBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.CommonViewModel
-import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.Constants.Companion.DELIVERY
 import me.kzaman.android.utils.Constants.Companion.ORDER
 import me.kzaman.android.utils.Constants.Companion.TRACKING
@@ -38,6 +37,7 @@ import javax.inject.Inject
 class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
+
     private val viewModel by viewModels<CommonViewModel>()
     private lateinit var homeMenuParentAdapter: MenuParentAdapter
     private lateinit var binding: ActivityDashboardBinding

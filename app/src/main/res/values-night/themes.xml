@@ -15,6 +15,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.ActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorPrimaryDark</item>
+        <item name="colorSecondaryVariant">@color/colorAccent</item>
+        <!-- Customize your theme here. -->
+    </style>
+
     <style name="loginHeader">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/thirty</item>

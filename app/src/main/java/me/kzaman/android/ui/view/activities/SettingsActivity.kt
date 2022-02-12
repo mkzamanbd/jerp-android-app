@@ -22,6 +22,7 @@ import javax.inject.Inject
 class SettingsActivity : BaseActivity() {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
+
     private val viewModel by viewModels<ProfileViewModel>()
     private lateinit var binding: ActivitySettingsBinding
 

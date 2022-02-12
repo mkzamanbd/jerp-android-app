@@ -28,6 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 ) {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
