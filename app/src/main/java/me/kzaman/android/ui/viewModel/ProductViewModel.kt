@@ -8,6 +8,7 @@ import me.kzaman.android.data.response.ProductResponse
 import me.kzaman.android.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.repository.ProductRepository
 import javax.inject.Inject
 
@@ -22,5 +23,16 @@ class ProductViewModel @Inject constructor(
     fun getRemoteProducts() = viewModelScope.launch {
         _products.value = Resource.Loading
         _products.value = repository.getRemoteProducts()
+    }
+
+    private val _localProducts: MutableLiveData<List<ProductEntities>> = MutableLiveData()
+    val localProducts: LiveData<List<ProductEntities>> = _localProducts
+
+    fun getLocalProducts() = viewModelScope.launch {
+        _localProducts.value = repository.getLocalProducts()
+    }
+
+    fun saveProductToLocal(products: ArrayList<ProductEntities>) = viewModelScope.launch {
+        repository.saveLocalProducts(products)
     }
 }
