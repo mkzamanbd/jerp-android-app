@@ -12,6 +12,6 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(product: ArrayList<ProductEntities>): LongArray
 
-    @Query("SELECT * FROM products_list")
+    @Query("SELECT * FROM products")
     suspend fun getLocalProducts(): List<ProductEntities>
 }

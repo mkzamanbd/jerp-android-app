@@ -103,32 +103,32 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     }
 
     private fun setBottomMenu(menuModels: List<UserParentMenuModel>) {
-        val bottomMenu: MutableList<UserChildMenuModel> = ArrayList()
-        for (bottom in menuModels) {
-            if (bottom.menuName == "BOTTOM") {
-                bottomMenu.addAll(bottom.menuItems)
+        val menuItems: MutableList<UserChildMenuModel> = ArrayList()
+        menuModels.forEach {
+            if (it.menuName == "BOTTOM") {
+                menuItems.addAll(it.menuItems)
             }
         }
 
-        if (bottomMenu.size == 5) {
+        if (menuItems.size == 5) {
             binding.bottomMenuRoot.visible(true)
             val bottomCenterMenu = binding.bottomCenterMenu
 
             bottomCenterMenu.setOnClickListener {
-                menuRouting(this, bottomMenu[2].featureId)
+                menuRouting(this, menuItems[2].featureId)
             }
             binding.lnFirst.setOnClickListener {
-                menuRouting(this, bottomMenu[0].featureId)
+                menuRouting(this, menuItems[0].featureId)
             }
 
             binding.lnSecond.setOnClickListener {
-                menuRouting(this, bottomMenu[1].featureId)
+                menuRouting(this, menuItems[1].featureId)
             }
             binding.lnThird.setOnClickListener {
-                menuRouting(this, bottomMenu[3].featureId)
+                menuRouting(this, menuItems[3].featureId)
             }
             binding.lnLast.setOnClickListener {
-                menuRouting(this, bottomMenu[4].featureId)
+                menuRouting(this, menuItems[4].featureId)
             }
 
             val firstMenu = binding.bottomFirstMenu
@@ -141,8 +141,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             val ivThird = binding.ivBottomThird
             val ivLast = binding.ivBottomLast
 
-            for ((count, bottom) in bottomMenu.withIndex()) {
-                when (count) {
+            menuItems.forEachIndexed { index, bottom ->
+                when (index) {
                     0 -> {
                         firstMenu.text = bottom.menuName
                         ivFirst.setImageDrawable(ContextCompat.getDrawable(this,
@@ -170,7 +170,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                             }
                             else -> {
                                 bottomCenterMenu.setImageDrawable(ContextCompat.getDrawable(this,
-                                    R.drawable.ic_no_image_hm))
+                                    R.drawable.ic_baseline_filter_none_24))
                             }
                         }
                     }

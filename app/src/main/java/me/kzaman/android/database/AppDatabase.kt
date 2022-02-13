@@ -8,8 +8,8 @@ import me.kzaman.android.database.entities.ProductEntities
 
 @Database(
     entities = [ProductEntities::class],
-    version = 7
+    version = 8
 )
-public abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
 }

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "products_list")
+@Entity(tableName = "products")
 data class ProductEntities(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id") val id: Int,

@@ -95,7 +95,7 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         else -> {
-            Toast.makeText(activity, "Unknown Feature", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Unknown", Toast.LENGTH_SHORT).show()
         }
     }
 }
@@ -151,5 +151,5 @@ fun getMenuIcon(featureId: String): Int {
             return R.drawable.ic_hm_review_mtp
         }
     }
-    return R.drawable.ic_no_image_hm
+    return R.drawable.ic_baseline_filter_none_24
 }
