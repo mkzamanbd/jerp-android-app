@@ -14,11 +14,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RoomModule {
+object RoomModule {
 
     @Singleton
     @Provides
-    fun provideAppDB(@ApplicationContext context: Context): AppDatabase {
+    fun provideAppDatabase(
+        @ApplicationContext context: Context,
+    ): AppDatabase {
         return Room.databaseBuilder(context, AppDatabase::class.java, "android_mvvm")
             .fallbackToDestructiveMigration().build()
     }
