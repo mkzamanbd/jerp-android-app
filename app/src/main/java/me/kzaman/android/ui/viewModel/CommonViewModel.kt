@@ -39,11 +39,15 @@ class CommonViewModel @Inject constructor(
     private val _parentMenu: MutableLiveData<List<HomeParentMenuEntities>> = MutableLiveData()
     val parentMenuLocal: LiveData<List<HomeParentMenuEntities>> = _parentMenu
 
+
+    fun getParentMenuLocalDb() = viewModelScope.launch {
+        _parentMenu.value = repository.getParentMenuLocalDb()
+    }
+
     private val _childMenu: MutableLiveData<List<HomeChildMenuEntities>> = MutableLiveData()
     val childMenuLocal: LiveData<List<HomeChildMenuEntities>> = _childMenu
 
-    fun getMobileMenuLocalDb() = viewModelScope.launch {
-        _parentMenu.value = repository.getParentMenuLocalDb()
+    fun getMenuChildLocalDb() = viewModelScope.launch {
         _childMenu.value = repository.getChildMenuLocalDb()
     }
 

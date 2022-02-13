@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
@@ -22,10 +23,16 @@ import me.kzaman.android.database.entities.HomeParentMenuEntities
 import me.kzaman.android.databinding.ActivityDashboardBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.CommonViewModel
-import me.kzaman.android.utils.*
 import me.kzaman.android.utils.Constants.Companion.DELIVERY
 import me.kzaman.android.utils.Constants.Companion.ORDER
 import me.kzaman.android.utils.Constants.Companion.TRACKING
+import me.kzaman.android.utils.handleActivityApiError
+import me.kzaman.android.utils.menuRouting
+import me.kzaman.android.utils.getMenuIcon
+import me.kzaman.android.utils.startNewActivityAnimation
+import me.kzaman.android.utils.startAlphaAnimation
+import me.kzaman.android.utils.toastWarning
+import me.kzaman.android.utils.visible
 import javax.inject.Inject
 
 
@@ -54,24 +61,31 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         binding.appBarLayout.addOnOffsetChangedListener(this)
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
 
-        binding.rvHomeList.apply {
+        val rvHomeList = binding.rvHomeList
+        val shimmerMenuPlaceholder = binding.shimmerMenuPlaceholder
+
+        rvHomeList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeMenuParentAdapter
         }
 
-        val shimmerMenuPlaceholder = binding.shimmerMenuPlaceholder
+        // getMobileMenu()
 
-        getMobileMenu()
-
-        viewModel.getMobileMenuLocalDb()
+        viewModel.getParentMenuLocalDb()
+        viewModel.getMenuChildLocalDb()
 
         viewModel.parentMenuLocal.observe(this) { parentMenuEntities ->
             Toast.makeText(this, "parent ${parentMenuEntities.size}", Toast.LENGTH_SHORT).show()
+            Log.d("parentMenuEntities", parentMenuEntities.toString())
+
             viewModel.childMenuLocal.observe(this) { childMenuEntities ->
                 Toast.makeText(this, "child ${childMenuEntities.size}", Toast.LENGTH_SHORT).show()
+                Log.d("childMenuEntities", childMenuEntities.toString())
 
                 if (parentMenuEntities.isNotEmpty() && childMenuEntities.isNotEmpty()) {
                     setDashboardLocalMenu(parentMenuEntities, childMenuEntities)
+                    shimmerMenuPlaceholder.visibility = View.GONE
+                    rvHomeList.visibility = View.VISIBLE
                 } else {
                     getMobileMenu()
                 }
@@ -81,29 +95,25 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
         viewModel.mobileMenu.observe(this) {
             if (it is Resource.Loading) {
-                shimmerMenuPlaceholder.visible(true)
+                shimmerMenuPlaceholder.visibility = View.VISIBLE
             } else {
-                shimmerMenuPlaceholder.visible(false)
-                binding.rvHomeList.visible(true)
+                shimmerMenuPlaceholder.visibility = View.GONE
+                rvHomeList.visibility = View.VISIBLE
             }
 
             when (it) {
                 is Resource.Success -> {
                     val response = it.value
                     if (response.code == 200) {
-                        response.data.topParentMenu?.let { topMenu ->
-                            homeMenuParentAdapter.setHomePrentMenu(topMenu)
-                        }
-                        response.data.bottomParentMenu?.let { bottomMenu ->
-                            setBottomMenu(bottomMenu)
-                        }
+                        val topMenu = response.data.topParentMenu
+                        val bottomMenu = response.data.bottomParentMenu
+                        homeMenuParentAdapter.setHomePrentMenu(topMenu)
+                        setDashboardBottomMenu(bottomMenu)
 
-                        // storeMenuToLocalDb(response.data.topParentMenu!!, response.data.bottomParentMenu!!)
-
+                        storeMenuToLocalDb(topMenu, bottomMenu)
                     } else {
                         toastWarning("User menu not found!")
                     }
-
                 }
                 is Resource.Failure -> handleActivityApiError(it) {
                     Toast.makeText(this, "Menu Can't loaded", Toast.LENGTH_SHORT).show()
@@ -118,12 +128,11 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         childMenuEntities: List<HomeChildMenuEntities>,
     ) {
         val parentMenuModel: ArrayList<UserParentMenuModel> = ArrayList()
-        val menuItems: ArrayList<UserChildMenuModel> = ArrayList()
 
         parentMenuEntities.forEach { parentMenu ->
+            val childMenuModel: ArrayList<UserChildMenuModel> = ArrayList()
             childMenuEntities.forEach { childMenu ->
-
-                if (childMenu.parentMenuId.equals(parentMenu.parentMenuId)) {
+                if (childMenu.parentMenuId == parentMenu.parentMenuId) {
                     val childItem = UserChildMenuModel(
                         menuId = childMenu.menuId,
                         menuName = childMenu.menuTitle,
@@ -131,27 +140,34 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                         featureId = childMenu.featureId,
                         iconId = childMenu.iconId
                     )
-                    menuItems.add(childItem)
+                    Log.d("childItem", childItem.toString())
+                    childMenuModel.add(childItem)
                 }
             }
             val parentItem = UserParentMenuModel(
                 menuId = parentMenu.parentMenuId,
                 menuName = parentMenu.parentMenuTitle,
-                menuItems = menuItems,
+                menuItems = childMenuModel,
                 navType = parentMenu.navType
             )
+            parentMenuModel.add(parentItem)
         }
+
+        Log.d("parentMenuModel", parentMenuModel.toString())
+
+        setDashboardBottomMenu(parentMenuModel)
+        homeMenuParentAdapter.setHomePrentMenu(parentMenuModel)
     }
 
     private fun storeMenuToLocalDb(
-        menuItems: List<UserParentMenuModel>,
+        topMenu: List<UserParentMenuModel>,
         bottomMenu: List<UserParentMenuModel>,
     ) {
         val parentMenuEntities: ArrayList<HomeParentMenuEntities> = ArrayList()
         val childMenuEntities: ArrayList<HomeChildMenuEntities> = ArrayList()
 
-        val mergeTopAndBottomMenu = ArrayList<UserParentMenuModel>()
-        mergeTopAndBottomMenu.addAll(menuItems)
+        val mergeTopAndBottomMenu: ArrayList<UserParentMenuModel> = ArrayList()
+        mergeTopAndBottomMenu.addAll(topMenu)
         mergeTopAndBottomMenu.addAll(bottomMenu)
 
         mergeTopAndBottomMenu.forEach { parentMenu ->
@@ -166,7 +182,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                 val childEntities = HomeChildMenuEntities(
                     menuId = childMenu.menuId,
                     menuType = childMenu.navType,
-                    parentMenuId = childMenu.menuId,
+                    parentMenuId = parentMenu.menuId,
                     menuTitle = childMenu.menuName,
                     featureId = childMenu.featureId,
                     iconId = childMenu.iconId
@@ -177,6 +193,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
         lifecycleScope.launch {
             viewModel.saveHomeParentMenuToLocalDb(parentMenuEntities)
+        }
+        lifecycleScope.launch {
             viewModel.saveHomeChildMenuToLocalDb(childMenuEntities)
         }
     }
@@ -187,7 +205,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         viewModel.getMobileMenu()
     }
 
-    private fun setBottomMenu(menuModels: List<UserParentMenuModel>) {
+    private fun setDashboardBottomMenu(menuModels: List<UserParentMenuModel>) {
         val menuItems: ArrayList<UserChildMenuModel> = ArrayList()
         menuModels.forEach {
             if (it.menuName == "BOTTOM") {
