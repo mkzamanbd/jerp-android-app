@@ -10,12 +10,12 @@ import me.kzaman.android.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.android.database.AppDatabase
+import me.kzaman.android.database.dao.MenuDao
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
-    private val appDatabase: AppDatabase,
 ) : BaseViewModel(repository) {
 
     private val _profile: MutableLiveData<Resource<ProfileResponse>> = MutableLiveData()
@@ -24,9 +24,5 @@ class ProfileViewModel @Inject constructor(
     fun getUserProfile() = viewModelScope.launch {
         _profile.value = Resource.Loading
         _profile.value = repository.getUserProfile()
-    }
-
-    fun clearAllTable() = viewModelScope.launch {
-        appDatabase.clearAllTables()
     }
 }
