@@ -17,8 +17,8 @@ import me.kzaman.android.base.BaseActivity
 import me.kzaman.android.data.response.UserChildMenuModel
 import me.kzaman.android.data.response.UserParentMenuModel
 import me.kzaman.android.database.SharedPreferenceManager
-import me.kzaman.android.database.entities.HomeChildMenuEntities
-import me.kzaman.android.database.entities.HomeParentMenuEntities
+import me.kzaman.android.database.entities.SubMenuEntities
+import me.kzaman.android.database.entities.MenuEntities
 import me.kzaman.android.databinding.ActivityDashboardBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.CommonViewModel
@@ -68,12 +68,12 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             adapter = homeMenuParentAdapter
         }
 
-        viewModel.getParentMenuLocalDb()
+        viewModel.getMenuLocalDb()
 
         viewModel.parentMenuLocal.observe(this) { parentMenuEntities ->
-            viewModel.childMenuLocal.observe(this) { childMenuEntities ->
-                if (parentMenuEntities.isNotEmpty() && childMenuEntities.isNotEmpty()) {
-                    setDashboardLocalMenu(parentMenuEntities, childMenuEntities)
+            viewModel.subMenuLocal.observe(this) { subMenuEntities ->
+                if (parentMenuEntities.isNotEmpty() && subMenuEntities.isNotEmpty()) {
+                    setDashboardLocalMenu(parentMenuEntities, subMenuEntities)
                     shimmerMenuPlaceholder.visibility = View.GONE
                     rvHomeList.visibility = View.VISIBLE
                 } else {
@@ -114,8 +114,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     }
 
     private fun setDashboardLocalMenu(
-        parentMenuEntities: List<HomeParentMenuEntities>,
-        childMenuEntities: List<HomeChildMenuEntities>,
+        parentMenuEntities: List<MenuEntities>,
+        subMenuEntities: List<SubMenuEntities>,
     ) {
         val topMenuModel: ArrayList<UserParentMenuModel> = ArrayList()
         val bottomMenuModel: ArrayList<UserParentMenuModel> = ArrayList()
@@ -125,7 +125,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                 val parentItem = UserParentMenuModel(
                     menuId = parentMenu.parentMenuId,
                     menuName = parentMenu.parentMenuTitle,
-                    menuItems = getChildMenu(parentMenu, childMenuEntities),
+                    menuItems = getSubMenu(parentMenu, subMenuEntities),
                     navType = parentMenu.navType
                 )
                 bottomMenuModel.add(parentItem)
@@ -133,7 +133,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                 val parentItem = UserParentMenuModel(
                     menuId = parentMenu.parentMenuId,
                     menuName = parentMenu.parentMenuTitle,
-                    menuItems = getChildMenu(parentMenu, childMenuEntities),
+                    menuItems = getSubMenu(parentMenu, subMenuEntities),
                     navType = parentMenu.navType
                 )
                 topMenuModel.add(parentItem)
@@ -144,63 +144,63 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         homeMenuParentAdapter.setHomePrentMenu(topMenuModel)
     }
 
-    private fun getChildMenu(
-        parentMenu: HomeParentMenuEntities,
-        childMenuEntities: List<HomeChildMenuEntities>,
+    private fun getSubMenu(
+        parentMenu: MenuEntities,
+        subMenuEntities: List<SubMenuEntities>,
     ): ArrayList<UserChildMenuModel> {
-        val childMenuModel: ArrayList<UserChildMenuModel> = ArrayList()
-        childMenuEntities.forEach { childMenu ->
-            if (childMenu.parentMenuId == parentMenu.parentMenuId) {
+        val subMenuModel: ArrayList<UserChildMenuModel> = ArrayList()
+        subMenuEntities.forEach { subMenu ->
+            if (subMenu.parentMenuId == parentMenu.parentMenuId) {
                 val childItem = UserChildMenuModel(
-                    menuId = childMenu.menuId,
-                    menuName = childMenu.menuTitle,
-                    navType = childMenu.menuType,
-                    featureId = childMenu.featureId,
-                    iconId = childMenu.iconId
+                    menuId = subMenu.menuId,
+                    menuName = subMenu.menuTitle,
+                    navType = subMenu.menuType,
+                    featureId = subMenu.featureId,
+                    iconId = subMenu.iconId
                 )
-                childMenuModel.add(childItem)
+                subMenuModel.add(childItem)
             }
         }
-        return childMenuModel
+        return subMenuModel
     }
 
     private fun storeMenuToLocalDb(
         topMenu: List<UserParentMenuModel>,
         bottomMenu: List<UserParentMenuModel>,
     ) {
-        val parentMenuEntities: ArrayList<HomeParentMenuEntities> = ArrayList()
-        val childMenuEntities: ArrayList<HomeChildMenuEntities> = ArrayList()
+        val parentMenuEntities: ArrayList<MenuEntities> = ArrayList()
+        val subMenuEntities: ArrayList<SubMenuEntities> = ArrayList()
 
         val mergeTopAndBottomMenu: ArrayList<UserParentMenuModel> = ArrayList()
         mergeTopAndBottomMenu.addAll(topMenu)
         mergeTopAndBottomMenu.addAll(bottomMenu)
 
         mergeTopAndBottomMenu.forEach { parentMenu ->
-            val homeParentMenuEntities = HomeParentMenuEntities(
+            val homeParentMenuEntities = MenuEntities(
                 parentMenuId = parentMenu.menuId,
                 parentMenuTitle = parentMenu.menuName,
                 navType = parentMenu.navType
             )
             parentMenuEntities.add(homeParentMenuEntities)
 
-            parentMenu.menuItems.forEach { childMenu ->
-                val childEntities = HomeChildMenuEntities(
-                    menuId = childMenu.menuId,
-                    menuType = childMenu.navType,
+            parentMenu.menuItems.forEach { subMenu ->
+                val childEntities = SubMenuEntities(
+                    menuId = subMenu.menuId,
+                    menuType = subMenu.navType,
                     parentMenuId = parentMenu.menuId,
-                    menuTitle = childMenu.menuName,
-                    featureId = childMenu.featureId,
-                    iconId = childMenu.iconId
+                    menuTitle = subMenu.menuName,
+                    featureId = subMenu.featureId,
+                    iconId = subMenu.iconId
                 )
-                childMenuEntities.add(childEntities)
+                subMenuEntities.add(childEntities)
             }
         }
 
         lifecycleScope.launch {
-            viewModel.saveHomeParentMenuToLocalDb(parentMenuEntities)
+            viewModel.saveParentMenuToLocalDb(parentMenuEntities)
         }
         lifecycleScope.launch {
-            viewModel.saveHomeChildMenuToLocalDb(childMenuEntities)
+            viewModel.saveSubMenuToLocalDb(subMenuEntities)
         }
     }
 

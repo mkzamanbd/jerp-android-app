@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "home_child_menu_entities")
-class HomeChildMenuEntities(
+@Entity(tableName = "sub_menus")
+class SubMenuEntities(
     @PrimaryKey
     @ColumnInfo(name = "menu_id")
     @NonNull

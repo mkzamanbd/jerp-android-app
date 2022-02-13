@@ -9,8 +9,8 @@ import me.kzaman.android.network.Resource
 import me.kzaman.android.repository.CommonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import me.kzaman.android.database.entities.HomeChildMenuEntities
-import me.kzaman.android.database.entities.HomeParentMenuEntities
+import me.kzaman.android.database.entities.SubMenuEntities
+import me.kzaman.android.database.entities.MenuEntities
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,24 +26,25 @@ class CommonViewModel @Inject constructor(
         _mobileMenu.value = repository.getMobileMenu()
     }
 
-    fun saveHomeParentMenuToLocalDb(parentMenuEntities: ArrayList<HomeParentMenuEntities>) =
+    fun saveParentMenuToLocalDb(parentMenuEntities: ArrayList<MenuEntities>) =
         viewModelScope.launch {
             repository.saveParentMenuLocalDb(parentMenuEntities)
         }
 
-    fun saveHomeChildMenuToLocalDb(homeChildMenuEntities: ArrayList<HomeChildMenuEntities>) =
+    fun saveSubMenuToLocalDb(subMenuEntities: ArrayList<SubMenuEntities>) =
         viewModelScope.launch {
-            repository.saveChildMenuLocalDb(homeChildMenuEntities)
+            repository.saveSubMenuLocalDb(subMenuEntities)
         }
 
-    private val _parentMenu: MutableLiveData<List<HomeParentMenuEntities>> = MutableLiveData()
-    val parentMenuLocal: LiveData<List<HomeParentMenuEntities>> = _parentMenu
-    private val _childMenu: MutableLiveData<List<HomeChildMenuEntities>> = MutableLiveData()
-    val childMenuLocal: LiveData<List<HomeChildMenuEntities>> = _childMenu
+    private val _parentMenu: MutableLiveData<List<MenuEntities>> = MutableLiveData()
+    val parentMenuLocal: LiveData<List<MenuEntities>> = _parentMenu
 
-    fun getParentMenuLocalDb() = viewModelScope.launch {
+    private val _subMenu: MutableLiveData<List<SubMenuEntities>> = MutableLiveData()
+    val subMenuLocal: LiveData<List<SubMenuEntities>> = _subMenu
+
+    fun getMenuLocalDb() = viewModelScope.launch {
         _parentMenu.value = repository.getParentMenuLocalDb()
-        _childMenu.value = repository.getChildMenuLocalDb()
+        _subMenu.value = repository.getSubMenuLocalDb()
     }
 
 }

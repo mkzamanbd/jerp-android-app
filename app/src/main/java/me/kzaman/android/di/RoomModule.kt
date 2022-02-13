@@ -8,8 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.kzaman.android.database.AppDatabase
-import me.kzaman.android.database.dao.ChildMenuDao
-import me.kzaman.android.database.dao.ParentMenuDao
+import me.kzaman.android.database.dao.MenuDao
 import me.kzaman.android.database.dao.ProductDao
 import javax.inject.Singleton
 
@@ -33,9 +32,5 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideParentMenuDAO(database: AppDatabase): ParentMenuDao = database.parentMenuDao()
-
-    @Singleton
-    @Provides
-    fun provideChildMenuDAO(database: AppDatabase): ChildMenuDao = database.childMenuDao()
+    fun provideMenuDAO(database: AppDatabase): MenuDao = database.menuDao()
 }
