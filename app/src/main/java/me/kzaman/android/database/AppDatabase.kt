@@ -14,8 +14,7 @@ import me.kzaman.android.database.entities.ProductEntities
         ProductEntities::class,
         MenuEntities::class,
         SubMenuEntities::class,
-    ],
-    version = 13
+    ], version = 14
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao

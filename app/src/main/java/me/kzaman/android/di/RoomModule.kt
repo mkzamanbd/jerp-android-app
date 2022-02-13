@@ -18,12 +18,9 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideProductDb(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "android_mvvm")
-            .fallbackToDestructiveMigration()
-            .build()
+    fun provideAppDB(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, "android_mvvm")
+            .fallbackToDestructiveMigration().build()
     }
 
     @Singleton
