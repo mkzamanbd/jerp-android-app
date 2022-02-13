@@ -11,7 +11,7 @@ data class MobileMenuResponse(
 
 data class Data(
     @SerializedName("bottom") val bottomParentMenu: List<UserParentMenuModel>? = ArrayList(),
-    @SerializedName("menu") val topParentMenu: List<UserParentMenuModel> ? = ArrayList(),
+    @SerializedName("menu") val topParentMenu: List<UserParentMenuModel>? = ArrayList(),
 )
 
 data class UserParentMenuModel(
