@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import me.kzaman.android.R
 import me.kzaman.android.database.SharedPreferenceManager
 import me.kzaman.android.ui.view.activities.AuthActivity
@@ -18,22 +19,54 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var prefManager: SharedPreferenceManager
 
-    lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        progressBar = findViewById(R.id.m_progress_bar)
 
-        Handler(Looper.getMainLooper()).postDelayed(
-            { //This method will be executed once the timer is over
-                if (prefManager.getIsUserLoggedIn()) {
-                    startNewActivityAnimation(DashboardActivity::class.java)
-                } else {
-                    startNewActivityAnimation(AuthActivity::class.java)
-                }
-            },
-            500,
-        )
+        val progressBar = findViewById<ProgressBar>(R.id.m_progress_bar)
+        val motionLayout = findViewById<MotionLayout>(R.id.motion_layout)
+
+        motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+            ) {
+                // TODO Started transition
+            }
+
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float,
+            ) {
+                // TODO Change transition
+            }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { //This method will be executed once the timer is over
+                        if (prefManager.getIsUserLoggedIn()) {
+                            startNewActivityAnimation(DashboardActivity::class.java)
+                        } else {
+                            startNewActivityAnimation(AuthActivity::class.java)
+                        }
+                    },
+                    1000,
+                )
+            }
+
+            override fun onTransitionTrigger(
+                motionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float,
+            ) {
+                // TODO onTransitionTrigger
+            }
+
+        })
     }
 }
