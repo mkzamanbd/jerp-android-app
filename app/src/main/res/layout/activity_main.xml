@@ -27,7 +27,7 @@
         android:layout_width="@dimen/mainLogoWidth"
         android:layout_height="@dimen/mainLogoHeight"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_white"
+        android:src="@drawable/jerp_logo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,9 @@
         <ProgressBar
             android:id="@+id/m_progress_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/white" />
 
         <TextView
             android:id="@+id/tv_version"
@@ -59,7 +61,8 @@
             android:padding="@dimen/five"
             android:textColor="@color/white"
             android:textSize="@dimen/fifteen"
-            tools:text="V 1.0.1" />
+            tools:ignore="HardcodedText,TextContrastCheck"
+            android:text="V 1.0.1" />
 
     </LinearLayout>
 

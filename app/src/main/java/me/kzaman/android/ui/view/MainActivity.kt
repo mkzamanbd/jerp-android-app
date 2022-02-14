@@ -3,6 +3,7 @@ package me.kzaman.android.ui.view
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -46,6 +47,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { //This method will be executed once the timer is over
+                        progressBar.visibility = View.VISIBLE
+                    },
+                    100,
+                )
                 Handler(Looper.getMainLooper()).postDelayed(
                     { //This method will be executed once the timer is over
                         if (prefManager.getIsUserLoggedIn()) {
