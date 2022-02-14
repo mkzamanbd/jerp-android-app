@@ -3,7 +3,6 @@ package me.kzaman.android.ui.view.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -22,10 +21,10 @@ import me.kzaman.android.database.entities.MenuEntities
 import me.kzaman.android.databinding.ActivityDashboardBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.CommonViewModel
+import me.kzaman.android.utils.handleNetworkError
 import me.kzaman.android.utils.Constants.Companion.DELIVERY
 import me.kzaman.android.utils.Constants.Companion.ORDER
 import me.kzaman.android.utils.Constants.Companion.TRACKING
-import me.kzaman.android.utils.handleActivityApiError
 import me.kzaman.android.utils.menuRouting
 import me.kzaman.android.utils.getMenuIcon
 import me.kzaman.android.utils.startNewActivityAnimation
@@ -68,12 +67,12 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             adapter = homeMenuParentAdapter
         }
 
-        viewModel.getMenuLocalDb()
+        getMobileMenu()
 
-        viewModel.parentMenuLocal.observe(this) { parentMenuEntities ->
-            viewModel.subMenuLocal.observe(this) { subMenuEntities ->
-                if (parentMenuEntities.isNotEmpty() && subMenuEntities.isNotEmpty()) {
-                    setDashboardLocalMenu(parentMenuEntities, subMenuEntities)
+        viewModel.parentMenuLocal.observe(this) { parentMenu ->
+            viewModel.subMenuLocal.observe(this) { subMenu ->
+                if (parentMenu.isNotEmpty() && subMenu.isNotEmpty()) {
+                    setDashboardLocalMenu(parentMenu, subMenu)
                     shimmerMenuPlaceholder.visibility = View.GONE
                     rvHomeList.visibility = View.VISIBLE
                 } else {
@@ -97,16 +96,15 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                     if (response.code == 200) {
                         val topMenu = response.data.topParentMenu
                         val bottomMenu = response.data.bottomParentMenu
-                        homeMenuParentAdapter.setHomePrentMenu(topMenu)
                         setDashboardBottomMenu(bottomMenu)
-
-                        storeMenuToLocalDb(topMenu, bottomMenu)
+                        homeMenuParentAdapter.setHomePrentMenu(topMenu)
+                        //storeMenuToLocalDb(topMenu, bottomMenu)
                     } else {
                         toastWarning("User menu not found!")
                     }
                 }
-                is Resource.Failure -> handleActivityApiError(it) {
-                    Toast.makeText(this, "Menu Can't loaded", Toast.LENGTH_SHORT).show()
+                is Resource.Failure -> handleNetworkError(it, this) {
+                    getMobileMenu()
                 }
                 else -> Log.d("error", "Unknown Error")
             }

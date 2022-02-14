@@ -21,7 +21,7 @@ import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.hideSoftKeyboard
 import me.kzaman.android.utils.toastWarning
 import me.kzaman.android.utils.visible
-import me.kzaman.android.utils.handleFragmentApiError
+import me.kzaman.android.utils.handleNetworkError
 import java.util.ArrayList
 
 @AndroidEntryPoint
@@ -87,7 +87,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                         mActivity.toastWarning("Product list list not found")
                     }
                 }
-                is Resource.Failure -> handleFragmentApiError(it) {
+                is Resource.Failure -> handleNetworkError(it, mActivity) {
                     getProductList()
                 }
                 else -> Log.d("unknownError", "Unknown Error")

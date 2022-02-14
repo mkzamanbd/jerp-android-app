@@ -10,7 +10,7 @@ import me.kzaman.android.databinding.ActivitySettingsBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.viewModel.ProfileViewModel
 import me.kzaman.android.utils.LoadingUtils
-import me.kzaman.android.utils.handleActivityApiError
+import me.kzaman.android.utils.handleNetworkError
 import me.kzaman.android.utils.startNewActivityAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -58,7 +58,7 @@ class SettingsActivity : BaseActivity() {
                 is Resource.Success -> {
                     binding.tvName.text = it.value.data.toString()
                 }
-                is Resource.Failure -> handleActivityApiError(it) {
+                is Resource.Failure -> handleNetworkError(it, this) {
                     getUserProfile()
                 }
                 else -> Log.d("unknownError", "Unknown Error")

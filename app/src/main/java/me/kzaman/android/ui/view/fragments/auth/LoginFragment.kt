@@ -18,7 +18,7 @@ import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.enable
 import me.kzaman.android.utils.startNewActivityAnimation
 import me.kzaman.android.utils.visible
-import me.kzaman.android.utils.handleFragmentApiError
+import me.kzaman.android.utils.handleNetworkError
 import me.kzaman.android.utils.hideSoftKeyboard
 import javax.inject.Inject
 
@@ -72,7 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                         mActivity.startNewActivityAnimation(DashboardActivity::class.java)
                     }
                 }
-                is Resource.Failure -> handleFragmentApiError(it) {
+                is Resource.Failure -> handleNetworkError(it, mActivity) {
                     login()
                 }
                 else -> Log.d("unknownError", "Unknown Error")

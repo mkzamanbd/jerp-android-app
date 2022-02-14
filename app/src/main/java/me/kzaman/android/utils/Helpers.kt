@@ -1,37 +1,27 @@
 package me.kzaman.android.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import me.kzaman.android.R
-import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.DashboardActivity
-import me.kzaman.android.ui.view.fragments.auth.LoginFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
+import me.kzaman.android.ui.view.activities.AuthActivity
 
-
-fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
-    Intent(this, activity).also {
-        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(it)
-    }
-}
 
 
 fun View.visible(isVisible: Boolean) {
@@ -43,8 +33,14 @@ fun View.enable(enabled: Boolean) {
     alpha = if (enabled) 1f else 0.5f
 }
 
-fun View.snackBar(message: String, action: (() -> Unit)? = null) {
-    val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
+@SuppressLint("InflateParams")
+fun View.showSnackBar(mActivity: Activity, action: (() -> Unit)? = null) {
+    val snackBar = Snackbar.make(this, "", Snackbar.LENGTH_LONG)
+    val layout = snackBar.view as Snackbar.SnackbarLayout
+    val inflater = LayoutInflater.from(mActivity)
+    val snackView = inflater.inflate(R.layout.layout_snackbar, null)
+    layout.setPadding(0, 0, 0, 0)
+    layout.addView(snackView)
     action?.let {
         snackBar.setAction("Retry") {
             it()
@@ -53,80 +49,42 @@ fun View.snackBar(message: String, action: (() -> Unit)? = null) {
     snackBar.show()
 }
 
-fun Fragment.logout() = lifecycleScope.launch {
-    if (activity is DashboardActivity) {
-        (activity as DashboardActivity).performLogout()
-    }
-}
-
-fun Fragment.handleFragmentApiError(
+fun handleNetworkError(
     failure: Resource.Failure,
+    mActivity: Activity,
     retry: (() -> Unit)? = null,
 ) {
     when {
         failure.isNetworkError -> {
-            requireView().snackBar("Please check your internet connection", retry)
+            val view: View = mActivity.window.decorView.rootView
+            view.showSnackBar(mActivity, retry)
         }
         failure.statusCode == 401 -> {
-            if (this is LoginFragment) {
-                requireView().snackBar("You've entered incorrect email or password")
+            if (mActivity is AuthActivity) {
+                mActivity.toastError("You've entered incorrect email or password")
             } else {
-                (this as BaseFragment<*>).logout()
+                (mActivity as DashboardActivity).performLogout()
             }
         }
         failure.statusCode == 404 -> {
-            requireView().snackBar("Url not found!")
+            mActivity.toastError("Url not found!")
         }
         failure.statusCode == 422 -> {
-            requireView().snackBar("The given data was invalid")
+            mActivity.toastError("The given data was invalid")
         }
         failure.statusCode == 500 -> {
-            requireView().snackBar("Internal server error")
+            mActivity.toastError("Internal server error")
         }
         else -> {
             val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
-            requireView().snackBar(error)
+            mActivity.toastError(error)
         }
     }
 }
 
-fun Activity.handleActivityApiError(
-    failure: Resource.Failure,
-    retry: (() -> Unit)? = null,
-) {
-    when {
-        failure.isNetworkError -> {
-            toastError("Please check your internet connection")
-        }
-        failure.statusCode == 401 -> {
-            (this as DashboardActivity).performLogout()
-        }
-        failure.statusCode == 404 -> {
-            toastError("Url not found!")
-        }
-        failure.statusCode == 422 -> {
-            toastError("The given data was invalid")
-        }
-        failure.statusCode == 500 -> {
-            toastError("Internal server error")
-        }
-        else -> {
-            val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
-            toastError(error)
-        }
-    }
-}
-
-fun getProgressDrawable(context: Context): CircularProgressDrawable {
-    return CircularProgressDrawable(context).apply {
-        strokeWidth = 10f
-        centerRadius = 50f
-        start()
-    }
-}
-
-fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
-    val option = RequestOptions().placeholder(progressDrawable).error(R.mipmap.ic_launcher_round)
+fun ImageView.loadImage(uri: String) {
+    val option =
+        RequestOptions().placeholder(R.mipmap.ic_launcher_round).error(R.mipmap.ic_launcher_round)
     Glide.with(this.context).setDefaultRequestOptions(option).load(uri).into(this)
 }
 

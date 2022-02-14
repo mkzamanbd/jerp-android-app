@@ -1,12 +1,11 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/snack_bar_layout_root"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:padding="@dimen/_5sdp"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_toast"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal"
+    android:padding="@dimen/_5sdp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_icon"
@@ -15,11 +14,12 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/five"
         android:background="@drawable/bg_toast_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:padding="@dimen/dividerHeight"
-        android:src="@drawable/ic_no_internet" />
+        android:src="@drawable/ic_baseline_network_check_24"
+        android:tint="@color/warning_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/ln_details"
@@ -38,9 +38,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/_2sdp"
+            android:text="@string/no_internet"
             android:textColor="@color/warning_color"
-            android:textSize="@dimen/_12sdp"
-            android:text="@string/no_internet" />
+            android:textSize="@dimen/_12sdp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_message"
@@ -50,23 +50,23 @@
             android:gravity="center_vertical"
             android:maxLines="2"
             android:padding="@dimen/_2sdp"
+            android:text="@string/no_network_warning"
             android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp"
-            android:text="@string/no_network_warning" />
+            android:textSize="@dimen/_10sdp" />
 
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_retry"
+        style="@style/RobotoMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:gravity="center"
         android:padding="@dimen/_2sdp"
-        android:textSize="@dimen/_12sdp"
-        style="@style/RobotoMedium"
-        android:textColor="@color/success_color"
         android:text="@string/retry"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"/>
+        android:textColor="@color/success_color"
+        android:textSize="@dimen/_12sdp" />
 
 </RelativeLayout>
