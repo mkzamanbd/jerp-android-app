@@ -23,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar
 import me.kzaman.android.ui.view.activities.AuthActivity
 
 
-
 fun View.visible(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
 }
@@ -63,14 +62,15 @@ fun handleNetworkError(
             if (mActivity is AuthActivity) {
                 mActivity.toastError("You've entered incorrect email or password")
             } else {
-                (mActivity as DashboardActivity).performLogout()
+                mActivity.toastError("Unauthenticated")
+                (mActivity as? DashboardActivity)?.performLogout()
             }
         }
         failure.statusCode == 404 -> {
             mActivity.toastError("Url not found!")
         }
         failure.statusCode == 422 -> {
-            mActivity.toastError("The given data was invalid")
+            mActivity.toastWarning("The given data was invalid")
         }
         failure.statusCode == 500 -> {
             mActivity.toastError("Internal server error")
