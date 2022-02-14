@@ -14,4 +14,7 @@ interface ProductDao {
 
     @Query("SELECT * FROM products")
     suspend fun getLocalProducts(): List<ProductEntities>
+
+    @Query("DELETE FROM products")
+    suspend fun deleteProductTable()
 }

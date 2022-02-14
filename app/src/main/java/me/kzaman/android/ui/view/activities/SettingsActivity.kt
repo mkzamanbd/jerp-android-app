@@ -69,6 +69,7 @@ class SettingsActivity : BaseActivity() {
             lifecycleScope.launch {
                 viewModel.logout()
                 prefManager.clearAll()
+                viewModel.clearAllTable()
                 startNewActivityAnimation(AuthActivity::class.java)
             }
         }

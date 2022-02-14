@@ -21,4 +21,10 @@ interface MenuDao {
 
     @Query("SELECT * FROM sub_menus")
     suspend fun getSubMenu(): List<SubMenuEntities>
+
+    @Query("DELETE FROM menus")
+    suspend fun deleteMenuTable()
+
+    @Query("DELETE FROM sub_menus")
+    suspend fun deleteSubMenuTable()
 }

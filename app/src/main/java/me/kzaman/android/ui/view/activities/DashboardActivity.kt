@@ -67,7 +67,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             adapter = homeMenuParentAdapter
         }
 
-        getMobileMenu()
+        viewModel.getMenuLocalDb()
 
         viewModel.parentMenuLocal.observe(this) { parentMenu ->
             viewModel.subMenuLocal.observe(this) { subMenu ->
@@ -98,7 +98,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                         val bottomMenu = response.data.bottomParentMenu
                         setDashboardBottomMenu(bottomMenu)
                         homeMenuParentAdapter.setHomePrentMenu(topMenu)
-                        //storeMenuToLocalDb(topMenu, bottomMenu)
+                        storeMenuToLocalDb(topMenu, bottomMenu)
                     } else {
                         toastWarning("User menu not found!")
                     }
