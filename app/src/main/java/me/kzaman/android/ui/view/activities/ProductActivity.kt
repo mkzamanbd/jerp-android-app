@@ -5,16 +5,17 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment
 import me.kzaman.android.R
 import me.kzaman.android.base.BaseActivity
-import me.kzaman.android.databinding.ActivityProductBinding
 import me.kzaman.android.utils.startNewActivityAnimation
 import me.kzaman.android.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import me.kzaman.android.databinding.LayoutFragmentsBinding
 
 @AndroidEntryPoint
 class ProductActivity : BaseActivity() {
-    private lateinit var binding: ActivityProductBinding
+    private lateinit var binding: LayoutFragmentsBinding
 
     lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView
@@ -22,9 +23,20 @@ class ProductActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProductBinding.inflate(layoutInflater)
+        binding = LayoutFragmentsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        init()
+
+    }
+
+    override fun init() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        navGraph.setStartDestination(R.id.productListFragment)
+        navController.graph = navGraph
 
         rlToolbar = findViewById(R.id.toolbar_root)
         tvTitle = findViewById(R.id.tv_toolbar_title)
@@ -34,8 +46,6 @@ class ProductActivity : BaseActivity() {
             onBackPressed()
         }
     }
-
-    override fun init() {}
 
     override fun setToolbarTitle(title: String) {
         setToolbarTitle(title, tvTitle)
