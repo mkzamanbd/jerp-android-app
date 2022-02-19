@@ -55,7 +55,7 @@ class CustomerListAdapter(
             }
 
             if (customer.photo != null) {
-                imageView.loadImage(customer.photo.toString())
+                imageView.loadImage(customer.photo!!)
             }
 
             itemView.setOnClickListener {
