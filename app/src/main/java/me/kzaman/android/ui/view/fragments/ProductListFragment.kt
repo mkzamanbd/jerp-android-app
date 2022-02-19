@@ -84,7 +84,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                         productListAdapter.setProducts(response.productList)
                         saveLocalProduct(response.productList)
                     } else {
-                        mActivity.toastWarning("Product list list not found")
+                        toastWarning(mActivity, "Product list list not found")
                     }
                 }
                 is Resource.Failure -> handleNetworkError(it, mActivity) {

@@ -24,7 +24,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
         productId = arguments?.getString("productId")
 
         if (productId != null) {
-            mActivity.toastSuccess(productId.toString())
+            toastSuccess(mActivity, productId.toString())
         }
     }
 }

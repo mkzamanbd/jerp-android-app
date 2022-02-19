@@ -64,24 +64,24 @@ fun handleNetworkError(
         }
         failure.statusCode == 401 -> {
             if (mActivity is AuthActivity) {
-                mActivity.toastError("You've entered incorrect email or password")
+                toastError(mActivity, "You've entered incorrect email or password")
             } else {
-                mActivity.toastError("Unauthenticated")
+                toastError(mActivity, "Unauthenticated")
                 (mActivity as? DashboardActivity)?.performLogout()
             }
         }
         failure.statusCode == 404 -> {
-            mActivity.toastError("Url not found!")
+            toastError(mActivity, "Url not found!")
         }
         failure.statusCode == 422 -> {
-            mActivity.toastWarning("The given data was invalid")
+            toastWarning(mActivity, "The given data was invalid")
         }
         failure.statusCode == 500 -> {
-            mActivity.toastError("Internal server error")
+            toastError(mActivity, "Internal server error")
         }
         else -> {
             val error = "Code: ${failure.statusCode},  ${failure.errorMessage}"
-            mActivity.toastError(error)
+            toastError(mActivity, error)
         }
     }
 }

@@ -108,7 +108,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
                         homeMenuParentAdapter.setHomePrentMenu(topMenu)
                         storeMenuToLocalDb(topMenu, bottomMenu)
                     } else {
-                        toastWarning("User menu not found!")
+                        toastWarning(this, "User menu not found!")
                     }
                 }
                 is Resource.Failure -> handleNetworkError(it, this) {

@@ -28,92 +28,92 @@ fun Activity.getDrawableBackgroundColor(mView: View, color: Int) {
 /**
  * ...display success toast message
  */
-fun Activity.toastSuccess(body: String) {
-    val inflater = this.layoutInflater
+fun toastSuccess(activity: Activity, message: String) {
+    val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
     val ivIcon = layout.findViewById<ImageView>(R.id.iv_icon)
 
-    tvTitle.setTextColor(ContextCompat.getColor(this, R.color.success_color))
-    ivIcon.background = ContextCompat.getDrawable(this, R.drawable.bg_toast_icon)
-    this.getDrawableBackgroundColor(ivIcon, R.color.success_bg_color)
-    ivIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_success_toast_icon))
+    tvTitle.setTextColor(ContextCompat.getColor(activity, R.color.success_color))
+    ivIcon.background = ContextCompat.getDrawable(activity, R.drawable.bg_toast_icon)
+    activity.getDrawableBackgroundColor(ivIcon, R.color.success_bg_color)
+    ivIcon.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_success_toast_icon))
 
-    tvTitle.text = this.resources.getString(R.string.success)
-    tvBody.text = body
+    tvTitle.text = activity.resources.getString(R.string.success)
+    tvBody.text = message
 
-    this.setToast(layout)
+    activity.setToast(layout)
 }
 
 /**
  * ...display error toast message
  */
 
-fun Activity.toastError(body: String) {
-    val inflater = this.layoutInflater
+fun toastError(activity: Activity, message: String) {
+    val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
     val ivIcon = layout.findViewById<ImageView>(R.id.iv_icon)
 
-    tvTitle.setTextColor(ContextCompat.getColor(this, R.color.error_color))
-    ivIcon.background = ContextCompat.getDrawable(this, R.drawable.bg_toast_icon)
-    this.getDrawableBackgroundColor(ivIcon, R.color.error_bg_color)
-    ivIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error_toast))
+    tvTitle.setTextColor(ContextCompat.getColor(activity, R.color.error_color))
+    ivIcon.background = ContextCompat.getDrawable(activity, R.drawable.bg_toast_icon)
+    activity.getDrawableBackgroundColor(ivIcon, R.color.error_bg_color)
+    ivIcon.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_error_toast))
 
-    tvTitle.text = this.resources.getString(R.string.error)
-    tvBody.text = body
+    tvTitle.text = activity.resources.getString(R.string.error)
+    tvBody.text = message
 
-    this.setToast(layout)
+    activity.setToast(layout)
 }
 
 /**
  * ...display information toast message
  */
-fun Activity.toastInfo(body: String) {
-    val inflater = this.layoutInflater
+fun toastInfo(activity: Activity, message: String) {
+    val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
     val ivIcon = layout.findViewById<ImageView>(R.id.iv_icon)
 
-    tvTitle.setTextColor(ContextCompat.getColor(this, R.color.info_color))
-    ivIcon.background = ContextCompat.getDrawable(this, R.drawable.bg_toast_icon)
-    this.getDrawableBackgroundColor(ivIcon, R.color.info_bg_color)
-    ivIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_info_toast))
+    tvTitle.setTextColor(ContextCompat.getColor(activity, R.color.info_color))
+    ivIcon.background = ContextCompat.getDrawable(activity, R.drawable.bg_toast_icon)
+    activity.getDrawableBackgroundColor(ivIcon, R.color.info_bg_color)
+    ivIcon.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_info_toast))
 
-    tvTitle.text = this.resources.getString(R.string.info)
-    tvBody.text = body
+    tvTitle.text = activity.resources.getString(R.string.info)
+    tvBody.text = message
 
-    this.setToast(layout)
+    activity.setToast(layout)
 }
 
 /**
  * ...display warning toast message
  */
-fun Activity.toastWarning(body: String) {
-    val inflater = this.layoutInflater
+fun toastWarning(activity: Activity, message: String) {
+    val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, this.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
     val ivIcon = layout.findViewById<ImageView>(R.id.iv_icon)
 
-    tvTitle.setTextColor(ContextCompat.getColor(this, R.color.warning_color))
-    ivIcon.background = ContextCompat.getDrawable(this, R.drawable.bg_toast_icon)
-    this.getDrawableBackgroundColor(ivIcon, R.color.warning_bg_color)
-    ivIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_warning_toast))
+    tvTitle.setTextColor(ContextCompat.getColor(activity, R.color.warning_color))
+    ivIcon.background = ContextCompat.getDrawable(activity, R.drawable.bg_toast_icon)
+    activity.getDrawableBackgroundColor(ivIcon, R.color.warning_bg_color)
+    ivIcon.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_warning_toast))
 
-    tvTitle.text = this.resources.getString(R.string.warning)
-    tvBody.text = body
+    tvTitle.text = activity.resources.getString(R.string.warning)
+    tvBody.text = message
 
-    this.setToast(layout)
+    activity.setToast(layout)
 }
