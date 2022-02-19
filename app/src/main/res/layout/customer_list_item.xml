@@ -17,18 +17,19 @@
         android:orientation="vertical"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_customer"
             android:layout_width="@dimen/large_image_size"
             android:layout_height="@dimen/large_image_size"
-            android:src="@drawable/img_avatar"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
+            android:src="@drawable/img_avatar" />
 
         <TextView
             android:id="@+id/tv_payment_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five"
+            android:paddingLeft="@dimen/five"
+            android:paddingRight="@dimen/five"
             tools:text="Cash" />
     </LinearLayout>
 

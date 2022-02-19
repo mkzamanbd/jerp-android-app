@@ -3,6 +3,7 @@ package me.kzaman.android.ui.view.fragments.customer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +15,8 @@ import me.kzaman.android.ui.view.activities.CustomerActivity
 import me.kzaman.android.ui.viewModel.CommonViewModel
 import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.handleNetworkError
+import me.kzaman.android.utils.hideSoftKeyboard
+import me.kzaman.android.utils.visible
 
 
 @AndroidEntryPoint
@@ -55,6 +58,23 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
                 is Resource.Failure -> handleNetworkError(it, mActivity)
                 else -> Log.d("unknownError", "Unknown Error")
             }
+        }
+
+        val etCustomerSearch = binding.etCustomerSearch
+        val ivSearchClear = binding.ivSearchClear
+
+        etCustomerSearch.addTextChangedListener {
+            if (it.isNullOrEmpty()) {
+                ivSearchClear.visible(false)
+            } else {
+                ivSearchClear.visible(true)
+            }
+            customerListAdapter.filter.filter(it)
+        }
+        ivSearchClear.setOnClickListener {
+            etCustomerSearch.text = null
+            hideSoftKeyboard(mContext, etCustomerSearch)
+            ivSearchClear.visible(false)
         }
     }
 }

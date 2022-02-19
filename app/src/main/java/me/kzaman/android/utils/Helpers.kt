@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +13,18 @@ import android.view.animation.AlphaAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.ColorInt
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import me.kzaman.android.R
 import me.kzaman.android.network.Resource
-import me.kzaman.android.ui.view.activities.DashboardActivity
-import com.google.android.material.snackbar.Snackbar
 import me.kzaman.android.ui.view.activities.AuthActivity
+import me.kzaman.android.ui.view.activities.DashboardActivity
 
 
 fun View.visible(isVisible: Boolean) {
@@ -170,4 +174,11 @@ fun startAlphaAnimation(view: View, duration: Long, visibility: Int) {
     alphaAnimation.duration = duration
     alphaAnimation.fillAfter = true
     view.startAnimation(alphaAnimation)
+}
+
+fun getTintedDrawable(inputDrawable: Drawable, @ColorInt color: Int): Drawable {
+    val wrapDrawable = DrawableCompat.wrap(inputDrawable)
+    DrawableCompat.setTint(wrapDrawable, color)
+    DrawableCompat.setTintMode(wrapDrawable, PorterDuff.Mode.SRC_IN)
+    return wrapDrawable
 }

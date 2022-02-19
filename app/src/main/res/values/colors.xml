@@ -35,4 +35,9 @@
     <color name="info_color">#4693FF</color>
     <color name="info_bg_color">#33528AD8</color>
     <color name="toast_view_color">#282F39</color>
+
+    <color name="cash_type_customer">#8900FF</color>
+    <color name="cash_type_customer_bg">#1A8900FF</color>
+    <color name="credit_type_customer">#FF1178</color>
+    <color name="credit_type_customer_bg">#1AC568A5</color>
 </resources>

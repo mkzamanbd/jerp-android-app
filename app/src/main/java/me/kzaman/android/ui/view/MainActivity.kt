@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                             startNewActivityAnimation(AuthActivity::class.java)
                         }
                     },
-                    1000,
+                    800,
                 )
             }
 

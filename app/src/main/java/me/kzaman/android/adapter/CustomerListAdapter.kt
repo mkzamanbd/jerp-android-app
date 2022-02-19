@@ -7,17 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.android.R
 import me.kzaman.android.data.model.CustomerModel
 import me.kzaman.android.data.model.Product
+import me.kzaman.android.utils.getTintedDrawable
 import me.kzaman.android.utils.loadImage
 import java.util.Locale
 import kotlin.collections.ArrayList
 
 class CustomerListAdapter(
     var customers: ArrayList<CustomerModel>,
-    val context: Context,
+    val mContext: Context,
 ) : RecyclerView.Adapter<CustomerListAdapter.ViewHolder>(), Filterable {
 
     var filterList = ArrayList<CustomerModel>()
@@ -39,7 +41,7 @@ class CustomerListAdapter(
         private val territory: TextView = view.findViewById(R.id.tv_territory)
         private val phone: TextView = view.findViewById(R.id.tv_phone)
 
-        private val customerType: TextView = view.findViewById(R.id.tv_payment_type)
+        private val tvPaymentType: TextView = view.findViewById(R.id.tv_payment_type)
         private val imageView: ImageView = view.findViewById(R.id.iv_customer)
 
         @SuppressLint("SetTextI18n")
@@ -49,9 +51,20 @@ class CustomerListAdapter(
             territory.text = customer.territoryName
             phone.text = customer.phone
             if (customer.creditFlag == "Y") {
-                customerType.text = "Credit"
+                tvPaymentType.text = "Credit"
+                tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mContext,
+                    R.drawable.bg_order_status)!!,
+                    ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
+                tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+                    R.color.credit_type_customer))
+
             } else {
-                customerType.text = "Cash"
+                tvPaymentType.text = "Cash"
+                tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mContext,
+                    R.drawable.bg_order_status)!!,
+                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
+                tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+                    R.color.cash_type_customer))
             }
 
             if (customer.photo != null) {
@@ -59,7 +72,7 @@ class CustomerListAdapter(
             }
 
             itemView.setOnClickListener {
-                Toast.makeText(context, customer.customerCode, Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, customer.customerCode, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -83,8 +96,8 @@ class CustomerListAdapter(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
                 Log.d("charSearch", charSearch)
-                if (charSearch.isEmpty()) {
-                    filterList = customers
+                filterList = if (charSearch.isEmpty()) {
+                    customers
                 } else {
                     val resultList = ArrayList<CustomerModel>()
                     for (customer in filterList) {
@@ -94,7 +107,7 @@ class CustomerListAdapter(
                             resultList.add(customer)
                         }
                     }
-                    filterList = resultList
+                    resultList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = filterList
