@@ -17,7 +17,7 @@ import me.kzaman.android.databinding.LayoutFragmentsBinding
 class ProductActivity : BaseActivity() {
     private lateinit var binding: LayoutFragmentsBinding
 
-    lateinit var rlToolbar: RelativeLayout
+    private lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView
     private lateinit var ivBackButton: ImageView
 

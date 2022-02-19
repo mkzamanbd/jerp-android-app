@@ -128,7 +128,13 @@ fun horizontalColumnRecyclerView(
 *
 */
 
-fun goToNextActivityAnimation(activity: Activity, intent: Intent, isNextActivity: Boolean = true) {
+fun goToNextActivityAnimation(
+    activity: Activity,
+    intent: Intent,
+    isNextActivity: Boolean = true,
+    featureId: String? = null,
+) {
+    intent.putExtra("featureId", featureId)
     activity.startActivity(intent)
     if (isNextActivity) {
         activity.overridePendingTransition(R.anim.animation_slide_in_right,

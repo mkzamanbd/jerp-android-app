@@ -7,6 +7,8 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,6 +47,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
     private var scrollRange = -1
     private var mIsTheTitleVisible = false
+    private lateinit var rvHomeList: RecyclerView
+    private lateinit var shimmerMenuPlaceholder: ShimmerFrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +63,8 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         binding.appBarLayout.addOnOffsetChangedListener(this)
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
 
-        val rvHomeList = binding.rvHomeList
-        val shimmerMenuPlaceholder = binding.shimmerMenuPlaceholder
+        rvHomeList = binding.rvHomeList
+        shimmerMenuPlaceholder = binding.shimmerMenuPlaceholder
 
         rvHomeList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -81,6 +85,10 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             }
         }
 
+    }
+
+    private fun getMobileMenu() {
+        viewModel.getMobileMenu()
 
         viewModel.mobileMenu.observe(this) {
             if (it is Resource.Loading) {
@@ -110,6 +118,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             }
         }
     }
+
 
     private fun setDashboardLocalMenu(
         parentMenuEntities: List<MenuEntities>,
@@ -203,10 +212,6 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     }
 
     override fun setToolbarTitle(title: String) {}
-
-    private fun getMobileMenu() {
-        viewModel.getMobileMenu()
-    }
 
     private fun setDashboardBottomMenu(menuModels: List<UserParentMenuModel>) {
         val menuItems: ArrayList<UserChildMenuModel> = ArrayList()

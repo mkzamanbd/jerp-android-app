@@ -50,7 +50,7 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER -> {
-            goToNextActivityAnimation(activity, Intent(activity, OrdersActivity::class.java))
+            goToNextActivityAnimation(activity, Intent(activity, OrdersActivity::class.java), true, featureId)
         }
         ORDER_HISTORY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
@@ -65,7 +65,7 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         SETTING -> {
-            goToNextActivityAnimation(activity, Intent(activity, SettingsActivity::class.java))
+            goToNextActivityAnimation(activity, Intent(activity, SettingsActivity::class.java), true, featureId)
         }
         DELIVERY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
@@ -74,7 +74,7 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         PRODUCT_LIST -> {
-            goToNextActivityAnimation(activity, Intent(activity, ProductActivity::class.java))
+            goToNextActivityAnimation(activity, Intent(activity, ProductActivity::class.java), true, featureId)
         }
         HISTORY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
