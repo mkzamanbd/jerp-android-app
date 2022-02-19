@@ -22,4 +22,7 @@ class CommonRepository @Inject constructor(
 
     suspend fun getParentMenuLocalDb() = menuDao.getParentMenu()
     suspend fun getSubMenuLocalDb() = menuDao.getSubMenu()
+
+    // get customer
+    suspend fun getAllRemoteCustomer() = safeApiCall { api.getAllCustomers() }
 }

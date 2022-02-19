@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/iv_customer"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/large_image_size"
+            android:layout_height="@dimen/large_image_size"
             android:src="@drawable/img_avatar"
             tools:ignore="ContentDescription,ImageContrastCheck" />
 
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_user_name"
+                android:id="@+id/tv_customer_name"
                 style="@style/RobotoRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

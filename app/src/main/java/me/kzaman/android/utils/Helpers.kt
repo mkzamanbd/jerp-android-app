@@ -84,7 +84,7 @@ fun handleNetworkError(
 
 fun ImageView.loadImage(uri: String) {
     val option =
-        RequestOptions().placeholder(R.mipmap.ic_launcher_round).error(R.mipmap.ic_launcher_round)
+        RequestOptions().placeholder(R.drawable.img_avatar).error(R.drawable.img_avatar)
     Glide.with(this.context).setDefaultRequestOptions(option).load(uri).into(this)
 }
 

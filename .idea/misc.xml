@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/background.xml" value="0.3635" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/baseline_directions_bike_white_36.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_bottom_line.xml" value="0.3575" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_custom_layout.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_home_profile.xml" value="0.292" />
@@ -19,7 +20,9 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_dashboard_24.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2755" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.2755" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_keyboard_return_24.xml" value="0.194" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_list_alt_24.xml" value="0.37864583333333335" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_location_searching_24.xml" value="0.194" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2755" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.2755" />
@@ -31,6 +34,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" value="0.3575" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_baseline_swap_vertical_circle_24.xml" value="0.2755" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_order_icon.xml" value="0.3575" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_outline_watch_later_24.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/ic_welcome.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/jerp_logo.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/splash_background.xml" value="0.3635" />
@@ -45,6 +49,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/child_menu_list.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/customer_list_item.xml" value="0.353713768115942" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/dialog_progress_layout.xml" value="0.67" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_customer_list.xml" value="0.353713768115942" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_customer_selection.xml" value="0.353713768115942" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_dashboard.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_home.xml" value="0.3625" />

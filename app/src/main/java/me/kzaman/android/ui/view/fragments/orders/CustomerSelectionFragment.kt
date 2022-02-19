@@ -25,7 +25,7 @@ class CustomerSelectionFragment : BaseFragment<FragmentCustomerSelectionBinding>
         loadingUtils = LoadingUtils(mContext)
 
         (activity as OrdersActivity).showToolbar(true) //display toolbar
-        (activity as OrdersActivity).setToolbarTitle("Customers")
+        (activity as OrdersActivity).setToolbarTitle("Choose Customers")
     }
 
 }

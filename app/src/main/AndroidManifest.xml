@@ -30,6 +30,9 @@
             android:name=".ui.view.activities.AuthActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.view.activities.CustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>

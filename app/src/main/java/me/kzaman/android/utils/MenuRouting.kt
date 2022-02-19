@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 import me.kzaman.android.R
+import me.kzaman.android.ui.view.activities.CustomerActivity
 import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.ui.view.activities.ProductActivity
 import me.kzaman.android.ui.view.activities.SettingsActivity
@@ -30,8 +31,6 @@ import me.kzaman.android.utils.Constants.Companion.TA_DA
 import me.kzaman.android.utils.Constants.Companion.TRACKING
 
 
-
-
 /*
 *
 * dashboard menu routing
@@ -50,13 +49,23 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER -> {
-            goToNextActivityAnimation(activity, Intent(activity, OrdersActivity::class.java), true, featureId)
+            goToNextActivityAnimation(
+                activity,
+                Intent(activity, OrdersActivity::class.java),
+                true,
+                featureId
+            )
         }
         ORDER_HISTORY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         CUSTOMER_LIST -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            goToNextActivityAnimation(
+                activity,
+                Intent(activity, CustomerActivity::class.java),
+                true,
+                featureId
+            )
         }
         ADVISER_LIST -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
@@ -65,7 +74,12 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         SETTING -> {
-            goToNextActivityAnimation(activity, Intent(activity, SettingsActivity::class.java), true, featureId)
+            goToNextActivityAnimation(
+                activity,
+                Intent(activity, SettingsActivity::class.java),
+                true,
+                featureId
+            )
         }
         DELIVERY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
@@ -74,7 +88,12 @@ fun menuRouting(activity: Activity, featureId: String) {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
         }
         PRODUCT_LIST -> {
-            goToNextActivityAnimation(activity, Intent(activity, ProductActivity::class.java), true, featureId)
+            goToNextActivityAnimation(
+                activity,
+                Intent(activity, ProductActivity::class.java),
+                true,
+                featureId
+            )
         }
         HISTORY -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()

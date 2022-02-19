@@ -9,6 +9,7 @@ import me.kzaman.android.network.Resource
 import me.kzaman.android.repository.CommonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import me.kzaman.android.data.response.DefaultResponse
 import me.kzaman.android.database.entities.SubMenuEntities
 import me.kzaman.android.database.entities.MenuEntities
 import javax.inject.Inject
@@ -18,6 +19,9 @@ class CommonViewModel @Inject constructor(
     val repository: CommonRepository,
 ) : BaseViewModel(repository) {
 
+    /*
+    * get mobile menu
+    */
     private val _mobileMenu: MutableLiveData<Resource<MobileMenuResponse>> = MutableLiveData()
     val mobileMenu: LiveData<Resource<MobileMenuResponse>> = _mobileMenu
 
@@ -45,6 +49,18 @@ class CommonViewModel @Inject constructor(
     fun getMenuLocalDb() = viewModelScope.launch {
         _parentMenu.value = repository.getParentMenuLocalDb()
         _subMenu.value = repository.getSubMenuLocalDb()
+    }
+
+    /*
+    * all customer
+    */
+
+    private val _customers: MutableLiveData<Resource<DefaultResponse>> = MutableLiveData()
+    val customers: LiveData<Resource<DefaultResponse>> = _customers
+
+    fun getAllRemoteCustomer() = viewModelScope.launch {
+        _customers.value = Resource.Loading
+        _customers.value = repository.getAllRemoteCustomer()
     }
 
 }

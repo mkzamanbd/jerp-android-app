@@ -1,5 +1,6 @@
 package me.kzaman.android.network.api
 
+import me.kzaman.android.data.response.DefaultResponse
 import me.kzaman.android.data.response.MobileMenuResponse
 import me.kzaman.android.data.response.ProductResponse
 import me.kzaman.android.data.response.ProfileResponse
@@ -16,4 +17,7 @@ interface CommonApi : BaseApi {
 
     @GET("web/v2/search-product-data-list")
     suspend fun getRemoteProducts(): ProductResponse
+
+    @GET("mobile/get-sales-user-wise-all-customer-list")
+    suspend fun getAllCustomers(): DefaultResponse
 }

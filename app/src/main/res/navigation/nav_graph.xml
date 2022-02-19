@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    tools:ignore="InvalidNavigation">
+    tools:ignore="InvalidNavigation"
+    app:startDestination="@id/productListFragment">
 
     <fragment
         android:id="@+id/productListFragment"
         android:name="me.kzaman.android.ui.view.fragments.ProductListFragment"
         android:label="Product List"
         tools:layout="@layout/fragment_product_list" />
+
+    <fragment
+        android:id="@+id/customerListFragment"
+        android:name="me.kzaman.android.ui.view.fragments.customer.CustomerListFragment"
+        android:label="CustomerListFragment" />
 
     <fragment
         android:id="@+id/customerSelectionFragment"
