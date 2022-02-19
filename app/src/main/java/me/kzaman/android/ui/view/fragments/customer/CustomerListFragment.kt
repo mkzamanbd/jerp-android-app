@@ -1,14 +1,18 @@
 package me.kzaman.android.ui.view.fragments.customer
 
+import android.app.AlertDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import me.kzaman.android.R
 import me.kzaman.android.adapter.CustomerListAdapter
 import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.data.model.CustomerModel
@@ -115,6 +119,26 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
             etCustomerSearch.text = null
             hideSoftKeyboard(mContext, etCustomerSearch)
             ivSearchClear.visible(false)
+        }
+        @Suppress("NAME_SHADOWING")
+        binding.ivCustomerFilter.setOnClickListener {
+            val builder = AlertDialog.Builder(mContext)
+            val view: View = layoutInflater.inflate(R.layout.dialog_customer_filter, null)
+            builder.setView(view)
+            builder.setCancelable(false)
+
+            val alertDialog: AlertDialog = builder.create()
+            if (alertDialog.window != null) {
+                alertDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+            alertDialog.show()
+
+            val closeBtn = view.findViewById<ImageView>(R.id.imageView)
+
+            closeBtn.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
         }
     }
 
