@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context=".ui.view.fragments.ProductListFragment">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -47,7 +46,7 @@
                 android:layout_marginStart="@dimen/five"
                 android:padding="@dimen/eight"
                 android:src="@drawable/ic_baseline_close_24"
-                android:visibility="gone" />
+                android:visibility="invisible" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

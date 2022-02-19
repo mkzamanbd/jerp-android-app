@@ -1,38 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/fifteen"
-    android:layout_marginEnd="@dimen/fifteen"
-    android:layout_marginBottom="@dimen/five"
-    android:background="@drawable/bg_bottom_line"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/fifteen"
-    android:paddingBottom="@dimen/fifteen">
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:padding="@dimen/ten"
+    android:weightSum="5">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/prod_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textColor="@color/primaryTextColor" />
-
-        <TextView
-            android:id="@+id/pack_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/five"
-            android:text="@string/todo" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <TextView
-        android:id="@+id/code"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/notification" />
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/iv_customer"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/img_avatar"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/tv_payment_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five"
+            tools:text="Cash" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/RobotoRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="@string/author_name"
+                android:textAllCaps="true"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/fourteen" />
+
+
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/RobotoRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/two"
+                android:drawablePadding="@dimen/five"
+                android:gravity="center_vertical"
+                android:textColor="@color/childTextColor"
+                android:textSize="@dimen/twelve"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
+                app:drawableTint="@color/colorPrimary"
+                tools:text="Dhaka" />
+
+            <TextView
+                android:id="@+id/tv_territory"
+                style="@style/RobotoRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/two"
+                android:drawablePadding="@dimen/five"
+                android:gravity="center_vertical"
+                android:textColor="@color/childTextColor"
+                android:textSize="@dimen/twelve"
+                app:drawableStartCompat="@drawable/ic_baseline_business_15"
+                app:drawableTint="@color/colorPrimary"
+                tools:text="MuMCH-2" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/RobotoRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/two"
+                android:drawablePadding="@dimen/five"
+                android:gravity="center_vertical"
+                android:textColor="@color/childTextColor"
+                android:textSize="@dimen/twelve"
+                app:drawableStartCompat="@drawable/ic_baseline_local_phone_15"
+                app:drawableTint="@color/colorPrimary"
+                tools:text="MuMCH-2" />
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_baseline_shopping_basket_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary"
+            tools:ignore="TouchTargetSizeCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
