@@ -149,7 +149,7 @@ fun getMenuIcon(featureId: String): Int {
             return R.drawable.ic_bt_return
         }
         OFFER -> {
-            return R.drawable.ic_bt_offers
+            return R.drawable.ic_baseline_card_giftcard_36
         }
         PAYMENT_COLLECTION -> {
             return R.drawable.ic_bt_payments
