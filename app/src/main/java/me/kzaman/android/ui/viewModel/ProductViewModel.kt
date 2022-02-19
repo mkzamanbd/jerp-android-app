@@ -32,7 +32,7 @@ class ProductViewModel @Inject constructor(
         _localProducts.value = repository.getLocalProducts()
     }
 
-    fun saveProductToLocal(products: ArrayList<ProductEntities>) = viewModelScope.launch {
+    suspend fun saveProductToLocal(products: ArrayList<ProductEntities>) = viewModelScope.launch {
         repository.saveLocalProducts(products)
     }
 }

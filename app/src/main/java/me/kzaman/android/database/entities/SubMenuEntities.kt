@@ -7,9 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "sub_menus")
 class SubMenuEntities(
-    @PrimaryKey
-    @ColumnInfo(name = "menu_id")
-    @NonNull
+    @PrimaryKey @ColumnInfo(name = "menu_id") @NonNull
     val menuId: String,
 
     @ColumnInfo(name = "parent_menu_id")

@@ -5,18 +5,24 @@ import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import me.kzaman.android.adapter.CustomerListAdapter
 import me.kzaman.android.base.BaseFragment
+import me.kzaman.android.data.model.CustomerModel
+import me.kzaman.android.database.entities.CustomerEntities
 import me.kzaman.android.databinding.FragmentCustomerListBinding
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.CustomerActivity
 import me.kzaman.android.ui.viewModel.CommonViewModel
 import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.handleNetworkError
-import me.kzaman.android.utils.hideSoftKeyboard
+import me.kzaman.android.utils.toastWarning
 import me.kzaman.android.utils.visible
+import me.kzaman.android.utils.hideSoftKeyboard
+import java.util.ArrayList
 
 
 @AndroidEntryPoint
@@ -46,19 +52,53 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
             adapter = customerListAdapter
         }
 
-        viewModel.getAllRemoteCustomer()
+        viewModel.getAllCustomersLocalDb()
 
-        viewModel.customers.observe(viewLifecycleOwner) {
-            loadingUtils.isLoading(it is Resource.Loading)
+        viewModel.localCustomers.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val customerModels: ArrayList<CustomerModel> = ArrayList()
 
-            when (it) {
-                is Resource.Success -> {
-                    customerListAdapter.setCustomers(it.value.customerList)
+                it.forEach { customerEntities ->
+                    val item = CustomerModel(
+                        sbuId = customerEntities.sbuId,
+                        compositeKey = customerEntities.compositeKey,
+                        customerId = customerEntities.customerId,
+                        dsId = customerEntities.dsId ?: "",
+                        salesAreaId = customerEntities.salesAreaId,
+                        areaLevel = customerEntities.areaLevel,
+                        customerType = customerEntities.customerType,
+                        customerCode = customerEntities.customerCode,
+                        displayCode = customerEntities.displayCode,
+                        customerName = customerEntities.customerName,
+                        creditFlag = customerEntities.creditFlag,
+                        displayName = customerEntities.displayName ?: "",
+                        creditLimit = customerEntities.creditLimit,
+                        searchKey = customerEntities.searchKey,
+                        vatChallaFlag = customerEntities.vatChallaFlag ?: "",
+                        status = customerEntities.status,
+                        currentDue = customerEntities.currentDue,
+                        currentAdvance = customerEntities.currentAdvance,
+                        phone = customerEntities.phone,
+                        email = customerEntities.email,
+                        customerAddress = customerEntities.customerAddress,
+                        photo = customerEntities.photo,
+                        territoryCode = customerEntities.territoryCode,
+                        territoryName = customerEntities.territoryName,
+                        paymentMode = customerEntities.paymentMode ?: "",
+                        cashDueAmt = customerEntities.cashDueAmt,
+                        activateVerifyDate = customerEntities.activateVerifyDate,
+                        activateVerifyBy = customerEntities.activateVerifyBy,
+                        hqType = customerEntities.hqType,
+                    )
+                    customerModels.add(item)
                 }
-                is Resource.Failure -> handleNetworkError(it, mActivity)
-                else -> Log.d("unknownError", "Unknown Error")
+
+                customerListAdapter.setCustomers(customerModels)
+            } else {
+                getRemoteCustomerList()
             }
         }
+
 
         val etCustomerSearch = binding.etCustomerSearch
         val ivSearchClear = binding.ivSearchClear
@@ -76,5 +116,70 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
             hideSoftKeyboard(mContext, etCustomerSearch)
             ivSearchClear.visible(false)
         }
+    }
+
+    private fun getRemoteCustomerList() {
+        viewModel.getAllRemoteCustomer()
+        viewModel.customers.observe(viewLifecycleOwner) {
+            loadingUtils.isLoading(it is Resource.Loading)
+
+            when (it) {
+                is Resource.Success -> {
+                    val response = it.value
+                    if (response.responseCode == 200) {
+                        customerListAdapter.setCustomers(response.customerList)
+                        saveCustomerLocalDb(response.customerList)
+                    } else {
+                        toastWarning(mActivity, "No customer found!")
+                    }
+                }
+                is Resource.Failure -> handleNetworkError(it, mActivity)
+                else -> Log.d("unknownError", "Unknown Error")
+            }
+        }
+    }
+
+    private fun saveCustomerLocalDb(customerList: List<CustomerModel>) {
+        val customerItems: ArrayList<CustomerEntities> = ArrayList()
+
+        customerList.forEach { customerModel ->
+            val item = CustomerEntities(
+                sbuId = customerModel.sbuId,
+                compositeKey = customerModel.compositeKey,
+                customerId = customerModel.customerId,
+                dsId = customerModel.dsId,
+                salesAreaId = customerModel.salesAreaId,
+                areaLevel = customerModel.areaLevel,
+                customerType = customerModel.customerType,
+                customerCode = customerModel.customerCode,
+                displayCode = customerModel.displayCode,
+                customerName = customerModel.customerName,
+                creditFlag = customerModel.creditFlag,
+                displayName = customerModel.displayName,
+                creditLimit = customerModel.creditLimit,
+                searchKey = customerModel.searchKey,
+                vatChallaFlag = customerModel.vatChallaFlag,
+                status = customerModel.status,
+                currentDue = customerModel.currentDue,
+                currentAdvance = customerModel.currentAdvance,
+                phone = customerModel.phone,
+                email = customerModel.email,
+                customerAddress = customerModel.customerAddress,
+                photo = customerModel.photo,
+                territoryCode = customerModel.territoryCode,
+                territoryName = customerModel.territoryName,
+                paymentMode = customerModel.paymentMode,
+                cashDueAmt = customerModel.cashDueAmt,
+                activateVerifyDate = customerModel.activateVerifyDate,
+                activateVerifyBy = customerModel.activateVerifyBy,
+                hqType = customerModel.hqType,
+            )
+            customerItems.add(item)
+        }
+
+        lifecycleScope.launch {
+            viewModel.saveCustomersLocalDb(customerItems)
+        }
+
     }
 }

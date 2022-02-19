@@ -10,6 +10,7 @@ import me.kzaman.android.repository.CommonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.android.data.response.DefaultResponse
+import me.kzaman.android.database.entities.CustomerEntities
 import me.kzaman.android.database.entities.SubMenuEntities
 import me.kzaman.android.database.entities.MenuEntities
 import javax.inject.Inject
@@ -61,6 +62,18 @@ class CommonViewModel @Inject constructor(
     fun getAllRemoteCustomer() = viewModelScope.launch {
         _customers.value = Resource.Loading
         _customers.value = repository.getAllRemoteCustomer()
+    }
+
+    suspend fun saveCustomersLocalDb(customerEntities: ArrayList<CustomerEntities>) =
+        viewModelScope.launch {
+            repository.saveCustomersLocalDb(customerEntities)
+        }
+
+    private val _localCustomers: MutableLiveData<List<CustomerEntities>> = MutableLiveData()
+    val localCustomers: LiveData<List<CustomerEntities>> = _localCustomers
+
+    fun getAllCustomersLocalDb() = viewModelScope.launch {
+        _localCustomers.value = repository.getAllCustomersLocalDb()
     }
 
 }

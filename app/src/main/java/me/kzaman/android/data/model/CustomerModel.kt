@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class CustomerModel(
     @SerializedName("sbu_id") val sbuId: String,
-    @SerializedName("id") val id: String,
     @SerializedName("composite_key") val compositeKey: String,
     @SerializedName("customer_id") val customerId: String,
     @SerializedName("ds_id") val dsId: String,

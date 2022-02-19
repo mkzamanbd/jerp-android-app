@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.kzaman.android.database.AppDatabase
+import me.kzaman.android.database.dao.CustomerDao
 import me.kzaman.android.database.dao.MenuDao
 import me.kzaman.android.database.dao.ProductDao
 import javax.inject.Singleton
@@ -32,4 +33,8 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideMenuDAO(database: AppDatabase): MenuDao = database.menuDao()
+
+    @Singleton
+    @Provides
+    fun provideCustomerDAO(database: AppDatabase): CustomerDao = database.customerDao()
 }

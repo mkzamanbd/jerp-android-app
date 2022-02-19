@@ -27,10 +27,12 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun clearAllTable() = viewModelScope.launch {
-        // delete menu
+        // clear menu table
         appDatabase.menuDao().deleteMenuTable()
         appDatabase.menuDao().deleteSubMenuTable()
-        // delete product
+        // clear product table
         appDatabase.productDao().deleteProductTable()
+        // clear customer table
+        appDatabase.customerDao().deleteAllCustomers()
     }
 }
