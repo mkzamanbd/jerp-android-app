@@ -158,7 +158,7 @@ fun getMenuIcon(featureId: String): Int {
             return R.drawable.ic_bt_product
         }
         CUSTOMER_LIST -> {
-            return R.drawable.ic_bt_customer
+            return R.drawable.ic_baseline_people_36
         }
         REVIEW_ORDER -> {
             return R.drawable.ic_hm_review_order

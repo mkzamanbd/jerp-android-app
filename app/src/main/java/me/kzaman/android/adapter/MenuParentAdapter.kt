@@ -79,6 +79,7 @@ class MenuParentAdapter(
                 ORDER -> {
                     menu.iconId = R.drawable.ic_hm_order
                 }
+
                 DCR -> {
                     menu.iconId = R.drawable.ic_hm_visit
                 }
@@ -96,12 +97,11 @@ class MenuParentAdapter(
                 }
 
                 CUSTOMER_LIST -> {
-                    menu.iconId = R.drawable.ic_hm_customer
+                    menu.iconId = R.drawable.ic_baseline_people_36
                 }
 
                 ADVISER_LIST -> {
                     menu.iconId = R.drawable.ic_hm_doctors;
-
                 }
 
                 NOTICE -> {
@@ -109,7 +109,7 @@ class MenuParentAdapter(
                 };
 
                 OFFER -> {
-                    menu.iconId = R.drawable.ic_hm_offer
+                    menu.iconId = R.drawable.ic_baseline_card_giftcard_36
                 }
 
                 SETTING -> {
@@ -176,7 +176,7 @@ class MenuParentAdapter(
                     menu.iconId = R.drawable.ic_hm_review_mtp
                 }
                 else -> {
-                    menu.iconId = R.drawable.ic_no_image_hm
+                    menu.iconId = R.drawable.ic_baseline_image_not_supported_36
                 }
             }
         }
