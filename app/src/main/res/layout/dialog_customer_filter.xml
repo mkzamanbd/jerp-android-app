@@ -43,12 +43,12 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/customer_type_all"
+                    android:id="@+id/customer_type_both"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="All" />
+                    android:text="Both" />
 
                 <RadioButton
                     android:id="@+id/customer_type_chemist"
@@ -85,12 +85,12 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/payment_method_all"
+                    android:id="@+id/payment_method_both"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="All" />
+                    android:text="Both" />
 
                 <RadioButton
                     android:id="@+id/payment_method_credit"
@@ -127,12 +127,12 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/verification_all"
+                    android:id="@+id/verification_both"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="All" />
+                    android:text="Both" />
 
                 <RadioButton
                     android:id="@+id/verification_verified"
@@ -157,19 +157,23 @@
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/customer_verification_layout">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_filter_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/ten"
-                android:text="Clear" />
+                android:background="@drawable/bg_primary_outline_button"
+                android:text="Clear"
+                android:textColor="@color/colorPrimary" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/ten"
-                android:text="Filter" />
+                android:background="@drawable/bg_primary_button"
+                android:text="Filter"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
