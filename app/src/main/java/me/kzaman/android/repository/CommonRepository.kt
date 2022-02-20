@@ -1,5 +1,6 @@
 package me.kzaman.android.repository
 
+import androidx.sqlite.db.SupportSQLiteQuery
 import me.kzaman.android.base.BaseRepository
 import me.kzaman.android.database.dao.CustomerDao
 import me.kzaman.android.database.dao.MenuDao
@@ -32,4 +33,5 @@ class CommonRepository @Inject constructor(
         customerDao.insertCustomers(customerEntities)
 
     suspend fun getAllCustomersLocalDb() = customerDao.getLocalCustomers()
+    suspend fun getAllCustomersLocalDb(query: SupportSQLiteQuery) = customerDao.getLocalCustomers(query)
 }

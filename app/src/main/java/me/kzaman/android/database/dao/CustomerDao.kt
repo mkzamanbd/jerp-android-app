@@ -1,9 +1,7 @@
 package me.kzaman.android.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import me.kzaman.android.database.entities.CustomerEntities
 
 
@@ -14,6 +12,9 @@ interface CustomerDao {
 
     @Query("SELECT * FROM customers")
     suspend fun getLocalCustomers(): List<CustomerEntities>
+
+    @RawQuery
+    suspend fun getLocalCustomers(query: SupportSQLiteQuery): List<CustomerEntities>
 
     @Query("DELETE FROM customers")
     suspend fun deleteAllCustomers()

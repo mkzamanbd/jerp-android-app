@@ -13,6 +13,14 @@
         android:layout_height="match_parent"
         android:padding="@dimen/ten">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter Customer"
+            style="@style/RobotoBold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -21,6 +29,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_close_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/five"
+            android:background="@color/whiteCardColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
 
         <LinearLayout
             android:id="@+id/customer_type_layout"
@@ -38,17 +55,17 @@
                 android:text="Customer Type" />
 
             <RadioGroup
+                android:id="@+id/customer_type_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/customer_type_both"
+                    android:id="@+id/customer_type_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
-                    android:text="Both" />
+                    android:text="All" />
 
                 <RadioButton
                     android:id="@+id/customer_type_chemist"
@@ -80,17 +97,17 @@
                 android:text="Payment Method" />
 
             <RadioGroup
+                android:id="@+id/payment_type_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/payment_method_both"
+                    android:id="@+id/payment_method_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
-                    android:text="Both" />
+                    android:text="All" />
 
                 <RadioButton
                     android:id="@+id/payment_method_credit"
@@ -127,12 +144,11 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/verification_both"
+                    android:id="@+id/verification_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
-                    android:text="Both" />
+                    android:text="All" />
 
                 <RadioButton
                     android:id="@+id/verification_verified"

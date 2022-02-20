@@ -3,6 +3,7 @@ package me.kzaman.android.ui.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.sqlite.db.SimpleSQLiteQuery
 import me.kzaman.android.base.BaseViewModel
 import me.kzaman.android.data.response.MobileMenuResponse
 import me.kzaman.android.network.Resource
@@ -75,5 +76,26 @@ class CommonViewModel @Inject constructor(
     fun getAllCustomersLocalDb() = viewModelScope.launch {
         _localCustomers.value = repository.getAllCustomersLocalDb()
     }
+
+    fun getFilteredCustomersLocalDb(customerType: String? = null, paymentType: String? = null) =
+        viewModelScope.launch {
+            var whereCondition = ""
+            if (customerType == "422" || customerType == "424") {
+                whereCondition = "WHERE customer_type = '$customerType'"
+            }
+
+            if (paymentType != "") {
+                whereCondition = if (whereCondition != "") {
+                    "$whereCondition AND credit_flag = '$paymentType'"
+                } else {
+                    "WHERE credit_flag = '$paymentType'"
+                }
+            }
+
+
+            val sqlQuery = "SELECT * FROM customers $whereCondition"
+            val query = SimpleSQLiteQuery(sqlQuery)
+            _localCustomers.value = repository.getAllCustomersLocalDb(query)
+        }
 
 }
