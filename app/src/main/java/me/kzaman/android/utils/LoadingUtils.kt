@@ -7,15 +7,15 @@ import me.kzaman.android.R
 import me.kzaman.android.interfaces.LoadingConfig
 
 class LoadingUtils(
-    val mContext: Context,
+    private val mContext: Context,
 ) : LoadingConfig {
 
     init {
-        createLoadingDialog()
+        onCreateLoadingDialog()
     }
 
-    lateinit var loadingDialog: Dialog
-    private fun createLoadingDialog() {
+    private lateinit var loadingDialog: Dialog
+    private fun onCreateLoadingDialog() {
         loadingDialog = Dialog(mContext)
         loadingDialog.setContentView(R.layout.dialog_loading_layout)
 
@@ -39,7 +39,6 @@ class LoadingUtils(
      */
     override fun dismissLoadingDialog() {
         try {
-            loadingDialog.hide()
             loadingDialog.dismiss()
         } catch (e: Exception) {
             e.printStackTrace()

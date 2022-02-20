@@ -1,6 +1,6 @@
 package me.kzaman.android.ui.view.fragments.customer
 
-import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -120,23 +120,20 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
             hideSoftKeyboard(mContext, etCustomerSearch)
             ivSearchClear.visible(false)
         }
-        @Suppress("NAME_SHADOWING")
+
         binding.ivCustomerFilter.setOnClickListener {
-            val builder = AlertDialog.Builder(mContext)
-            val view: View = layoutInflater.inflate(R.layout.dialog_customer_filter, null)
-            builder.setView(view)
-            builder.setCancelable(false)
+            val dialog = Dialog(mContext, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+            dialog.setContentView(R.layout.dialog_customer_filter)
+            dialog.setCancelable(false)
 
-            val alertDialog: AlertDialog = builder.create()
-            if (alertDialog.window != null) {
-                alertDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+            if (dialog.window != null) {
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
             }
-            alertDialog.show()
+            dialog.show()
 
-            val closeBtn = view.findViewById<ImageView>(R.id.imageView)
-
+            val closeBtn = dialog.findViewById<ImageView>(R.id.imageView)
             closeBtn.setOnClickListener {
-                alertDialog.dismiss()
+                dialog.dismiss()
             }
 
         }
