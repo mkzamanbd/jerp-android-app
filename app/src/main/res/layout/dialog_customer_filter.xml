@@ -43,7 +43,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButtonAll"
+                    android:id="@+id/customer_type_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -51,14 +51,14 @@
                     android:text="All" />
 
                 <RadioButton
-                    android:id="@+id/radioButtonChemist"
+                    android:id="@+id/customer_type_chemist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Chemist" />
 
                 <RadioButton
-                    android:id="@+id/radioButtonInstitution"
+                    android:id="@+id/customer_type_institution"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,6 +85,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/payment_method_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -92,12 +93,14 @@
                     android:text="All" />
 
                 <RadioButton
+                    android:id="@+id/payment_method_credit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Credit" />
 
                 <RadioButton
+                    android:id="@+id/payment_method_cash"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -124,6 +127,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/verification_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -131,12 +135,14 @@
                     android:text="All" />
 
                 <RadioButton
+                    android:id="@+id/verification_verified"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Verified" />
 
                 <RadioButton
+                    android:id="@+id/verification_unverified"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,7 +170,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/ten"
                 android:text="Filter" />
-
 
         </LinearLayout>
 

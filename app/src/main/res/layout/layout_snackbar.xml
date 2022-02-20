@@ -3,7 +3,7 @@
     android:id="@+id/snack_bar_layout_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_toast"
+    android:background="@drawable/bg_toast_message"
     android:orientation="horizontal"
     android:padding="@dimen/_5sdp">
 

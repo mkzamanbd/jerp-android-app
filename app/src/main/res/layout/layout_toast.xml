@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:padding="@dimen/_5sdp"
-    android:background="@drawable/bg_toast"
+    android:background="@drawable/bg_toast_message"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
