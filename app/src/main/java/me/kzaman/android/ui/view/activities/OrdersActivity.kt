@@ -1,6 +1,7 @@
 package me.kzaman.android.ui.view.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -9,10 +10,15 @@ import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.android.R
 import me.kzaman.android.base.BaseActivity
+import me.kzaman.android.data.model.CustomerModel
 import me.kzaman.android.utils.visible
 
 @AndroidEntryPoint
 class OrdersActivity : BaseActivity() {
+
+    companion object {
+        var customerModel: CustomerModel? = null
+    }
 
     private lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView

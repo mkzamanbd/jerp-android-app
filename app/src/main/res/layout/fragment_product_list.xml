@@ -1,175 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ln_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_customer_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dividerHeight"
-        app:cardElevation="@dimen/zero">
+    <data>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/fifteen"
-            android:layout_marginTop="@dimen/five"
-            android:layout_marginEnd="@dimen/fifteen"
-            android:layout_marginBottom="@dimen/five">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_image"
-                android:layout_width="@dimen/large_image_size"
-                android:layout_height="@dimen/large_image_size"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/ten"
-                android:background="@drawable/bg_white_with_stroke"
-                android:padding="@dimen/two"
-                android:src="@drawable/img_avatar" />
-
-            <LinearLayout
-                android:id="@+id/ln_user_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/ten"
-                android:layout_toStartOf="@+id/rl_cart"
-                android:layout_toEndOf="@+id/iv_image"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_customer_name"
-                    style="@style/RobotoMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="@dimen/ten"
-                    android:maxLines="2"
-                    android:padding="@dimen/five"
-                    android:text="@string/author_name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/fifteen" />
-
-                <TextView
-                    android:id="@+id/tv_customer_id"
-                    style="@style/RobotoRegular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/five"
-                    android:text="@string/location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sixteen" />
-
-                <TextView
-                    android:id="@+id/tv_current_due"
-                    style="@style/RobotoBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="@dimen/ten"
-                    android:padding="@dimen/five"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/fourteen"
-                    android:visibility="gone"
-                    tools:text="Due: 15666.63" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/rl_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/five"
-                android:orientation="vertical"
-                tools:ignore="UseCompoundDrawables">
-
-                <TextView
-                    android:id="@+id/tv_cart_item"
-                    style="@style/RobotoBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="-10dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/bg_badge_white"
-                    android:gravity="center"
-                    android:minWidth="@dimen/twenty"
-                    android:minHeight="@dimen/twenty"
-                    android:padding="2dp"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/todo"
-                    android:padding="@dimen/five"
-                    android:src="@drawable/ic_baseline_shopping_cart_24"
-                    app:tint="@color/colorPrimary" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dividerHeight"
-        app:cardElevation="@dimen/zero">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/fifteen"
-            android:layout_marginTop="@dimen/five"
-            android:layout_marginEnd="@dimen/fifteen"
-            android:layout_marginBottom="@dimen/five">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_search"
-                style="@style/RobotoRegular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_white_input"
-                android:drawableStart="@drawable/ic_baseline_search_24"
-                android:gravity="center_vertical"
-                android:hint="@string/search"
-                android:inputType="text"
-                android:padding="@dimen/eight"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/fifteen"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_cancel_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/five"
-                android:padding="@dimen/eight"
-                android:src="@drawable/ic_baseline_close_24"
-                android:visibility="invisible" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+        <variable
+            name="productList"
+            type="me.kzaman.android.ui.viewModel.OrderViewModel" />
+    </data>
 
     <LinearLayout
+        android:id="@+id/ln_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_customer_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dividerHeight"
+            app:cardElevation="@dimen/zero">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fifteen"
+                android:layout_marginTop="@dimen/five"
+                android:layout_marginEnd="@dimen/fifteen"
+                android:layout_marginBottom="@dimen/five">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="@dimen/large_image_size"
+                    android:layout_height="@dimen/large_image_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/ten"
+                    android:background="@drawable/bg_white_with_stroke"
+                    android:padding="@dimen/two"
+                    android:onClick="@{productList::customerImageView}"
+                    android:src="@drawable/img_avatar" />
+
+                <LinearLayout
+                    android:id="@+id/ln_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/ten"
+                    android:layout_toStartOf="@+id/rl_cart"
+                    android:layout_toEndOf="@+id/iv_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_customer_name"
+                        style="@style/RobotoMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/ten"
+                        android:maxLines="2"
+                        android:padding="@dimen/five"
+                        android:text="@={productList.mlCustomerName}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/fifteen"
+                        tools:text="@string/author_name" />
+
+                    <TextView
+                        android:id="@+id/tv_customer_id"
+                        style="@style/RobotoRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/five"
+                        android:text="@={productList.mlCustomerAddress}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/sixteen"
+                        tools:text="@string/location" />
+
+                    <TextView
+                        android:id="@+id/tv_current_due"
+                        style="@style/RobotoBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/ten"
+                        android:padding="@dimen/five"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/fourteen"
+                        android:visibility="gone"
+                        tools:text="Due: 15666.63" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rl_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/five"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <TextView
+                        android:id="@+id/tv_cart_item"
+                        style="@style/RobotoBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="-10dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/bg_badge_white"
+                        android:gravity="center"
+                        android:minWidth="@dimen/twenty"
+                        android:minHeight="@dimen/twenty"
+                        android:padding="2dp"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:padding="@dimen/five"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"
+                        app:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dividerHeight"
+            app:cardElevation="@dimen/zero">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fifteen"
+                android:layout_marginTop="@dimen/five"
+                android:layout_marginEnd="@dimen/fifteen"
+                android:layout_marginBottom="@dimen/five">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_search"
+                    style="@style/RobotoRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_input"
+                    android:drawableStart="@drawable/ic_baseline_search_24"
+                    android:gravity="center_vertical"
+                    android:hint="@string/search"
+                    android:inputType="text"
+                    android:padding="@dimen/eight"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/fifteen"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_cancel_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/five"
+                    android:padding="@dimen/eight"
+                    android:src="@drawable/ic_baseline_close_24"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"
@@ -178,6 +184,4 @@
             android:layout_marginTop="@dimen/five"
             tools:listitem="@layout/product_list_item" />
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

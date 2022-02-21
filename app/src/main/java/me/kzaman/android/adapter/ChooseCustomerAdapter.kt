@@ -56,6 +56,7 @@ class ChooseCustomerAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(mActivity, OrdersActivity::class.java)
+            OrdersActivity.customerModel = customer
             intent.putExtra("productSelection", "YES")
             goToNextActivityAnimation(mActivity, intent)
         }
