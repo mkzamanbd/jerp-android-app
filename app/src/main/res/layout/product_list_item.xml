@@ -1,34 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/fifteen"
-    android:layout_marginEnd="@dimen/fifteen"
-    android:layout_marginBottom="@dimen/five"
     android:background="@drawable/bg_bottom_line"
     android:orientation="vertical"
     android:paddingTop="@dimen/five"
-    android:paddingBottom="@dimen/fifteen">
+    android:paddingBottom="@dimen/five">
 
     <LinearLayout
+        android:id="@+id/product_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/fifteen"
+        android:layout_toStartOf="@+id/cart_info"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title"
-            android:textSize="@dimen/fourteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:textColor="@color/primaryTextColor" />
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/fourteen" />
+
+        <TextView
+            android:id="@+id/tv_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/twelve"
+            tools:text="@string/notification" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_details"
-        android:textSize="@dimen/twelve"
+    <LinearLayout
+        android:id="@+id/cart_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/notification" />
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_qty"
+            style="@style/RobotoBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/ten"
+            android:background="@drawable/bg_white_with_stroke"
+            android:gravity="center"
+            android:padding="@dimen/five"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/twelve"
+            tools:text="200" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_add_to_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/five"
+            android:background="@drawable/bg_add_button"
+            android:gravity="center"
+            android:padding="@dimen/two"
+            android:src="@drawable/ic_baseline_add_20"
+
+            app:tint="@color/colorPrimary"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+</RelativeLayout>

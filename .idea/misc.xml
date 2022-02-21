@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/background.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/baseline_directions_bike_white_36.xml" value="0.3635" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_add_button.xml" value="0.34" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_background.xml" value="0.34" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_bottom_line.xml" value="0.3575" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_custom_layout.xml" value="0.37864583333333335" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_home_profile.xml" value="0.292" />
@@ -64,6 +66,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_notification.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product.xml" value="0.24954710144927536" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_list.xml" value="0.3625" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_selection.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_profile.xml" value="0.1546875" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_register.xml" value="0.22270114942528735" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_settings.xml" value="0.13541666666666666" />
