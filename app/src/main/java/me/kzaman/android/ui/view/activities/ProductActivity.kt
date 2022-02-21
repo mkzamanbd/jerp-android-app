@@ -8,14 +8,11 @@ import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
 import me.kzaman.android.R
 import me.kzaman.android.base.BaseActivity
-import me.kzaman.android.utils.startNewActivityAnimation
 import me.kzaman.android.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import me.kzaman.android.databinding.LayoutFragmentsBinding
 
 @AndroidEntryPoint
 class ProductActivity : BaseActivity() {
-    private lateinit var binding: LayoutFragmentsBinding
 
     private lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView
@@ -23,18 +20,16 @@ class ProductActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LayoutFragmentsBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.layout_fragments)
         init()
 
     }
 
     override fun init() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragment_view) as NavHostFragment
+        val navController = navHost.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
         navGraph.setStartDestination(R.id.productListFragment)
         navController.graph = navGraph
 
@@ -64,7 +59,8 @@ class ProductActivity : BaseActivity() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
         } else {
-            startNewActivityAnimation(DashboardActivity::class.java, false);
+            super.onBackPressed()
+            overridePendingTransition(0, R.anim.animation_slide_out_right)
         }
     }
 }

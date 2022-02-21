@@ -15,6 +15,7 @@ import me.kzaman.android.utils.startNewActivityAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import me.kzaman.android.BuildConfig
+import me.kzaman.android.R
 import me.kzaman.android.utils.visible
 import javax.inject.Inject
 
@@ -85,7 +86,8 @@ class SettingsActivity : BaseActivity() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
         } else {
-            startNewActivityAnimation(DashboardActivity::class.java, false);
+            super.onBackPressed()
+            overridePendingTransition(0, R.anim.animation_slide_out_right)
         }
     }
 }
