@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_bottom_line"
     android:orientation="vertical"
-    android:paddingTop="@dimen/five"
+    android:paddingTop="@dimen/ten"
     android:paddingBottom="@dimen/five">
 
     <LinearLayout
@@ -56,6 +56,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="@dimen/twelve"
+            android:visibility="gone"
             tools:text="200" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -68,6 +69,7 @@
             android:gravity="center"
             android:padding="@dimen/two"
             android:src="@drawable/ic_baseline_add_20"
+            android:visibility="invisible"
 
             app:tint="@color/colorPrimary"
             tools:ignore="TouchTargetSizeCheck" />

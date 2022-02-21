@@ -14,15 +14,19 @@
     <fragment
         android:id="@+id/customerListFragment"
         android:name="me.kzaman.android.ui.view.fragments.customer.CustomerListFragment"
-        android:label="CustomerListFragment" />
+        android:label="CustomerListFragment"
+        tools:layout="@layout/fragment_customer_list" />
 
     <fragment
         android:id="@+id/customerSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment"
-        android:label="fragment_customer_selection" />
+        android:label="fragment_customer_selection"
+        tools:layout="@layout/fragment_customer_list" />
+
     <fragment
         android:id="@+id/productSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment"
-        android:label="fragment_product_selection" />
+        android:label="fragment_product_selection"
+        tools:layout="@layout/fragment_product_list" />
 
 </navigation>

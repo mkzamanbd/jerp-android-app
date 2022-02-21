@@ -144,6 +144,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>(
     override fun init() {
         (activity as ProductActivity).showToolbar(true) //display toolbar
         (activity as ProductActivity).setToolbarTitle("Product List")
+        binding.cvCustomerInfo.visibility = View.GONE
     }
 
     private fun getProductList() {

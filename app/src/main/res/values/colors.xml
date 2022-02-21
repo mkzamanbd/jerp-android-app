@@ -24,6 +24,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="badge_icon">#FF6600</color>
 
     <!-- toast background color -->
     <color name="success_color">#2CD994</color>

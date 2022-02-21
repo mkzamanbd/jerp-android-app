@@ -1,6 +1,5 @@
 package me.kzaman.android.ui.view.fragments.orders
 
-import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.android.adapter.ChooseCustomerAdapter
@@ -11,12 +10,6 @@ import me.kzaman.android.ui.view.fragments.customer.CustomerListFragment
 
 @AndroidEntryPoint
 class CustomerSelectionFragment : CustomerListFragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mContext = requireContext()
-        mActivity = requireActivity()
-    }
 
     override fun init() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
