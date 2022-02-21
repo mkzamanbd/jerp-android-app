@@ -112,11 +112,12 @@
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/customer_arrow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_baseline_shopping_basket_24"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/linearLayout2"
             app:layout_constraintTop_toTopOf="parent"

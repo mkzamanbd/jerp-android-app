@@ -62,7 +62,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="@dimen/ten"
+        android:layout_marginTop="@dimen/five"
         android:id="@+id/rv_customer_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

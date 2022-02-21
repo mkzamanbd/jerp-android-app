@@ -38,8 +38,9 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
     private val viewModel by viewModels<CommonViewModel>()
     private lateinit var customerListAdapter: CustomerListAdapter
 
-    private var customerType: String? = ""
-    private var paymentType: String? = ""
+    private var customerType: String = ""
+    private var paymentType: String = ""
+    private var isCustomerFilter : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +65,7 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
         viewModel.getAllCustomersLocalDb()
 
         viewModel.localCustomers.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
+            if (it.isNotEmpty() || isCustomerFilter) {
                 val customerModels: ArrayList<CustomerModel> = ArrayList()
 
                 it.forEach { customerEntities ->
@@ -196,6 +197,7 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
 
             filterBtn.setOnClickListener {
                 viewModel.getFilteredCustomersLocalDb(customerType, paymentType)
+                isCustomerFilter = true
                 dialog.dismiss()
             }
             closeBtn.setOnClickListener {
