@@ -26,7 +26,7 @@ import me.kzaman.android.utils.handleNetworkError
 import java.util.ArrayList
 
 @AndroidEntryPoint
-class ProductListFragment : BaseFragment<FragmentProductListBinding>(
+open class ProductListFragment : BaseFragment<FragmentProductListBinding>(
     FragmentProductListBinding::inflate
 ) {
 
@@ -45,9 +45,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
 
         productListAdapter = ProductListAdapter(arrayListOf(), mContext)
         loadingUtils = LoadingUtils(mContext)
-
-        (activity as ProductActivity).showToolbar(true) //display toolbar
-        (activity as ProductActivity).setToolbarTitle("Product List")
+        init()
 
         val productListRecyclerView = binding.productList
 
@@ -141,6 +139,11 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                 productListAdapter.setProducts(products)
             }
         }
+    }
+
+    override fun init() {
+        (activity as ProductActivity).showToolbar(true) //display toolbar
+        (activity as ProductActivity).setToolbarTitle("Product List")
     }
 
     private fun getProductList() {

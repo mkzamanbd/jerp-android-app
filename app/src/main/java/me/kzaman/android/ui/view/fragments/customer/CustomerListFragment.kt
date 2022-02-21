@@ -60,8 +60,8 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
         loadingUtils = LoadingUtils(mContext)
         rvCustomerList = binding.rvCustomerList
         init()
-        viewModel.getAllCustomersLocalDb()
 
+        viewModel.getAllCustomersLocalDb()
         viewModel.localCustomers.observe(viewLifecycleOwner) {
             if (it.isNotEmpty() || isCustomerFilter) {
                 val customerModels: ArrayList<CustomerModel> = ArrayList()
@@ -106,7 +106,6 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
             }
         }
 
-
         val etCustomerSearch = binding.etCustomerSearch
         val ivSearchClear = binding.ivSearchClear
 
@@ -125,82 +124,85 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
         }
 
         binding.ivCustomerFilter.setOnClickListener {
-            val dialog = Dialog(mContext, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-            dialog.setContentView(R.layout.dialog_customer_filter)
-            dialog.setCancelable(true)
+            customerFilter()
+        }
+    }
 
-            if (dialog.window != null) {
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+    private fun customerFilter() {
+        val dialog = Dialog(mContext, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        dialog.setContentView(R.layout.dialog_customer_filter)
+        dialog.setCancelable(true)
+
+        if (dialog.window != null) {
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+        }
+        dialog.show()
+
+        val closeBtn = dialog.findViewById<ImageView>(R.id.imageView)
+        val filterBtn = dialog.findViewById<AppCompatButton>(R.id.button_filter)
+
+        val customerTypeRadioGroup = dialog.findViewById<RadioGroup>(R.id.customer_type_group)
+        val paymentTypeRadioGroup = dialog.findViewById<RadioGroup>(R.id.payment_type_group)
+
+        when (customerType) {
+            "422" -> {
+                customerTypeRadioGroup.check(R.id.customer_type_chemist)
             }
-            dialog.show()
-
-            val closeBtn = dialog.findViewById<ImageView>(R.id.imageView)
-            val filterBtn = dialog.findViewById<AppCompatButton>(R.id.button_filter)
-
-            val customerTypeRadioGroup = dialog.findViewById<RadioGroup>(R.id.customer_type_group)
-            val paymentTypeRadioGroup = dialog.findViewById<RadioGroup>(R.id.payment_type_group)
-
-            when (customerType) {
-                "422" -> {
-                    customerTypeRadioGroup.check(R.id.customer_type_chemist)
-                }
-                "424" -> {
-                    customerTypeRadioGroup.check(R.id.customer_type_institution)
-                }
-                else -> {
-                    customerTypeRadioGroup.check(R.id.customer_type_all)
-                }
+            "424" -> {
+                customerTypeRadioGroup.check(R.id.customer_type_institution)
             }
-
-            when (paymentType) {
-                "Y" -> {
-                    paymentTypeRadioGroup.check(R.id.payment_method_credit)
-                }
-                "N" -> {
-                    paymentTypeRadioGroup.check(R.id.payment_method_cash)
-                }
-                else -> {
-                    paymentTypeRadioGroup.check(R.id.payment_method_all)
-                }
+            else -> {
+                customerTypeRadioGroup.check(R.id.customer_type_all)
             }
+        }
 
-            customerTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    R.id.customer_type_all -> {
-                        customerType = ""
-                    }
-                    R.id.customer_type_chemist -> {
-                        customerType = "422"
-                    }
-                    R.id.customer_type_institution -> {
-                        customerType = "424"
-                    }
-                }
+        when (paymentType) {
+            "Y" -> {
+                paymentTypeRadioGroup.check(R.id.payment_method_credit)
             }
+            "N" -> {
+                paymentTypeRadioGroup.check(R.id.payment_method_cash)
+            }
+            else -> {
+                paymentTypeRadioGroup.check(R.id.payment_method_all)
+            }
+        }
 
-            paymentTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    R.id.payment_method_all -> {
-                        paymentType = ""
-                    }
-                    R.id.payment_method_credit -> {
-                        paymentType = "Y"
-                    }
-                    R.id.payment_method_cash -> {
-                        paymentType = "N"
-                    }
+        customerTypeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.customer_type_all -> {
+                    customerType = ""
+                }
+                R.id.customer_type_chemist -> {
+                    customerType = "422"
+                }
+                R.id.customer_type_institution -> {
+                    customerType = "424"
                 }
             }
+        }
 
-            filterBtn.setOnClickListener {
-                viewModel.getFilteredCustomersLocalDb(customerType, paymentType)
-                isCustomerFilter = true
-                dialog.dismiss()
+        paymentTypeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.payment_method_all -> {
+                    paymentType = ""
+                }
+                R.id.payment_method_credit -> {
+                    paymentType = "Y"
+                }
+                R.id.payment_method_cash -> {
+                    paymentType = "N"
+                }
             }
-            closeBtn.setOnClickListener {
-                dialog.dismiss()
-            }
+        }
 
+        filterBtn.setOnClickListener {
+            viewModel.getFilteredCustomersLocalDb(customerType, paymentType)
+            isCustomerFilter = true
+            dialog.dismiss()
+        }
+        closeBtn.setOnClickListener {
+            dialog.dismiss()
         }
     }
 
@@ -226,9 +228,9 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
     }
 
     protected open fun displayCustomerList(customerModels: List<CustomerModel>) {
-        customerListAdapter = CustomerListAdapter(arrayListOf(), mContext)
+        customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
         rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mContext)
+            layoutManager = LinearLayoutManager(mActivity)
             adapter = customerListAdapter
         }
         customerListAdapter.setCustomers(customerModels)

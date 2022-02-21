@@ -20,13 +20,13 @@ class CustomerSelectionFragment : CustomerListFragment() {
 
     override fun init() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
-        (activity as OrdersActivity).setToolbarTitle("Choose Customers")
+        (activity as OrdersActivity).setToolbarTitle("Choose Customer")
     }
 
     override fun displayCustomerList(customerModels: List<CustomerModel>){
-        customerListAdapter = ChooseCustomerAdapter(arrayListOf(), mContext)
+        customerListAdapter = ChooseCustomerAdapter(arrayListOf(), mActivity)
         rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mContext)
+            layoutManager = LinearLayoutManager(mActivity)
             adapter = customerListAdapter
         }
         customerListAdapter.setCustomers(customerModels)

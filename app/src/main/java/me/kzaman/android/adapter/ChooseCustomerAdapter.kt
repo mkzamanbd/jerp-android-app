@@ -1,19 +1,21 @@
 package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.widget.Toast
+import android.app.Activity
+import android.content.Intent
 import androidx.core.content.ContextCompat
 import me.kzaman.android.R
 import me.kzaman.android.data.model.CustomerModel
+import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.utils.getTintedDrawable
+import me.kzaman.android.utils.goToNextActivityAnimation
 import me.kzaman.android.utils.loadImage
 import kotlin.collections.ArrayList
 
 class ChooseCustomerAdapter(
     customers: ArrayList<CustomerModel>,
-    mContext: Context,
-) : CustomerListAdapter(customers, mContext) {
+    mActivity: Activity,
+) : CustomerListAdapter(customers, mActivity) {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,23 +29,24 @@ class ChooseCustomerAdapter(
             holder.currentDue.text = "Due: ${customer.currentDue}"
         }
 
-        holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mContext,
+        holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mActivity,
             R.drawable.ic_baseline_shopping_basket_24))
 
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
-            holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mContext, R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+            holder.tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                R.drawable.bg_order_status)!!,
+                ContextCompat.getColor(mActivity, R.color.credit_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
                 R.color.credit_type_customer))
 
         } else {
             holder.tvPaymentType.text = "Cash"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mContext, R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                    R.drawable.bg_order_status)!!,
+                    ContextCompat.getColor(mActivity, R.color.cash_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
                 R.color.cash_type_customer))
         }
 
@@ -52,7 +55,9 @@ class ChooseCustomerAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(mContext, customer.customerName, Toast.LENGTH_SHORT).show()
+            val intent = Intent(mActivity, OrdersActivity::class.java)
+            intent.putExtra("productSelection", "YES")
+            goToNextActivityAnimation(mActivity, intent)
         }
     }
 }

@@ -29,7 +29,13 @@ class OrdersActivity : BaseActivity() {
         val navController = navHost.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-        navGraph.setStartDestination(R.id.customerSelectionFragment)
+        val productSelection = intent.extras?.get("productSelection")
+
+        if (productSelection == "YES") {
+            navGraph.setStartDestination(R.id.productSelectionFragment)
+        } else {
+            navGraph.setStartDestination(R.id.customerSelectionFragment)
+        }
         navController.graph = navGraph
 
         rlToolbar = findViewById(R.id.toolbar_root)

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    tools:ignore="InvalidNavigation">
+    app:startDestination="@id/productListFragment">
 
     <fragment
         android:id="@+id/productListFragment"
@@ -19,5 +20,9 @@
         android:id="@+id/customerSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment"
         android:label="fragment_customer_selection" />
+    <fragment
+        android:id="@+id/productSelectionFragment"
+        android:name="me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment"
+        android:label="fragment_product_selection" />
 
 </navigation>
