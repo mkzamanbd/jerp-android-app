@@ -23,6 +23,9 @@ class ChooseCustomerAdapter(
         holder.location.text = customer.customerAddress
         holder.territory.text = customer.territoryName
         holder.phone.text = customer.phone
+        if (customer.currentDue.toFloat() > 0) {
+            holder.currentDue.text = "Due: ${customer.currentDue}"
+        }
 
         holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mContext,
             R.drawable.ic_baseline_shopping_basket_24))

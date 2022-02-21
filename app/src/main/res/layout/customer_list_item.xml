@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginEnd="24dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,20 +94,43 @@
                 app:drawableTint="@color/colorPrimary"
                 tools:text="MuMCH-2" />
 
-            <TextView
-                android:id="@+id/tv_phone"
-                style="@style/RobotoRegular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/two"
-                android:drawablePadding="@dimen/five"
-                android:gravity="center_vertical"
-                android:textColor="@color/childTextColor"
-                android:textSize="@dimen/twelve"
-                app:drawableStartCompat="@drawable/ic_baseline_local_phone_15"
-                app:drawableTint="@color/colorPrimary"
-                tools:text="MuMCH-2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/RobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="@dimen/five"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/childTextColor"
+                    android:textSize="@dimen/twelve"
+                    app:drawableStartCompat="@drawable/ic_baseline_local_phone_15"
+                    app:drawableTint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="MuMCH-2" />
+
+                <TextView
+                    android:id="@+id/tv_due"
+                    style="@style/RobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="@dimen/five"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/twelve"
+                    app:drawableTint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Due: 500" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
@@ -119,7 +143,7 @@
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/colorPrimary"
             tools:ignore="TouchTargetSizeCheck" />

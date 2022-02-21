@@ -43,6 +43,7 @@ open class CustomerListAdapter(
         val location: TextView = view.findViewById(R.id.tv_location)
         val territory: TextView = view.findViewById(R.id.tv_territory)
         val phone: TextView = view.findViewById(R.id.tv_phone)
+        val currentDue: TextView = view.findViewById(R.id.tv_due)
         val tvPaymentType: TextView = view.findViewById(R.id.tv_payment_type)
         val imageView: ImageView = view.findViewById(R.id.iv_customer)
         val arrowButton: ImageView = view.findViewById(R.id.customer_arrow_button)
@@ -63,6 +64,10 @@ open class CustomerListAdapter(
         holder.location.text = customer.customerAddress
         holder.territory.text = customer.territoryName
         holder.phone.text = customer.phone
+        if (customer.currentDue.toFloat() > 0) {
+            holder.currentDue.text = "Due: ${customer.currentDue}"
+        }
+
 
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
