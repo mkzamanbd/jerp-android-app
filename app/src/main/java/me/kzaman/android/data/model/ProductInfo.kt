@@ -3,7 +3,7 @@ package me.kzaman.android.data.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Product(
+data class ProductInfo(
     @SerializedName("id") val id: Int,
     @Expose
     @SerializedName("prod_id") val productId: String,
@@ -25,15 +25,15 @@ data class Product(
     @SerializedName("start_date") val startDate: String,
     @SerializedName("valid_until") val validUntil: String,
     @SerializedName("min_qty") val minimumQty: Int = 0,
-    @SerializedName("element") val elementInfo: ArrayList<Element>? = null,
+    @SerializedName("element") val elementInfo: ArrayList<ProductElement>? = null,
 
     @Expose
     val quantity: Int = 0,
     val totalPrice: Double = 0.0,
-    val elements: String,
+    var elements: String,
 )
 
-data class Element(
+data class ProductElement(
     @SerializedName("code_id") val codeId: String,
     @SerializedName("element_name") val elementName: String,
     @SerializedName("id") val id: Int,

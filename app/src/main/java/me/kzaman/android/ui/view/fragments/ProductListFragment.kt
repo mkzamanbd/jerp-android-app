@@ -7,6 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.GsonBuilder
 import me.kzaman.android.adapter.ProductListAdapter
 import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductListBinding
@@ -14,7 +15,7 @@ import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.ProductActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import me.kzaman.android.data.model.Product
+import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.ui.viewModel.ProductViewModel
 import me.kzaman.android.utils.LoadingUtils
@@ -81,8 +82,19 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                 is Resource.Success -> {
                     val response = it.value
                     if (response.responseCode == 200) {
-                        productListAdapter.setProducts(response.productList)
-                        saveLocalProduct(response.productList)
+                        val productList = ArrayList<ProductInfo>()
+                        response.productList.forEach { product ->
+                            val gson = GsonBuilder().create()
+                            val elementInfo = if (!product.elementInfo.isNullOrEmpty()) {
+                                gson.toJson(product.elementInfo)
+                            } else ""
+                            product.elements = if (!elementInfo.isNullOrEmpty()) {
+                                elementInfo
+                            } else ""
+                            productList.add(product)
+                        }
+                        saveLocalProduct(productList)
+                        productListAdapter.setProducts(productList)
                     } else {
                         toastWarning(mActivity, "Product list list not found")
                     }
@@ -99,9 +111,9 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                 viewModel.getRemoteProducts()
             } else {
                 Log.d("localProduct", it.toString())
-                val products = ArrayList<Product>()
+                val products = ArrayList<ProductInfo>()
                 it.forEach { product ->
-                    val item = Product(
+                    val item = ProductInfo(
                         id = product.id,
                         productId = product.productId,
                         productClass = product.productClass,
@@ -135,7 +147,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         viewModel.getLocalProducts()
     }
 
-    private fun saveLocalProduct(products: List<Product>) {
+    private fun saveLocalProduct(products: List<ProductInfo>) {
         val productItems: ArrayList<ProductEntities> = ArrayList()
         products.forEach { product ->
             val item = ProductEntities(
@@ -158,6 +170,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding>(
                 offerType = product.offerType,
                 startDate = product.startDate,
                 validUntil = product.validUntil,
+                elementInfo = product.elements
             )
             productItems.add(item)
         }
