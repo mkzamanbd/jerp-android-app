@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import me.kzaman.android.R
@@ -32,15 +33,16 @@ import java.util.ArrayList
 
 
 @AndroidEntryPoint
-class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
+open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
     FragmentCustomerListBinding::inflate
 ) {
     private val viewModel by viewModels<CommonViewModel>()
-    private lateinit var customerListAdapter: CustomerListAdapter
+    lateinit var customerListAdapter: CustomerListAdapter
 
     private var customerType: String = ""
     private var paymentType: String = ""
-    private var isCustomerFilter : Boolean = false
+    private var isCustomerFilter: Boolean = false
+    lateinit var rvCustomerList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,20 +50,16 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
         mActivity = requireActivity()
     }
 
+    override fun init() {
+        (activity as CustomerActivity).showToolbar(true) //display toolbar
+        (activity as CustomerActivity).setToolbarTitle("Customers List")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadingUtils = LoadingUtils(mContext)
-
-        (activity as CustomerActivity).showToolbar(true) //display toolbar
-        (activity as CustomerActivity).setToolbarTitle("Customers List")
-
-        customerListAdapter = CustomerListAdapter(arrayListOf(), mContext)
-
-        binding.rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mContext)
-            adapter = customerListAdapter
-        }
-
+        rvCustomerList = binding.rvCustomerList
+        init()
         viewModel.getAllCustomersLocalDb()
 
         viewModel.localCustomers.observe(viewLifecycleOwner) {
@@ -102,8 +100,7 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
                     )
                     customerModels.add(item)
                 }
-
-                customerListAdapter.setCustomers(customerModels)
+                displayCustomerList(customerModels)
             } else {
                 getRemoteCustomerList()
             }
@@ -216,7 +213,7 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
                 is Resource.Success -> {
                     val response = it.value
                     if (response.responseCode == 200) {
-                        customerListAdapter.setCustomers(response.customerList)
+                        displayCustomerList(response.customerList)
                         saveCustomerLocalDb(response.customerList)
                     } else {
                         toastWarning(mActivity, "No customer found!")
@@ -226,6 +223,15 @@ class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
                 else -> Log.d("unknownError", "Unknown Error")
             }
         }
+    }
+
+    protected open fun displayCustomerList(customerModels: List<CustomerModel>) {
+        customerListAdapter = CustomerListAdapter(arrayListOf(), mContext)
+        rvCustomerList.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = customerListAdapter
+        }
+        customerListAdapter.setCustomers(customerModels)
     }
 
     private fun saveCustomerLocalDb(customerList: List<CustomerModel>) {

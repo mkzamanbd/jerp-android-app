@@ -1,18 +1,16 @@
 package me.kzaman.android.ui.view.fragments.orders
 
 import android.os.Bundle
-import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import me.kzaman.android.base.BaseFragment
-import me.kzaman.android.databinding.FragmentCustomerSelectionBinding
+import me.kzaman.android.adapter.ChooseCustomerAdapter
+import me.kzaman.android.data.model.CustomerModel
 import me.kzaman.android.ui.view.activities.OrdersActivity
-import me.kzaman.android.utils.LoadingUtils
+import me.kzaman.android.ui.view.fragments.customer.CustomerListFragment
 
 
 @AndroidEntryPoint
-class CustomerSelectionFragment : BaseFragment<FragmentCustomerSelectionBinding>(
-    FragmentCustomerSelectionBinding::inflate
-) {
+class CustomerSelectionFragment : CustomerListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +18,18 @@ class CustomerSelectionFragment : BaseFragment<FragmentCustomerSelectionBinding>
         mActivity = requireActivity()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        loadingUtils = LoadingUtils(mContext)
-
+    override fun init() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle("Choose Customers")
+    }
+
+    override fun displayCustomerList(customerModels: List<CustomerModel>){
+        customerListAdapter = ChooseCustomerAdapter(arrayListOf(), mContext)
+        rvCustomerList.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = customerListAdapter
+        }
+        customerListAdapter.setCustomers(customerModels)
     }
 
 }

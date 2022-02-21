@@ -20,7 +20,6 @@
     <fragment
         android:id="@+id/customerSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment"
-        android:label="fragment_customer_selection"
-        tools:layout="@layout/fragment_customer_selection" />
+        android:label="fragment_customer_selection" />
 
 </navigation>

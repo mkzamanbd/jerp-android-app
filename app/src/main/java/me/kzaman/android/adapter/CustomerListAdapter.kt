@@ -6,19 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filterable
+import android.widget.Filter
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.android.R
 import me.kzaman.android.data.model.CustomerModel
-import me.kzaman.android.data.model.Product
 import me.kzaman.android.utils.getTintedDrawable
 import me.kzaman.android.utils.loadImage
 import java.util.Locale
 import kotlin.collections.ArrayList
 
-class CustomerListAdapter(
-    var customers: ArrayList<CustomerModel>,
+open class CustomerListAdapter(
+    val customers: ArrayList<CustomerModel>,
     val mContext: Context,
 ) : RecyclerView.Adapter<CustomerListAdapter.ViewHolder>(), Filterable {
 
@@ -35,46 +38,14 @@ class CustomerListAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val name: TextView = view.findViewById(R.id.tv_customer_name)
-        private val location: TextView = view.findViewById(R.id.tv_location)
-        private val territory: TextView = view.findViewById(R.id.tv_territory)
-        private val phone: TextView = view.findViewById(R.id.tv_phone)
-
-        private val tvPaymentType: TextView = view.findViewById(R.id.tv_payment_type)
-        private val imageView: ImageView = view.findViewById(R.id.iv_customer)
-
-        @SuppressLint("SetTextI18n")
-        fun bind(customer: CustomerModel) {
-            name.text = customer.customerName
-            location.text = customer.customerAddress
-            territory.text = customer.territoryName
-            phone.text = customer.phone
-            if (customer.creditFlag == "Y") {
-                tvPaymentType.text = "Credit"
-                tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mContext,
-                    R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
-                tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
-                    R.color.credit_type_customer))
-
-            } else {
-                tvPaymentType.text = "Cash"
-                tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mContext,
-                    R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
-                tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
-                    R.color.cash_type_customer))
-            }
-
-            if (customer.photo != null) {
-                imageView.loadImage(customer.photo!!)
-            }
-
-            itemView.setOnClickListener {
-                Toast.makeText(mContext, customer.customerCode, Toast.LENGTH_SHORT).show()
-            }
-        }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.tv_customer_name)
+        val location: TextView = view.findViewById(R.id.tv_location)
+        val territory: TextView = view.findViewById(R.id.tv_territory)
+        val phone: TextView = view.findViewById(R.id.tv_phone)
+        val tvPaymentType: TextView = view.findViewById(R.id.tv_payment_type)
+        val imageView: ImageView = view.findViewById(R.id.iv_customer)
+        val arrowButton: ImageView = view.findViewById(R.id.customer_arrow_button)
     }
 
     override fun onCreateViewHolder(
@@ -84,8 +55,39 @@ class CustomerListAdapter(
         LayoutInflater.from(parent.context).inflate(R.layout.customer_list_item, parent, false)
     )
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(filterList[position])
+        val customer = filterList[position]
+
+        holder.name.text = customer.customerName
+        holder.location.text = customer.customerAddress
+        holder.territory.text = customer.territoryName
+        holder.phone.text = customer.phone
+
+        if (customer.creditFlag == "Y") {
+            holder.tvPaymentType.text = "Credit"
+            holder.tvPaymentType.background =
+                getTintedDrawable(ContextCompat.getDrawable(mContext, R.drawable.bg_order_status)!!,
+                    ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+                R.color.credit_type_customer))
+
+        } else {
+            holder.tvPaymentType.text = "Cash"
+            holder.tvPaymentType.background =
+                getTintedDrawable(ContextCompat.getDrawable(mContext, R.drawable.bg_order_status)!!,
+                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
+                R.color.cash_type_customer))
+        }
+
+        if (customer.photo != null) {
+            holder.imageView.loadImage(customer.photo!!)
+        }
+
+        holder.itemView.setOnClickListener {
+            Toast.makeText(mContext, customer.customerCode, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount() = filterList.size
