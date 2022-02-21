@@ -96,16 +96,13 @@ open class CustomerListAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                Log.d("charSearch", charSearch)
-                filterList = if (charSearch.isEmpty()) {
+                val searchKey = constraint.toString().lowercase(Locale.ROOT)
+                filterList = if (searchKey.isEmpty()) {
                     customers
                 } else {
                     val resultList = ArrayList<CustomerModel>()
                     for (customer in filterList) {
-                        if (customer.searchKey.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT))
-                        ) {
+                        if (customer.searchKey.lowercase(Locale.ROOT).contains(searchKey)) {
                             resultList.add(customer)
                         }
                     }
@@ -120,6 +117,7 @@ open class CustomerListAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 filterList = results?.values as ArrayList<CustomerModel>
+                Log.d("charSearch", "Published")
                 notifyDataSetChanged()
             }
         }

@@ -68,21 +68,18 @@ class ProductListAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                Log.d("charSearch", charSearch)
-                if (charSearch.isEmpty()) {
-                    filterList = products
+                val searchKey = constraint.toString().lowercase(Locale.ROOT)
+                Log.d("charSearch", searchKey)
+                filterList = if (searchKey.isEmpty()) {
+                    products
                 } else {
                     val resultList = ArrayList<Product>()
                     for (product in filterList) {
-                        if (product.productName.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT)) || product.productCode.lowercase(
-                                Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))
-                        ) {
+                        if (product.productName.lowercase(Locale.ROOT).contains(searchKey)) {
                             resultList.add(product)
                         }
                     }
-                    filterList = resultList
+                    resultList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = filterList
