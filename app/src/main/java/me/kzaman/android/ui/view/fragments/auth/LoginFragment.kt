@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         if (binding.passwordInputField.text.isNullOrEmpty()) {
             binding.loginButton.enable(false)

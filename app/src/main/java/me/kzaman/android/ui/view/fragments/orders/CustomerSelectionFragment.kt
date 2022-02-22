@@ -16,9 +16,9 @@ class CustomerSelectionFragment : CustomerListFragment() {
         (activity as OrdersActivity).setToolbarTitle("Choose Customer")
     }
 
-    override fun displayCustomerList(customerModels: List<CustomerModel>){
+    override fun displayCustomerList(customerModels: List<CustomerModel>) {
         customerListAdapter = ChooseCustomerAdapter(arrayListOf(), mActivity)
-        rvCustomerList.apply {
+        binding.rvCustomerList.apply {
             layoutManager = LinearLayoutManager(mActivity)
             adapter = customerListAdapter
         }

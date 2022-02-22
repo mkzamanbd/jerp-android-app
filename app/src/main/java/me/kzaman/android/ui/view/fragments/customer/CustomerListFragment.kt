@@ -12,7 +12,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import me.kzaman.android.R
@@ -43,7 +42,6 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     private var customerType: String = ""
     private var paymentType: String = ""
     private var isCustomerFilter: Boolean = false
-    lateinit var rvCustomerList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +58,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
-        binding.lifecycleOwner = this
-
-        rvCustomerList = binding.rvCustomerList
+        binding.lifecycleOwner = viewLifecycleOwner
         init()
 
         viewModel.getAllCustomersLocalDb()
@@ -233,7 +229,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
 
     protected open fun displayCustomerList(customerModels: List<CustomerModel>) {
         customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
-        rvCustomerList.apply {
+        binding.rvCustomerList.apply {
             layoutManager = LinearLayoutManager(mActivity)
             adapter = customerListAdapter
         }

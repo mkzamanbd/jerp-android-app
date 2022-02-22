@@ -73,7 +73,8 @@ open class CustomerListAdapter(
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mActivity, R.drawable.bg_order_status)!!,
+                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                    R.drawable.bg_order_status)!!,
                     ContextCompat.getColor(mActivity, R.color.credit_type_customer_bg))
             holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
                 R.color.credit_type_customer))
@@ -81,7 +82,8 @@ open class CustomerListAdapter(
         } else {
             holder.tvPaymentType.text = "Cash"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mActivity, R.drawable.bg_order_status)!!,
+                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                    R.drawable.bg_order_status)!!,
                     ContextCompat.getColor(mActivity, R.color.cash_type_customer_bg))
             holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
                 R.color.cash_type_customer))

@@ -45,7 +45,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.productViewModel = viewModel
         init()
         productListAdapter = ProductListAdapter(arrayListOf(), mContext)
