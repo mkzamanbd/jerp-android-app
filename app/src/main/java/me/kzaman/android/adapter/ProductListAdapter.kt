@@ -43,6 +43,7 @@ open class ProductListAdapter(
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
         val tvDetails: TextView = view.findViewById(R.id.tv_details)
         val addToCart : AppCompatImageView = view.findViewById(R.id.product_add_to_cart)
+        val tvQuantity : TextView = view.findViewById(R.id.tv_qty)
     }
 
     override fun onCreateViewHolder(

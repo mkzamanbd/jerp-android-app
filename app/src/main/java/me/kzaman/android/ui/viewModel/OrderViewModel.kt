@@ -19,6 +19,10 @@ class OrderViewModel @Inject constructor(
     val repository: OrderRepository,
 ) : BaseViewModel(repository) {
 
+    companion object {
+        @JvmField var cartItemCounter = MutableLiveData<String?>()
+    }
+
     private val _products: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()
     val products: LiveData<Resource<ProductResponse>> = _products
 

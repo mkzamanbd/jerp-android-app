@@ -28,9 +28,10 @@ data class ProductInfo(
     @SerializedName("element") val elementInfo: ArrayList<ProductElement>? = null,
 
     @Expose
-    val quantity: Int = 0,
-    val totalPrice: Double = 0.0,
+    var quantity: Int = 0,
+    var totalPrice: Double = 0.0,
     var elements: String,
+    var isProductSelected : Boolean = false
 )
 
 data class ProductElement(

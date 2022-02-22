@@ -1,13 +1,18 @@
 package me.kzaman.android.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import me.kzaman.android.data.model.ProductInfo
+import me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
+import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.cartItemCounter
 import me.kzaman.android.utils.compareDatesWithCurrentDate
 import me.kzaman.android.utils.genericNameFromJson
+import me.kzaman.android.utils.isProductAlreadyExist
 import kotlin.collections.ArrayList
 
 class OrderItemSelectionAdapter(
@@ -15,6 +20,7 @@ class OrderItemSelectionAdapter(
     mContext: Context,
 ) : ProductListAdapter(products, mContext) {
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = filterList[position]
 
@@ -49,8 +55,23 @@ class OrderItemSelectionAdapter(
         holder.tvDetails.text = HtmlCompat.fromHtml(tvDetailHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
         holder.addToCart.visibility = View.VISIBLE
+        if (product.isProductSelected) {
+            holder.tvQuantity.visibility = View.VISIBLE
+            holder.tvQuantity.text = "${product.quantity}"
+        }
         holder.addToCart.setOnClickListener {
-            Toast.makeText(mContext, product.productId, Toast.LENGTH_SHORT).show()
+            if (selectedProduct.isProductAlreadyExist(product.productId)) {
+                product.quantity += 1
+                notifyDataSetChanged()
+            } else {
+                product.quantity = 1
+                selectedProduct.add(product)
+                product.isProductSelected = true
+                isCartItemsChanged = true
+                cartItemCounter.value = selectedProduct.size.toString()
+                notifyDataSetChanged()
+            }
+
         }
     }
 }

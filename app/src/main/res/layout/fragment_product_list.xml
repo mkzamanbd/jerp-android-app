@@ -114,6 +114,7 @@
                         android:gravity="center"
                         android:minWidth="@dimen/twenty"
                         android:minHeight="@dimen/twenty"
+                        android:text="@={orderViewModel.cartItemCounter}"
                         android:padding="2dp"
                         android:textColor="@color/white"
                         android:textSize="12sp"

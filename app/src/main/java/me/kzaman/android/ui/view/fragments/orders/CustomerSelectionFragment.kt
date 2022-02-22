@@ -10,6 +10,10 @@ import me.kzaman.android.ui.view.fragments.customer.CustomerListFragment
 @AndroidEntryPoint
 class CustomerSelectionFragment : CustomerListFragment() {
 
+    companion object {
+        var isCartItemsChanged = false
+    }
+
     override fun initializeApp() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle("Choose Customer")

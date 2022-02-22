@@ -32,6 +32,7 @@
             android:id="@+id/tv_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/eight"
             android:textSize="@dimen/twelve"
             tools:text="@string/notification" />
     </LinearLayout>
@@ -40,6 +41,8 @@
         android:id="@+id/cart_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/five"
+        android:paddingBottom="@dimen/five"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true">
 
@@ -70,9 +73,7 @@
             android:padding="@dimen/two"
             android:src="@drawable/ic_baseline_add_20"
             android:visibility="invisible"
-
-            app:tint="@color/colorPrimary"
-            tools:ignore="TouchTargetSizeCheck" />
+            app:tint="@color/colorPrimary" />
     </LinearLayout>
 
 </RelativeLayout>
