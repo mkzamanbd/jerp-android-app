@@ -13,11 +13,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.GsonBuilder
 import me.kzaman.android.R
-import me.kzaman.android.data.model.ProductElement
 import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.utils.compareDatesWithCurrentDate
+import me.kzaman.android.utils.genericNameFromJson
 import java.util.Locale
 import kotlin.collections.ArrayList
 
@@ -39,54 +38,9 @@ class ProductListAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val tvTitle: TextView = view.findViewById(R.id.tv_title)
-        private val tvDetails: TextView = view.findViewById(R.id.tv_details)
-
-        @SuppressLint("SetTextI18n")
-        fun bind(product: ProductInfo) {
-            val packSize =
-                "<small><b><font color='#696A6A'>(${product.packSize})</font><b/></small>"
-            val offerText = "<b><font color='#009C32'>${product.offer}</font><b/>"
-            val offerDescription = "<b><font color='#757575'>${product.offerDescription}</font><b/>"
-
-            val genericName: String = genericNameFromJson(product.elements).ifEmpty {
-                ""
-            }
-
-            val mtp: String = if (product.offerType == "D" || product.offerType == "P") {
-                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                        "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
-                    else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-                } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-            } else if (product.offerType == "F" || product.offerType == "B") {
-                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                        "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
-                    else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-                } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-            } else "TP: <font color='#757575'>" + product.mtp + "</font>"
-
-            tvTitle.text = HtmlCompat.fromHtml("${product.productName} $packSize",
-                HtmlCompat.FROM_HTML_MODE_LEGACY)
-            var tvDetailHtml = product.productCode
-            if (!product.comPackDesc.isNullOrEmpty()) {
-                tvDetailHtml += " | ${product.comPackDesc}"
-            }
-            if (genericName.isNotEmpty()) {
-                tvDetailHtml += genericName
-            }
-
-            if (genericName.isNotEmpty()) {
-                tvDetailHtml += " | $mtp"
-            }
-            tvDetails.text = HtmlCompat.fromHtml(tvDetailHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
-
-            itemView.setOnClickListener {
-                Toast.makeText(context, product.productId, Toast.LENGTH_SHORT).show()
-            }
-        }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvTitle: TextView = view.findViewById(R.id.tv_title)
+        val tvDetails: TextView = view.findViewById(R.id.tv_details)
     }
 
     override fun onCreateViewHolder(
@@ -97,7 +51,41 @@ class ProductListAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(filterList[position])
+        val product = filterList[position]
+
+        val packSize = "<small><b><font color='#696A6A'>(${product.packSize})</font><b/></small>"
+        val offerText = "<b><font color='#009C32'>${product.offer}</font><b/>"
+        val offerDescription = "<b><font color='#757575'>${product.offerDescription}</font><b/>"
+
+        val genericName: String = genericNameFromJson(product.elements).ifEmpty { "" }
+
+        val mtp: String = if (product.offerType == "D" || product.offerType == "P") {
+            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                    "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
+                else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+            } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+        } else if (product.offerType == "F" || product.offerType == "B") {
+            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                    "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
+                else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+            } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+        } else "TP: <font color='#757575'>" + product.mtp + "</font>"
+
+        holder.tvTitle.text = HtmlCompat.fromHtml("${product.productName} $packSize",
+            HtmlCompat.FROM_HTML_MODE_LEGACY)
+        var tvDetailHtml = product.productCode
+        if (!product.comPackDesc.isNullOrEmpty()) {
+            tvDetailHtml += " | ${product.comPackDesc}"
+        }
+        tvDetailHtml += "$genericName | $mtp"
+
+        holder.tvDetails.text = HtmlCompat.fromHtml(tvDetailHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+        holder.itemView.setOnClickListener {
+            Toast.makeText(context, product.productId, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount() = filterList.size
@@ -132,21 +120,4 @@ class ProductListAdapter(
             }
         }
     }
-
-    private fun genericNameFromJson(json: String): String {
-        val gson = GsonBuilder().create()
-        var elementName = ""
-        if (json == "" || TextUtils.isEmpty(json)) {
-            return elementName
-        }
-
-        val jsonArray = gson.fromJson(json, Array<ProductElement>::class.java).toList()
-
-        for (item in jsonArray) {
-            elementName += " | ${item.elementName}"
-        }
-
-        return elementName
-    }
-
 }

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AlphaAnimation
@@ -21,7 +22,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.GsonBuilder
 import me.kzaman.android.R
+import me.kzaman.android.data.model.ProductElement
 import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.AuthActivity
 import me.kzaman.android.ui.view.activities.DashboardActivity
@@ -181,4 +184,20 @@ fun getTintedDrawable(inputDrawable: Drawable, @ColorInt color: Int): Drawable {
     DrawableCompat.setTint(wrapDrawable, color)
     DrawableCompat.setTintMode(wrapDrawable, PorterDuff.Mode.SRC_IN)
     return wrapDrawable
+}
+
+fun genericNameFromJson(json: String): String {
+    val gson = GsonBuilder().create()
+    var elementName = ""
+    if (json == "" || TextUtils.isEmpty(json)) {
+        return elementName
+    }
+
+    val jsonArray = gson.fromJson(json, Array<ProductElement>::class.java).toList()
+
+    for (item in jsonArray) {
+        elementName += " | ${item.elementName}"
+    }
+
+    return elementName
 }
