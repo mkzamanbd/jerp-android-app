@@ -50,11 +50,6 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         loadingUtils = LoadingUtils(mContext)
     }
 
-    override fun init() {
-        (activity as CustomerActivity).showToolbar(true) //display toolbar
-        (activity as CustomerActivity).setToolbarTitle("Customers List")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
@@ -126,6 +121,11 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         binding.ivCustomerFilter.setOnClickListener {
             customerFilter()
         }
+    }
+
+    override fun init() {
+        (activity as CustomerActivity).showToolbar(true) //display toolbar
+        (activity as CustomerActivity).setToolbarTitle("Customers List")
     }
 
     private fun customerFilter() {
@@ -230,7 +230,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     protected open fun displayCustomerList(customerModels: List<CustomerModel>) {
         customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
         binding.rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mActivity)
+            layoutManager = LinearLayoutManager(mContext)
             adapter = customerListAdapter
         }
         customerListAdapter.setCustomers(customerModels)

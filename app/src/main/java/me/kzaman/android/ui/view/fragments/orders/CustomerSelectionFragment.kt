@@ -19,7 +19,7 @@ class CustomerSelectionFragment : CustomerListFragment() {
     override fun displayCustomerList(customerModels: List<CustomerModel>) {
         customerListAdapter = ChooseCustomerAdapter(arrayListOf(), mActivity)
         binding.rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mActivity)
+            layoutManager = LinearLayoutManager(mContext)
             adapter = customerListAdapter
         }
         customerListAdapter.setCustomers(customerModels)
