@@ -11,6 +11,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.android.R
@@ -20,9 +21,9 @@ import me.kzaman.android.utils.genericNameFromJson
 import java.util.Locale
 import kotlin.collections.ArrayList
 
-class ProductListAdapter(
+open class ProductListAdapter(
     var products: ArrayList<ProductInfo>,
-    val context: Context,
+    val mContext: Context,
 ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>(), Filterable {
 
     var filterList = ArrayList<ProductInfo>()
@@ -41,6 +42,7 @@ class ProductListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
         val tvDetails: TextView = view.findViewById(R.id.tv_details)
+        val addToCart : AppCompatImageView = view.findViewById(R.id.product_add_to_cart)
     }
 
     override fun onCreateViewHolder(
@@ -84,7 +86,7 @@ class ProductListAdapter(
         holder.tvDetails.text = HtmlCompat.fromHtml(tvDetailHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, product.productId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, product.productId, Toast.LENGTH_SHORT).show()
         }
     }
 

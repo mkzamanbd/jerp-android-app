@@ -33,7 +33,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     protected val viewModel by viewModels<ProductViewModel>()
     override val layoutId: Int = R.layout.fragment_product_list
 
-    private lateinit var productListAdapter: ProductListAdapter
+    protected lateinit var productListAdapter: ProductListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,68 +48,45 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.productViewModel = viewModel
         initializeApp()
-        productListAdapter = ProductListAdapter(arrayListOf(), mContext)
 
-        val productListRecyclerView = binding.productList
-
-        productListRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = productListAdapter
-        }
-
-        val etSearch = binding.etSearch
-        val ivCancelSearch = binding.ivCancelSearch
-
-        etSearch.addTextChangedListener {
+        binding.etSearch.addTextChangedListener {
             if (it.isNullOrEmpty()) {
-                ivCancelSearch.visible(false)
+                binding.ivCancelSearch.visible(false)
             } else {
-                ivCancelSearch.visible(true)
+                binding.ivCancelSearch.visible(true)
             }
             productListAdapter.filter.filter(it)
         }
 
         binding.ivCancelSearch.setOnClickListener {
-            etSearch.text = null
-            hideSoftKeyboard(mContext, etSearch)
-            ivCancelSearch.visible(false)
+            binding.etSearch.text = null
+            hideSoftKeyboard(mContext, binding.etSearch)
+            it.visible(false)
         }
+        /*
+        * get local product
+        */
+        getLocalProducts()
 
-        getProductList()
+    }
 
-        viewModel.products.observe(viewLifecycleOwner) {
-            loadingUtils.isLoading(it is Resource.Loading)
-            when (it) {
-                is Resource.Success -> {
-                    val response = it.value
-                    if (response.responseCode == 200) {
-                        val productList = ArrayList<ProductInfo>()
-                        response.productList.forEach { product ->
-                            val gson = GsonBuilder().create()
-                            val elementInfo = if (!product.elementInfo.isNullOrEmpty()) {
-                                gson.toJson(product.elementInfo)
-                            } else ""
-                            product.elements = if (!elementInfo.isNullOrEmpty()) {
-                                elementInfo
-                            } else ""
-                            productList.add(product)
-                        }
-                        saveLocalProduct(productList)
-                        productListAdapter.setProducts(productList)
-                    } else {
-                        toastWarning(mActivity, "Product list list not found")
-                    }
-                }
-                is Resource.Failure -> handleNetworkError(it, mActivity) {
-                    getProductList()
-                }
-                else -> Log.d("unknownError", "Unknown Error")
-            }
+    override fun initializeApp() {
+        (activity as ProductActivity).showToolbar(true) //display toolbar
+        (activity as ProductActivity).setToolbarTitle("Product List")
+        binding.cvCustomerInfo.visibility = View.GONE
+
+        productListAdapter = ProductListAdapter(arrayListOf(), mContext)
+        binding.productList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = productListAdapter
         }
+    }
 
+    private fun getLocalProducts() {
+        viewModel.getLocalProducts()
         viewModel.localProducts.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
-                viewModel.getRemoteProducts()
+                getRemoteProductList()
             } else {
                 Log.d("localProduct", it.toString())
                 val products = ArrayList<ProductInfo>()
@@ -144,14 +121,37 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         }
     }
 
-    override fun initializeApp() {
-        (activity as ProductActivity).showToolbar(true) //display toolbar
-        (activity as ProductActivity).setToolbarTitle("Product List")
-        binding.cvCustomerInfo.visibility = View.GONE
-    }
-
-    private fun getProductList() {
-        viewModel.getLocalProducts()
+    private fun getRemoteProductList() {
+        viewModel.getRemoteProducts()
+        viewModel.products.observe(viewLifecycleOwner) {
+            loadingUtils.isLoading(it is Resource.Loading)
+            when (it) {
+                is Resource.Success -> {
+                    val response = it.value
+                    if (response.responseCode == 200) {
+                        val productList = ArrayList<ProductInfo>()
+                        response.productList.forEach { product ->
+                            val gson = GsonBuilder().create()
+                            val elementInfo = if (!product.elementInfo.isNullOrEmpty()) {
+                                gson.toJson(product.elementInfo)
+                            } else ""
+                            product.elements = if (!elementInfo.isNullOrEmpty()) {
+                                elementInfo
+                            } else ""
+                            productList.add(product)
+                        }
+                        saveLocalProduct(productList)
+                        productListAdapter.setProducts(productList)
+                    } else {
+                        toastWarning(mActivity, "Product list list not found")
+                    }
+                }
+                is Resource.Failure -> handleNetworkError(it, mActivity) {
+                    getLocalProducts()
+                }
+                else -> Log.d("unknownError", "Unknown Error")
+            }
+        }
     }
 
     private fun saveLocalProduct(products: List<ProductInfo>) {
