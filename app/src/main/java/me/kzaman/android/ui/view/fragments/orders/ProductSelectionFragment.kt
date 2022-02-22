@@ -9,6 +9,7 @@ import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.ui.view.fragments.ProductListFragment
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.cartItemCounter
+import me.kzaman.android.utils.toastWarning
 
 @AndroidEntryPoint
 class ProductSelectionFragment : ProductListFragment() {
@@ -35,6 +36,12 @@ class ProductSelectionFragment : ProductListFragment() {
                 binding.tvCartItem.visibility = View.GONE
             } else {
                 binding.tvCartItem.visibility = View.VISIBLE
+            }
+        }
+
+        binding.rlCart.setOnClickListener {
+            if (cartItemCounter.value.isNullOrEmpty()) {
+                toastWarning(mActivity, "Please add product first and retry")
             }
         }
     }
