@@ -58,21 +58,18 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
 
         getCustomersList()
 
-        val etCustomerSearch = binding.etCustomerSearch
-        val ivSearchClear = binding.ivSearchClear
-
-        etCustomerSearch.addTextChangedListener {
+        binding.etCustomerSearch.addTextChangedListener {
             if (it.isNullOrEmpty()) {
-                ivSearchClear.visible(false)
+                binding.ivSearchClear.visible(false)
             } else {
-                ivSearchClear.visible(true)
+                binding.ivSearchClear.visible(true)
             }
             customerListAdapter.filter.filter(it)
         }
-        ivSearchClear.setOnClickListener {
-            etCustomerSearch.text = null
-            hideSoftKeyboard(mContext, etCustomerSearch)
-            ivSearchClear.visible(false)
+        binding.ivSearchClear.setOnClickListener {
+            binding.etCustomerSearch.text = null
+            hideSoftKeyboard(mContext, binding.etCustomerSearch)
+            it.visible(false)
         }
 
         binding.ivCustomerFilter.setOnClickListener {
