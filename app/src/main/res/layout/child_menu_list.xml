@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:tint="@color/white"
             android:layout_margin="@dimen/fifteen"
-            android:src="@drawable/baseline_directions_bike_white_36" />
+            android:src="@drawable/ic_baseline_directions_bike_24" />
 
     </androidx.cardview.widget.CardView>
 
