@@ -54,7 +54,9 @@ class OrderViewModel @Inject constructor(
     fun displayCustomerInfo(customerModel: CustomerModel?) {
         mlCustomerName.value = customerModel?.customerName
         mlCustomerAddress.value = customerModel?.customerAddress
-        mlCustomerCurrentDue.value = customerModel?.currentDue
+        mlCustomerCurrentDue.value = if(customerModel?.currentDue != "0"){
+            "Due: ${customerModel?.currentDue}"
+        } else null
         Log.d("customerModel", customerModel.toString())
     }
 }
