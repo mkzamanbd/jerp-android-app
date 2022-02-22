@@ -6,7 +6,7 @@ import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.network.api.CommonApi
 import javax.inject.Inject
 
-class ProductRepository @Inject constructor(
+class OrderRepository @Inject constructor(
     private val api: CommonApi,
     private val productDao: ProductDao
 ) : BaseRepository(api) {

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import me.kzaman.android.R
 import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.database.entities.ProductEntities
-import me.kzaman.android.ui.viewModel.ProductViewModel
+import me.kzaman.android.ui.viewModel.OrderViewModel
 import me.kzaman.android.utils.LoadingUtils
 import me.kzaman.android.utils.hideSoftKeyboard
 import me.kzaman.android.utils.toastWarning
@@ -30,7 +30,7 @@ import java.util.ArrayList
 open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
     lateinit var binding: FragmentProductListBinding
 
-    protected val viewModel by viewModels<ProductViewModel>()
+    protected val viewModel by viewModels<OrderViewModel>()
     override val layoutId: Int = R.layout.fragment_product_list
 
     protected lateinit var productListAdapter: ProductListAdapter
@@ -46,7 +46,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.productViewModel = viewModel
+        binding.orderViewModel = viewModel
         initializeApp()
 
         binding.etSearch.addTextChangedListener {

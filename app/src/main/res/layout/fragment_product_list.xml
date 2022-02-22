@@ -5,9 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="productViewModel"
-            type="me.kzaman.android.ui.viewModel.ProductViewModel" />
+            name="orderViewModel"
+            type="me.kzaman.android.ui.viewModel.OrderViewModel" />
     </data>
 
     <LinearLayout
@@ -60,7 +62,7 @@
                         android:drawablePadding="@dimen/ten"
                         android:maxLines="2"
                         android:padding="@dimen/five"
-                        android:text="@={productViewModel.mlCustomerName}"
+                        android:text="@={orderViewModel.mlCustomerName}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/fifteen" />
 
@@ -70,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/five"
-                        android:text="@={productViewModel.mlCustomerAddress}"
+                        android:text="@={orderViewModel.mlCustomerAddress}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/sixteen" />
 
@@ -81,9 +83,10 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/ten"
                         android:padding="@dimen/five"
+                        android:text="@={orderViewModel.mlCustomerCurrentDue}"
                         android:textColor="@color/red"
                         android:textSize="@dimen/fourteen"
-                        android:visibility="gone"
+                        android:visibility="@{orderViewModel.mlCustomerCurrentDue != null ? View.VISIBLE : View.GONE}"
                         tools:text="Due: 15666.63" />
 
                 </LinearLayout>
