@@ -56,50 +56,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         binding.lifecycleOwner = viewLifecycleOwner
         init()
 
-        viewModel.getAllCustomersLocalDb()
-        viewModel.localCustomers.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty() || isCustomerFilter) {
-                val customerModels: ArrayList<CustomerModel> = ArrayList()
-
-                it.forEach { customerEntities ->
-                    val item = CustomerModel(
-                        sbuId = customerEntities.sbuId,
-                        compositeKey = customerEntities.compositeKey,
-                        customerId = customerEntities.customerId,
-                        dsId = customerEntities.dsId ?: "",
-                        salesAreaId = customerEntities.salesAreaId,
-                        areaLevel = customerEntities.areaLevel,
-                        customerType = customerEntities.customerType,
-                        customerCode = customerEntities.customerCode,
-                        displayCode = customerEntities.displayCode,
-                        customerName = customerEntities.customerName,
-                        creditFlag = customerEntities.creditFlag,
-                        displayName = customerEntities.displayName ?: "",
-                        creditLimit = customerEntities.creditLimit,
-                        searchKey = customerEntities.searchKey,
-                        vatChallaFlag = customerEntities.vatChallaFlag ?: "",
-                        status = customerEntities.status,
-                        currentDue = customerEntities.currentDue,
-                        currentAdvance = customerEntities.currentAdvance,
-                        phone = customerEntities.phone,
-                        email = customerEntities.email,
-                        customerAddress = customerEntities.customerAddress,
-                        photo = customerEntities.photo,
-                        territoryCode = customerEntities.territoryCode,
-                        territoryName = customerEntities.territoryName,
-                        paymentMode = customerEntities.paymentMode ?: "",
-                        cashDueAmt = customerEntities.cashDueAmt,
-                        activateVerifyDate = customerEntities.activateVerifyDate,
-                        activateVerifyBy = customerEntities.activateVerifyBy,
-                        hqType = customerEntities.hqType,
-                    )
-                    customerModels.add(item)
-                }
-                displayCustomerList(customerModels)
-            } else {
-                getRemoteCustomerList()
-            }
-        }
+        getCustomersList()
 
         val etCustomerSearch = binding.etCustomerSearch
         val ivSearchClear = binding.ivSearchClear
@@ -126,6 +83,11 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     override fun init() {
         (activity as CustomerActivity).showToolbar(true) //display toolbar
         (activity as CustomerActivity).setToolbarTitle("Customers List")
+        customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
+        binding.rvCustomerList.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = customerListAdapter
+        }
     }
 
     private fun customerFilter() {
@@ -206,6 +168,53 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         }
     }
 
+    private fun getCustomersList() {
+        viewModel.getAllCustomersLocalDb()
+        viewModel.localCustomers.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty() || isCustomerFilter) {
+                val customerModels: ArrayList<CustomerModel> = ArrayList()
+
+                it.forEach { customerEntities ->
+                    val item = CustomerModel(
+                        sbuId = customerEntities.sbuId,
+                        compositeKey = customerEntities.compositeKey,
+                        customerId = customerEntities.customerId,
+                        dsId = customerEntities.dsId ?: "",
+                        salesAreaId = customerEntities.salesAreaId,
+                        areaLevel = customerEntities.areaLevel,
+                        customerType = customerEntities.customerType,
+                        customerCode = customerEntities.customerCode,
+                        displayCode = customerEntities.displayCode,
+                        customerName = customerEntities.customerName,
+                        creditFlag = customerEntities.creditFlag,
+                        displayName = customerEntities.displayName ?: "",
+                        creditLimit = customerEntities.creditLimit,
+                        searchKey = customerEntities.searchKey,
+                        vatChallaFlag = customerEntities.vatChallaFlag ?: "",
+                        status = customerEntities.status,
+                        currentDue = customerEntities.currentDue,
+                        currentAdvance = customerEntities.currentAdvance,
+                        phone = customerEntities.phone,
+                        email = customerEntities.email,
+                        customerAddress = customerEntities.customerAddress,
+                        photo = customerEntities.photo,
+                        territoryCode = customerEntities.territoryCode,
+                        territoryName = customerEntities.territoryName,
+                        paymentMode = customerEntities.paymentMode ?: "",
+                        cashDueAmt = customerEntities.cashDueAmt,
+                        activateVerifyDate = customerEntities.activateVerifyDate,
+                        activateVerifyBy = customerEntities.activateVerifyBy,
+                        hqType = customerEntities.hqType,
+                    )
+                    customerModels.add(item)
+                }
+                customerListAdapter.setCustomers(customerModels)
+            } else {
+                getRemoteCustomerList()
+            }
+        }
+    }
+
     private fun getRemoteCustomerList() {
         viewModel.getAllRemoteCustomer()
         viewModel.customers.observe(viewLifecycleOwner) {
@@ -215,7 +224,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
                 is Resource.Success -> {
                     val response = it.value
                     if (response.responseCode == 200) {
-                        displayCustomerList(response.customerList)
+                        customerListAdapter.setCustomers(response.customerList)
                         saveCustomerLocalDb(response.customerList)
                     } else {
                         toastWarning(mActivity, "No customer found!")
@@ -225,15 +234,6 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
                 else -> Log.d("unknownError", "Unknown Error")
             }
         }
-    }
-
-    protected open fun displayCustomerList(customerModels: List<CustomerModel>) {
-        customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
-        binding.rvCustomerList.apply {
-            layoutManager = LinearLayoutManager(mContext)
-            adapter = customerListAdapter
-        }
-        customerListAdapter.setCustomers(customerModels)
     }
 
     private fun saveCustomerLocalDb(customerList: List<CustomerModel>) {
