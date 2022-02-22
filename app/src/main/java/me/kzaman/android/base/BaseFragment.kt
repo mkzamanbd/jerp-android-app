@@ -6,34 +6,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import me.kzaman.android.interfaces.InitialComponent
 import me.kzaman.android.utils.LoadingUtils
 
-abstract class BaseFragment<VB : ViewBinding>(
-    private val bindingInflater: (inflater: LayoutInflater) -> VB,
-) : Fragment(), InitialComponent {
+abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), InitialComponent {
 
     protected lateinit var mContext: Context
     protected lateinit var mActivity: Activity
     protected lateinit var baseActivity: BaseActivity
     protected lateinit var loadingUtils: LoadingUtils
 
-    private var _binding: VB? = null
+    lateinit var mRootView: View
+    lateinit var viewDataBinding: VB
 
-    val binding: VB
-        get() = _binding as VB
+    @get:LayoutRes
+    abstract val layoutId: Int
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = bindingInflater.invoke(inflater)
-        if (_binding == null)
-            throw IllegalArgumentException("Binding cannot be null")
-        return binding.root
+        viewDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        mRootView = viewDataBinding.root
+        return mRootView
     }
 
     override fun init() {}

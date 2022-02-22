@@ -23,24 +23,27 @@ import me.kzaman.android.utils.hideSoftKeyboard
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>(
-    FragmentLoginBinding::inflate
-) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+    private lateinit var binding: FragmentLoginBinding
+
     @Inject
     lateinit var prefManager: SharedPreferenceManager
+
+    override val layoutId: Int = R.layout.fragment_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
+        loadingUtils = LoadingUtils(mContext)
     }
 
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        loadingUtils = LoadingUtils(mContext)
+        binding = viewDataBinding
+        binding.lifecycleOwner = this
 
         if (binding.passwordInputField.text.isNullOrEmpty()) {
             binding.loginButton.enable(false)

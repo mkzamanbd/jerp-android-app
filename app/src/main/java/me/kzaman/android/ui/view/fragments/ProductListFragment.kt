@@ -15,6 +15,7 @@ import me.kzaman.android.network.Resource
 import me.kzaman.android.ui.view.activities.ProductActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import me.kzaman.android.R
 import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.ui.viewModel.ProductViewModel
@@ -26,11 +27,11 @@ import me.kzaman.android.utils.handleNetworkError
 import java.util.ArrayList
 
 @AndroidEntryPoint
-open class ProductListFragment : BaseFragment<FragmentProductListBinding>(
-    FragmentProductListBinding::inflate
-) {
+open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
+    lateinit var binding: FragmentProductListBinding
 
-    private val viewModel by viewModels<ProductViewModel>()
+    protected val viewModel by viewModels<ProductViewModel>()
+    override val layoutId: Int = R.layout.fragment_product_list
 
     private lateinit var productListAdapter: ProductListAdapter
 
@@ -38,14 +39,16 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>(
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
+        loadingUtils = LoadingUtils(mContext)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        productListAdapter = ProductListAdapter(arrayListOf(), mContext)
-        loadingUtils = LoadingUtils(mContext)
+        binding = viewDataBinding
+        binding.lifecycleOwner = this
+        binding.productViewModel = viewModel
         init()
+        productListAdapter = ProductListAdapter(arrayListOf(), mContext)
 
         val productListRecyclerView = binding.productList
 

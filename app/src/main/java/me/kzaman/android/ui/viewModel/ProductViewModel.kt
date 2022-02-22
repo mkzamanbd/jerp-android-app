@@ -1,5 +1,8 @@
 package me.kzaman.android.ui.viewModel
 
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,6 +11,7 @@ import me.kzaman.android.data.response.ProductResponse
 import me.kzaman.android.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import me.kzaman.android.data.model.CustomerModel
 import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.repository.ProductRepository
 import javax.inject.Inject
@@ -34,5 +38,24 @@ class ProductViewModel @Inject constructor(
 
     suspend fun saveProductToLocal(products: ArrayList<ProductEntities>) = viewModelScope.launch {
         repository.saveLocalProducts(products)
+    }
+
+    var mlCustomerName = MutableLiveData<String>()
+    var mlCustomerCode = MutableLiveData<String>()
+    var mlCustomerBusinessUnit = MutableLiveData<String>()
+    var mlCustomerId = MutableLiveData<String>()
+    var mlCustomerTblCompositeKey = MutableLiveData<String>()
+    var mlCustomerPhone = MutableLiveData<String>()
+    var mlCustomerEmail = MutableLiveData<String>()
+    var mlCustomerAddress = MutableLiveData<String?>()
+    var mlDeliveryCustomerAddress = MutableLiveData<String>()
+    var mlCreditType = MutableLiveData<String>()
+    var mlCustomerImage = MutableLiveData<String>()
+
+    fun displayCustomerInfo(customerModel: CustomerModel?) {
+        mlCustomerName.value = customerModel?.customerName
+        mlCustomerAddress.value = customerModel?.customerAddress
+        Log.d("customerModel", customerModel.toString())
+
     }
 }

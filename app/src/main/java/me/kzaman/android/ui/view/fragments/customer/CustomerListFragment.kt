@@ -33,11 +33,12 @@ import java.util.ArrayList
 
 
 @AndroidEntryPoint
-open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
-    FragmentCustomerListBinding::inflate
-) {
+open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
+    lateinit var binding: FragmentCustomerListBinding
     private val viewModel by viewModels<CommonViewModel>()
     lateinit var customerListAdapter: CustomerListAdapter
+
+    override val layoutId: Int = R.layout.fragment_customer_list
 
     private var customerType: String = ""
     private var paymentType: String = ""
@@ -48,6 +49,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
         super.onCreate(savedInstanceState)
         mContext = requireContext()
         mActivity = requireActivity()
+        loadingUtils = LoadingUtils(mContext)
     }
 
     override fun init() {
@@ -57,7 +59,9 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadingUtils = LoadingUtils(mContext)
+        binding = viewDataBinding
+        binding.lifecycleOwner = this
+
         rvCustomerList = binding.rvCustomerList
         init()
 

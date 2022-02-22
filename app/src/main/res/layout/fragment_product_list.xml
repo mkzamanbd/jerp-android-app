@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="productList"
-            type="me.kzaman.android.ui.viewModel.OrderViewModel" />
+            name="productViewModel"
+            type="me.kzaman.android.ui.viewModel.ProductViewModel" />
     </data>
 
     <LinearLayout
@@ -40,7 +40,6 @@
                     android:layout_marginStart="@dimen/ten"
                     android:background="@drawable/bg_white_with_stroke"
                     android:padding="@dimen/two"
-                    android:onClick="@{productList::customerImageView}"
                     android:src="@drawable/img_avatar" />
 
                 <LinearLayout
@@ -56,26 +55,24 @@
                     <TextView
                         android:id="@+id/tv_customer_name"
                         style="@style/RobotoMedium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/ten"
                         android:maxLines="2"
                         android:padding="@dimen/five"
-                        android:text="@={productList.mlCustomerName}"
+                        android:text="@={productViewModel.mlCustomerName}"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/fifteen"
-                        tools:text="@string/author_name" />
+                        android:textSize="@dimen/fifteen" />
 
                     <TextView
                         android:id="@+id/tv_customer_id"
                         style="@style/RobotoRegular"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/five"
-                        android:text="@={productList.mlCustomerAddress}"
+                        android:text="@={productViewModel.mlCustomerAddress}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/sixteen"
-                        tools:text="@string/location" />
+                        android:textSize="@dimen/sixteen" />
 
                     <TextView
                         android:id="@+id/tv_current_due"
