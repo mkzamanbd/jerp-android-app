@@ -10,7 +10,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import me.kzaman.android.interfaces.InitialComponent
 import me.kzaman.android.utils.LoadingUtils
 
