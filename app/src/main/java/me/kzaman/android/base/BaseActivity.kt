@@ -9,7 +9,7 @@ abstract class BaseActivity : AppCompatActivity(), InitialComponent {
 
     protected lateinit var loadingUtils: LoadingUtils
 
-    abstract override fun init()
+    abstract override fun initializeApp()
     abstract override fun setToolbarTitle(title: String)
 
     /**

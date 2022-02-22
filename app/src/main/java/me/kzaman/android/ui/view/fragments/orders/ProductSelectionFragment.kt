@@ -9,7 +9,7 @@ import me.kzaman.android.ui.view.fragments.ProductListFragment
 @AndroidEntryPoint
 class ProductSelectionFragment : ProductListFragment() {
 
-    override fun init() {
+    override fun initializeApp() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle("Select Product")
         val customerModel = OrdersActivity.customerModel

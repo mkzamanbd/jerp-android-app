@@ -21,11 +21,11 @@ class ProductActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragments)
-        init()
+        initializeApp()
 
     }
 
-    override fun init() {
+    override fun initializeApp() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment_view) as NavHostFragment
         val navController = navHost.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)

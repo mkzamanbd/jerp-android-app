@@ -55,11 +55,11 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        init()
+        initializeApp()
     }
 
 
-    override fun init() {
+    override fun initializeApp() {
         binding.appBarLayout.addOnOffsetChangedListener(this)
         homeMenuParentAdapter = MenuParentAdapter(arrayListOf(), this)
 

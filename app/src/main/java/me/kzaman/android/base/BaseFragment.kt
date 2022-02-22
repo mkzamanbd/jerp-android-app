@@ -37,6 +37,6 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), InitialComponent
         return mRootView
     }
 
-    override fun init() {}
+    override fun initializeApp() {}
     override fun setToolbarTitle(title: String) {}
 }

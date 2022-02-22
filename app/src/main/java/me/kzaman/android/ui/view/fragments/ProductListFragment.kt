@@ -47,7 +47,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         binding = viewDataBinding
         binding.lifecycleOwner = viewLifecycleOwner
         binding.productViewModel = viewModel
-        init()
+        initializeApp()
         productListAdapter = ProductListAdapter(arrayListOf(), mContext)
 
         val productListRecyclerView = binding.productList
@@ -144,7 +144,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         }
     }
 
-    override fun init() {
+    override fun initializeApp() {
         (activity as ProductActivity).showToolbar(true) //display toolbar
         (activity as ProductActivity).setToolbarTitle("Product List")
         binding.cvCustomerInfo.visibility = View.GONE

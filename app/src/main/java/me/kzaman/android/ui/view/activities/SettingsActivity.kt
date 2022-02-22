@@ -34,7 +34,7 @@ class SettingsActivity : BaseActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        init()
+        initializeApp()
 
         loadingUtils = LoadingUtils(this)
 
@@ -51,7 +51,7 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    override fun init() {
+    override fun initializeApp() {
         getUserProfile()
         viewModel.profile.observe(this) {
             loadingUtils.isLoading(it is Resource.Loading)

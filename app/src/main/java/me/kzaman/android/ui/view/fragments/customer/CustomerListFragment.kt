@@ -54,7 +54,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding = viewDataBinding
         binding.lifecycleOwner = viewLifecycleOwner
-        init()
+        initializeApp()
 
         getCustomersList()
 
@@ -80,7 +80,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         }
     }
 
-    override fun init() {
+    override fun initializeApp() {
         (activity as CustomerActivity).showToolbar(true) //display toolbar
         (activity as CustomerActivity).setToolbarTitle("Customers List")
         customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
