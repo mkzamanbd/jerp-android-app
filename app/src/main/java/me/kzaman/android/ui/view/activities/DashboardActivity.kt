@@ -329,8 +329,7 @@ class DashboardActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             startAlphaAnimation(binding.toolbar, 0, View.INVISIBLE)
             binding.clCollapsing.visibility = View.VISIBLE
             mIsTheTitleVisible = false
-            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.colorPrimary))
+            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
             binding.clCollapsing.background =
                 ContextCompat.getDrawable(this, R.drawable.bg_home_profile)
         }
