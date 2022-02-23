@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,15 +9,130 @@
             type="me.kzaman.android.ui.viewModel.OrderViewModel" />
     </data>
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/offWhiteBackground">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/customer_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/ten"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_customer"
+                android:layout_width="@dimen/large_image_size"
+                android:layout_height="@dimen/large_image_size"
+                android:layout_gravity="center"
+                android:src="@drawable/img_avatar" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/fifteen">
+
+                <TextView
+                    android:id="@+id/tv_customer_name"
+                    style="@style/RobotoBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/author_name"
+                    android:textColor="@color/colorPrimary" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/five"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_baseline_local_phone_15"
+                    app:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/customer_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_customer_name"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/location"
+                    app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
+                    app:drawableTint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/customer_payment_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/customer_address"
+                    android:layout_marginTop="@dimen/five"
+                    android:drawablePadding="@dimen/five"
+                    android:text="Payment type Cash"
+                    app:drawableStartCompat="@drawable/ic_baseline_circle_15"
+                    app:drawableTint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/customer_order_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/customer_payment_type"
+                    android:layout_marginTop="@dimen/five"
+                    android:drawablePadding="@dimen/five"
+                    android:text="Total: 1,500.23"
+                    android:textColor="@color/success_color" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customer_info">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:padding="@dimen/ten"
+                android:weightSum="4">
+
+                <TextView
+                    style="@style/RobotoBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Product Name" />
+
+                <TextView
+                    style="@style/RobotoBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Quantity" />
+
+                <TextView
+                    style="@style/RobotoBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Price" />
+
+            </LinearLayout>
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
