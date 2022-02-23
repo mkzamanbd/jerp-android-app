@@ -2,13 +2,12 @@ package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import androidx.core.content.ContextCompat
 import me.kzaman.android.R
 import me.kzaman.android.data.model.CustomerModel
 import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.utils.getTintedDrawable
-import me.kzaman.android.utils.goToNextActivityAnimation
+import me.kzaman.android.utils.goToNextFragment
 import me.kzaman.android.utils.loadImage
 import kotlin.collections.ArrayList
 
@@ -55,10 +54,8 @@ class ChooseCustomerAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(mActivity, OrdersActivity::class.java)
             OrdersActivity.customerModel = customer
-            intent.putExtra("productSelection", "YES")
-            goToNextActivityAnimation(mActivity, intent)
+            goToNextFragment(R.id.action_customerSelectionFragment_to_productSelectionFragment, holder.itemView, null)
         }
     }
 }

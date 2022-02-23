@@ -21,12 +21,34 @@
         android:id="@+id/customerSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment"
         android:label="fragment_customer_selection"
-        tools:layout="@layout/fragment_customer_list" />
+        tools:layout="@layout/fragment_customer_list">
+        <action
+            android:id="@+id/action_customerSelectionFragment_to_productSelectionFragment"
+            app:destination="@id/productSelectionFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/productSelectionFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment"
         android:label="fragment_product_selection"
-        tools:layout="@layout/fragment_product_list" />
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/action_productSelectionFragment_to_productCartFragment"
+            app:destination="@id/productCartFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productCartFragment"
+        android:name="me.kzaman.android.ui.view.fragments.orders.ProductCartFragment"
+        android:label="ProductCartFragment"
+        tools:layout="@layout/fragment_product_cart" />
 
 </navigation>

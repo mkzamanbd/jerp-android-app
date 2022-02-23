@@ -1,7 +1,6 @@
 package me.kzaman.android.ui.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -34,14 +33,7 @@ class OrdersActivity : BaseActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment_view) as NavHostFragment
         val navController = navHost.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
-
-        val productSelection = intent.extras?.get("productSelection")
-
-        if (productSelection == "YES") {
-            navGraph.setStartDestination(R.id.productSelectionFragment)
-        } else {
-            navGraph.setStartDestination(R.id.customerSelectionFragment)
-        }
+        navGraph.setStartDestination(R.id.customerSelectionFragment)
         navController.graph = navGraph
 
         rlToolbar = findViewById(R.id.toolbar_root)

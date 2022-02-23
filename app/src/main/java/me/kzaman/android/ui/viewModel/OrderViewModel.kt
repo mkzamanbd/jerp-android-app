@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-    val repository: OrderRepository,
+    private val repository: OrderRepository,
 ) : BaseViewModel(repository) {
 
     companion object {

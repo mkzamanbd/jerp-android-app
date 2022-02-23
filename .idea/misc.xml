@@ -71,6 +71,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_notification.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product.xml" value="0.24954710144927536" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_cart.xml" value="0.3432971014492754" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_list.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_selection.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_profile.xml" value="0.1546875" />
@@ -83,6 +84,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/layout_fragments.xml" value="0.353713768115942" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/layout_toast.xml" value="0.2513586956521739" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/layout_toolbar.xml" value="0.536" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/model_user_menu.xml" value="0.3432971014492754" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/product_list_item.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/shimmer_menu_placeholder_layout.xml" value="0.21703296703296704" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/user_list_item.xml" value="0.13072916666666667" />
