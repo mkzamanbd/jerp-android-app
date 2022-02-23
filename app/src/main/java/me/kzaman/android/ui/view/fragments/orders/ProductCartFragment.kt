@@ -1,19 +1,13 @@
 package me.kzaman.android.ui.view.fragments.orders
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.android.R
-import me.kzaman.android.adapter.ProductListAdapter
 import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductCartBinding
 import me.kzaman.android.ui.view.activities.OrdersActivity
-import me.kzaman.android.ui.view.activities.ProductActivity
 import me.kzaman.android.ui.viewModel.OrderViewModel
 import me.kzaman.android.utils.LoadingUtils
 

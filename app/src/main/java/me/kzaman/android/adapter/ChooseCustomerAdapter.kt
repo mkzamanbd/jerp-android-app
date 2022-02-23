@@ -29,7 +29,7 @@ class ChooseCustomerAdapter(
         }
 
         holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mActivity,
-            R.drawable.ic_baseline_shopping_basket_24))
+            R.drawable.ic_baseline_shopping_basket_15))
 
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
