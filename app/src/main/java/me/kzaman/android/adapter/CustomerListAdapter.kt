@@ -2,7 +2,6 @@ package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +53,7 @@ open class CustomerListAdapter(
         parent: ViewGroup,
         viewType: Int,
     ) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.customer_list_item, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.model_customer_list, parent, false)
     )
 
     @SuppressLint("SetTextI18n")

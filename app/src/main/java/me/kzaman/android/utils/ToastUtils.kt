@@ -31,7 +31,7 @@ fun Activity.getDrawableBackgroundColor(mView: View, color: Int) {
 fun toastSuccess(activity: Activity, message: String) {
     val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast_message, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
@@ -55,7 +55,7 @@ fun toastSuccess(activity: Activity, message: String) {
 fun toastError(activity: Activity, message: String) {
     val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast_message, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
@@ -78,7 +78,7 @@ fun toastError(activity: Activity, message: String) {
 fun toastInfo(activity: Activity, message: String) {
     val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast_message, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
@@ -101,7 +101,7 @@ fun toastInfo(activity: Activity, message: String) {
 fun toastWarning(activity: Activity, message: String) {
     val inflater = activity.layoutInflater
     val layout: View =
-        inflater.inflate(R.layout.layout_toast, activity.findViewById(R.id.toast_layout_root))
+        inflater.inflate(R.layout.layout_toast_message, activity.findViewById(R.id.toast_layout_root))
 
     val tvBody = layout.findViewById<TextView>(R.id.tv_message)
     val tvTitle = layout.findViewById<TextView>(R.id.tv_title)

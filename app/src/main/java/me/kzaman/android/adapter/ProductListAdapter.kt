@@ -50,7 +50,7 @@ open class ProductListAdapter(
         parent: ViewGroup,
         viewType: Int,
     ) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.model_product_list, parent, false)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

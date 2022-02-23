@@ -36,7 +36,7 @@ class MenuChildAdapter(
         parent: ViewGroup,
         viewType: Int,
     ) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.child_menu_list, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.model_sub_menu_list, parent, false)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
