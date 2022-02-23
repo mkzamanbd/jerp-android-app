@@ -58,6 +58,8 @@ class OrderItemSelectionAdapter(
         if (product.isProductSelected) {
             holder.tvQuantity.visibility = View.VISIBLE
             holder.tvQuantity.text = "${product.quantity}"
+        } else {
+            holder.tvQuantity.visibility = View.GONE
         }
         holder.addToCart.setOnClickListener {
             if (selectedProduct.isProductAlreadyExist(product.productId)) {
