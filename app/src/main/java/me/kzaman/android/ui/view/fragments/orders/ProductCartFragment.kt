@@ -3,8 +3,10 @@ package me.kzaman.android.ui.view.fragments.orders
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.android.R
+import me.kzaman.android.adapter.ProductCartAdapter
 import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductCartBinding
 import me.kzaman.android.ui.view.activities.OrdersActivity
@@ -18,6 +20,8 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
     private val viewModel by viewModels<OrderViewModel>()
     override val layoutId: Int = R.layout.fragment_product_cart
 
+    private lateinit var productCartAdapter: ProductCartAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireContext()
@@ -30,12 +34,20 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
         binding = viewDataBinding
         binding.lifecycleOwner = viewLifecycleOwner
         binding.orderViewModel = viewModel
+        productCartAdapter = ProductCartAdapter(arrayListOf(), mContext)
+        binding.rvProductCart.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = productCartAdapter
+        }
         initializeApp()
+
     }
 
     override fun initializeApp() {
         viewModel.displayCustomerInfo(OrdersActivity.customerModel)
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle(viewModel.mlCustomerName.value!!)
+
+        productCartAdapter.setProducts(ProductSelectionFragment.selectedProduct)
     }
 }

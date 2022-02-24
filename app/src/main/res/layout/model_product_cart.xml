@@ -19,12 +19,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adarbi 80 Tablet"
             android:textColor="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/tv_unit_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Unit price: 320.0"
@@ -52,7 +54,7 @@
             tools:ignore="NestedWeights" />
 
         <TextView
-            android:id="@+id/product_qty"
+            android:id="@+id/tv_product_qty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
