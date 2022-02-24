@@ -108,8 +108,8 @@ open class ProductCartAdapter(
                 products.removeAt(position)
                 selectedProduct.remove(product)
                 cartItemCounter.value = products.size.toString()
-                calculateGrandTotalPrice()
                 notifyDataSetChanged()
+                calculateGrandTotalPrice()
             }
         }
     }
