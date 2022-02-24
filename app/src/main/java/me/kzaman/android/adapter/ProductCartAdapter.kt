@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.android.R
@@ -69,31 +68,41 @@ open class ProductCartAdapter(
         calculateGrandTotalPrice()
 
         holder.ivQtyDecrease.setOnClickListener {
-            if (product.quantity > 1) {
-                product.quantity--
-                product.totalPrice = getUnitPrice(product) * product.quantity
-                calculateGrandTotalPrice()
-                notifyDataSetChanged()
-            }
+            product.quantity = product.quantity - 1
+            product.totalPrice =
+                doubleValueFormat(product.quantity * getUnitPrice(products[position])).toDouble()
+            notifyDataSetChanged()
+            calculateGrandTotalPrice()
         }
         holder.ivQtyIncrease.setOnClickListener {
-            product.quantity++
-            product.totalPrice = getUnitPrice(product) * product.quantity
-            calculateGrandTotalPrice()
+            product.quantity = product.quantity + 1
+            product.totalPrice =
+                doubleValueFormat(product.quantity * getUnitPrice(products[position])).toDouble()
             notifyDataSetChanged()
+            calculateGrandTotalPrice()
         }
 
         holder.etQuantity.addTextChangedListener {
             val quantity = it.toString()
-            if (quantity.isNotEmpty() && quantity.toInt() > 0) {
-                product.quantity = quantity.toInt()
-                calculateGrandTotalPrice()
-            } else {
-                product.quantity = 1
-                calculateGrandTotalPrice()
+            try {
+                if (quantity.isNotEmpty()) {
+                    //while quantity field is not empty and quantity is not 0
+                    if (quantity == "0" || quantity.toInt() <= 0) {
+                        holder.etQuantity.setText("1")
+                        products[position].quantity = 1
+                    } else products[position].quantity = quantity.toInt()
+                } else products[position].quantity = 1
+            } catch (ex: Exception) {
+                products[position].quantity = 1
                 holder.etQuantity.setText("1")
+            } finally {
+                products[position].totalPrice =
+                    doubleValueFormat(products[position].quantity * getUnitPrice(products[position])).toDouble()
+                holder.tvTotalPrice.text = numberFormat(products[position].totalPrice)
+                calculateGrandTotalPrice()
             }
         }
+
         holder.ivRemoveProduct.setOnClickListener {
             if (products.size > 1) {
                 products.removeAt(position)

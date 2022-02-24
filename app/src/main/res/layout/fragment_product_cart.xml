@@ -10,152 +10,291 @@
             type="me.kzaman.android.ui.viewModel.OrderViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/offWhiteBackground">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/customer_info"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="@dimen/ten"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_customer"
-                android:layout_width="@dimen/large_image_size"
-                android:layout_height="@dimen/large_image_size"
-                android:layout_gravity="center"
-                android:src="@drawable/img_avatar" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/fifteen">
-
-                <TextView
-                    android:id="@+id/tv_customer_name"
-                    style="@style/RobotoBold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={orderViewModel.mlCustomerName}"
-                    android:textColor="@color/colorPrimary"
-                    tools:text="@string/author_name" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/five"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_baseline_local_phone_15"
-                    app:tint="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/customer_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_customer_name"
-                    android:layout_marginTop="@dimen/ten"
-                    android:text="@={orderViewModel.mlCustomerAddress}"
-                    android:textColor="@color/textColor"
-                    app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
-                    app:drawableTint="@color/colorPrimary"
-                    tools:text="@string/location" />
-
-                <TextView
-                    android:id="@+id/customer_payment_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/customer_address"
-                    android:layout_marginTop="@dimen/five"
-                    android:drawablePadding="@dimen/five"
-                    android:text="@={orderViewModel.mlCreditType}"
-                    android:textColor="@color/textColor"
-                    app:drawableStartCompat="@drawable/ic_baseline_circle_15"
-                    app:drawableTint="@color/textColor"
-                    tools:text="Payment type Cash" />
-
-                <TextView
-                    android:id="@+id/tv_total_bill"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/customer_payment_type"
-                    android:layout_marginTop="@dimen/five"
-                    android:drawablePadding="@dimen/five"
-                    android:textColor="@color/colorB"
-                    tools:text="Total: 1,500.23" />
-
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customer_info">
-
+            android:background="@color/offWhiteBackground">
 
             <LinearLayout
+                android:id="@+id/customer_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/whiteCardColor"
+                android:layout_gravity="center"
+                android:background="@color/white"
                 android:orientation="horizontal"
                 android:padding="@dimen/ten"
-                android:weightSum="4">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    style="@style/RobotoBold"
-                    android:layout_width="0dp"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_customer"
+                    android:layout_width="@dimen/large_image_size"
+                    android:layout_height="@dimen/large_image_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/img_avatar" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/product_name"
-                    android:textColor="@color/textColor" />
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/fifteen">
 
-                <TextView
-                    style="@style/RobotoBold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/quantity"
-                    android:textColor="@color/textColor" />
+                    <TextView
+                        android:id="@+id/tv_customer_name"
+                        style="@style/RobotoBold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={orderViewModel.mlCustomerName}"
+                        android:textColor="@color/colorPrimary"
+                        tools:text="@string/author_name" />
 
-                <TextView
-                    style="@style/RobotoBold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/price"
-                    android:textColor="@color/textColor" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/five"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_baseline_local_phone_15"
+                        app:tint="@color/colorPrimary" />
 
+                    <TextView
+                        android:id="@+id/customer_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_customer_name"
+                        android:layout_marginTop="@dimen/ten"
+                        android:text="@={orderViewModel.mlCustomerAddress}"
+                        android:textColor="@color/textColor"
+                        app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
+                        app:drawableTint="@color/colorPrimary"
+                        tools:text="@string/location" />
+
+                    <TextView
+                        android:id="@+id/customer_payment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/customer_address"
+                        android:layout_marginTop="@dimen/five"
+                        android:drawablePadding="@dimen/five"
+                        android:text="@={orderViewModel.mlCreditType}"
+                        android:textColor="@color/textColor"
+                        app:drawableStartCompat="@drawable/ic_baseline_circle_15"
+                        app:drawableTint="@color/textColor"
+                        tools:text="Payment type Cash" />
+
+                    <TextView
+                        android:id="@+id/tv_total_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/customer_payment_type"
+                        android:layout_marginTop="@dimen/five"
+                        android:drawablePadding="@dimen/five"
+                        android:textColor="@color/colorB"
+                        tools:text="Total: 1,500.23" />
+
+                </RelativeLayout>
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:layout_marginTop="@dimen/five"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_info">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_product_cart"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/model_product_cart" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:background="@color/whiteCardColor"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/ten"
+                    android:weightSum="4">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        style="@style/RobotoBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="@string/product_name"
+                        android:textColor="@color/textColor" />
+
+                    <TextView
+                        style="@style/RobotoBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/quantity"
+                        android:textColor="@color/textColor" />
+
+                    <TextView
+                        style="@style/RobotoBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/price"
+                        android:textColor="@color/textColor" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_product_cart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_bottom_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:padding="@dimen/five"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_input_field"
+                                android:padding="@dimen/five"
+                                android:text="@string/update_cart"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:baselineAligned="false"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@string/sub_total"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@={orderViewModel.mlDisplaySubTotalPrice}"
+                                    android:textColor="@color/textColor"
+                                    tools:text="5231.23" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@string/vat"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@={orderViewModel.mlDisplayTotalVat}"
+                                    android:textColor="@color/textColor"
+                                    tools:text="52.23" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@string/grand_total"
+                                    android:textColor="@color/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:padding="@dimen/five"
+                                    android:text="@={orderViewModel.mlDisplayGrandTotal}"
+                                    android:textColor="@color/colorPrimary"
+                                    tools:text="5231.23" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/thirty">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/ten"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_danger_outline_button"
+                            android:text="@string/empty_cart"
+                            android:textColor="@color/red" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/ten"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_primary_button"
+                            android:text="@string/next"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

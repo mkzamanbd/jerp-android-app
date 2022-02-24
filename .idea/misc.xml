@@ -10,11 +10,13 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_badge_white.xml" value="0.34" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_bottom_line.xml" value="0.3575" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_custom_layout.xml" value="0.37864583333333335" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_danger_outline_button.xml" value="0.1415" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_home_profile.xml" value="0.292" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_input_field.xml" value="0.2755" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_order_status.xml" value="0.3635" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_primary_button.xml" value="0.3495" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_primary_outline_button.xml" value="0.3495" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_red_stroke.xml" value="0.1415" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_secondary.xml" value="0.3205" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_toast.xml" value="0.2755" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/drawable/bg_toast_icon.xml" value="0.2755" />
@@ -86,7 +88,7 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_notification.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product.xml" value="0.24954710144927536" />
-        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_cart.xml" value="0.1" />
+        <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_cart.xml" value="0.33" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_list.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_product_selection.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/fragment_profile.xml" value="0.1546875" />
