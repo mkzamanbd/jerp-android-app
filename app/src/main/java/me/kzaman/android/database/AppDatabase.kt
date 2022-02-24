@@ -4,10 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import me.kzaman.android.database.dao.CustomerDao
 import me.kzaman.android.database.dao.MenuDao
-import me.kzaman.android.database.dao.ProductDao
+import me.kzaman.android.database.dao.OrderDao
 import me.kzaman.android.database.entities.CustomerEntities
 import me.kzaman.android.database.entities.SubMenuEntities
 import me.kzaman.android.database.entities.MenuEntities
+import me.kzaman.android.database.entities.CartItemsEntities
 import me.kzaman.android.database.entities.ProductEntities
 
 
@@ -17,10 +18,11 @@ import me.kzaman.android.database.entities.ProductEntities
         SubMenuEntities::class,
         ProductEntities::class,
         CustomerEntities::class,
-    ], version = 25
+        CartItemsEntities::class,
+    ], version = 26
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun menuDao(): MenuDao
-    abstract fun productDao(): ProductDao
+    abstract fun orderDao(): OrderDao
     abstract fun customerDao(): CustomerDao
 }

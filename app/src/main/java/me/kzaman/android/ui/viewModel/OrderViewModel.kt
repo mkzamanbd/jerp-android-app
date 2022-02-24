@@ -10,6 +10,7 @@ import me.kzaman.android.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.android.data.model.CustomerModel
+import me.kzaman.android.database.entities.CartItemsEntities
 import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.repository.OrderRepository
 import javax.inject.Inject
@@ -87,6 +88,10 @@ class OrderViewModel @Inject constructor(
 
     suspend fun saveProductToLocal(products: ArrayList<ProductEntities>) = viewModelScope.launch {
         repository.saveLocalProducts(products)
+    }
+
+    suspend fun saveCartProducts(cartItemsEntities: CartItemsEntities) = viewModelScope.launch {
+        repository.saveCartProducts(cartItemsEntities)
     }
 
     var mlCustomerName = MutableLiveData<String>()

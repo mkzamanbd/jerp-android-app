@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
-    private val appDatabase: AppDatabase
+    private val appDatabase: AppDatabase,
 ) : BaseViewModel(repository) {
 
     private val _profile: MutableLiveData<Resource<ProfileResponse>> = MutableLiveData()
@@ -30,8 +30,8 @@ class ProfileViewModel @Inject constructor(
         // clear menu table
         appDatabase.menuDao().deleteMenuTable()
         appDatabase.menuDao().deleteSubMenuTable()
-        // clear product table
-        appDatabase.productDao().deleteProductTable()
+        // clear order table
+        appDatabase.orderDao().deleteProductTable()
         // clear customer table
         appDatabase.customerDao().deleteAllCustomers()
     }

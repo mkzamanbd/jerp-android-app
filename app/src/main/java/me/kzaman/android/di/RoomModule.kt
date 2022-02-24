@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import me.kzaman.android.database.AppDatabase
 import me.kzaman.android.database.dao.CustomerDao
 import me.kzaman.android.database.dao.MenuDao
-import me.kzaman.android.database.dao.ProductDao
+import me.kzaman.android.database.dao.OrderDao
 import javax.inject.Singleton
 
 @Module
@@ -28,7 +28,7 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideProductDAO(database: AppDatabase): ProductDao = database.productDao()
+    fun provideOrderDAO(database: AppDatabase): OrderDao = database.orderDao()
 
     @Singleton
     @Provides
