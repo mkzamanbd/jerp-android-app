@@ -1,5 +1,6 @@
 package me.kzaman.android.ui.view.fragments.orders
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductCartBinding
 import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.ui.viewModel.OrderViewModel
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
 import me.kzaman.android.utils.LoadingUtils
 
 @AndroidEntryPoint
@@ -40,14 +42,19 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
             adapter = productCartAdapter
         }
         initializeApp()
-
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeApp() {
         viewModel.displayCustomerInfo(OrdersActivity.customerModel)
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle(viewModel.mlCustomerName.value!!)
 
         productCartAdapter.setProducts(ProductSelectionFragment.selectedProduct)
+
+        mlDisplayGrandTotal.observe(viewLifecycleOwner) {
+            binding.tvTotalBill.visibility = View.VISIBLE
+            binding.tvTotalBill.text = "Total: $it"
+        }
     }
 }

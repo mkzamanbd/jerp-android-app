@@ -22,6 +22,52 @@ class OrderViewModel @Inject constructor(
     companion object {
         @JvmField
         var cartItemCounter = MutableLiveData<String?>()
+
+        @JvmField
+        var mlSubTotalPrice = MutableLiveData<String>()
+
+        @JvmField
+        var mlGrandTotal = MutableLiveData<String>()
+
+        @JvmField
+        var mlTotalDiscount = MutableLiveData<String>()
+
+        @JvmField
+        var mlSpecialDiscountAmt = MutableLiveData<Double>()
+
+        @JvmField
+        var mlGrossTotal = MutableLiveData<String>()
+
+        @JvmField
+        var mlTotalVat = MutableLiveData<String>()
+
+        @JvmField
+        var mlLineTotal = MutableLiveData<Double>()
+
+        @JvmField
+        var mlOrderSelected = MutableLiveData<Int>()
+
+        /**
+         * ...only display
+         * ...display amount with comma
+         */
+        @JvmField
+        var mlDisplaySubTotalPrice = MutableLiveData<String>()
+
+        @JvmField
+        var mlDisplayGrandTotal = MutableLiveData<String>()
+
+        @JvmField
+        var mlDisplayTotalDiscount = MutableLiveData<String>()
+
+        @JvmField
+        var mlDisplaySpecialDiscount = MutableLiveData<String>()
+
+        @JvmField
+        var mlDisplayGrossTotal = MutableLiveData<String>()
+
+        @JvmField
+        var mlDisplayTotalVat = MutableLiveData<String>()
     }
 
     private val _products: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()

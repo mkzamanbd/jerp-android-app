@@ -91,7 +91,9 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/five"
             android:layout_toStartOf="@id/cancel_product"
+            android:padding="@dimen/five"
             android:textColor="@color/textColor"
+            android:textSize="@dimen/twelve"
             tools:text="5,324.00" />
 
         <ImageView

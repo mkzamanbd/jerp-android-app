@@ -17,8 +17,15 @@ import me.kzaman.android.R
 import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.cartItemCounter
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplaySubTotalPrice
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplayTotalVat
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlGrandTotal
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlSubTotalPrice
+import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlTotalVat
 import me.kzaman.android.utils.Constants.Companion.DISCOUNT_OFFER_TYPE
 import me.kzaman.android.utils.Constants.Companion.DISCOUNT_PCT_OFFER_TYPE
+import me.kzaman.android.utils.doubleValueFormat
 import me.kzaman.android.utils.numberFormat
 
 open class ProductCartAdapter(
@@ -56,19 +63,23 @@ open class ProductCartAdapter(
         val product = products[position]
         product.totalPrice = getUnitPrice(product) * product.quantity
         holder.tvProductName.text = product.productName
-        holder.tvPrice.text = "Unit price: ${product.baseTp}"
+        holder.tvPrice.text = "Unit price: ${getUnitPrice(product)}"
         holder.etQuantity.setText(product.quantity.toString())
         holder.tvTotalPrice.text = numberFormat(product.totalPrice)
-
+        calculateGrandTotalPrice()
 
         holder.ivQtyDecrease.setOnClickListener {
             if (product.quantity > 1) {
                 product.quantity--
+                product.totalPrice = getUnitPrice(product) * product.quantity
+                calculateGrandTotalPrice()
                 notifyDataSetChanged()
             }
         }
         holder.ivQtyIncrease.setOnClickListener {
             product.quantity++
+            product.totalPrice = getUnitPrice(product) * product.quantity
+            calculateGrandTotalPrice()
             notifyDataSetChanged()
         }
 
@@ -76,8 +87,10 @@ open class ProductCartAdapter(
             val quantity = it.toString()
             if (quantity.isNotEmpty() && quantity.toInt() > 0) {
                 product.quantity = quantity.toInt()
+                calculateGrandTotalPrice()
             } else {
                 product.quantity = 1
+                calculateGrandTotalPrice()
                 holder.etQuantity.setText("1")
             }
         }
@@ -86,6 +99,7 @@ open class ProductCartAdapter(
                 products.removeAt(position)
                 selectedProduct.remove(product)
                 cartItemCounter.value = products.size.toString()
+                calculateGrandTotalPrice()
                 notifyDataSetChanged()
             }
         }
@@ -106,5 +120,26 @@ open class ProductCartAdapter(
         }
 
         return unitPrice
+    }
+
+    /**
+     * ...calculate sub total of selected product list
+     * ...calculate total based on quantity * base price
+     * ...set calculated price in mutable live data
+     */
+    private fun calculateGrandTotalPrice() {
+        var subTotal = 0.0
+        var totalVat = 0.0
+        products.forEach { item ->
+            subTotal += item.totalPrice
+            totalVat += (item.baseVat * item.quantity)
+        }
+        mlSubTotalPrice.value = doubleValueFormat(subTotal)
+        mlTotalVat.value = doubleValueFormat(totalVat)
+        mlGrandTotal.value = doubleValueFormat(subTotal + totalVat)
+
+        mlDisplaySubTotalPrice.value = numberFormat(subTotal)
+        mlDisplayTotalVat.value = numberFormat(totalVat)
+        mlDisplayGrandTotal.value = numberFormat(subTotal + totalVat)
     }
 }

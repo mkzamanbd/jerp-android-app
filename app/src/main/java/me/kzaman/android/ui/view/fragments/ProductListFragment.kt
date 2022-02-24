@@ -177,6 +177,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                 offerType = product.offerType,
                 startDate = product.startDate,
                 validUntil = product.validUntil,
+                minimumQty = product.minimumQty,
                 elementInfo = product.elements
             )
             productItems.add(item)
