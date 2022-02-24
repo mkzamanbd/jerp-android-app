@@ -40,8 +40,7 @@
         android:background="@drawable/bg_secondary"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/five"
-        android:paddingEnd="@dimen/five">
+        android:padding="@dimen/five">
 
         <ImageView
             android:id="@+id/quantity_decrease"
