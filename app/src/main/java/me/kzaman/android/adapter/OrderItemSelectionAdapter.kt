@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
 import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.cartItemCounter
+import me.kzaman.android.utils.Constants.Companion.BONUS_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.DISCOUNT_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.DISCOUNT_PCT_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.FREE_OFFER_TYPE
 import me.kzaman.android.utils.compareDatesWithCurrentDate
 import me.kzaman.android.utils.genericNameFromJson
 import me.kzaman.android.utils.isProductAlreadyExist
@@ -30,19 +33,20 @@ class OrderItemSelectionAdapter(
 
         val genericName: String = genericNameFromJson(product.elements).ifEmpty { "" }
 
-        val mtp: String = if (product.offerType == "D" || product.offerType == "P") {
-            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                    "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
-                else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-            } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-        } else if (product.offerType == "F" || product.offerType == "B") {
-            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                    "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
-                else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-            } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-        } else "TP: <font color='#757575'>" + product.mtp + "</font>"
+        val mtp: String =
+            if (product.offerType == DISCOUNT_OFFER_TYPE || product.offerType == DISCOUNT_PCT_OFFER_TYPE) {
+                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                        "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
+                    else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+                } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+            } else if (product.offerType == FREE_OFFER_TYPE || product.offerType == BONUS_OFFER_TYPE) {
+                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                        "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
+                    else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+                } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+            } else "TP: <font color='#757575'>" + product.mtp + "</font>"
 
         holder.tvTitle.text = HtmlCompat.fromHtml("${product.productName} $packSize",
             HtmlCompat.FROM_HTML_MODE_LEGACY)
@@ -63,17 +67,15 @@ class OrderItemSelectionAdapter(
         }
         holder.itemView.setOnClickListener {
             if (selectedProduct.isProductAlreadyExist(product.productId)) {
-                product.quantity += 1
-                notifyDataSetChanged()
+                product.quantity++
             } else {
                 product.quantity = 1
                 selectedProduct.add(product)
                 product.isProductSelected = true
                 isCartItemsChanged = true
                 cartItemCounter.value = selectedProduct.size.toString()
-                notifyDataSetChanged()
             }
-
+            notifyDataSetChanged()
         }
     }
 }

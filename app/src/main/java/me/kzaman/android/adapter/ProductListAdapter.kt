@@ -16,6 +16,10 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.android.R
 import me.kzaman.android.data.model.ProductInfo
+import me.kzaman.android.utils.Constants.Companion.BONUS_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.DISCOUNT_PCT_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.FREE_OFFER_TYPE
+import me.kzaman.android.utils.Constants.Companion.DISCOUNT_OFFER_TYPE
 import me.kzaman.android.utils.compareDatesWithCurrentDate
 import me.kzaman.android.utils.genericNameFromJson
 import java.util.Locale
@@ -42,8 +46,8 @@ open class ProductListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
         val tvDetails: TextView = view.findViewById(R.id.tv_details)
-        val addToCart : AppCompatImageView = view.findViewById(R.id.product_add_to_cart)
-        val tvQuantity : TextView = view.findViewById(R.id.tv_qty)
+        val addToCart: AppCompatImageView = view.findViewById(R.id.product_add_to_cart)
+        val tvQuantity: TextView = view.findViewById(R.id.tv_qty)
     }
 
     override fun onCreateViewHolder(
@@ -62,19 +66,20 @@ open class ProductListAdapter(
 
         val genericName: String = genericNameFromJson(product.elements).ifEmpty { "" }
 
-        val mtp: String = if (product.offerType == "D" || product.offerType == "P") {
-            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                    "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
-                else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-            } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
-        } else if (product.offerType == "F" || product.offerType == "B") {
-            if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
-                if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
-                    "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
-                else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-            } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
-        } else "TP: <font color='#757575'>" + product.mtp + "</font>"
+        val mtp: String =
+            if (product.offerType == DISCOUNT_OFFER_TYPE || product.offerType == DISCOUNT_PCT_OFFER_TYPE) {
+                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                        "<b><font color='#009C32'>MTP: " + product.mtp + "</font><b> | " + offerDescription
+                    else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+                } else "TP: <font color='#757575'>" + (product.baseTp + product.baseVat) + "</font>"
+            } else if (product.offerType == FREE_OFFER_TYPE || product.offerType == BONUS_OFFER_TYPE) {
+                if (!TextUtils.isEmpty(product.startDate) && !TextUtils.isEmpty(product.validUntil)) {
+                    if (compareDatesWithCurrentDate(product.validUntil, product.startDate))
+                        "TP: <font color='#757575'>" + product.mtp + " | </font> " + offerText + offerDescription
+                    else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+                } else "TP: <font color='#757575'>" + product.mtp + " | </font> "
+            } else "TP: <font color='#757575'>" + product.mtp + "</font>"
 
         holder.tvTitle.text = HtmlCompat.fromHtml("${product.productName} $packSize",
             HtmlCompat.FROM_HTML_MODE_LEGACY)

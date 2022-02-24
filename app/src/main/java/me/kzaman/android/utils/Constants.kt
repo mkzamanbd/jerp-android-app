@@ -26,5 +26,11 @@ class Constants {
         const val REVIEW_REQUEST = "831"
         const val REVIEW_MTP = "832"
         const val ORDER_APPROVAL = "-1"
+
+        /*Offer type */
+        const val BONUS_OFFER_TYPE = "B"
+        const val DISCOUNT_PCT_OFFER_TYPE = "P"
+        const val DISCOUNT_OFFER_TYPE = "D"
+        const val FREE_OFFER_TYPE = "F"
     }
 }
