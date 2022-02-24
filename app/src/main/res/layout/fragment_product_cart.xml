@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -44,8 +45,9 @@
                     style="@style/RobotoBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/author_name"
-                    android:textColor="@color/colorPrimary" />
+                    android:text="@={orderViewModel.mlCustomerName}"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="@string/author_name" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -62,9 +64,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_customer_name"
                     android:layout_marginTop="@dimen/ten"
-                    android:text="@string/location"
+                    android:text="@={orderViewModel.mlCustomerAddress}"
+                    android:textColor="@color/textColor"
                     app:drawableStartCompat="@drawable/ic_baseline_location_on_15"
-                    app:drawableTint="@color/colorPrimary" />
+                    app:drawableTint="@color/colorPrimary"
+                    tools:text="@string/location" />
 
                 <TextView
                     android:id="@+id/customer_payment_type"
@@ -73,9 +77,11 @@
                     android:layout_below="@id/customer_address"
                     android:layout_marginTop="@dimen/five"
                     android:drawablePadding="@dimen/five"
-                    android:text="Payment type Cash"
+                    android:text="@={orderViewModel.mlCreditType}"
+                    android:textColor="@color/textColor"
                     app:drawableStartCompat="@drawable/ic_baseline_circle_15"
-                    app:drawableTint="@color/colorPrimary" />
+                    app:drawableTint="@color/textColor"
+                    tools:text="Payment type Cash" />
 
                 <TextView
                     android:id="@+id/customer_order_total"
@@ -94,6 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/whiteCardColor"
+                android:orientation="horizontal"
                 android:padding="@dimen/ten"
                 android:weightSum="4">
 
@@ -112,7 +120,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Product Name" />
+                    android:text="@string/product_name"
+                    android:textColor="@color/textColor" />
 
                 <TextView
                     style="@style/RobotoBold"
@@ -120,7 +129,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Quantity" />
+                    android:text="@string/quantity"
+                    android:textColor="@color/textColor" />
 
                 <TextView
                     style="@style/RobotoBold"
@@ -128,8 +138,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Price" />
+                    android:text="@string/price"
+                    android:textColor="@color/textColor" />
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/model_product_cart" />
             </LinearLayout>
         </LinearLayout>
 

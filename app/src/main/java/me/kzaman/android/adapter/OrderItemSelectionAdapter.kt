@@ -61,7 +61,7 @@ class OrderItemSelectionAdapter(
         } else {
             holder.tvQuantity.visibility = View.GONE
         }
-        holder.addToCart.setOnClickListener {
+        holder.itemView.setOnClickListener {
             if (selectedProduct.isProductAlreadyExist(product.productId)) {
                 product.quantity += 1
                 notifyDataSetChanged()

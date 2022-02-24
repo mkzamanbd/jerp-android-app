@@ -60,4 +60,7 @@
     <string name="location">Mymensingh</string>
     <string name="designation">Software Engineer</string>
     <string name="author_name">Kamruzzaman</string>
+    <string name="product_name">Product Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
 </resources>

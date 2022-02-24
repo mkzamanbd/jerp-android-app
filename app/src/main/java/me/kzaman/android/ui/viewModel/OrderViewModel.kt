@@ -20,7 +20,8 @@ class OrderViewModel @Inject constructor(
 ) : BaseViewModel(repository) {
 
     companion object {
-        @JvmField var cartItemCounter = MutableLiveData<String?>()
+        @JvmField
+        var cartItemCounter = MutableLiveData<String?>()
     }
 
     private val _products: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()
@@ -58,9 +59,22 @@ class OrderViewModel @Inject constructor(
     fun displayCustomerInfo(customerModel: CustomerModel?) {
         mlCustomerName.value = customerModel?.customerName
         mlCustomerAddress.value = customerModel?.customerAddress
-        mlCustomerCurrentDue.value = if(customerModel?.currentDue != "0"){
+        mlCustomerCurrentDue.value = if (customerModel?.currentDue != "0") {
             "Due: ${customerModel?.currentDue}"
         } else null
+        mlCreditType.value = if (customerModel?.creditFlag == "Y") {
+            try {
+                if (customerModel.creditLimit == "0" || customerModel.creditLimit == "0.0") {
+                    "Payment Type Credit"
+                } else {
+                    "Credit Limit : ${customerModel.creditLimit}"
+                }
+            } catch (e: Exception) {
+                "Payment Type Credit"
+            }
+        } else {
+            "Payment Type Cash"
+        }
         Log.d("customerModel", customerModel.toString())
     }
 }
