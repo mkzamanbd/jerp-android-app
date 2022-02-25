@@ -28,6 +28,7 @@ import me.kzaman.android.utils.handleNetworkError
 import me.kzaman.android.utils.toastWarning
 import me.kzaman.android.utils.visible
 import me.kzaman.android.utils.hideSoftKeyboard
+import me.kzaman.android.utils.countJsonObject
 import java.util.ArrayList
 
 
@@ -156,7 +157,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
         }
 
         filterBtn.setOnClickListener {
-            viewModel.getFilteredCustomersLocalDb(customerType, paymentType)
+            viewModel.getAllCustomersLocalDb(customerType, paymentType)
             isCustomerFilter = true
             dialog.dismiss()
         }
@@ -166,12 +167,16 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     }
 
     private fun getCustomersList() {
-        viewModel.getAllCustomersLocalDb()
+        viewModel.getAllCustomersLocalDb(customerType, paymentType)
         viewModel.localCustomers.observe(viewLifecycleOwner) {
             if (it.isNotEmpty() || isCustomerFilter) {
                 val customerModels: ArrayList<CustomerModel> = ArrayList()
 
                 it.forEach { customerEntities ->
+                    val totalCartCount = if (customerEntities.cartJson != null) {
+                        countJsonObject(customerEntities.cartJson!!)
+                    } else 0
+                    
                     val item = CustomerModel(
                         sbuId = customerEntities.sbuId,
                         compositeKey = customerEntities.compositeKey,
@@ -202,6 +207,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
                         activateVerifyDate = customerEntities.activateVerifyDate,
                         activateVerifyBy = customerEntities.activateVerifyBy,
                         hqType = customerEntities.hqType,
+                        totalCartItem = totalCartCount
                     )
                     customerModels.add(item)
                 }

@@ -11,6 +11,7 @@ import me.kzaman.android.repository.CommonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.android.data.response.DefaultResponse
+import me.kzaman.android.database.entities.CustomerCartEntities
 import me.kzaman.android.database.entities.CustomerEntities
 import me.kzaman.android.database.entities.SubMenuEntities
 import me.kzaman.android.database.entities.MenuEntities
@@ -70,14 +71,16 @@ class CommonViewModel @Inject constructor(
             repository.saveCustomersLocalDb(customerEntities)
         }
 
-    private val _localCustomers: MutableLiveData<List<CustomerEntities>> = MutableLiveData()
-    val localCustomers: LiveData<List<CustomerEntities>> = _localCustomers
+    private val _mlLocalCustomers: MutableLiveData<List<CustomerEntities>> = MutableLiveData()
+    val mlLocalCustomers: LiveData<List<CustomerEntities>> = _mlLocalCustomers
 
-    fun getAllCustomersLocalDb() = viewModelScope.launch {
-        _localCustomers.value = repository.getAllCustomersLocalDb()
+    fun getCustomersLocalDb() = viewModelScope.launch {
+        _mlLocalCustomers.value = repository.getAllCustomersLocalDb()
     }
 
-    fun getFilteredCustomersLocalDb(customerType: String? = null, paymentType: String? = null) =
+    private val _localCustomers: MutableLiveData<List<CustomerCartEntities>> = MutableLiveData()
+    val localCustomers: LiveData<List<CustomerCartEntities>> = _localCustomers
+    fun getAllCustomersLocalDb(customerType: String? = null, paymentType: String? = null) =
         viewModelScope.launch {
             var whereCondition = ""
             if (customerType == "422" || customerType == "424") {
@@ -92,8 +95,8 @@ class CommonViewModel @Inject constructor(
                 }
             }
 
-
-            val sqlQuery = "SELECT * FROM customers $whereCondition"
+            val sqlQuery =
+                "SELECT customer.*, cart.cart_json FROM customers customer LEFT JOIN carts cart ON cart.customer_id = customer.composite_key $whereCondition"
             val query = SimpleSQLiteQuery(sqlQuery)
             _localCustomers.value = repository.getAllCustomersLocalDb(query)
         }

@@ -33,5 +33,6 @@ class CommonRepository @Inject constructor(
         customerDao.insertCustomers(customerEntities)
 
     suspend fun getAllCustomersLocalDb() = customerDao.getLocalCustomers()
-    suspend fun getAllCustomersLocalDb(query: SupportSQLiteQuery) = customerDao.getLocalCustomers(query)
+    suspend fun getAllCustomersLocalDb(query: SupportSQLiteQuery) =
+        customerDao.getLocalCustomers(query)
 }
