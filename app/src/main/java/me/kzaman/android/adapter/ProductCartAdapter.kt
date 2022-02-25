@@ -89,16 +89,16 @@ open class ProductCartAdapter(
                     //while quantity field is not empty and quantity is not 0
                     if (quantity == "0" || quantity.toInt() <= 0) {
                         holder.etQuantity.setText("1")
-                        products[position].quantity = 1
-                    } else products[position].quantity = quantity.toInt()
-                } else products[position].quantity = 1
+                        product.quantity = 1
+                    } else product.quantity = quantity.toInt()
+                } else product.quantity = 1
             } catch (ex: Exception) {
-                products[position].quantity = 1
+                product.quantity = 1
                 holder.etQuantity.setText("1")
             } finally {
-                products[position].totalPrice =
-                    doubleValueFormat(products[position].quantity * getUnitPrice(products[position])).toDouble()
-                holder.tvTotalPrice.text = numberFormat(products[position].totalPrice)
+                product.totalPrice =
+                    doubleValueFormat(product.quantity * getUnitPrice(product)).toDouble()
+                holder.tvTotalPrice.text = numberFormat(product.totalPrice)
                 calculateGrandTotalPrice()
             }
         }
