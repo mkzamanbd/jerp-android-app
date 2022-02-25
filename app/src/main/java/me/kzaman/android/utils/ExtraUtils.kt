@@ -1,5 +1,6 @@
 package me.kzaman.android.utils
 
+import org.json.JSONArray
 import java.text.DecimalFormat
 
 
@@ -43,5 +44,14 @@ fun doubleValueFormat(d: Double): String {
         String.format("%d", d.toLong())
     } else {
         String.format("%.2f", d)
+    }
+}
+
+fun countJsonObject(json: String): Int {
+    return try {
+        val jsonArray = JSONArray(json)
+        jsonArray.length()
+    } catch (ex: Exception) {
+        0
     }
 }

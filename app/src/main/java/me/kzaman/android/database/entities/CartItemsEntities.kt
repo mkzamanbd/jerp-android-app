@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "carts")
 class CartItemsEntities(
     @PrimaryKey @NonNull @ColumnInfo(name = "customer_id") val customerId: String,
-    @ColumnInfo(name = "product_detail") var productDetail: String,
+    @ColumnInfo(name = "cart_json") var cartJson: String,
 )

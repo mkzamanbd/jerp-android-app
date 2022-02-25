@@ -138,6 +138,19 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_total_cart_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_with_stroke"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary"
+            tools:text="30" />
+
         <ImageView
             android:id="@+id/customer_arrow_button"
             android:layout_width="wrap_content"

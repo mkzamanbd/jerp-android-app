@@ -54,7 +54,7 @@ class CustomerSelectionFragment : CustomerListFragment() {
             val cartItemsEntities = OrdersActivity.customerModel?.let {
                 CartItemsEntities(
                     customerId = it.compositeKey,
-                    productDetail = productJson.toString()
+                    cartJson = productJson.toString()
                 )
             }
             lifecycleScope.launch {

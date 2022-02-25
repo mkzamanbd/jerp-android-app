@@ -47,6 +47,7 @@ open class CustomerListAdapter(
         val tvPaymentType: TextView = view.findViewById(R.id.tv_payment_type)
         val imageView: ImageView = view.findViewById(R.id.iv_customer)
         val arrowButton: ImageView = view.findViewById(R.id.customer_arrow_button)
+        val tvTotalCartSize: TextView = view.findViewById(R.id.tv_total_cart_size)
     }
 
     override fun onCreateViewHolder(

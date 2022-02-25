@@ -34,4 +34,7 @@ data class CustomerModel(
     @SerializedName("hq_type") var hqType: String? = null,
     @SerializedName("cardiac_cover") val isCardiacCover: Int = 0,
     @SerializedName("total_due_ait") val totalDueAit: Double = 0.0,
+
+    var totalCartItem: Int = 0,
+    var isSelected: Boolean = false,
 )

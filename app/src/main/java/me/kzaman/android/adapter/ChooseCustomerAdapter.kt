@@ -2,6 +2,7 @@ package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.view.View
 import androidx.core.content.ContextCompat
 import me.kzaman.android.R
 import me.kzaman.android.data.model.CustomerModel
@@ -28,8 +29,16 @@ class ChooseCustomerAdapter(
             holder.currentDue.text = "Due: ${customer.currentDue}"
         }
 
-        holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mActivity,
-            R.drawable.ic_baseline_shopping_basket_15))
+        if (customer.totalCartItem > 0) {
+            holder.tvTotalCartSize.visibility = View.VISIBLE
+            holder.arrowButton.visibility = View.GONE
+            holder.tvTotalCartSize.text = "${customer.totalCartItem}"
+        } else {
+            holder.arrowButton.visibility = View.VISIBLE
+            holder.tvTotalCartSize.visibility = View.GONE
+            holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mActivity,
+                R.drawable.ic_baseline_shopping_basket_15))
+        }
 
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
@@ -55,7 +64,9 @@ class ChooseCustomerAdapter(
 
         holder.itemView.setOnClickListener {
             OrdersActivity.customerModel = customer
-            goToNextFragment(R.id.action_customerSelectionFragment_to_productSelectionFragment, holder.itemView, null)
+            goToNextFragment(R.id.action_customerSelectionFragment_to_productSelectionFragment,
+                holder.itemView,
+                null)
         }
     }
 }
