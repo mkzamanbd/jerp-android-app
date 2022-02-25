@@ -11,6 +11,7 @@ import me.kzaman.android.adapter.ProductCartAdapter
 import me.kzaman.android.base.BaseFragment
 import me.kzaman.android.databinding.FragmentProductCartBinding
 import me.kzaman.android.ui.view.activities.OrdersActivity
+import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.android.ui.viewModel.OrderViewModel
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
 import me.kzaman.android.utils.LoadingUtils
@@ -50,7 +51,7 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
         (activity as OrdersActivity).showToolbar(true) //display toolbar
         (activity as OrdersActivity).setToolbarTitle(viewModel.mlCustomerName.value!!)
 
-        productCartAdapter.setProducts(ProductSelectionFragment.selectedProduct)
+        productCartAdapter.setProducts(selectedProduct)
 
         mlDisplayGrandTotal.observe(viewLifecycleOwner) {
             binding.tvTotalBill.visibility = View.VISIBLE

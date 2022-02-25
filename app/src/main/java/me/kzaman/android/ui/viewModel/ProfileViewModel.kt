@@ -32,6 +32,8 @@ class ProfileViewModel @Inject constructor(
         appDatabase.menuDao().deleteSubMenuTable()
         // clear order table
         appDatabase.orderDao().deleteProductTable()
+        // delete cart table
+        appDatabase.orderDao().deleteCartsTable()
         // clear customer table
         appDatabase.customerDao().deleteAllCustomers()
     }

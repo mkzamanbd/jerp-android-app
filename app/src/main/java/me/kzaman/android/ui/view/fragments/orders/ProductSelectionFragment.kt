@@ -69,8 +69,7 @@ class ProductSelectionFragment : ProductListFragment() {
 
     override fun displayProductList(products: List<ProductInfo>) {
         viewModel.cartItems.observe(viewLifecycleOwner) {
-            Log.d("CartItem", it.cartJson)
-            if (it.cartJson.isNotEmpty()) {
+            if (it != null) {
                 selectedProduct.clear()
                 selectedProduct.addAll(getProductFromCartJson(it.cartJson, products))
                 cartItemCounter.value = "${selectedProduct.size}"

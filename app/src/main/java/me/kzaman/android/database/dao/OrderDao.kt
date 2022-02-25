@@ -24,4 +24,7 @@ interface OrderDao {
 
     @Query("DELETE FROM products")
     suspend fun deleteProductTable()
+
+    @Query("DELETE FROM carts")
+    suspend fun deleteCartsTable()
 }

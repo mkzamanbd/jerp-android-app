@@ -106,7 +106,7 @@ open class ProductCartAdapter(
         holder.ivRemoveProduct.setOnClickListener {
             if (products.size > 1) {
                 products.removeAt(position)
-                selectedProduct.remove(product)
+                selectedProduct.removeAt(position)
                 cartItemCounter.value = products.size.toString()
                 notifyDataSetChanged()
                 calculateGrandTotalPrice()
