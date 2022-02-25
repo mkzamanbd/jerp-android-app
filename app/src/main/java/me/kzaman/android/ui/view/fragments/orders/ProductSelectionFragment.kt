@@ -66,11 +66,6 @@ class ProductSelectionFragment : ProductListFragment() {
             }
         }
         viewModel.getCustomerWiseCartItems(customerModel?.compositeKey!!)
-
-        if (selectedProduct.size > 0) {
-            viewModel.storeProductCartItem(selectedProduct)
-            Toast.makeText(mContext, "Cart Item Saved", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun displayProductList(products: List<ProductInfo>) {
