@@ -3,6 +3,7 @@ package me.kzaman.android.ui.viewModel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import me.kzaman.android.base.BaseViewModel
 import me.kzaman.android.data.response.ProductResponse
@@ -10,9 +11,14 @@ import me.kzaman.android.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.android.data.model.CustomerModel
+import me.kzaman.android.data.model.ProductInfo
 import me.kzaman.android.database.entities.CartItemsEntities
 import me.kzaman.android.database.entities.ProductEntities
 import me.kzaman.android.repository.OrderRepository
+import me.kzaman.android.ui.view.activities.OrdersActivity
+import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment
+import org.json.JSONArray
+import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
@@ -129,6 +135,53 @@ class OrderViewModel @Inject constructor(
         Log.d("customerModel", customerModel.toString())
     }
 
+    fun storeProductCartItem(products: List<ProductInfo>) {
+        try {
+            val productJson = JSONArray()
+            products.forEach { product ->
+                val jsonObject = JSONObject()
+                jsonObject.put("id", product.productId)
+                jsonObject.put("qty", product.quantity)
+                productJson.put(jsonObject)
+            }
+            val cartItemsEntities = OrdersActivity.customerModel?.let {
+                CartItemsEntities(
+                    customerId = it.compositeKey,
+                    cartJson = productJson.toString()
+                )
+            }
+            viewModelScope.launch {
+                repository.saveCartProducts(cartItemsEntities!!)
+                ProductSelectionFragment.selectedProduct.clear()
+                Log.d("storeJsonCart", cartItemsEntities.toString())
+            }
+
+        } catch (e: Exception) {
+            Log.d("orderJsonException", e.toString())
+        }
+
+    }
+
+    /**
+     * ...get only unselected product list from all product list
+     * ...remove all selected product from allProduct list
+     * @param selectedProduct product list
+     * @param allProducts product list
+     */
+    fun getOnlyUnselectedProducts(
+        allProducts: ArrayList<ProductInfo>,
+        selectedProduct: List<ProductInfo>,
+    ): List<ProductInfo> {
+        for (product in selectedProduct) {
+            for (item in allProducts) {
+                val position = allProducts.indexOfFirst {
+                    it.productId == product.productId
+                }
+                allProducts[position] = product
+            }
+        }
+        return allProducts
+    }
 
     private val _cartItems: MutableLiveData<CartItemsEntities> = MutableLiveData()
     val cartItems: LiveData<CartItemsEntities> = _cartItems

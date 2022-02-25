@@ -4,6 +4,7 @@ package me.kzaman.android.ui.view.fragments.orders
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,17 +66,24 @@ class ProductSelectionFragment : ProductListFragment() {
             }
         }
         viewModel.getCustomerWiseCartItems(customerModel?.compositeKey!!)
+
+        if (selectedProduct.size > 0) {
+            viewModel.storeProductCartItem(selectedProduct)
+            Toast.makeText(mContext, "Cart Item Saved", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun displayProductList(products: List<ProductInfo>) {
+        val unSelectedProduct: List<ProductInfo> =
+            viewModel.getOnlyUnselectedProducts(products as ArrayList<ProductInfo>, selectedProduct)
         viewModel.cartItems.observe(viewLifecycleOwner) {
             if (it != null) {
                 selectedProduct.clear()
                 selectedProduct.addAll(getProductFromCartJson(it.cartJson, products))
                 cartItemCounter.value = "${selectedProduct.size}"
             }
+            productListAdapter.setProducts(unSelectedProduct)
         }
-        productListAdapter.setProducts(products)
     }
 
 }
