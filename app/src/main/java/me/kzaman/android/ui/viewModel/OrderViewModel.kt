@@ -128,4 +128,11 @@ class OrderViewModel @Inject constructor(
         }
         Log.d("customerModel", customerModel.toString())
     }
+
+
+    private val _cartItems: MutableLiveData<CartItemsEntities> = MutableLiveData()
+    val cartItems: LiveData<CartItemsEntities> = _cartItems
+    fun getCustomerWiseCartItems(customerId: String) = viewModelScope.launch {
+        _cartItems.value = repository.getCartItems(customerId)
+    }
 }

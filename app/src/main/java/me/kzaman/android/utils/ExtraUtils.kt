@@ -1,5 +1,9 @@
 package me.kzaman.android.utils
 
+import android.util.Log
+import com.google.gson.GsonBuilder
+import me.kzaman.android.data.model.CartItemsModel
+import me.kzaman.android.data.model.ProductInfo
 import org.json.JSONArray
 import java.text.DecimalFormat
 
@@ -54,4 +58,23 @@ fun countJsonObject(json: String): Int {
     } catch (ex: Exception) {
         0
     }
+}
+
+fun getProductFromCartJson(json: String, products: List<ProductInfo>): List<ProductInfo> {
+    val gson = GsonBuilder().create()
+    val jsonArray = gson.fromJson(json, Array<CartItemsModel>::class.java).toList()
+    val selectedProduct = ArrayList<ProductInfo>()
+
+    for (item in jsonArray) {
+        products.forEach { product ->
+            if (item.productId == product.productId) {
+                Log.d("jsonProdId", "id is: ${product.productId}")
+                product.quantity = item.quantity
+                product.isProductSelected = true
+                selectedProduct.add(product)
+                return@forEach
+            }
+        }
+    }
+    return selectedProduct
 }

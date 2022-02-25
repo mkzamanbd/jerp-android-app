@@ -116,7 +116,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                     )
                     products.add(item)
                 }
-                productListAdapter.setProducts(products)
+                displayProductList(products)
             }
         }
     }
@@ -141,7 +141,7 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
                             productList.add(product)
                         }
                         saveLocalProduct(productList)
-                        productListAdapter.setProducts(productList)
+                        displayProductList(productList)
                     } else {
                         toastWarning(mActivity, "Product list list not found")
                     }
@@ -185,5 +185,9 @@ open class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
         lifecycleScope.launch {
             viewModel.saveProductToLocal(productItems)
         }
+    }
+
+    open fun displayProductList(products: List<ProductInfo>){
+        productListAdapter.setProducts(products)
     }
 }

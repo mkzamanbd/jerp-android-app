@@ -2,6 +2,7 @@ package me.kzaman.android.ui.view.fragments.orders
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import me.kzaman.android.ui.view.activities.OrdersActivity
 import me.kzaman.android.ui.view.fragments.ProductListFragment
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.cartItemCounter
 import me.kzaman.android.utils.LoadingUtils
+import me.kzaman.android.utils.getProductFromCartJson
 import me.kzaman.android.utils.goToNextFragment
 import me.kzaman.android.utils.toastWarning
 
@@ -62,6 +64,19 @@ class ProductSelectionFragment : ProductListFragment() {
                 )
             }
         }
+        viewModel.getCustomerWiseCartItems(customerModel?.compositeKey!!)
+    }
+
+    override fun displayProductList(products: List<ProductInfo>) {
+        viewModel.cartItems.observe(viewLifecycleOwner) {
+            Log.d("CartItem", it.cartJson)
+            if (it.cartJson.isNotEmpty()) {
+                selectedProduct.clear()
+                selectedProduct.addAll(getProductFromCartJson(it.cartJson, products))
+                cartItemCounter.value = "${selectedProduct.size}"
+            }
+        }
+        productListAdapter.setProducts(products)
     }
 
 }

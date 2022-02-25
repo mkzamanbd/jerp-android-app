@@ -19,6 +19,9 @@ interface OrderDao {
     @Query("SELECT * FROM products")
     suspend fun getLocalProducts(): List<ProductEntities>
 
+    @Query("SELECT * FROM carts WHERE customer_id = :customerId LIMIT 1")
+    suspend fun getCartItems(customerId: String): CartItemsEntities
+
     @Query("DELETE FROM products")
     suspend fun deleteProductTable()
 }
