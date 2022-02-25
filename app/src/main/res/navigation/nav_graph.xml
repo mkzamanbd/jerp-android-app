@@ -49,6 +49,16 @@
         android:id="@+id/productCartFragment"
         android:name="me.kzaman.android.ui.view.fragments.orders.ProductCartFragment"
         android:label="ProductCartFragment"
-        tools:layout="@layout/fragment_product_cart" />
+        tools:layout="@layout/fragment_product_cart">
+        <action
+            android:id="@+id/action_productCartFragment_to_productSelectionFragment"
+            app:destination="@id/productSelectionFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right"
+            app:popUpTo="@id/productSelectionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -74,26 +73,32 @@ class OrdersActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        doOnBackPressed()
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
+            Log.d("onBackPressed", "backStackEntryCount")
         } else {
             super.onBackPressed()
-            if (navController.currentDestination?.id == R.id.customerSelectionFragment) {
-                if (ProductSelectionFragment.selectedProduct.size > 0) {
-                    storeProductCartItem(ProductSelectionFragment.selectedProduct)
-                    Log.d("SaveCart", "Cart Saved Customer Selection")
-                }
-            } else if (navController.currentDestination?.id == R.id.productSelectionFragment) {
-                if (ProductSelectionFragment.selectedProduct.size > 0) {
-                    storeProductCartItem(ProductSelectionFragment.selectedProduct)
-                    Log.d("SaveCart", "Cart Saved Product Selection")
-                }
-            }
+            Log.d("onBackPressed", "super.onBackPressed")
             overridePendingTransition(0, R.anim.animation_slide_out_right)
         }
     }
 
-    private fun storeProductCartItem(products: List<ProductInfo>) {
+    private fun doOnBackPressed() {
+        if (navController.currentDestination?.id == R.id.customerSelectionFragment) {
+            if (ProductSelectionFragment.selectedProduct.size > 0) {
+                storeProductCartItem(ProductSelectionFragment.selectedProduct)
+                Log.d("saveCart", "Cart Saved Customer Selection")
+            }
+        } else if (navController.currentDestination?.id == R.id.productSelectionFragment) {
+            if (ProductSelectionFragment.selectedProduct.size > 0) {
+                storeProductCartItem(ProductSelectionFragment.selectedProduct)
+                Log.d("saveCart", "Cart Saved Product Selection")
+            }
+        }
+    }
+
+    fun storeProductCartItem(products: List<ProductInfo>) {
         try {
             val productJson = JSONArray()
             products.forEach { product ->
@@ -117,6 +122,5 @@ class OrdersActivity : BaseActivity() {
         } catch (e: Exception) {
             Log.d("orderJsonException", e.toString())
         }
-
     }
 }

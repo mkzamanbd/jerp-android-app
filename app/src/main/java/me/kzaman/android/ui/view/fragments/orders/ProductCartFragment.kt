@@ -15,6 +15,7 @@ import me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment.Compa
 import me.kzaman.android.ui.viewModel.OrderViewModel
 import me.kzaman.android.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
 import me.kzaman.android.utils.LoadingUtils
+import me.kzaman.android.utils.goToNextFragment
 
 @AndroidEntryPoint
 class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
@@ -43,6 +44,11 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
             adapter = productCartAdapter
         }
         initializeApp()
+
+        binding.tvUpdateCart.setOnClickListener {
+            (activity as OrdersActivity).storeProductCartItem(selectedProduct)
+            goToNextFragment(R.id.action_productCartFragment_to_productSelectionFragment, mRootView, null)
+        }
     }
 
     @SuppressLint("SetTextI18n")
