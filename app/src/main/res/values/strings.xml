@@ -82,4 +82,9 @@
     <string name="unverified">Unverified</string>
     <string name="clear">Clear</string>
     <string name="filter">Filter</string>
+    <string name="expand_detail">Expand Detail</string>
+    <string name="enter_order_note_here">Enter order note here</string>
+    <string name="note">Note</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="_0176724245">0176724245</string>
 </resources>

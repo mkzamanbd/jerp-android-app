@@ -100,6 +100,132 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_hide_expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five"
+                android:background="@color/white"
+                android:drawablePadding="@dimen/five"
+                android:gravity="end"
+                android:padding="@dimen/ten"
+                android:text="@string/expand_detail"
+                android:textColor="@color/colorPrimary"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_15"
+                app:drawableTint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_info" />
+
+            <LinearLayout
+                android:id="@+id/collapsable_customer_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/ten"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_hide_expand">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/five"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/five"
+                                android:text="@string/phone"
+                                android:textColor="@color/textColor" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_input_field"
+                                android:drawableStart="@drawable/ic_baseline_local_phone_15"
+                                android:drawablePadding="10dp"
+                                android:hint="@string/_0176724245"
+                                android:importantForAutofill="no"
+                                android:inputType="number"
+                                android:padding="@dimen/eight"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/twelve" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/five"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/five"
+                                android:text="@string/delivery_address"
+                                android:textColor="@color/textColor" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_input_field"
+                                android:drawableStart="@drawable/ic_baseline_location_on_15"
+                                android:drawablePadding="10dp"
+                                android:hint="@string/location"
+                                android:importantForAutofill="no"
+                                android:inputType="text"
+                                android:padding="@dimen/eight"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/twelve" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/five"
+                        android:text="@string/note"
+                        android:textColor="@color/textColor" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/five"
+                        android:background="@drawable/bg_input_field"
+                        android:gravity="start"
+                        android:hint="@string/enter_order_note_here"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:minHeight="@dimen/_80sdp"
+                        android:padding="@dimen/eight"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/twelve" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +233,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/customer_info">
+                app:layout_constraintTop_toBottomOf="@id/collapsable_customer_detail">
 
 
                 <LinearLayout
@@ -157,8 +283,8 @@
                         android:id="@+id/rv_product_cart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/model_product_cart"
-                        android:background="@drawable/bg_bottom_line" />
+                        android:background="@drawable/bg_bottom_line"
+                        tools:listitem="@layout/model_product_cart" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

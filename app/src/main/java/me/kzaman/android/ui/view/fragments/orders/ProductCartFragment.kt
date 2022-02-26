@@ -44,7 +44,8 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
             adapter = productCartAdapter
         }
         initializeApp()
-
+        binding.tvHideExpand.visibility = View.GONE
+        binding.collapsableCustomerDetail.visibility = View.GONE
         binding.tvUpdateCart.setOnClickListener {
             (activity as OrdersActivity).storeProductCartItem(selectedProduct)
             goToNextFragment(

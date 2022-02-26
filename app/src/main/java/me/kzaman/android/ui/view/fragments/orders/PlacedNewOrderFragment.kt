@@ -51,12 +51,32 @@ class PlacedNewOrderFragment : BaseFragment<FragmentProductCartBinding>() {
                 null
             )
         }
+        binding.tvHideExpand.setOnClickListener {
+            if (binding.collapsableCustomerDetail.visibility == View.GONE) {
+                binding.collapsableCustomerDetail.visibility = View.VISIBLE
+                binding.tvHideExpand.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    0,
+                    R.drawable.ic_baseline_keyboard_arrow_up_15,
+                    0
+                )
+            } else {
+                binding.collapsableCustomerDetail.visibility = View.GONE
+                binding.tvHideExpand.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    0,
+                    R.drawable.ic_baseline_keyboard_arrow_down_15,
+                    0
+                )
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
     override fun initializeApp() {
         viewModel.displayCustomerInfo(OrdersActivity.customerModel)
         (activity as OrdersActivity).showToolbar(true) //display toolbar
+        binding.tvHideExpand.visibility = View.VISIBLE
         binding.tvEmptyCart.visibility = View.GONE
         binding.buttonOrderNext.text = "Place Order"
         (activity as OrdersActivity).setToolbarTitle(viewModel.mlCustomerName.value!!)
