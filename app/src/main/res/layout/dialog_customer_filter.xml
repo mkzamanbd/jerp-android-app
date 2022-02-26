@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filter Customer"
+            android:text="@string/filter_customer"
             style="@style/RobotoBold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/five"
-                android:text="Customer Type" />
+                android:text="@string/customer_type" />
 
             <RadioGroup
                 android:id="@+id/customer_type_group"
@@ -65,21 +65,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="All" />
+                    android:text="@string/all" />
 
                 <RadioButton
                     android:id="@+id/customer_type_chemist"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Chemist" />
+                    android:text="@string/chemist" />
 
                 <RadioButton
                     android:id="@+id/customer_type_institution"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Institution" />
+                    android:text="@string/institution" />
             </RadioGroup>
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/five"
-                android:text="Payment Method" />
+                android:text="@string/payment_method" />
 
             <RadioGroup
                 android:id="@+id/payment_type_group"
@@ -107,21 +107,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="All" />
+                    android:text="@string/all" />
 
                 <RadioButton
                     android:id="@+id/payment_method_credit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Credit" />
+                    android:text="@string/credit" />
 
                 <RadioButton
                     android:id="@+id/payment_method_cash"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cash" />
+                    android:text="@string/cash" />
             </RadioGroup>
         </LinearLayout>
 
@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/five"
-                android:text="Customer Verification" />
+                android:text="@string/customer_verification" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -148,21 +148,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="All" />
+                    android:text="@string/all" />
 
                 <RadioButton
                     android:id="@+id/verification_verified"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Verified" />
+                    android:text="@string/verified" />
 
                 <RadioButton
                     android:id="@+id/verification_unverified"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Unverified" />
+                    android:text="@string/unverified" />
             </RadioGroup>
         </LinearLayout>
 
@@ -178,9 +178,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/ten"
-                android:background="@drawable/bg_primary_outline_button"
-                android:text="Clear"
-                android:textColor="@color/colorPrimary" />
+                android:background="@drawable/bg_danger_outline_button"
+                android:text="@string/clear"
+                android:textColor="@color/red" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_filter"
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/ten"
                 android:background="@drawable/bg_primary_button"
-                android:text="Filter"
+                android:text="@string/filter"
                 android:textColor="@color/white" />
 
         </LinearLayout>

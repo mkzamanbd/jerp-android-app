@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/ten"
     android:paddingBottom="@dimen/ten"
     android:weightSum="5"
+    android:background="@drawable/bg_bottom_line"
     tools:ignore="RtlSymmetry">
 
     <LinearLayout

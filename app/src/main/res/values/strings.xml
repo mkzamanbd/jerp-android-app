@@ -69,4 +69,17 @@
     <string name="grand_total">Grand Total</string>
     <string name="empty_cart">Empty Cart</string>
     <string name="next">Next</string>
+    <string name="filter_customer">Filter Customer</string>
+    <string name="customer_type">Customer Type</string>
+    <string name="all">All</string>
+    <string name="chemist">Chemist</string>
+    <string name="institution">Institution</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="credit">Credit</string>
+    <string name="cash">Cash</string>
+    <string name="customer_verification">Customer Verification</string>
+    <string name="verified">Verified</string>
+    <string name="unverified">Unverified</string>
+    <string name="clear">Clear</string>
+    <string name="filter">Filter</string>
 </resources>
