@@ -49,6 +49,11 @@ class ProductCartFragment : BaseFragment<FragmentProductCartBinding>() {
             (activity as OrdersActivity).storeProductCartItem(selectedProduct)
             goToNextFragment(R.id.action_productCartFragment_to_productSelectionFragment, mRootView, null)
         }
+        binding.tvEmptyCart.setOnClickListener {
+            selectedProduct.clear()
+            viewModel.customerCartEmpty(OrdersActivity.customerModel?.compositeKey!!)
+            goToNextFragment(R.id.action_productCartFragment_to_productSelectionFragment, mRootView, null)
+        }
     }
 
     @SuppressLint("SetTextI18n")

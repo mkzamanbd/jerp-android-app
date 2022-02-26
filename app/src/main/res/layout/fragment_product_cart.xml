@@ -157,6 +157,7 @@
                         android:id="@+id/rv_product_cart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        tools:listitem="@layout/model_product_cart"
                         android:background="@drawable/bg_bottom_line" />
 
                     <LinearLayout
@@ -273,6 +274,7 @@
                         android:padding="@dimen/thirty">
 
                         <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/tv_empty_cart"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/ten"

@@ -95,6 +95,10 @@ class OrderViewModel @Inject constructor(
         repository.saveCartProducts(cartItemsEntities)
     }
 
+    fun customerCartEmpty(customerId: String) = viewModelScope.launch {
+        repository.customerCartEmpty(customerId)
+    }
+
     var mlCustomerName = MutableLiveData<String>()
     var mlCustomerCode = MutableLiveData<String>()
     var mlCustomerBusinessUnit = MutableLiveData<String>()

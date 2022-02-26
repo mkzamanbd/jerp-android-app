@@ -22,4 +22,5 @@ class OrderRepository @Inject constructor(
     suspend fun saveCartProducts(cartItemsEntities: CartItemsEntities) {
         orderDao.insertCartProducts(cartItemsEntities)
     }
+    suspend fun customerCartEmpty(customerId: String) = orderDao.customerCartEmpty(customerId)
 }
