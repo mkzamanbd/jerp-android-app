@@ -284,6 +284,7 @@
                             android:textColor="@color/red" />
 
                         <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/button_order_next"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/ten"

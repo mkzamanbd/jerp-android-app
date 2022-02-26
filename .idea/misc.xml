@@ -110,12 +110,15 @@
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/layout/user_menu_item.xml" value="0.3625" />
         <entry key="..\:/Android/SimpleLogin/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
         <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/dialog_customer_filter.xml" value="0.34479166666666666" />
+        <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/fragment_placed_regular_order.xml" value="0.18541666666666667" />
         <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/fragment_product_cart.xml" value="0.3625" />
         <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/model_customer_list.xml" value="0.34479166666666666" />
+        <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/model_product_cart.xml" value="0.3625" />
+        <entry key="..\:/Zaman/Android/android-mvvm/app/src/main/res/layout/model_selected_cart_item.xml" value="0.3625" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

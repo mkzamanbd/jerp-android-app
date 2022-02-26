@@ -59,6 +59,33 @@
             app:popExitAnim="@anim/animation_slide_out_right"
             app:popUpTo="@id/productSelectionFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_productCartFragment_to_placedNewOrderFragment"
+            app:destination="@id/placedNewOrderFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/placedNewOrderFragment"
+        android:name="me.kzaman.android.ui.view.fragments.orders.PlacedNewOrderFragment"
+        android:label="PlacedNewOrderFragment"
+        app:enterAnim="@anim/animation_slide_in_right"
+        app:exitAnim="@anim/animation_slide_out_left"
+        app:popEnterAnim="@anim/animation_slide_in_left"
+        app:popExitAnim="@anim/animation_slide_out_right"
+        tools:layout="@layout/fragment_product_cart" >
+        <action
+            android:id="@+id/action_placedNewOrderFragment_to_productSelectionFragment"
+            app:destination="@id/productSelectionFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right"
+            app:popUpTo="@id/productSelectionFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

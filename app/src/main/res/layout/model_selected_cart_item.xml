@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/ten"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            tools:text="Adarbi 80 Tablet" />
+
+        <TextView
+            android:id="@+id/tv_unit_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/twelve"
+            tools:text="Unit price: 320.0" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_product_qty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:minWidth="@dimen/thirty"
+        android:textAlignment="center"
+        android:textSize="@dimen/twelve"
+        tools:ignore="LabelFor,RelativeOverlap"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tv_total_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:layout_marginEnd="@dimen/five"
+        android:padding="@dimen/five"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/twelve"
+        tools:text="5,324.00" />
+
+</LinearLayout>

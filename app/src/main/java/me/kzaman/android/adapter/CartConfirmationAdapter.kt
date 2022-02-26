@@ -27,10 +27,10 @@ import me.kzaman.android.utils.Constants.Companion.DISCOUNT_PCT_OFFER_TYPE
 import me.kzaman.android.utils.doubleValueFormat
 import me.kzaman.android.utils.numberFormat
 
-open class ProductCartAdapter(
+open class CartConfirmationAdapter(
     var products: ArrayList<ProductInfo>,
     val mContext: Context,
-) : RecyclerView.Adapter<ProductCartAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CartConfirmationAdapter.ViewHolder>() {
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -43,10 +43,7 @@ open class ProductCartAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvProductName: TextView = view.findViewById(R.id.tv_product_name)
         val tvPrice: TextView = view.findViewById(R.id.tv_unit_price)
-        val etQuantity: EditText = view.findViewById(R.id.et_product_qty)
-        val ivQtyIncrease: ImageView = view.findViewById(R.id.quantity_increase)
-        val ivQtyDecrease: ImageView = view.findViewById(R.id.quantity_decrease)
-        val ivRemoveProduct: ImageView = view.findViewById(R.id.cancel_product)
+        val tvQuantity: TextView = view.findViewById(R.id.tv_product_qty)
         val tvTotalPrice: TextView = view.findViewById(R.id.tv_total_price)
     }
 
@@ -54,7 +51,8 @@ open class ProductCartAdapter(
         parent: ViewGroup,
         viewType: Int,
     ) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.model_product_cart, parent, false)
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.model_selected_cart_item, parent, false)
     )
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
@@ -63,55 +61,9 @@ open class ProductCartAdapter(
         product.totalPrice = getUnitPrice(product) * product.quantity
         holder.tvProductName.text = product.productName
         holder.tvPrice.text = "Unit price: ${getUnitPrice(product)}"
-        holder.etQuantity.setText(product.quantity.toString())
+        holder.tvQuantity.text = product.quantity.toString()
         holder.tvTotalPrice.text = numberFormat(product.totalPrice)
         calculateGrandTotalPrice()
-
-        holder.ivQtyDecrease.setOnClickListener {
-            product.quantity = product.quantity - 1
-            product.totalPrice =
-                doubleValueFormat(product.quantity * getUnitPrice(products[position])).toDouble()
-            notifyDataSetChanged()
-            calculateGrandTotalPrice()
-        }
-        holder.ivQtyIncrease.setOnClickListener {
-            product.quantity = product.quantity + 1
-            product.totalPrice =
-                doubleValueFormat(product.quantity * getUnitPrice(products[position])).toDouble()
-            notifyDataSetChanged()
-            calculateGrandTotalPrice()
-        }
-
-        holder.etQuantity.addTextChangedListener {
-            val quantity = it.toString()
-            try {
-                if (quantity.isNotEmpty()) {
-                    //while quantity field is not empty and quantity is not 0
-                    if (quantity == "0" || quantity.toInt() <= 0) {
-                        holder.etQuantity.setText("1")
-                        product.quantity = 1
-                    } else product.quantity = quantity.toInt()
-                } else product.quantity = 1
-            } catch (ex: Exception) {
-                product.quantity = 1
-                holder.etQuantity.setText("1")
-            } finally {
-                product.totalPrice =
-                    doubleValueFormat(product.quantity * getUnitPrice(product)).toDouble()
-                holder.tvTotalPrice.text = numberFormat(product.totalPrice)
-                calculateGrandTotalPrice()
-            }
-        }
-
-        holder.ivRemoveProduct.setOnClickListener {
-            if (products.size > 1) {
-                products.removeAt(position)
-                selectedProduct.removeAt(position)
-                cartItemCounter.value = products.size.toString()
-                notifyDataSetChanged()
-                calculateGrandTotalPrice()
-            }
-        }
     }
 
     override fun getItemCount() = products.size
