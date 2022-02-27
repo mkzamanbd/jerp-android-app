@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="me.kzaman.android.ui.view.fragments.ProductListFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.ProductListFragment"
         android:label="Product List"
         tools:layout="@layout/fragment_product_list" />
 
     <fragment
         android:id="@+id/customerListFragment"
-        android:name="me.kzaman.android.ui.view.fragments.customer.CustomerListFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.customer.CustomerListFragment"
         android:label="CustomerListFragment"
         tools:layout="@layout/fragment_customer_list" />
 
     <fragment
         android:id="@+id/customerSelectionFragment"
-        android:name="me.kzaman.android.ui.view.fragments.orders.CustomerSelectionFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.orders.CustomerSelectionFragment"
         android:label="fragment_customer_selection"
         tools:layout="@layout/fragment_customer_list">
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/productSelectionFragment"
-        android:name="me.kzaman.android.ui.view.fragments.orders.ProductSelectionFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment"
         android:label="fragment_product_selection"
         tools:layout="@layout/fragment_product_list">
         <action
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/productCartFragment"
-        android:name="me.kzaman.android.ui.view.fragments.orders.ProductCartFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.orders.ProductCartFragment"
         android:label="ProductCartFragment"
         tools:layout="@layout/fragment_product_cart">
         <action
@@ -70,7 +70,7 @@
 
     <fragment
         android:id="@+id/placedNewOrderFragment"
-        android:name="me.kzaman.android.ui.view.fragments.orders.PlacedNewOrderFragment"
+        android:name="me.kzaman.demo_app.ui.view.fragments.orders.PlacedNewOrderFragment"
         android:label="PlacedNewOrderFragment"
         app:enterAnim="@anim/animation_slide_in_right"
         app:exitAnim="@anim/animation_slide_out_left"

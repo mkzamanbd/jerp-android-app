@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "me.kzaman.android"
+        applicationId "me.kzaman.demo_app"
         minSdk 22
         targetSdk 32
         versionCode 1

@@ -9,7 +9,7 @@
 
         <variable
             name="orderViewModel"
-            type="me.kzaman.android.ui.viewModel.OrderViewModel" />
+            type="me.kzaman.demo_app.ui.viewModel.OrderViewModel" />
     </data>
 
     <LinearLayout
