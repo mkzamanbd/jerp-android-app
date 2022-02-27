@@ -131,6 +131,7 @@ class OrderViewModel @Inject constructor(
         } else {
             "Payment Type Cash"
         }
+        mlCustomerPhone.value = customerModel?.phone.toString()
         Log.d("customerModel", customerModel.toString())
     }
 

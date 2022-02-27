@@ -159,11 +159,11 @@
                     android:gravity="center_vertical"
                     android:hint="@string/search"
                     android:inputType="text"
+                    android:focusable="false"
                     android:padding="@dimen/eight"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/fifteen"
-                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                    android:textSize="@dimen/fifteen" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_cancel_search"
