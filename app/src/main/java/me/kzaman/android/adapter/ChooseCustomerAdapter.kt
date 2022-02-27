@@ -2,6 +2,7 @@ package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
 import me.kzaman.android.R
@@ -14,8 +15,8 @@ import kotlin.collections.ArrayList
 
 class ChooseCustomerAdapter(
     customers: ArrayList<CustomerModel>,
-    mActivity: Activity,
-) : CustomerListAdapter(customers, mActivity) {
+    mContext: Context,
+) : CustomerListAdapter(customers, mContext) {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -36,25 +37,25 @@ class ChooseCustomerAdapter(
         } else {
             holder.arrowButton.visibility = View.VISIBLE
             holder.tvTotalCartSize.visibility = View.GONE
-            holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mActivity,
+            holder.arrowButton.setImageDrawable(ContextCompat.getDrawable(mContext,
                 R.drawable.ic_baseline_shopping_basket_15))
         }
 
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
-            holder.tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mActivity,
+            holder.tvPaymentType.background = getTintedDrawable(ContextCompat.getDrawable(mContext,
                 R.drawable.bg_order_status)!!,
-                ContextCompat.getColor(mActivity, R.color.credit_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
+                ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
                 R.color.credit_type_customer))
 
         } else {
             holder.tvPaymentType.text = "Cash"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                getTintedDrawable(ContextCompat.getDrawable(mContext,
                     R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mActivity, R.color.cash_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
+                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
                 R.color.cash_type_customer))
         }
 

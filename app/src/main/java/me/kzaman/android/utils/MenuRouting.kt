@@ -1,6 +1,7 @@
 package me.kzaman.android.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import me.kzaman.android.R
@@ -37,7 +38,8 @@ import me.kzaman.android.utils.Constants.Companion.TRACKING
 * activity, featureId
 */
 
-fun menuRouting(activity: Activity, featureId: String) {
+fun menuRouting(context: Context, featureId: String) {
+    val activity = (context as Activity)
     when (featureId) {
         MONTHLY_TOUR_PLAN -> {
             Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()

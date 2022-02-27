@@ -81,7 +81,7 @@ open class CustomerListFragment : BaseFragment<FragmentCustomerListBinding>() {
     override fun initializeApp() {
         (activity as CustomerActivity).showToolbar(true) //display toolbar
         (activity as CustomerActivity).setToolbarTitle("Customers List")
-        customerListAdapter = CustomerListAdapter(arrayListOf(), mActivity)
+        customerListAdapter = CustomerListAdapter(arrayListOf(), mContext)
         binding.rvCustomerList.apply {
             layoutManager = LinearLayoutManager(mContext)
             adapter = customerListAdapter

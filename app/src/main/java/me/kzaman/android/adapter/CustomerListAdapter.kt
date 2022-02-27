@@ -2,6 +2,7 @@ package me.kzaman.android.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,7 @@ import kotlin.collections.ArrayList
 
 open class CustomerListAdapter(
     val customers: ArrayList<CustomerModel>,
-    val mActivity: Activity,
+    val mContext: Context,
 ) : RecyclerView.Adapter<CustomerListAdapter.ViewHolder>(), Filterable {
 
     var filterList = ArrayList<CustomerModel>()
@@ -73,19 +74,19 @@ open class CustomerListAdapter(
         if (customer.creditFlag == "Y") {
             holder.tvPaymentType.text = "Credit"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                getTintedDrawable(ContextCompat.getDrawable(mContext,
                     R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mActivity, R.color.credit_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
+                    ContextCompat.getColor(mContext, R.color.credit_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
                 R.color.credit_type_customer))
 
         } else {
             holder.tvPaymentType.text = "Cash"
             holder.tvPaymentType.background =
-                getTintedDrawable(ContextCompat.getDrawable(mActivity,
+                getTintedDrawable(ContextCompat.getDrawable(mContext,
                     R.drawable.bg_order_status)!!,
-                    ContextCompat.getColor(mActivity, R.color.cash_type_customer_bg))
-            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mActivity,
+                    ContextCompat.getColor(mContext, R.color.cash_type_customer_bg))
+            holder.tvPaymentType.setTextColor(ContextCompat.getColor(mContext,
                 R.color.cash_type_customer))
         }
 
@@ -94,7 +95,7 @@ open class CustomerListAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(mActivity, customer.customerCode, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, customer.customerCode, Toast.LENGTH_SHORT).show()
         }
     }
 

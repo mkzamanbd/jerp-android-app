@@ -1,6 +1,6 @@
 package me.kzaman.android.adapter
 
-import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import me.kzaman.android.utils.menuRouting
 
 class MenuChildAdapter(
     private var menuItems: List<UserChildMenuModel>,
-    val activity: Activity,
+    val mContext: Context,
 ) : RecyclerView.Adapter<MenuChildAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,10 +24,10 @@ class MenuChildAdapter(
         private val lnRoot: LinearLayout = view.findViewById(R.id.ln_root)
         fun bind(menuModel: UserChildMenuModel) {
             tvTitle.text = menuModel.menuName
-            ivImage.setImageDrawable(ContextCompat.getDrawable(activity, menuModel.iconId))
+            ivImage.setImageDrawable(ContextCompat.getDrawable(mContext, menuModel.iconId))
 
             lnRoot.setOnClickListener {
-                menuRouting(activity, menuModel.featureId)
+                menuRouting(mContext, menuModel.featureId)
             }
         }
     }
