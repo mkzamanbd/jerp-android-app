@@ -15,6 +15,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import me.kzaman.demo_app.network.api.OrderApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -93,4 +94,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideCommonApi(retrofit: Retrofit): CommonApi = retrofit.create(CommonApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOrderApi(retrofit: Retrofit): OrderApi = retrofit.create(OrderApi::class.java)
 }

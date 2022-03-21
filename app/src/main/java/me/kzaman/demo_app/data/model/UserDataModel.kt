@@ -23,10 +23,3 @@ data class UserDataModel(
     @SerializedName("mobile") val phone: String,
     @SerializedName("photo") val photo: String,
 )
-
-data class SalesAreaModel(
-    @SerializedName("id") val areaId: String,
-    @SerializedName("sales_area_id") val salesAreaId: String,
-    @SerializedName("area_name") val areaName: String,
-    @SerializedName("display_code") val displayCode: String,
-)

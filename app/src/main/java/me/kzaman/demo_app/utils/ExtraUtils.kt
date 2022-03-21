@@ -1,11 +1,16 @@
 package me.kzaman.demo_app.utils
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.google.gson.GsonBuilder
 import me.kzaman.demo_app.data.model.CartItemsModel
 import me.kzaman.demo_app.data.model.ProductInfo
 import org.json.JSONArray
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Calendar
+import kotlin.collections.ArrayList
 
 
 /**
@@ -77,4 +82,25 @@ fun getProductFromCartJson(json: String, products: List<ProductInfo>): List<Prod
         }
     }
     return selectedProduct
+}
+
+fun todayDate(): String {
+    var date = Date()
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+    date = calendar.time
+    return dateFormatDDMMYYYYFormDate(date)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun dateFormatDDMMYYYYFormDate(value: Date): String {
+    val outPutPattern = "dd-MM-yyyy"
+    val dateFormat = SimpleDateFormat(outPutPattern)
+    lateinit var result: String
+    try {
+        result = dateFormat.format(value)
+    } catch (e: java.lang.Exception) {
+        e.printStackTrace()
+    }
+    return result
 }

@@ -11,6 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.kzaman.demo_app.data.model.CustomerModel
 import me.kzaman.demo_app.data.model.ProductInfo
+import me.kzaman.demo_app.data.response.DefaultResponse
+import me.kzaman.demo_app.data.response.OrderResponse
 import me.kzaman.demo_app.database.entities.CartItemsEntities
 import me.kzaman.demo_app.database.entities.ProductEntities
 import me.kzaman.demo_app.repository.OrderRepository
@@ -99,6 +101,13 @@ class OrderViewModel @Inject constructor(
         repository.customerCartEmpty(customerId)
     }
 
+    private val _salesAreaList: MutableLiveData<Resource<DefaultResponse>> = MutableLiveData()
+    val salesAreaList: LiveData<Resource<DefaultResponse>> = _salesAreaList
+    fun getAreaListByUser(customerId: String) = viewModelScope.launch {
+        _salesAreaList.value = Resource.Loading
+        _salesAreaList.value = repository.getAreaListByUser(customerId)
+    }
+
     var mlCustomerName = MutableLiveData<String>()
     var mlCustomerCode = MutableLiveData<String>()
     var mlCustomerBusinessUnit = MutableLiveData<String>()
@@ -160,5 +169,28 @@ class OrderViewModel @Inject constructor(
     val cartItems: LiveData<CartItemsEntities> = _cartItems
     fun getCustomerWiseCartItems(customerId: String) = viewModelScope.launch {
         _cartItems.value = repository.getCartItems(customerId)
+    }
+
+    private val _createOrderRequest: MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
+    val createOrderRequest: LiveData<Resource<OrderResponse>> = _createOrderRequest
+    suspend fun createOrder(
+        sbuId: String,
+        customerId: String,
+        salesAreaId: String,
+        orderNote: String,
+        orderDetail: String,
+        deliveryAddress: String,
+        orderDate: String,
+    ) = viewModelScope.launch {
+        _createOrderRequest.value = Resource.Loading
+        _createOrderRequest.value = repository.createOrder(
+            sbuId,
+            customerId,
+            salesAreaId,
+            orderNote,
+            orderDetail,
+            deliveryAddress,
+            orderDate
+        )
     }
 }

@@ -86,6 +86,15 @@
             app:popExitAnim="@anim/animation_slide_out_right"
             app:popUpTo="@id/productSelectionFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_placedNewOrderFragment_to_customerSelectionFragment"
+            app:destination="@id/customerSelectionFragment"
+            app:enterAnim="@anim/animation_slide_in_right"
+            app:exitAnim="@anim/animation_slide_out_left"
+            app:popEnterAnim="@anim/animation_slide_in_left"
+            app:popExitAnim="@anim/animation_slide_out_right"
+            app:popUpTo="@id/customerSelectionFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

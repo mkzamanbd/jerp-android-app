@@ -32,5 +32,14 @@ class Constants {
         const val DISCOUNT_PCT_OFFER_TYPE = "P"
         const val DISCOUNT_OFFER_TYPE = "D"
         const val FREE_OFFER_TYPE = "F"
+
+
+        // http response code
+        const val RESPONSE_SUCCESS = "200"
+        const val RESPONSE_CREATED = "201"
+        const val RESPONSE_UNAUTHORISED = "401"
+        const val RESPONSE_NOT_FOUND = "404"
+        const val RESPONSE_DUPLICATE_ENTRY = "422"
+        const val RESPONSE_INTERNAL_SERVER_ERROR = "500"
     }
 }
