@@ -35,88 +35,88 @@ import me.kzaman.demo_app.utils.Constants.Companion.TRACKING
 /*
 *
 * dashboard menu routing
-* activity, featureId
+* mActivity, featureId
 */
 
-fun menuRouting(context: Context, featureId: String) {
-    val activity = (context as Activity)
+fun menuRouting(mContext: Context, featureId: String) {
+    val mActivity = (mContext as Activity)
     when (featureId) {
         MONTHLY_TOUR_PLAN -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         DAILY_CALL_PLAN -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         DCR -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER -> {
             goToNextActivityAnimation(
-                activity,
-                Intent(activity, OrdersActivity::class.java),
+                mActivity,
+                Intent(mActivity, OrdersActivity::class.java),
                 true,
                 featureId
             )
         }
         ORDER_HISTORY -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         CUSTOMER_LIST -> {
             goToNextActivityAnimation(
-                activity,
-                Intent(activity, CustomerActivity::class.java),
+                mActivity,
+                Intent(mActivity, CustomerActivity::class.java),
                 true,
                 featureId
             )
         }
         ADVISER_LIST -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         RETURN -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         SETTING -> {
             goToNextActivityAnimation(
-                activity,
-                Intent(activity, SettingsActivity::class.java),
+                mActivity,
+                Intent(mActivity, SettingsActivity::class.java),
                 true,
                 featureId
             )
         }
         DELIVERY -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         PAYMENT_COLLECTION -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         PRODUCT_LIST -> {
             goToNextActivityAnimation(
-                activity,
-                Intent(activity, ProductActivity::class.java),
+                mActivity,
+                Intent(mActivity, ProductActivity::class.java),
                 true,
                 featureId
             )
         }
         HISTORY -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_MTP -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_ORDER -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         ORDER_APPROVAL -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         REVIEW_REQUEST -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         TRACKING -> {
-            Toast.makeText(activity, featureId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, featureId, Toast.LENGTH_SHORT).show()
         }
         else -> {
-            Toast.makeText(activity, "Unknown", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Unknown", Toast.LENGTH_SHORT).show()
         }
     }
 }
