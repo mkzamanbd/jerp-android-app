@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.orders
+package me.kzaman.demo_app.ui.fragments.orders
 
 
 import android.os.Bundle
@@ -8,8 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.demo_app.R
 import me.kzaman.demo_app.adapter.OrderItemSelectionAdapter
 import me.kzaman.demo_app.data.model.ProductInfo
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
-import me.kzaman.demo_app.ui.view.fragments.ProductListFragment
+import me.kzaman.demo_app.ui.activities.OrdersActivity
+import me.kzaman.demo_app.ui.fragments.ProductListFragment
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.cartItemCounter
 import me.kzaman.demo_app.utils.LoadingUtils
 import me.kzaman.demo_app.utils.getProductFromCartJson

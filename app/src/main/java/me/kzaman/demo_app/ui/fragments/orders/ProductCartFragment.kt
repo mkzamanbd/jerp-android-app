@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.orders
+package me.kzaman.demo_app.ui.fragments.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,8 +10,8 @@ import me.kzaman.demo_app.R
 import me.kzaman.demo_app.adapter.ProductCartAdapter
 import me.kzaman.demo_app.base.BaseFragment
 import me.kzaman.demo_app.databinding.FragmentProductCartBinding
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
-import me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
+import me.kzaman.demo_app.ui.activities.OrdersActivity
+import me.kzaman.demo_app.ui.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
 import me.kzaman.demo_app.utils.LoadingUtils

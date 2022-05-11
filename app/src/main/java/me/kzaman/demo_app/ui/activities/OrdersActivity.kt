@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.activities
+package me.kzaman.demo_app.ui.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +17,7 @@ import me.kzaman.demo_app.base.BaseActivity
 import me.kzaman.demo_app.data.model.CustomerModel
 import me.kzaman.demo_app.data.model.ProductInfo
 import me.kzaman.demo_app.database.entities.CartItemsEntities
-import me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment
+import me.kzaman.demo_app.ui.fragments.orders.ProductSelectionFragment
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel
 import me.kzaman.demo_app.utils.visible
 import org.json.JSONArray

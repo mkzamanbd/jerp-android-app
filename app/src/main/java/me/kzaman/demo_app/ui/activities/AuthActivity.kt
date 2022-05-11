@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.activities
+package me.kzaman.demo_app.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

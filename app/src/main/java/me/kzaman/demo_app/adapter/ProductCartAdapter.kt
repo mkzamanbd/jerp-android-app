@@ -14,7 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import me.kzaman.demo_app.R
 import me.kzaman.demo_app.data.model.ProductInfo
-import me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
+import me.kzaman.demo_app.ui.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.cartItemCounter
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.mlDisplayGrandTotal
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.mlDisplaySubTotalPrice

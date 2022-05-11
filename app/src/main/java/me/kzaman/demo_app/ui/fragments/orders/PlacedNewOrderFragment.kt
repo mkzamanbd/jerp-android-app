@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.orders
+package me.kzaman.demo_app.ui.fragments.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -17,9 +17,9 @@ import me.kzaman.demo_app.data.model.ProductInfo
 import me.kzaman.demo_app.data.model.SalesAreaModel
 import me.kzaman.demo_app.databinding.FragmentProductCartBinding
 import me.kzaman.demo_app.network.Resource
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
-import me.kzaman.demo_app.ui.view.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
-import me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
+import me.kzaman.demo_app.ui.activities.OrdersActivity
+import me.kzaman.demo_app.ui.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
+import me.kzaman.demo_app.ui.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel
 import me.kzaman.demo_app.utils.LoadingUtils
 import me.kzaman.demo_app.utils.goToNextFragment

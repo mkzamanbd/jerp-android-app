@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import me.kzaman.demo_app.R
-import me.kzaman.demo_app.ui.view.activities.CustomerActivity
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
-import me.kzaman.demo_app.ui.view.activities.ProductActivity
-import me.kzaman.demo_app.ui.view.activities.SettingsActivity
+import me.kzaman.demo_app.ui.activities.CustomerActivity
+import me.kzaman.demo_app.ui.activities.OrdersActivity
+import me.kzaman.demo_app.ui.activities.ProductActivity
+import me.kzaman.demo_app.ui.activities.SettingsActivity
 import me.kzaman.demo_app.utils.Constants.Companion.ADVISER_LIST
 import me.kzaman.demo_app.utils.Constants.Companion.CUSTOMER_LIST
 import me.kzaman.demo_app.utils.Constants.Companion.DAILY_CALL_PLAN

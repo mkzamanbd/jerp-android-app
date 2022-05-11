@@ -6,8 +6,8 @@ import android.text.TextUtils
 import android.view.View
 import androidx.core.text.HtmlCompat
 import me.kzaman.demo_app.data.model.ProductInfo
-import me.kzaman.demo_app.ui.view.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
-import me.kzaman.demo_app.ui.view.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
+import me.kzaman.demo_app.ui.fragments.orders.CustomerSelectionFragment.Companion.isCartItemsChanged
+import me.kzaman.demo_app.ui.fragments.orders.ProductSelectionFragment.Companion.selectedProduct
 import me.kzaman.demo_app.ui.viewModel.OrderViewModel.Companion.cartItemCounter
 import me.kzaman.demo_app.utils.Constants.Companion.BONUS_OFFER_TYPE
 import me.kzaman.demo_app.utils.Constants.Companion.DISCOUNT_OFFER_TYPE

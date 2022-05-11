@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments
+package me.kzaman.demo_app.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,7 @@ import me.kzaman.demo_app.adapter.ProductListAdapter
 import me.kzaman.demo_app.base.BaseFragment
 import me.kzaman.demo_app.databinding.FragmentProductListBinding
 import me.kzaman.demo_app.network.Resource
-import me.kzaman.demo_app.ui.view.activities.ProductActivity
+import me.kzaman.demo_app.ui.activities.ProductActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import me.kzaman.demo_app.utils.visible

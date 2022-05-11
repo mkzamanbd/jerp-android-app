@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.auth
+package me.kzaman.demo_app.ui.fragments.auth
 
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,7 @@ import me.kzaman.demo_app.base.BaseFragment
 import me.kzaman.demo_app.database.SharedPreferenceManager
 import me.kzaman.demo_app.databinding.FragmentLoginBinding
 import me.kzaman.demo_app.network.Resource
-import me.kzaman.demo_app.ui.view.activities.DashboardActivity
+import me.kzaman.demo_app.ui.activities.DashboardActivity
 import me.kzaman.demo_app.ui.viewModel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.demo_app.utils.LoadingUtils

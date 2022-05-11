@@ -1,10 +1,10 @@
-package me.kzaman.demo_app.ui.view.fragments.orders
+package me.kzaman.demo_app.ui.fragments.orders
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.demo_app.adapter.ChooseCustomerAdapter
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
-import me.kzaman.demo_app.ui.view.fragments.customer.CustomerListFragment
+import me.kzaman.demo_app.ui.activities.OrdersActivity
+import me.kzaman.demo_app.ui.fragments.customer.CustomerListFragment
 
 
 @AndroidEntryPoint

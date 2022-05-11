@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.activities
+package me.kzaman.demo_app.ui.activities
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,13 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
-import dagger.hilt.android.AndroidEntryPoint
 import me.kzaman.demo_app.R
 import me.kzaman.demo_app.base.BaseActivity
 import me.kzaman.demo_app.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CustomerActivity : BaseActivity() {
+class ProductActivity : BaseActivity() {
 
     private lateinit var rlToolbar: RelativeLayout
     private lateinit var tvTitle: TextView
@@ -22,6 +22,7 @@ class CustomerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragments)
         initializeApp()
+
     }
 
     override fun initializeApp() {
@@ -29,7 +30,7 @@ class CustomerActivity : BaseActivity() {
         val navController = navHost.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-        navGraph.setStartDestination(R.id.customerListFragment)
+        navGraph.setStartDestination(R.id.productListFragment)
         navController.graph = navGraph
 
         rlToolbar = findViewById(R.id.toolbar_root)

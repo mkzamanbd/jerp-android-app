@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view
+package me.kzaman.demo_app.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import me.kzaman.demo_app.R
 import me.kzaman.demo_app.database.SharedPreferenceManager
-import me.kzaman.demo_app.ui.view.activities.AuthActivity
-import me.kzaman.demo_app.ui.view.activities.DashboardActivity
+import me.kzaman.demo_app.ui.activities.AuthActivity
+import me.kzaman.demo_app.ui.activities.DashboardActivity
 import me.kzaman.demo_app.utils.startNewActivityAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

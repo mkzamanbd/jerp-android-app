@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import me.kzaman.demo_app.R
 import me.kzaman.demo_app.data.model.CustomerModel
-import me.kzaman.demo_app.ui.view.activities.OrdersActivity
+import me.kzaman.demo_app.ui.activities.OrdersActivity
 import me.kzaman.demo_app.utils.getTintedDrawable
 import me.kzaman.demo_app.utils.goToNextFragment
 import me.kzaman.demo_app.utils.loadImage

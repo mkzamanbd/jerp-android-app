@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.customer
+package me.kzaman.demo_app.ui.fragments.customer
 
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
@@ -21,7 +21,7 @@ import me.kzaman.demo_app.data.model.CustomerModel
 import me.kzaman.demo_app.database.entities.CustomerEntities
 import me.kzaman.demo_app.databinding.FragmentCustomerListBinding
 import me.kzaman.demo_app.network.Resource
-import me.kzaman.demo_app.ui.view.activities.CustomerActivity
+import me.kzaman.demo_app.ui.activities.CustomerActivity
 import me.kzaman.demo_app.ui.viewModel.CommonViewModel
 import me.kzaman.demo_app.utils.LoadingUtils
 import me.kzaman.demo_app.utils.handleNetworkError

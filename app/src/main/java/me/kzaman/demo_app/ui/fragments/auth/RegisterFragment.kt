@@ -1,4 +1,4 @@
-package me.kzaman.demo_app.ui.view.fragments.auth
+package me.kzaman.demo_app.ui.fragments.auth
 
 import android.os.Bundle
 import me.kzaman.demo_app.R
